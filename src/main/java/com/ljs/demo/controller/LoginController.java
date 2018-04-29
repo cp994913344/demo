@@ -7,16 +7,17 @@ import com.ljs.demo.pojo.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/")
+public class LoginController {
 
     @Autowired
     UserService userService;
@@ -27,17 +28,9 @@ public class UserController {
     @Autowired
     RedisClient redisClient;
 
-    @GetMapping(value = "/findAll")
-    public ResponseMessage findAll(){
-        List<User> list =  userService.findAll();
-        log.info("|对外接口|返回参数[{}]", list);
-        redisClient.setLists("list",list);
-        System.out.println(redisClient.getListStartEnd("list",0,5));
-        return ResponseMessage.ok("用户链表",list);
-    }
 
-    @GetMapping(value = "/toMain")
+    @GetMapping(value = "/")
     public String toMain(){
-        return "/views/index";
+        return "index";
     }
 }
