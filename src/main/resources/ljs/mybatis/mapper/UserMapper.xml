@@ -13,7 +13,7 @@
     </sql>
 
     <select id = "findAll" resultMap="user">
-        select * from M_USER
+        select <include refid="columns"/> from M_USER
     </select>
 
 </mapper>
