@@ -31,6 +31,6 @@ public class LoginController {
 
     @GetMapping(value = "/")
     public String toMain(){
-        return "index";
+        return "login";
     }
 }
