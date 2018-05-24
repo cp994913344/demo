@@ -38,5 +38,9 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
+	//访问静态资源
+	compile 'javax.servlet:javax.servlet-api:4.0.1'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf:2.0.2.RELEASE'
+
 
 }
