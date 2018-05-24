@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.EvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Evaluate" >
+    <id column="EVALUATEID" property="evaluateid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MANNER" property="manner" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="MAJOR" property="major" jdbcType="VARCHAR" />
+    <result column="FACE" property="face" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EVALUATEID, UUID, MANNER, DESCRIPTION, MAJOR, FACE, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from EVALUATE
+    where EVALUATEID = #{evaluateid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from EVALUATE
+    where EVALUATEID = #{evaluateid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Evaluate" >
+    insert into EVALUATE (EVALUATEID, UUID, MANNER, 
+      DESCRIPTION, MAJOR, FACE, 
+      REMARK)
+    values (#{evaluateid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{manner,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{face,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Evaluate" >
+    insert into EVALUATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluateid != null" >
+        EVALUATEID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="manner != null" >
+        MANNER,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="major != null" >
+        MAJOR,
+      </if>
+      <if test="face != null" >
+        FACE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluateid != null" >
+        #{evaluateid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="manner != null" >
+        #{manner,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="face != null" >
+        #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Evaluate" >
+    update EVALUATE
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="manner != null" >
+        MANNER = #{manner,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        MAJOR = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="face != null" >
+        FACE = #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EVALUATEID = #{evaluateid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Evaluate" >
+    update EVALUATE
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      MANNER = #{manner,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      MAJOR = #{major,jdbcType=VARCHAR},
+      FACE = #{face,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where EVALUATEID = #{evaluateid,jdbcType=INTEGER}
+  </update>
+</mapper>
