@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.MyVisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.MyVisitor" >
+    <id column="MYVISITORID" property="myvisitorid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="WITHNAME" property="withname" jdbcType="VARCHAR" />
+    <result column="WITHPHONE" property="withphone" jdbcType="VARCHAR" />
+    <result column="WITHSEX" property="withsex" jdbcType="VARCHAR" />
+    <result column="WITHCITY" property="withcity" jdbcType="VARCHAR" />
+    <result column="WITHPHOTO" property="withphoto" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MYVISITOR
+    where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MYVISITOR
+    where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
+    insert into MYVISITOR (MYVISITORID, UUID, WITHNAME, 
+      WITHPHONE, WITHSEX, WITHCITY, 
+      WITHPHOTO)
+    values (#{myvisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{withname,jdbcType=VARCHAR}, 
+      #{withphone,jdbcType=VARCHAR}, #{withsex,jdbcType=VARCHAR}, #{withcity,jdbcType=VARCHAR}, 
+      #{withphoto,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
+    insert into MYVISITOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="myvisitorid != null" >
+        MYVISITORID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="withname != null" >
+        WITHNAME,
+      </if>
+      <if test="withphone != null" >
+        WITHPHONE,
+      </if>
+      <if test="withsex != null" >
+        WITHSEX,
+      </if>
+      <if test="withcity != null" >
+        WITHCITY,
+      </if>
+      <if test="withphoto != null" >
+        WITHPHOTO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="myvisitorid != null" >
+        #{myvisitorid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="withname != null" >
+        #{withname,jdbcType=VARCHAR},
+      </if>
+      <if test="withphone != null" >
+        #{withphone,jdbcType=VARCHAR},
+      </if>
+      <if test="withsex != null" >
+        #{withsex,jdbcType=VARCHAR},
+      </if>
+      <if test="withcity != null" >
+        #{withcity,jdbcType=VARCHAR},
+      </if>
+      <if test="withphoto != null" >
+        #{withphoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
+    update MYVISITOR
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="withname != null" >
+        WITHNAME = #{withname,jdbcType=VARCHAR},
+      </if>
+      <if test="withphone != null" >
+        WITHPHONE = #{withphone,jdbcType=VARCHAR},
+      </if>
+      <if test="withsex != null" >
+        WITHSEX = #{withsex,jdbcType=VARCHAR},
+      </if>
+      <if test="withcity != null" >
+        WITHCITY = #{withcity,jdbcType=VARCHAR},
+      </if>
+      <if test="withphoto != null" >
+        WITHPHOTO = #{withphoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
+    update MYVISITOR
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      WITHNAME = #{withname,jdbcType=VARCHAR},
+      WITHPHONE = #{withphone,jdbcType=VARCHAR},
+      WITHSEX = #{withsex,jdbcType=VARCHAR},
+      WITHCITY = #{withcity,jdbcType=VARCHAR},
+      WITHPHOTO = #{withphoto,jdbcType=VARCHAR}
+    where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
+  </update>
+</mapper>

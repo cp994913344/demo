@@ -1,6 +1,6 @@
-package com.ljs.demo.common.mail.Impl;
+package com.ljs.demo.Service.Impl;
 
-import com.ljs.demo.common.mail.VisitorServcie;
+import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.pojo.domain.Visitor;
 import com.ljs.demo.pojo.mapper.VisitorMapper;
 import lombok.extern.slf4j.Slf4j;

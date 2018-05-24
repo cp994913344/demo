@@ -1,4 +1,4 @@
-package com.ljs.demo.common.mail.util;
+package com.ljs.demo.common.utils;
 
 import com.ljs.demo.common.mail.MailService;
 import com.ljs.demo.common.utils.RandomSixStringUtil;

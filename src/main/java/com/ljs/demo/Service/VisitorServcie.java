@@ -1,4 +1,4 @@
-package com.ljs.demo.common.mail;
+package com.ljs.demo.Service;
 
 import com.ljs.demo.pojo.domain.Visitor;
 import org.springframework.stereotype.Service;

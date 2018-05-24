@@ -1,6 +1,6 @@
 package com.ljs.demo.controller;
 
-import com.ljs.demo.common.mail.VisitorServcie;
+import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.pojo.domain.Visitor;
 import lombok.extern.slf4j.Slf4j;
