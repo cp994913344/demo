@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,8 +25,8 @@ public class RedisClient {
      * @param key
      * @param value
      */
-    public void set(String key,String value) throws Exception{
-        ValueOperations<String,String> operations = redisTemplate.opsForValue();
+    public void set(String key,Object value) throws Exception{
+        ValueOperations<Serializable,Object> operations = redisTemplate.opsForValue();
         operations.set(key,value);
     }
 
@@ -33,9 +34,11 @@ public class RedisClient {
      * 取值key从redis数据库
      * @param key
      */
-    public void get(String key) throws Exception{
-        ValueOperations<String,String> operations = redisTemplate.opsForValue();
-        operations.get(key);
+    public Object get(String key) throws Exception{
+        Object result = null;
+        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        result = operations.get(key);
+        return result;
     }
 
     /**

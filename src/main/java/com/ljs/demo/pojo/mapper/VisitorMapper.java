@@ -2,6 +2,7 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.Visitor;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface VisitorMapper {
@@ -51,7 +52,10 @@ public interface VisitorMapper {
      *
      * @mbggenerated Thu May 24 14:12:33 CST 2018
      */
-    int updateByPrimaryKey(Visitor record);
+    int updateByPrimaryKey(@Param("record") Visitor record,@Param("visitorid") Integer visitorid);
+
+
+    Visitor login(@Param("name") String phone , @Param("pass") String password);
 
 
 }
