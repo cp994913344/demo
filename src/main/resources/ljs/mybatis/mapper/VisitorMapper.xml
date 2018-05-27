@@ -179,21 +179,27 @@
     </set>
     where VISITORID = #{visitorid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Visitor" >
+  <update id="updateByPrimaryKey"  >
     update VISITOR
-    set UUID = #{uuid,jdbcType=VARCHAR},
-      TOGETHERVISITORID = #{togethervisitorid,jdbcType=INTEGER},
-      ORDERID = #{orderid,jdbcType=INTEGER},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      AGE = #{age,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
-      SEX = #{sex,jdbcType=VARCHAR},
-      CITY = #{city,jdbcType=VARCHAR},
-      WALLet = #{wallet,jdbcType=DOUBLE},
-      STATUS = #{status,jdbcType=VARCHAR},
-      SCULPTURE = #{sculpture,jdbcType=CHAR}
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      TOGETHERVISITORID = #{record.togethervisitorid,jdbcType=INTEGER},
+      ORDERID = #{record.orderid,jdbcType=INTEGER},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      WALLet = #{record.wallet,jdbcType=DOUBLE},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      SCULPTURE = #{record.sculpture,jdbcType=CHAR}
     where VISITORID = #{visitorid,jdbcType=INTEGER}
   </update>
+  <select id="login" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List" />
+    from VISITOR
+    WHERE PHONE = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
+  </select>
 </mapper>

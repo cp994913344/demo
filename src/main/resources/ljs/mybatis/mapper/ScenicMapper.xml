@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.ScenicMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Scenic" >
+    <id column="SCENICID" property="scenicid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="CITYINFOID" property="cityinfoid" jdbcType="INTEGER" />
+    <result column="SCENICNAME" property="scenicname" jdbcType="VARCHAR" />
+    <result column="LEVER" property="lever" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="SCENICPHONE" property="scenicphone" jdbcType="VARCHAR" />
+    <result column="OPENHOURS" property="openhours" jdbcType="VARCHAR" />
+    <result column="TICKETSINFO" property="ticketsinfo" jdbcType="VARCHAR" />
+    <result column="SCENICINFO" property="scenicinfo" jdbcType="VARCHAR" />
+    <result column="SCENICPHOTO" property="scenicphoto" jdbcType="CHAR" />
+    <result column="SCENICMAP" property="scenicmap" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SCENICID, UUID, CITYINFOID, SCENICNAME, LEVER, ADDRESS, SCENICPHONE, OPENHOURS, TICKETSINFO, 
+    SCENICINFO, SCENICPHOTO, SCENICMAP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SCENIC
+    where SCENICID = #{scenicid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SCENIC
+    where SCENICID = #{scenicid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Scenic" >
+    insert into SCENIC (SCENICID, UUID, CITYINFOID, 
+      SCENICNAME, LEVER, ADDRESS, 
+      SCENICPHONE, OPENHOURS, TICKETSINFO, 
+      SCENICINFO, SCENICPHOTO, SCENICMAP
+      )
+    values (#{scenicid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{cityinfoid,jdbcType=INTEGER}, 
+      #{scenicname,jdbcType=VARCHAR}, #{lever,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{scenicphone,jdbcType=VARCHAR}, #{openhours,jdbcType=VARCHAR}, #{ticketsinfo,jdbcType=VARCHAR}, 
+      #{scenicinfo,jdbcType=VARCHAR}, #{scenicphoto,jdbcType=CHAR}, #{scenicmap,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Scenic" >
+    insert into SCENIC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="cityinfoid != null" >
+        CITYINFOID,
+      </if>
+      <if test="scenicname != null" >
+        SCENICNAME,
+      </if>
+      <if test="lever != null" >
+        LEVER,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="scenicphone != null" >
+        SCENICPHONE,
+      </if>
+      <if test="openhours != null" >
+        OPENHOURS,
+      </if>
+      <if test="ticketsinfo != null" >
+        TICKETSINFO,
+      </if>
+      <if test="scenicinfo != null" >
+        SCENICINFO,
+      </if>
+      <if test="scenicphoto != null" >
+        SCENICPHOTO,
+      </if>
+      <if test="scenicmap != null" >
+        SCENICMAP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfoid != null" >
+        #{cityinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="scenicname != null" >
+        #{scenicname,jdbcType=VARCHAR},
+      </if>
+      <if test="lever != null" >
+        #{lever,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicphone != null" >
+        #{scenicphone,jdbcType=VARCHAR},
+      </if>
+      <if test="openhours != null" >
+        #{openhours,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketsinfo != null" >
+        #{ticketsinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicinfo != null" >
+        #{scenicinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicphoto != null" >
+        #{scenicphoto,jdbcType=CHAR},
+      </if>
+      <if test="scenicmap != null" >
+        #{scenicmap,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Scenic" >
+    update SCENIC
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfoid != null" >
+        CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="scenicname != null" >
+        SCENICNAME = #{scenicname,jdbcType=VARCHAR},
+      </if>
+      <if test="lever != null" >
+        LEVER = #{lever,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicphone != null" >
+        SCENICPHONE = #{scenicphone,jdbcType=VARCHAR},
+      </if>
+      <if test="openhours != null" >
+        OPENHOURS = #{openhours,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketsinfo != null" >
+        TICKETSINFO = #{ticketsinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicinfo != null" >
+        SCENICINFO = #{scenicinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicphoto != null" >
+        SCENICPHOTO = #{scenicphoto,jdbcType=CHAR},
+      </if>
+      <if test="scenicmap != null" >
+        SCENICMAP = #{scenicmap,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SCENICID = #{scenicid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Scenic" >
+    update SCENIC
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+      SCENICNAME = #{scenicname,jdbcType=VARCHAR},
+      LEVER = #{lever,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      SCENICPHONE = #{scenicphone,jdbcType=VARCHAR},
+      OPENHOURS = #{openhours,jdbcType=VARCHAR},
+      TICKETSINFO = #{ticketsinfo,jdbcType=VARCHAR},
+      SCENICINFO = #{scenicinfo,jdbcType=VARCHAR},
+      SCENICPHOTO = #{scenicphoto,jdbcType=CHAR},
+      SCENICMAP = #{scenicmap,jdbcType=VARCHAR}
+    where SCENICID = #{scenicid,jdbcType=INTEGER}
+  </update>
+</mapper>

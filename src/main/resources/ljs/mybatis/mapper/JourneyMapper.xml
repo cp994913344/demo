@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.JourneyMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Journey" >
+    <id column="TOURNEYID" property="tourneyid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="TOURORDERID" property="tourorderid" jdbcType="INTEGER" />
+    <result column="JOURNEYDATE" property="journeydate" jdbcType="DATE" />
+    <result column="JOURNEYSERVICE" property="journeyservice" jdbcType="CHAR" />
+    <result column="JOURNEYPRICE" property="journeyprice" jdbcType="VARCHAR" />
+    <result column="JOURNEYSERINFO" property="journeyserinfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TOURNEYID, UUID, TOURORDERID, JOURNEYDATE, JOURNEYSERVICE, JOURNEYPRICE, JOURNEYSERINFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from JOURNEY
+    where TOURNEYID = #{tourneyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from JOURNEY
+    where TOURNEYID = #{tourneyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Journey" >
+    insert into JOURNEY (TOURNEYID, UUID, TOURORDERID, 
+      JOURNEYDATE, JOURNEYSERVICE, JOURNEYPRICE, 
+      JOURNEYSERINFO)
+    values (#{tourneyid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{tourorderid,jdbcType=INTEGER}, 
+      #{journeydate,jdbcType=DATE}, #{journeyservice,jdbcType=CHAR}, #{journeyprice,jdbcType=VARCHAR}, 
+      #{journeyserinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Journey" >
+    insert into JOURNEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tourneyid != null" >
+        TOURNEYID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="tourorderid != null" >
+        TOURORDERID,
+      </if>
+      <if test="journeydate != null" >
+        JOURNEYDATE,
+      </if>
+      <if test="journeyservice != null" >
+        JOURNEYSERVICE,
+      </if>
+      <if test="journeyprice != null" >
+        JOURNEYPRICE,
+      </if>
+      <if test="journeyserinfo != null" >
+        JOURNEYSERINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tourneyid != null" >
+        #{tourneyid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tourorderid != null" >
+        #{tourorderid,jdbcType=INTEGER},
+      </if>
+      <if test="journeydate != null" >
+        #{journeydate,jdbcType=DATE},
+      </if>
+      <if test="journeyservice != null" >
+        #{journeyservice,jdbcType=CHAR},
+      </if>
+      <if test="journeyprice != null" >
+        #{journeyprice,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyserinfo != null" >
+        #{journeyserinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Journey" >
+    update JOURNEY
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tourorderid != null" >
+        TOURORDERID = #{tourorderid,jdbcType=INTEGER},
+      </if>
+      <if test="journeydate != null" >
+        JOURNEYDATE = #{journeydate,jdbcType=DATE},
+      </if>
+      <if test="journeyservice != null" >
+        JOURNEYSERVICE = #{journeyservice,jdbcType=CHAR},
+      </if>
+      <if test="journeyprice != null" >
+        JOURNEYPRICE = #{journeyprice,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyserinfo != null" >
+        JOURNEYSERINFO = #{journeyserinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TOURNEYID = #{tourneyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Journey" >
+    update JOURNEY
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      TOURORDERID = #{tourorderid,jdbcType=INTEGER},
+      JOURNEYDATE = #{journeydate,jdbcType=DATE},
+      JOURNEYSERVICE = #{journeyservice,jdbcType=CHAR},
+      JOURNEYPRICE = #{journeyprice,jdbcType=VARCHAR},
+      JOURNEYSERINFO = #{journeyserinfo,jdbcType=VARCHAR}
+    where TOURNEYID = #{tourneyid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.StrategyMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Strategy" >
+    <id column="STRATEGYID" property="strategyid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="INTEGER" />
+    <result column="STRATEGYNAME" property="strategyname" jdbcType="VARCHAR" />
+    <result column="STRATEGYCOL" property="strategycol" jdbcType="VARCHAR" />
+    <result column="STRATEGYPHOTO" property="strategyphoto" jdbcType="VARCHAR" />
+    <result column="STRATEGYINFO" property="strategyinfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STRATEGYID, UUID, SCENICID, STRATEGYNAME, STRATEGYCOL, STRATEGYPHOTO, STRATEGYINFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from STRATEGY
+    where STRATEGYID = #{strategyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from STRATEGY
+    where STRATEGYID = #{strategyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Strategy" >
+    insert into STRATEGY (STRATEGYID, UUID, SCENICID, 
+      STRATEGYNAME, STRATEGYCOL, STRATEGYPHOTO, 
+      STRATEGYINFO)
+    values (#{strategyid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{scenicid,jdbcType=INTEGER}, 
+      #{strategyname,jdbcType=VARCHAR}, #{strategycol,jdbcType=VARCHAR}, #{strategyphoto,jdbcType=VARCHAR}, 
+      #{strategyinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Strategy" >
+    insert into STRATEGY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="strategyid != null" >
+        STRATEGYID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="strategyname != null" >
+        STRATEGYNAME,
+      </if>
+      <if test="strategycol != null" >
+        STRATEGYCOL,
+      </if>
+      <if test="strategyphoto != null" >
+        STRATEGYPHOTO,
+      </if>
+      <if test="strategyinfo != null" >
+        STRATEGYINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="strategyid != null" >
+        #{strategyid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=INTEGER},
+      </if>
+      <if test="strategyname != null" >
+        #{strategyname,jdbcType=VARCHAR},
+      </if>
+      <if test="strategycol != null" >
+        #{strategycol,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyphoto != null" >
+        #{strategyphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyinfo != null" >
+        #{strategyinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Strategy" >
+    update STRATEGY
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        SCENICID = #{scenicid,jdbcType=INTEGER},
+      </if>
+      <if test="strategyname != null" >
+        STRATEGYNAME = #{strategyname,jdbcType=VARCHAR},
+      </if>
+      <if test="strategycol != null" >
+        STRATEGYCOL = #{strategycol,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyphoto != null" >
+        STRATEGYPHOTO = #{strategyphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyinfo != null" >
+        STRATEGYINFO = #{strategyinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where STRATEGYID = #{strategyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Strategy" >
+    update STRATEGY
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      SCENICID = #{scenicid,jdbcType=INTEGER},
+      STRATEGYNAME = #{strategyname,jdbcType=VARCHAR},
+      STRATEGYCOL = #{strategycol,jdbcType=VARCHAR},
+      STRATEGYPHOTO = #{strategyphoto,jdbcType=VARCHAR},
+      STRATEGYINFO = #{strategyinfo,jdbcType=VARCHAR}
+    where STRATEGYID = #{strategyid,jdbcType=INTEGER}
+  </update>
+</mapper>

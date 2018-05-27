@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.CityinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Cityinfo" >
+    <id column="CITYINFOID" property="cityinfoid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="PARENTID" property="parentid" jdbcType="INTEGER" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITYNAME" property="cityname" jdbcType="VARCHAR" />
+    <result column="CITYPHOTO" property="cityphoto" jdbcType="VARCHAR" />
+    <result column="CITYINFO" property="cityinfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CITYINFOID, UUID, PARENTID, AREA, PROVINCE, CITYNAME, CITYPHOTO, CITYINFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CITYINFO
+    where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CITYINFO
+    where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Cityinfo" >
+    insert into CITYINFO (CITYINFOID, UUID, PARENTID, 
+      AREA, PROVINCE, CITYNAME, 
+      CITYPHOTO, CITYINFO)
+    values (#{cityinfoid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{area,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{cityname,jdbcType=VARCHAR}, 
+      #{cityphoto,jdbcType=VARCHAR}, #{cityinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Cityinfo" >
+    insert into CITYINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cityinfoid != null" >
+        CITYINFOID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="cityname != null" >
+        CITYNAME,
+      </if>
+      <if test="cityphoto != null" >
+        CITYPHOTO,
+      </if>
+      <if test="cityinfo != null" >
+        CITYINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cityinfoid != null" >
+        #{cityinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cityphoto != null" >
+        #{cityphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfo != null" >
+        #{cityinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Cityinfo" >
+    update CITYINFO
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        PARENTID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        CITYNAME = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cityphoto != null" >
+        CITYPHOTO = #{cityphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="cityinfo != null" >
+        CITYINFO = #{cityinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Cityinfo" >
+    update CITYINFO
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      PARENTID = #{parentid,jdbcType=INTEGER},
+      AREA = #{area,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITYNAME = #{cityname,jdbcType=VARCHAR},
+      CITYPHOTO = #{cityphoto,jdbcType=VARCHAR},
+      CITYINFO = #{cityinfo,jdbcType=VARCHAR}
+    where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
+  </update>
+</mapper>
