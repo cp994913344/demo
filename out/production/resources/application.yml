@@ -25,19 +25,18 @@ spring:
       max-active: 8
       # 最大空闲连接数（默认为8，负数表示无限）
       max-idle: 8
-  mail:
-    #邮箱服务器地址
-    host : smtp.163.com
-    #用户名
-    username : cp994913344@163.com
-    #密码
-    password : czt19940718
-    default-encoding : UTF-8
-  mvc:
-    view:
-      prefix: /static/views
-      suffix: .html
-    static-path-pattern: classpath:/static/views/,classpath:/static/css/,classpath:/static/js/,classpath:/static/fonts/,classpath:/static/images/
+    mail:
+      #邮箱服务器地址
+      host : smtp.163.com
+      #用户名
+      username : cp994913344@163.com
+      #密码
+      password : czt19940718
+      default-encoding : UTF-8
+    mvc:
+      view:
+        prefix: /views/
+        suffix: .html
 
 mail:
   fromMail:
