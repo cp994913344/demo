@@ -188,4 +188,10 @@
       PRESENTPART = #{presentpart,jdbcType=INTEGER}
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </update>
+  <select id="queryByVisitorId" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TOVISITOR
+    where VISITORID = #{visitorid,jdbcType=VARCHAR}
+  </select>
 </mapper>

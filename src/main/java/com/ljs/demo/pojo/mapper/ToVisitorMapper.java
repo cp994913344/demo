@@ -57,4 +57,6 @@ public interface ToVisitorMapper {
     int updateByPrimaryKey(ToVisitor record);
 
     List<ToVisitor> selectList();
+
+    ToVisitor queryByVisitorId(String visitorid);
 }

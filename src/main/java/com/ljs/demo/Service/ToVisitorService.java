@@ -13,4 +13,8 @@ public interface ToVisitorService {
     List<ToVisitor> selectList();
 
     int insertTovisitor(ToVisitor toVisitor);
+
+    int updateTovisitor(ToVisitor toVisitor);
+
+    ToVisitor queryByVisitorId(String visitorid);
 }

@@ -30,4 +30,14 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     public int insertTovisitor(ToVisitor toVisitor) {
         return toVisitorMapper.insert(toVisitor);
     }
+
+    @Override
+    public int updateTovisitor(ToVisitor toVisitor) {
+        return toVisitorMapper.updateByPrimaryKey(toVisitor);
+    }
+
+    @Override
+    public ToVisitor queryByVisitorId(String visitorid) {
+        return toVisitorMapper.queryByVisitorId(visitorid);
+    }
 }
