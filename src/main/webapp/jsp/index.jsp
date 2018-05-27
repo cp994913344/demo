@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: ljs
+  Date: 2018/5/19
+  Time: 下午5:50
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,13 +13,13 @@
     <title>首页</title>
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="keywords" content="联途,联途旅游" />
+    <meta name="keywords" content="随心游旅游" />
     <meta name="description" content="联途旅游是一家提供专业导游、伴游、同游的服务平台，方便您找到志同道合的朋友一起旅行，一起快乐旅游，结伴旅游，同行之路，有你才有意义。" />
     <meta http-equiv="Cache-Control" content="no-transform" />
-    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" />
     <link rel="canonical" href="index.html" />
-    <link rel="stylesheet" type="text/css" href="http://localhost:63342/teamProjects/teamProjects_main/static/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost:63342/teamProjects/teamProjects_main/static/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/index.css" />
     <script type="text/javascript">
         var TU = {
             wwwUrl: 'http://www.liantu.cn',
@@ -31,8 +37,8 @@
             location.href = TU.mobile_agent;
         }
     </script>
-    <script type="text/javascript" id="js-prelogin" src="http://localhost:63342/teamProjects/teamProjects_main/static/js/cas.js"></script>
-    <script type="text/javascript" src="http://localhost:63342/teamProjects/teamProjects_main/static/js/jquery.seajs.js" id="seajsnode"></script>
+    <script type="text/javascript" id="js-prelogin" src="../../../js/cas.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.seajs.js" id="seajsnode"></script>
     <!--[if lte IE 8]>
     <script type="text/javascript">
         $(function(){
@@ -58,7 +64,7 @@
         <div class="mod-head">
             <div class="box">
                 <div class="logo">
-                    <a href="index.html"><img src="http://localhost:63342/teamProjects/teamProjects_main/static/images/logo.png" alt="联途" /></a>
+                    <a href="index.html"><img src="../../../images/logo.png" alt="联途" /></a>
                 </div>
                 <div class="login pl-login-info" id="pl-login-info"></div>
             </div>
@@ -66,7 +72,7 @@
         <div class="mod-mhead">
             <div class="box">
                 <a class="icon-menu" href="javascript:;" rel="nofollow">菜单</a>
-                <a class="logo" href="index.html"><img src="../images/logo.png" alt="联途" /></a>
+                <a class="logo" href="index.html"><img src="../../../images/logo.png" alt="联途" /></a>
             </div>
             <div class="sidebar">
                 <div class="mask"></div>
@@ -77,8 +83,8 @@
     <div class="container">
         <div class="full-column">
             <div class="mod-bg">
-                <img class="fixed" src="../images/bg.jpg" />
-                <img class="static" src="../images/bg.jpg" />
+                <img class="fixed" src="../../../images/bg.jpg" />
+                <img class="static" src="../../../images/bg.jpg" />
             </div>
             <div class="mod-search">
                 <div class="core">
@@ -134,7 +140,7 @@
                         <ul>
                             <li class="J_blocklink big">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/xiamen/" target="_blank"> <img src="../images/201507301606111559.jpeg" alt="厦门" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/xiamen/" target="_blank"> <img src="../../../images/201507301606111559.jpeg" alt="厦门" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -142,7 +148,7 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/beijing/" target="_blank"> <img src="../images/201511021401022091.jpeg" alt="北京" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/beijing/" target="_blank"> <img src="../../../images/201511021401022091.jpeg" alt="北京" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -150,7 +156,7 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/wuhan/" target="_blank"> <img src="../images/201511021401391496.jpeg" alt="武汉" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/wuhan/" target="_blank"> <img src="../../../images/201511021401391496.jpeg" alt="武汉" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -158,7 +164,7 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/zhangjiajie/" target="_blank"> <img src="../images/201511021401519527.jpeg" alt="张家界" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/zhangjiajie/" target="_blank"> <img src="../../../images/201511021401519527.jpeg" alt="张家界" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -166,7 +172,7 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/guilin/" target="_blank"> <img src="../images/201511021402011356.jpeg" alt="桂林" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/guilin/" target="_blank"> <img src="../../../images/201511021402011356.jpeg" alt="桂林" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -174,7 +180,7 @@
                                 </div> </li>
                             <li class="J_blocklink big">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/daoyou/xianggang/" target="_blank"> <img src="../images/201511021402117369.jpeg" alt="香港" width="100%" /> </a>
+                                    <a href="http://www.liantu.cn/daoyou/xianggang/" target="_blank"> <img src="../../../images/201511021402117369.jpeg" alt="香港" width="100%" /> </a>
                                 </div>
                                 <div class="text">
                                     <div class="cover"></div>
@@ -193,7 +199,7 @@
                             <li>
                                 <div class="item">
                                     <div class="pic">
-                                        <a href="/daoyou/65548.html" target="_blank"><img src="../images/65548.jpg" alt="陈艳" /></a>
+                                        <a href="/daoyou/65548.html" target="_blank"><img src="../../../images/65548.jpg" alt="陈艳" /></a>
                                     </div>
                                     <div class="text">
                                         <div class="bg"></div>
@@ -206,7 +212,7 @@
                             <li>
                                 <div class="item">
                                     <div class="pic">
-                                        <a href="/daoyou/1.html" target="_blank"><img src="../images/1.png" alt="你是白痴吗" /></a>
+                                        <a href="/daoyou/1.html" target="_blank"><img src="../../../images/1.png" alt="你是白痴吗" /></a>
                                     </div>
                                     <div class="text">
                                         <div class="bg"></div>
@@ -219,7 +225,7 @@
                             <li>
                                 <div class="item">
                                     <div class="pic">
-                                        <a href="/daoyou/3.html" target="_blank"><img src="../images/3.jpg" alt="楠楠" /></a>
+                                        <a href="/daoyou/3.html" target="_blank"><img src="../../../images/3.jpg" alt="楠楠" /></a>
                                     </div>
                                     <div class="text">
                                         <div class="bg"></div>
@@ -241,7 +247,7 @@
                         <ul>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/tongyou/4.html" target="_blank"><img src="../images/201507211603061831.png" alt="杭州到上海旅游 08月20日 3日游 求结伴同游" /></a>
+                                    <a href="http://www.liantu.cn/tongyou/4.html" target="_blank"><img src="../../../images/201507211603061831.png" alt="杭州到上海旅游 08月20日 3日游 求结伴同游" /></a>
                                 </div>
                                 <div class="text">
                                     <div class="avatar">
@@ -252,7 +258,7 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/tongyou/3.html" target="_blank"><img src="../images/201507211603182952.png" alt="绍兴出发 8月13日 拉萨 7日游 求结伴" /></a>
+                                    <a href="http://www.liantu.cn/tongyou/3.html" target="_blank"><img src="../../../images/201507211603182952.png" alt="绍兴出发 8月13日 拉萨 7日游 求结伴" /></a>
                                 </div>
                                 <div class="text">
                                     <div class="avatar">
@@ -263,11 +269,11 @@
                                 </div> </li>
                             <li class="J_blocklink">
                                 <div class="pic">
-                                    <a href="http://www.liantu.cn/tongyou/1.html" target="_blank"><img src="../images/201507211603301856.png" alt="厦门到丽江旅游 10月01日 5日游 求结伴同游" /></a>
+                                    <a href="http://www.liantu.cn/tongyou/1.html" target="_blank"><img src="../../../images/201507211603301856.png" alt="厦门到丽江旅游 10月01日 5日游 求结伴同游" /></a>
                                 </div>
                                 <div class="text">
                                     <div class="avatar">
-                                        <img src="../images/1.png" alt="你是白痴吗" />
+                                        <img src="../../../images/1.png" alt="你是白痴吗" />
                                         <span>你是白痴吗</span>
                                     </div>
                                     <p>厦门到丽江旅游 10月01日 5日游 求结伴同游</p>
@@ -318,7 +324,7 @@
     </div>
     <div class="footer">
         <div class="mod-back">
-            <span class="qrcode"> <span class="ico"></span> <img src="../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
+            <span class="qrcode"> <span class="ico"></span> <img src="../../../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
             <a href="javascript:" class="code" id="code"></a>
             <a href="index.html" class="customer"></a>
             <a href="#" class="goback"></a>
@@ -326,7 +332,7 @@
         <div class="mod-foot">
             <div class="info">
                 <div class="contact">
-                    <p class="logo"> <a href="index.html"><img src="../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+                    <p class="logo"> <a href="index.html"><img src="../../../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
                     <p class="tell">4006 666863</p>
                     <p>24小时服务热线</p>
                 </div>
@@ -399,7 +405,7 @@
                     <li><a href="/app/" target="_blank" rel="nofollow">APP下载</a></li>
                 </ul>
                 <div class="contact">
-                    <p class="logo"> <a href="index.html"><img src="../images/logo.png" alt="联途" width="100" /></a> </p>
+                    <p class="logo"> <a href="index.html"><img src="../../../images/logo.png" alt="联途" width="100" /></a> </p>
                     <p class="tell">4006-6668-63</p>
                 </div>
             </div>

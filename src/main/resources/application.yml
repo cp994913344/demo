@@ -35,9 +35,9 @@ spring:
     default-encoding : UTF-8
   mvc:
     view:
-      prefix: /static/views
-      suffix: .html
-    static-path-pattern: classpath:/static/views/,classpath:/static/css/,classpath:/static/js/,classpath:/static/fonts/,classpath:/static/images/
+      prefix: /jsp/
+      suffix: .jsp
+    static-path-pattern: /**
 
 mail:
   fromMail:

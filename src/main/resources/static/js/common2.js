@@ -40,7 +40,38 @@ define("js", ["cookie", "list.regexp", "jquery.countdown", "jquery.suggestion", 
         var e = d.status, f = $("body"), g = f.find(".header"), h = $('<div class="mod-login"></div>').appendTo(g).hide(), i = $('<div class="mask"></div>').appendTo(h), j = $('<div class="dialog"></div>').appendTo(h), k = $('<div class="panel login"></div>').appendTo(j), l = $('<div class="panel reg"></div>').appendTo(j), m = "login", n = 0, o = !1, p = a("public/cookie"), q = a("public/list.regexp"), r = {}, s = {}, t = {};
         a("plugins/jquery.countdown");
         var u = '            <p>                <span class="icon icon-captcha"><input class="input-text" type="number" name="captcha" placeholder="验证码" autocomplete="off" maxlength="4"></span>                <a class="captcha" href="javascript:;">                    <img src="" width="100" height="40" alt="更换验证码" title="更换验证码">                </a>            </p>        ';
-        k.html('            <div class="hd"><span>登录</span><a class="close" href="javascript:;"></a></div>            <div class="bd">                <form method="post" action="" autocomplete="off">                    <p class="error"></p>                    <p><span class="icon icon-phone"><input class="input-text" type="number" name="username" placeholder="手机号码" autocomplete="off" maxlength="11"></span></p>                    <p><span class="icon icon-key"><input type="password" class="input-text" name="password" placeholder="密码" autocomplete="off"></span></p>                    ' + (e ? u : "") + '<p class="auto">                        <a class="forget" href="' + TU.myUrl + '/member/passwd/phone/" target="_blank">忘记密码</a>                        <label class="checked"><input type="checkbox" name="remember" value="1" checked="checked">记住密码</label>                    </p>                    <p class="btn"><input class="input-submit" type="submit" value="登 录"></p>                    <p class="separate"><span class="line"></span><span class="or">或</span></p>                    <p class="link"><a class="switch" href="#reg">立即注册</a></p>                </form>            </div>        '), l.html('            <div class="hd"><span>快速注册</span><a class="close" href="javascript:;"></a></div>            <div class="bd">                <form method="post" action="" autocomplete="off">                    <p class="error"></p>                    <p><span class="icon icon-phone"><input class="input-text" type="number" name="username" placeholder="常用的手机号码" autocomplete="off" maxlength="11"></p>                    <p>                        <span class="icon icon-captcha"><input class="input-text" type="text" name="captcha" placeholder="验证码" autocomplete="off" maxlength="4"></span>                        <a class="captcha" href="javascript:;">                            <img src="" width="100" height="40" alt="更换验证码" title="更换验证码">                        </a>                    </p>                    <p>                        <span class="icon icon-captcha"><input class="input-text" type="number" name="code" placeholder="输入接收到的验证码" autocomplete="off" maxlength="4"></span>                        <a class="getcode" href="javascript:;">发送验证码</a>                    </p>                    <p><span class="icon icon-key"><input type="password" class="input-text" name="password" placeholder="设置密码" autocomplete="off"></span></p>                    <p class="btn"><input class="input-submit" type="submit" value="立即注册"></p>                    <p class="separate"><span class="line"></span><span class="or">或</span></p>                    <p class="link"><a class="switch" href="#login">登录</a></p>                </form>            </div>        ');
+        k.html('            <div class="hd"><span>登录</span><a class="close" href="javascript:;"></a></div>            ' +
+            '<div class="bd">                ' +
+            '<form method="post" action="/visitor/login" autocomplete="off">                    ' +
+            '<p class="error"></p>                    ' +
+            '<p><span class="icon icon-phone"><input class="input-text" type="number" name="phone" placeholder="手机号码" autocomplete="off" maxlength="11"></span></p>                    ' +
+            '<p><span class="icon icon-key"><input type="password" class="input-text" name="password" placeholder="密码" autocomplete="off"></span></p>                    ' + (e ? u : "") + '<p class="auto">                        ' +
+            '<a class="forget" href="' + TU.myUrl + '/member/passwd/phone/" target="_blank">忘记密码</a>                       ' +
+            '<label class="checked"><input type="checkbox" name="remember" value="1" checked="checked">记住密码</label>                    </p>         ' +
+            '           <p class="btn"><input class="input-submit" type="submit" value="登 录"></p>                    ' +
+            '<p class="separate"><span class="line"></span><span class="or">或</span></p>                    ' +
+            '<p class="link"><a class="switch" href="#reg">立即注册</a></p>                ' +
+            '</form>            </div>        '),
+
+
+
+
+
+            l.html('            <div class="hd"><span>快速注册</span><a class="close" href="javascript:;"></a></div>            ' +
+                '<div class="bd">                ' +
+                '<form method="post" action="" autocomplete="off">                    <p class="error"></p>                    ' +
+                '<p><span class="icon icon-phone"><input class="input-text" type="number" name="username" placeholder="常用的手机号码" autocomplete="off" maxlength="11"></p>                    ' +
+                '<p><span class="icon icon-captcha"><input class="input-text" type="text" name="captcha" placeholder="验证码" autocomplete="off" maxlength="4"></span>                        ' +
+                '<a class="captcha" href="javascript:;">                            ' +
+                '<img src="" width="100" height="40" alt="更换验证码" title="更换验证码"></a></p>                    ' +
+                '<p><span class="icon icon-captcha"><input class="input-text" type="number" name="code" placeholder="输入接收到的验证码" autocomplete="off" maxlength="4"></span>                        ' +
+                '<a class="getcode" href="javascript:;">发送验证码</a></p>                    ' +
+                '<p><span class="icon icon-key"><input type="password" class="input-text" name="password" placeholder="设置密码" autocomplete="off"></span></p>                    ' +
+                '<p class="btn"><input class="input-submit" type="submit" value="立即注册"></p>                    ' +
+                '<p class="separate"><span class="line"></span><span class="or">或</span></p>                    ' +
+                '<p class="link"><a class="switch" href="#login">登录</a></p>                ' +
+                '</form>            ' +
+                '</div>        ');
         var v, w, x, y, z, A, B, z = j.find(".captcha img"), C = j.find(".getcode"), D = function(a) {
             m = a || "login", "login" == m ? (k.show(), l.hide(), v = k.find("form")) : (k.hide(), l.show(), v = l.find("form")), w = v.find('input[name="username"]'), x = v.find('input[name="password"]'), y = v.find('input[name="captcha"]'), A = v.find('input[name="code"]'), B = v.find(".error"), s = {}, t = "login" == m ? {20201: y, 20202: y, 23202: w} : {30100: w, 30103: w, 20201: A, 21101: A, 21102: A, 25300: A, 23224: A}
         }, E = {username: function(a) {

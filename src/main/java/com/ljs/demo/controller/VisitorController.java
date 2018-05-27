@@ -40,8 +40,8 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ResponseMessage login(/*@RequestParam("phone") String phone , @RequestParam("password") String password*/) throws Exception {
-        Visitor visitor = visitorServcie.login("6874521", "0505");
+    public ResponseMessage login(@RequestParam("phone") String phone , @RequestParam("password") String password) throws Exception {
+        Visitor visitor = visitorServcie.login(phone, password);
         log.info("|对外接口|返回参数[{}]", visitor);
         if (visitor == null) {
             return ResponseMessage.error("登录失败");

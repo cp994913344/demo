@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -36,8 +37,10 @@ public class UserController {
         return ResponseMessage.ok("用户链表",list);
     }
 
-    @GetMapping(value = "/toMain")
-    public String toMain(){
-        return "/views/index";
+    @RequestMapping(value = "/toMain")
+    public ModelAndView toMain(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("index");
+        return mav;
     }
 }

@@ -12,7 +12,15 @@
                 myUrl: 'http://my.liantu.cn',
                 wwwUrl: 'http://www.liantu.cn'
             };
-        </script> 
+        </script>
+        <script>
+        function PreviewImage(imgFile) {
+        var path;
+        path = URL.createObjectURL(imgFile.files[0]);
+        document.getElementById('oldImg').setAttribute('src', path);
+
+        }
+        </script>
     </head> 
     <body> 
         <div class="header"> 
@@ -79,8 +87,8 @@
                                 </div> 
                             </div> 
                             <form action="/member/profile/portraitimg" method="POST" name="form" enctype="multipart/form-data" target="callback"> 
-                                <a href="javascript:;" id="j-upload" class="btn-portrait" title="选择头像"><input class="input-file" type="file" name="portrait" accept=".png,.jpg,.gif,.JPG,.PNG,.GIF" /><span>选择头像</span></a> 
-                            </form> 
+                                <a href="javascript:;" id="j-upload" class="btn-portrait" title="选择头像"><input class="input-file" type="file" name="portrait" accept=".png,.jpg,.gif,.JPG,.PNG,.GIF" /><span>选择头像</span></a>
+                            </form>
                             <a href="" id="j-confirm" class="btn-confirm" title="保存">保存</a> 
                             <p>请上传 .jpg 或 .gif 或 .png 格式的图片（照片大小需小于2M）</p> 
                         </div>
