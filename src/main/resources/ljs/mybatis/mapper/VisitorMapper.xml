@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Visitor" >
+    <id column="VISITORID" property="visitorid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="TOGETHERVISITORID" property="togethervisitorid" jdbcType="INTEGER" />
+    <result column="ORDERID" property="orderid" jdbcType="INTEGER" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="AGE" property="age" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="WALLet" property="wallet" jdbcType="DOUBLE" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="SCULPTURE" property="sculpture" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    VISITORID, UUID, TOGETHERVISITORID, ORDERID, PHONE, EMAIL, PASSWORD, AGE, NAME, SEX, 
+    CITY, WALLet, STATUS, SCULPTURE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from VISITOR
+    where VISITORID = #{visitorid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from VISITOR
+    where VISITORID = #{visitorid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Visitor" >
+    insert into VISITOR (VISITORID, UUID, TOGETHERVISITORID, 
+      ORDERID, PHONE, EMAIL, 
+      PASSWORD, AGE, NAME, 
+      SEX, CITY, WALLet, STATUS, 
+      SCULPTURE)
+    values (#{visitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{togethervisitorid,jdbcType=INTEGER}, 
+      #{orderid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{wallet,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, 
+      #{sculpture,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Visitor" >
+    insert into VISITOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="visitorid != null" >
+        VISITORID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="togethervisitorid != null" >
+        TOGETHERVISITORID,
+      </if>
+      <if test="orderid != null" >
+        ORDERID,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="wallet != null" >
+        WALLet,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="sculpture != null" >
+        SCULPTURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="visitorid != null" >
+        #{visitorid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="togethervisitorid != null" >
+        #{togethervisitorid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="wallet != null" >
+        #{wallet,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sculpture != null" >
+        #{sculpture,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Visitor" >
+    update VISITOR
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="togethervisitorid != null" >
+        TOGETHERVISITORID = #{togethervisitorid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        ORDERID = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="wallet != null" >
+        WALLet = #{wallet,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sculpture != null" >
+        SCULPTURE = #{sculpture,jdbcType=CHAR},
+      </if>
+    </set>
+    where VISITORID = #{visitorid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Visitor" >
+    update VISITOR
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      TOGETHERVISITORID = #{togethervisitorid,jdbcType=INTEGER},
+      ORDERID = #{orderid,jdbcType=INTEGER},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      WALLet = #{wallet,jdbcType=DOUBLE},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SCULPTURE = #{sculpture,jdbcType=CHAR}
+    where VISITORID = #{visitorid,jdbcType=INTEGER}
+  </update>
+</mapper>
