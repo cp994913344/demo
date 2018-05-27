@@ -25,4 +25,9 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     public List<ToVisitor> selectList() {
         return toVisitorMapper.selectList();
     }
+
+    @Override
+    public int insertTovisitor(ToVisitor toVisitor) {
+        return toVisitorMapper.insert(toVisitor);
+    }
 }

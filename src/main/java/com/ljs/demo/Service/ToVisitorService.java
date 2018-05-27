@@ -11,4 +11,6 @@ public interface ToVisitorService {
     ToVisitor selectByPrimaryKey(Integer id);
 
     List<ToVisitor> selectList();
+
+    int insertTovisitor(ToVisitor toVisitor);
 }
