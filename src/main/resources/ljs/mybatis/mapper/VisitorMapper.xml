@@ -200,6 +200,6 @@
     select
     <include refid="Base_Column_List" />
     from VISITOR
-    WHERE PHONE = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
+    WHERE EMAIL = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
   </select>
 </mapper>

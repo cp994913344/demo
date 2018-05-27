@@ -1,9 +1,12 @@
 package com.ljs.demo.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonObject;
 import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
+import com.ljs.demo.common.utils.SendVerificationCodeUtil;
 import com.ljs.demo.pojo.domain.Visitor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.util.StringUtils;
 
 
 @RestController
@@ -40,8 +44,8 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ResponseMessage login(@RequestParam("phone") String phone , @RequestParam("password") String password) throws Exception {
-        Visitor visitor = visitorServcie.login(phone, password);
+    public ResponseMessage login(String email , String password) throws Exception {
+        Visitor visitor = visitorServcie.login(email, password);
         log.info("|对外接口|返回参数[{}]", visitor);
         if (visitor == null) {
             return ResponseMessage.error("登录失败");
@@ -49,7 +53,7 @@ public class VisitorController {
         if(redisClient.get("ljs") != null){
             redisClient.del("ljs");
         }
-        redisClient.set("ljs",visitor);
+        redisClient.set(visitor.getEmail(),visitor);
         log.info("redis数据库存储的对象|参数[{}]", redisClient.get("ljs"));
         return ResponseMessage.ok("登陆成功", visitor);
     }
@@ -60,15 +64,20 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/register")
-    public ResponseMessage register() {
-        Visitor visitor = new Visitor();
-        visitor.setUuid(GetUuid.uuid);
-        visitor.setPhone("15566261421");
-        visitor.setPassword("123456");
-        log.info("|对外接口|入参[{}]", visitor);
-        int i = visitorServcie.register(visitor);
-        if (i > 0) {
-            return ResponseMessage.ok("注册成功", i);
+    public ResponseMessage register(Visitor visitor) throws Exception{
+        if(visitor!=null&& !StringUtils.isEmpty(visitor.getEmail())
+                &&!StringUtils.isEmpty(visitor.getPassword())){
+            String emailCode =(String)redisClient.get(visitor.getEmail()+ SendVerificationCodeUtil.REDIS_EMAIL_CODE);
+            if(emailCode==null||StringUtils.isEmpty(emailCode)||!emailCode.equals(visitor.getPhone())){
+                return ResponseMessage.error("请输入正确的邮箱验证码");
+            }
+            visitor.setPhone("");
+            visitor.setUuid(GetUuid.uuid);
+            log.info("|对外接口|入参[{}]", visitor);
+            int i = visitorServcie.register(visitor);
+            if (i > 0) {
+                return ResponseMessage.ok("注册成功", i);
+            }
         }
         return ResponseMessage.error("注册失败");
     }

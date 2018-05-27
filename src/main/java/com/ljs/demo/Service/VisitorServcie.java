@@ -8,7 +8,7 @@ public interface VisitorServcie {
 
     Visitor selectByPrimaryKey(Integer visitorid);
 
-    Visitor login(String phone,String password);
+    Visitor login(String email,String password);
 
     int register(Visitor visitor);
 

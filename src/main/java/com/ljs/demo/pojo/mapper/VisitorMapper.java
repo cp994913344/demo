@@ -55,7 +55,7 @@ public interface VisitorMapper {
     int updateByPrimaryKey(@Param("record") Visitor record,@Param("visitorid") Integer visitorid);
 
 
-    Visitor login(@Param("name") String phone , @Param("pass") String password);
+    Visitor login(@Param("name") String email , @Param("pass") String password);
 
 
 }

@@ -21,8 +21,8 @@ public class VisitorServiceImpl implements VisitorServcie {
     }
 
     @Override
-    public Visitor login(String phone, String password) {
-        return visitorMapper.login(phone,password);
+    public Visitor login(String email, String password) {
+        return visitorMapper.login(email,password);
     }
 
     @Override
