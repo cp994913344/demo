@@ -17,6 +17,10 @@ public class MyVisitorController {
     @Autowired
     MyVisitorService myVisitorService;
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/selectById")
     public ResponseMessage selectById(){
         MyVisitor myVisitor = myVisitorService.selectByPrimaryKey(1);
