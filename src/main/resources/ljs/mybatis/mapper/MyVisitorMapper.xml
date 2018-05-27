@@ -9,6 +9,7 @@
     <result column="WITHSEX" property="withsex" jdbcType="VARCHAR" />
     <result column="WITHCITY" property="withcity" jdbcType="VARCHAR" />
     <result column="WITHPHOTO" property="withphoto" jdbcType="VARCHAR" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
     MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR (MYVISITORID, UUID, WITHNAME, 
       WITHPHONE, WITHSEX, WITHCITY, 
-      WITHPHOTO)
+      WITHPHOTO,VISITORID)
     values (#{myvisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{withname,jdbcType=VARCHAR}, 
       #{withphone,jdbcType=VARCHAR}, #{withsex,jdbcType=VARCHAR}, #{withcity,jdbcType=VARCHAR}, 
-      #{withphoto,jdbcType=VARCHAR})
+      #{withphoto,jdbcType=VARCHAR}),#{visitorid,jdbcType=VARCHAR}
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR
@@ -112,6 +113,7 @@
       WITHSEX = #{withsex,jdbcType=VARCHAR},
       WITHCITY = #{withcity,jdbcType=VARCHAR},
       WITHPHOTO = #{withphoto,jdbcType=VARCHAR}
+      VISITORID = #{visitorid,jdbcType=VARCHAR}}
     where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
   </update>
 </mapper>

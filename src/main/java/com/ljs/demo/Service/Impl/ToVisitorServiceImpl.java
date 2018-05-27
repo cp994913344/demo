@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ToVisitorServiceImpl implements ToVisitorService {
@@ -17,5 +19,15 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     @Override
     public ToVisitor selectByPrimaryKey(Integer id) {
         return toVisitorMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<ToVisitor> selectList() {
+        return toVisitorMapper.selectList();
+    }
+
+    @Override
+    public int insertTovisitor(ToVisitor toVisitor) {
+        return toVisitorMapper.insert(toVisitor);
     }
 }

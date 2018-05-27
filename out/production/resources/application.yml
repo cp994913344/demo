@@ -35,8 +35,8 @@ spring:
     default-encoding : UTF-8
   mvc:
      view:
-          prefix: /views/
-          suffix: .html
+       prefix: /views/
+       suffix: .html
 
 mail:
   fromMail:

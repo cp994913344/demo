@@ -12,14 +12,17 @@
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
     <result column="DETAILS" property="details" jdbcType="VARCHAR" />
     <result column="STATUS" property="status" jdbcType="VARCHAR" />
-    <result column="PART" property="part" jdbcType="CHAR" />
-    <result column="VISITORID" property="visitorid" jdbcType="INTEGER" />
-    <result column="PRESENTPART" property="presentpart" jdbcType="VARCHAR" />
+    <result column="PART" property="part" jdbcType="INTEGER" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR" />
+    <result column="PRESENTPART" property="presentpart" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOVISITORID, UUID, PHONE, DEPARTURE, DESTINATION, DATE, TIMENUM, TITLE, DETAILS, 
     STATUS, PART, VISITORID, PRESENTPART
   </sql>
+  <select id="selectList" resultMap="BaseResultMap">
+    SELECT * FROM TOVISITOR
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -31,16 +34,16 @@
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.ToVisitor" >
-    insert into TOVISITOR (TOVISITORID, UUID, PHONE, 
-      DEPARTURE, DESTINATION, DATE, 
-      TIMENUM, TITLE, DETAILS, 
-      STATUS, PART, VISITORID, 
+    insert into TOVISITOR (TOVISITORID, UUID, PHONE,
+      DEPARTURE, DESTINATION, DATE,
+      TIMENUM, TITLE, DETAILS,
+      STATUS, PART, VISITORID,
       PRESENTPART)
     values (#{tovisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{departure,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
       #{timenum,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{part,jdbcType=CHAR}, #{visitorid,jdbcType=INTEGER}, 
-      #{presentpart,jdbcType=VARCHAR})
+      #{status,jdbcType=VARCHAR}, #{part,jdbcType=INTEGER}, #{visitorid,jdbcType=VARCHAR},
+      #{presentpart,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.ToVisitor" >
     insert into TOVISITOR
@@ -117,13 +120,13 @@
         #{status,jdbcType=VARCHAR},
       </if>
       <if test="part != null" >
-        #{part,jdbcType=CHAR},
+        #{part,jdbcType=INTEGER},
       </if>
       <if test="visitorid != null" >
-        #{visitorid,jdbcType=INTEGER},
+        #{visitorid,jdbcType=VARCHAR},
       </if>
       <if test="presentpart != null" >
-        #{presentpart,jdbcType=VARCHAR},
+        #{presentpart,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -158,13 +161,13 @@
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
       <if test="part != null" >
-        PART = #{part,jdbcType=CHAR},
+        PART = #{part,jdbcType=INTEGER},
       </if>
       <if test="visitorid != null" >
-        VISITORID = #{visitorid,jdbcType=INTEGER},
+        VISITORID = #{visitorid,jdbcType=VARCHAR},
       </if>
       <if test="presentpart != null" >
-        PRESENTPART = #{presentpart,jdbcType=VARCHAR},
+        PRESENTPART = #{presentpart,jdbcType=INTEGER},
       </if>
     </set>
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
@@ -180,9 +183,9 @@
       TITLE = #{title,jdbcType=VARCHAR},
       DETAILS = #{details,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
-      PART = #{part,jdbcType=CHAR},
-      VISITORID = #{visitorid,jdbcType=INTEGER},
-      PRESENTPART = #{presentpart,jdbcType=VARCHAR}
+      PART = #{part,jdbcType=INTEGER},
+      VISITORID = #{visitorid,jdbcType=VARCHAR},
+      PRESENTPART = #{presentpart,jdbcType=INTEGER}
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </update>
 </mapper>
