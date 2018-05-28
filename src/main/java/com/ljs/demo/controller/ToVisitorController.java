@@ -77,7 +77,43 @@ public class ToVisitorController {
         return ResponseMessage.error("发布失败");
     }
 
+    /**
+     * 编辑同游
+     * @param toVisitor
+     * @param datetime
+     * @return
+     */
+    @RequestMapping(value = "/updateTovisitor")
+    public ResponseMessage updateTovisitor(ToVisitor toVisitor,@RequestParam("datetime") String datetime) throws ParseException {
+        log.info("|发布同游接口入参|[{}]",toVisitor,datetime);
+        if(toVisitor.getTovisitorid() == null){
+            return ResponseMessage.error("参数错误");
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse(datetime);
+        toVisitor.setDate(date);
+        int i = toVisitorService.updateTovisitor(toVisitor);
+        if(i>0){
+            return ResponseMessage.ok("修改成功",i);
+        }
+        return ResponseMessage.error("修改失败");
+    }
 
-
+    /**
+     * 根据visitor表的uuid去查该用户发布的同游
+     *
+     * @param visitorUuid
+     * @return
+     */
+    @RequestMapping(value = "queryByVisitorId")
+    public ResponseMessage queryByVisitorId(@RequestParam ("visitorUuid") String visitorUuid){
+        log.info("|查询用户发布的同游接口入参|[{}]",visitorUuid);
+        //ToVisitor toVisitor = toVisitorService.queryByVisitorId("2b8a0a979ea34e5c84cccd1b908e1cf3");
+        ToVisitor toVisitor = toVisitorService.queryByVisitorId(visitorUuid);
+        if(toVisitor == null){
+            return ResponseMessage.error("查询失败");
+        }
+        return ResponseMessage.ok("该用户发布的同游信息",toVisitor);
+    }
 
 }
