@@ -55,15 +55,54 @@ public class LoginController {
         return ResponseMessage.error("未知的错误");
     }
 
+    /**
+     * 登录
+     *
+     * @return
+     */
     @GetMapping(value = "/")
     public String toLogin(){
         return "login";
     }
 
+    /**
+     * 主页
+     *
+     * @return
+     */
     @GetMapping(value = "/main")
     public String toMain(){
         return "main";
     }
 
+    /**
+     * 密码修改
+     *
+     * @return
+     */
+    @GetMapping(value = "/toUpdatePassword")
+    public String toUpdatePassword(){
+        return "update_password";
+    }
+
+    /**
+     * 头像修改
+     *
+     * @return
+     */
+    @GetMapping(value = "/toMemberAvatar")
+    public String toMemberAvatar(){
+        return "member_avatar";
+    }
+
+    /**
+     * 个人信息
+     *
+     * @return
+     */
+    @GetMapping(value = "/toMemberInfo")
+    public String toMemberInfo(){
+        return "member_info";
+    }
 
 }
