@@ -1,4 +1,4 @@
-/*
+
 package com.ljs.demo.common.config;
 
 import com.google.code.kaptcha.Producer;
@@ -41,8 +41,5 @@ public class KaptchaConfig {
         return new ServletRegistrationBean(new KaptchaServlet(), "/registration/kaptchaServlet.jpg");
     }
 
-
-
-
 }
-*/
+

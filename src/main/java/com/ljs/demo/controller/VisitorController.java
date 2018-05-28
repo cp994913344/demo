@@ -4,13 +4,20 @@ import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
+import com.ljs.demo.common.utils.SendVerificationCodeUtil;
+import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.Visitor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -40,35 +47,45 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public ResponseMessage login(@RequestParam("phone") String phone , @RequestParam("password") String password) throws Exception {
-        Visitor visitor = visitorServcie.login(phone, password);
+    public ResponseMessage login(@RequestParam("email") String email , @RequestParam("password") String password, HttpServletRequest request) throws Exception {
+        Visitor visitor = visitorServcie.login(email, password);
         log.info("|对外接口|返回参数[{}]", visitor);
         if (visitor == null) {
-            return ResponseMessage.error("登录失败");
+            return ResponseMessage.error("登录失败!用户名或密码不正确");
         }
-        if(redisClient.get("ljs") != null){
-            redisClient.del("ljs");
+        if(redisClient.get(email+ StaticClass.LOGIN_CODE) != null){
+            redisClient.del(email+ StaticClass.LOGIN_CODE);
         }
-        redisClient.set("ljs",visitor);
-        log.info("redis数据库存储的对象|参数[{}]", redisClient.get("ljs"));
+        request.getSession().setAttribute(StaticClass.LOGIN_CODE,email);
+        redisClient.set(email+ StaticClass.LOGIN_CODE,visitor);
+        log.info("redis数据库存储的对象|参数[{}]", redisClient.get(email+ StaticClass.LOGIN_CODE));
         return ResponseMessage.ok("登陆成功", visitor);
     }
 
     /**
      * 注册
      *
+     * @param emailCode  //邮箱验证码
+     * @param password
+     * @param email
      * @return
      */
     @RequestMapping(value = "/register")
-    public ResponseMessage register() {
-        Visitor visitor = new Visitor();
-        visitor.setUuid(GetUuid.uuid);
-        visitor.setPhone("15566261421");
-        visitor.setPassword("123456");
-        log.info("|对外接口|入参[{}]", visitor);
-        int i = visitorServcie.register(visitor);
-        if (i > 0) {
-            return ResponseMessage.ok("注册成功", i);
+    public ResponseMessage register(String emailCode,String password,String email) throws  Exception{
+        if(StringUtils.isNotEmpty(emailCode)&&StringUtils.isNotEmpty(password)&&StringUtils.isNotEmpty(email)){
+            String code  = (String)redisClient.get(email+ SendVerificationCodeUtil.REDIS_EMAIL_CODE);
+            if(StringUtils.isNotEmpty(code)&&emailCode.equals(code)) {
+                Visitor visitor = new Visitor();
+                visitor.setUuid(GetUuid.uuid);
+                visitor.setEmail(email);
+                visitor.setPassword(password);
+                visitor.setName(StaticClass.LOGIN_NAME+email);
+                log.info("|对外接口|入参[{}]", visitor);
+                int i = visitorServcie.register(visitor);
+                if (i > 0) {
+                    return ResponseMessage.ok("注册成功", i);
+                }
+            }
         }
         return ResponseMessage.error("注册失败");
     }
@@ -118,18 +135,27 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/updatePass")
-    public ResponseMessage updatePass(/*@RequestParam("oldPass") String oldPass ,
-                                      @RequestParam("newPass") String newPass*/) throws Exception {
-        //判断原密码是否相同
-        /*Visitor visitor = (Visitor) redisClient.get("ljs");
-        if(visitor.getPassword() != oldPass){
-            return ResponseMessage.error("密码与原密码不同！");
-        }*/
-        Visitor vi = new Visitor();
-        vi.setPassword("0421");
-        int i = visitorServcie.updateInfo(vi,1);
-        if (i > 0) {
-            return ResponseMessage.ok("修改成功", i);
+    public ResponseMessage updatePass(@RequestParam("oldPass") String oldPass ,
+                                      @RequestParam("newPass") String newPass, HttpServletRequest request) throws Exception {
+        //判断登录
+        String loginUser = (String)request.getSession().getAttribute(StaticClass.LOGIN_CODE);
+        if(StringUtils.isNotEmpty(loginUser)){
+            //判断原密码是否相同
+            Visitor visitor = (Visitor) redisClient.get(loginUser+StaticClass.LOGIN_CODE);
+            if(!visitor.getPassword().equals(oldPass)){
+                return ResponseMessage.error("密码与原密码不同！");
+            }
+            Visitor vi = new Visitor();
+            vi.setPassword(newPass);
+            visitor.setPassword(newPass);
+            redisClient.del(loginUser+ StaticClass.LOGIN_CODE);
+            redisClient.set(loginUser+ StaticClass.LOGIN_CODE,visitor);
+            int i = visitorServcie.updateInfo(vi,visitor.getVisitorid());
+            if (i > 0) {
+                return ResponseMessage.ok("修改成功", i);
+            }
+        }else{
+            return ResponseMessage.error("未登录");
         }
         return ResponseMessage.error("修改失败");
     }

@@ -4,16 +4,18 @@ import com.ljs.demo.Service.UserService;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.SendVerificationCodeUtil;
+import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.User;
+import com.ljs.demo.pojo.domain.Visitor;
 import com.sun.deploy.net.HttpResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +47,6 @@ public class LoginController {
             String  emailCode =  SendVerificationCodeUtil.sendSixCodeMail(email);
             try{
                 redisClient.set(email.trim()+SendVerificationCodeUtil.REDIS_EMAIL_CODE,emailCode);
-                log.info((String)redisClient.get(email.trim()+SendVerificationCodeUtil.REDIS_EMAIL_CODE));
             }catch (Exception e){
             }
             ResponseMessage.ok("success");
@@ -71,7 +72,7 @@ public class LoginController {
      * @return
      */
     @GetMapping(value = "/main")
-    public String toMain(){
+    public String toMain() {
         return "main";
     }
 
@@ -103,6 +104,26 @@ public class LoginController {
     @GetMapping(value = "/toMemberInfo")
     public String toMemberInfo(){
         return "member_info";
+    }
+
+    /**
+     * 验证是否登录
+     */
+    @RequestMapping("/returnLogin")
+    @ResponseBody
+    public ResponseMessage returnLogin(HttpServletRequest request){
+        String user =(String)request.getSession().getAttribute(StaticClass.LOGIN_CODE);
+        if(StringUtils.isNotEmpty(user)){
+            try {
+                Visitor visitor =(Visitor)redisClient.get(user+StaticClass.LOGIN_CODE);
+                if(visitor!=null&&StringUtils.isNotEmpty(visitor.getName())){
+                    return ResponseMessage.ok(visitor.getName());
+                }
+            }catch (Exception e){
+                log.info("未登录");
+            }
+        }
+        return ResponseMessage.ok("");
     }
 
 }

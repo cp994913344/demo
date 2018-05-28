@@ -100,7 +100,7 @@
                                         <a  style="float: right; margin: 0% 10% 5% 0%;" href="" target="_blank">忘记密码</a>
                                     </div>
                                     <div style=" margin:0px 0px 5% 10%;">
-                                        <input class="input-submit" type="button" onclick="submitData()" value="登 录"></p>
+                                        <input class="input-submit" type="button" onclick="login()" value="登 录"></p>
                                         <br>
                                         <div>
                                             <span style="margin: 0px 23px 17px 0px;display: block;border-top: 1px solid #ebebeb;"></span>
@@ -272,12 +272,12 @@
             function  register(){
                 var email = $("input[name='emailCode']").val();
                 var password = $("input[name='password']").val();
-                var phone = $("input[name='emailCaptcha']").val();
+                var emailCode = $("input[name='emailCaptcha']").val();
                 if(!email){
                     errorShow("请输入正确的邮箱");
                     return;
                 }
-                if(!phone||phone.size<6){
+                if(!emailCode||emailCode.size<6){
                     errorShow("请输入正确的邮箱验证码");
                     return;
                 }
@@ -288,7 +288,7 @@
                 $.ajax({
                     url:'/visitor/register',
                     data:{
-                        "phone":phone.trim(),
+                        "emailCode":emailCode.trim(),
                         "password":password.trim(),
                         "email":email.trim()
                     },
@@ -308,7 +308,7 @@
 
             }
 
-            function  submitData(){
+            function  login(){
                 var email = $("input[name='userEmailCode']").val();
                 var password = $("input[name='userPassword']").val();
                 var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
