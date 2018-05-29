@@ -36,7 +36,7 @@ public class ToVisitorController {
         if(toVisitor == null){
             return ResponseMessage.error("查询失败");
         }
-        return ResponseMessage.ok("",toVisitor);
+        return ResponseMessage.ok("查询成功",toVisitor);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ToVisitorController {
     public ResponseMessage selectToVisitorList(){
         List<ToVisitor> list = toVisitorService.selectList();
         log.info("|查询同游列表接口出参|[{}]",list);
-        return ResponseMessage.ok("所有同游列表",list);
+        return ResponseMessage.list(list.size(),list);
     }
 
     /**

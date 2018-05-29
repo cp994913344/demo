@@ -18,4 +18,9 @@ public class CityinfoServiceImpl implements CityinfoService {
     public Cityinfo selectByPrimaryKey(Integer id) {
         return cityinfoMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public Cityinfo quretByName(String cityname) {
+        return cityinfoMapper.queryByName(cityname);
+    }
 }

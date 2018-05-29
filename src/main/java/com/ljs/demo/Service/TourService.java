@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface TourService {
 
     Tour selectByPrimaryKey(Integer id);
+
+    int insertTour(Tour tour);
 }

@@ -53,4 +53,6 @@ public interface TourMapper {
      * @mbggenerated Thu May 24 20:54:12 CST 2018
      */
     int updateByPrimaryKey(Tour record);
+
+
 }

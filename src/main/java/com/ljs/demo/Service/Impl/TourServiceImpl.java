@@ -18,4 +18,9 @@ public class TourServiceImpl implements TourService {
     public Tour selectByPrimaryKey(Integer id) {
         return tourMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int insertTour(Tour tour) {
+        return tourMapper.insert(tour);
+    }
 }

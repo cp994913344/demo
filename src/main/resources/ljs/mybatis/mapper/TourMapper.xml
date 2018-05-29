@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Tour" >
     <id column="TOURID" property="tourid" jdbcType="INTEGER" />
     <result column="UUID" property="uuid" jdbcType="VARCHAR" />
-    <result column="VISITORID" property="visitorid" jdbcType="INTEGER" />
-    <result column="CITYINFOID" property="cityinfoid" jdbcType="INTEGER" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR" />
+    <result column="CITYINFOID" property="cityinfoid" jdbcType="VARCHAR" />
     <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
     <result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
     <result column="LAUGUAGE" property="lauguage" jdbcType="VARCHAR" />
@@ -49,8 +49,8 @@
       SCULPTURE, STATUS, SUBSCRIBE, 
       APPRAISE, FACE, TOVISITORINFO
       )
-    values (#{tourid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{visitorid,jdbcType=INTEGER}, 
-      #{cityinfoid,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+    values (#{tourid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{visitorid,jdbcType=VARCHAR},
+      #{cityinfoid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
       #{lauguage,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{cityservice,jdbcType=VARCHAR}, 
       #{stayyear,jdbcType=VARCHAR}, #{owncar,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{idphoto,jdbcType=VARCHAR}, 
@@ -204,10 +204,10 @@
         UUID = #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="visitorid != null" >
-        VISITORID = #{visitorid,jdbcType=INTEGER},
+        VISITORID = #{visitorid,jdbcType=VARCHAR},
       </if>
       <if test="cityinfoid != null" >
-        CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+        CITYINFOID = #{cityinfoid,jdbcType=VARCHAR},
       </if>
       <if test="realname != null" >
         REALNAME = #{realname,jdbcType=VARCHAR},
@@ -269,8 +269,8 @@
   <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Tour" >
     update TOUR
     set UUID = #{uuid,jdbcType=VARCHAR},
-      VISITORID = #{visitorid,jdbcType=INTEGER},
-      CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+      VISITORID = #{visitorid,jdbcType=VARCHAR},
+      CITYINFOID = #{cityinfoid,jdbcType=VARCHAR},
       REALNAME = #{realname,jdbcType=VARCHAR},
       BIRTHDAY = #{birthday,jdbcType=DATE},
       LAUGUAGE = #{lauguage,jdbcType=VARCHAR},

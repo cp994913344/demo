@@ -125,4 +125,7 @@
       CITYINFO = #{cityinfo,jdbcType=VARCHAR}
     where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
   </update>
+  <select id="queryByName" parameterType="String" resultMap="BaseResultMap">
+    SELECT  * from CITYINFO WHERE CITYNAME = #{cityname,jdbcType=VARCHAR}
+  </select>
 </mapper>

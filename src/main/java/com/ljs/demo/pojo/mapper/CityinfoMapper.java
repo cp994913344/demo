@@ -53,4 +53,6 @@ public interface CityinfoMapper {
      * @mbggenerated Fri May 25 00:11:02 CST 2018
      */
     int updateByPrimaryKey(Cityinfo record);
+
+    Cityinfo queryByName(String cityname);
 }

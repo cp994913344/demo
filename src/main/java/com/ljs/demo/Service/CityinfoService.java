@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface CityinfoService {
 
     Cityinfo selectByPrimaryKey(Integer id);
+
+    Cityinfo quretByName(String cityname);
 }
