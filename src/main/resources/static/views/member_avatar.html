@@ -6,56 +6,72 @@
         <title>更改头像</title> 
         <link rel="shortcut icon" href="images/favicon.ico" /> 
         <link rel="stylesheet" type="text/css" href="css/common_member.css" /> 
-        <link rel="stylesheet" type="text/css" href="css/portrait.css" /> 
-        <script type="text/javascript">
-            var TU = {
-                myUrl: 'http://my.liantu.cn',
-                wwwUrl: 'http://www.liantu.cn'
-            };
-        </script>
-        <script>
-        function PreviewImage(imgFile) {
-        var path;
-        path = URL.createObjectURL(imgFile.files[0]);
-        document.getElementById('oldImg').setAttribute('src', path);
-
-        }
-        </script>
-    </head> 
+        <link rel="stylesheet" type="text/css" href="css/portrait.css" />
+        <link rel="stylesheet" type="text/css" href="css/webuploader.css">
+    </head>
     <body> 
         <div class="header"> 
             <div class="top-bg"></div> 
-            <div class="mod-head"> 
+            <div class="mod-head">
                 <a href="views/main.html" class="logo"><img src="images/logo.png" alt="随心游" /></a>
-                <div class="search"> 
-                    <div class="box"> 
-                        <div class="sbox"> 
-                            <input type="text" class="text" id="search_text" placeholder="输入想去的地方（例如：北京）" /> 
+                <div class="search">
+                    <div class="box">
+                        <div class="sbox">
+                            <input type="text" class="text" id="search_text" placeholder="输入想去的地方（例如：北京）" />
                             <div class="ico" id="search_ico">
                                 <span></span>
-                            </div> 
-                        </div> 
-                    </div> 
-                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="link">
                     <a href="apply.html" rel="nofollow" target="_blank">申请成为向导</a>
-                </div> 
-                <div class="login pl-login-info" id="pl-login-info"> 
-                    <div class="name"> 
-                        <img width="40" height="40" alt="" src="images/man_100x100.jpg" />
-                        <span class="name-text">180*****538</span>
+                </div>
+                <div class="login pl-login-info displayNone" id="pl-login-info" >
+                    <div class="user" >
+                        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+                        <span class="name" id="login_user_name"></span>
                         <span class="ico"></span>
-                    </div> 
-                    <div class="list"> 
-                        <div class="ico"></div> 
-                        <div class="login-box"> 
-                            <div class="bg"></div> 
-                            <p> <a member_info.html>个人信息</a> <a href="member_order.html">我的订单</a> <a href="member_tongyou.html">我的同游</a> <a href="/member/logout/" class="js-pl-logout">退出</a> </p> 
-                        </div> 
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
+                    </div>
+                    <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+                        <div class="ico">
+                        </div>
+                        <ul>
+                            <li class="d-pc">
+                                <a href="/toMemberInfo">个人信息</a>
+                            </li>
+                            <li>
+                                <a href="http://my.liantu.cn/member/order/">我的订单</a>
+                            </li>
+                            <li>
+                                <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+                            </li>
+                            <li class="d-m">
+                                <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+                            </li>
+                            <li class="d-m">
+                                <a href="/banyou/">伴游</a>
+                            </li>
+                            <li class="d-m">
+                                <a href="/daoyou/">导游</a>
+                            </li>
+                            <li class="d-m">
+                                <a href="/tongyou/">同游</a>
+                            </li>
+                            <li class="d-pc">
+                                <a href="javascript:" onclick="">退出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="login pl-login-info displayNone" id="loginDiv">
+                    <div class="info">
+                        <a  href="/">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container"> 
             <div class="home"> 
                 <a href="views/main.html"> <span class="plus"></span>返回首页 </a>
@@ -80,16 +96,16 @@
                 <div class="content"> 
                     <h2>更改头像</h2> 
                     <div class="mod-box"> 
-                        <div class="box-portrait" id="j-portrait"> 
+                        <div class="box-portrait" id="uploader-demo">
                             <div class="portrait"> 
-                                <div class="pic200">
+                                <div class="pic200 uploader-list" id="fileList">
                                     <img src="images/man.jpg" id="j-curimg" class="cur-portrait" alt="当前头像" width="200" height="200" /> 
                                 </div> 
                             </div> 
-                            <form action="/member/profile/portraitimg" method="POST" name="form" enctype="multipart/form-data" target="callback"> 
-                                <a href="javascript:;" id="j-upload" class="btn-portrait" title="选择头像"><input class="input-file" type="file" name="portrait" accept=".png,.jpg,.gif,.JPG,.PNG,.GIF" /><span>选择头像</span></a>
+                            <form action="/member/profile/portraitimg" method="POST" id="fileForm" enctype="multipart/form-data" target="callback">
+                                <a class="btn-portrait" title="选择头像" id="filePicker"><input class="input-file" type="file" name="portrait" accept=".png,.jpg,.gif,.JPG,.PNG,.GIF" /><span>选择头像</span></a>
                             </form>
-                            <a href="" id="j-confirm" class="btn-confirm" title="保存">保存</a> 
+                            <a href="" id="j-confirm" class="btn-confirm" title="保存">保存</a>
                             <p>请上传 .jpg 或 .gif 或 .png 格式的图片（照片大小需小于2M）</p> 
                         </div>
                     </div> 
@@ -179,25 +195,105 @@
                     <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat 
                 </div> 
             </div> 
-        </div> 
-        <script type="text/javascript" src="js/jquery.seajs.js" id="seajsnode"></script> 
-        <script type="text/javascript" src="js/jquery.jcrop.min.js"></script> 
+        </div>
+
+        <script type="text/javascript" src="/js/jquery-3.3.1.js" />
+        <script type="text/javascript" src="/js/all_common.js" />
+        <!--引入JS-->
+        <script type="text/javascript" src="/js/web_file_upload/webuploader.js"></script>
         <script type="text/javascript">
-            seajs.config({
-                base: 'http://static.liantu.cn/script/dist',
-                paths: {
-                    'modules': 'http://static.liantu.cn/script/dist'
-                },
-                map: [
-                    [/^(.*?\/script\/(?:src|dist)\/.*?\/.*?\.js$)(?:.*)$/i, '$1?version=v1']
-                ],
-                charset: 'utf-8'
+            var uploader = WebUploader.create({
+
+                // 选完文件后，是否自动上传。
+                auto: true,
+
+                // swf文件路径
+                swf: BASE_URL + '/js/Uploader.swf',
+
+                // 文件接收服务端。
+                server: 'http://webuploader.duapp.com/server/fileupload.php',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#filePicker',
+
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
             });
 
-            seajs.use('modules/my/common/common.js');
 
-            seajs.use('modules/my/public/portrait.js');
-        </script> 
+            // 当有文件添加进来的时候
+            uploader.on( 'fileQueued', function( file ) {
+                var $li = $(
+                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<div class="info">' + file.name + '</div>' +
+                    '</div>'
+                    ),
+                    $img = $li.find('img');
+
+
+                // $list为容器jQuery实例
+                $list.append( $li );
+
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+
+                    $img.attr( 'src', src );
+                }, thumbnailWidth, thumbnailHeight );
+            });
+
+
+
+            // 文件上传过程中创建进度条实时显示。
+            uploader.on( 'uploadProgress', function( file, percentage ) {
+                var $li = $( '#'+file.id ),
+                    $percent = $li.find('.progress span');
+
+                // 避免重复创建
+                if ( !$percent.length ) {
+                    $percent = $('<p class="progress"><span></span></p>')
+                        .appendTo( $li )
+                        .find('span');
+                }
+
+                $percent.css( 'width', percentage * 100 + '%' );
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on( 'uploadSuccess', function( file ) {
+                $( '#'+file.id ).addClass('upload-state-done');
+            });
+
+            // 文件上传失败，显示上传出错。
+            uploader.on( 'uploadError', function( file ) {
+                var $li = $( '#'+file.id ),
+                    $error = $li.find('div.error');
+
+                // 避免重复创建
+                if ( !$error.length ) {
+                    $error = $('<div class="error"></div>').appendTo( $li );
+                }
+
+                $error.text('上传失败');
+            });
+
+            // 完成上传完了，成功或者失败，先删除进度条。
+            uploader.on( 'uploadComplete', function( file ) {
+                $( '#'+file.id ).find('.progress').remove();
+            });
+
+        </script>
         <div class="hide"> 
         </div>  
     </body>

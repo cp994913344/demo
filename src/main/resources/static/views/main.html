@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="keywords" content="随心游旅游" />
-    <meta name="description" content="随心油旅游是一家提供专业导游、伴游、同游的服务平台，方便您找到志同道合的朋友一起旅行，一起快乐旅游，结伴旅游，同行之路，有你才有意义。" />
+    <meta name="description" content="随心游旅游是一家提供专业导游、伴游、同游的服务平台，方便您找到志同道合的朋友一起旅行，一起快乐旅游，结伴旅游，同行之路，有你才有意义。" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <link rel="shortcut icon" href="../images/favicon.ico" />
     <link rel="canonical" href="main.html" />
@@ -14,24 +14,6 @@
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
     <script type="text/javascript" id="js-prelogin" src="../js/cas.js"></script>
     <script type="text/javascript" src="../js/jquery.seajs.js" id="seajsnode"></script>
-    <!--[if lte IE 8]>
-    <script type="text/javascript">
-        $(function(){
-            var $body=$('body');
-            var $window =  $(window);
-            $window.resize(function() {
-                var width = $window.width();
-                if(width<768){
-                    $body.addClass("media-small").removeClass("media-medium");
-                }else if(width<1300){
-                    $body.addClass("media-medium").removeClass("media-small");
-                }else{
-                    $body.removeClass("media-small").removeClass("media-medium");
-                }
-            }).resize();
-        });
-    </script>
-    <![endif]-->
 </head>
 <body>
 <div class="wrapper">
@@ -437,28 +419,8 @@
 </div>
 
 
-<script src="/js/jquery-3.3.1.js"></script>
-<script type="text/javascript">
-    $(function(){
-            $.ajax({
-                url:'/returnLogin',
-                type :'post',
-                success:function(_res){
-                    if(_res.message){
-                        $("#login_user_name").text(_res.message);
-                        $("#pl-login-info").removeClass("displayNone");
-                    }else{
-                        $("#loginDiv").removeClass("displayNone");
-                    }
-                }
-            });
-    });
-
-    //控制头像登录 滑入滑出
-    $("#pl-login-info").hover(function(){
-        $("#loginInfo").toggle();
-    });
-</script>
+<script type="text/javascript" src="/js/jquery-3.3.1.js" />
+<script type="text/javascript" src="/js/all_common.js" />
 <div class="hide">
 </div>
 </body>
