@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Scenic" >
     <id column="SCENICID" property="scenicid" jdbcType="INTEGER" />
     <result column="UUID" property="uuid" jdbcType="VARCHAR" />
-    <result column="CITYINFOID" property="cityinfoid" jdbcType="INTEGER" />
+    <result column="CITYINFOID" property="cityinfoid" jdbcType="VARCHAR" />
     <result column="SCENICNAME" property="scenicname" jdbcType="VARCHAR" />
     <result column="LEVER" property="lever" jdbcType="VARCHAR" />
     <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
@@ -35,7 +35,7 @@
       SCENICPHONE, OPENHOURS, TICKETSINFO, 
       SCENICINFO, SCENICPHOTO, SCENICMAP
       )
-    values (#{scenicid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{cityinfoid,jdbcType=INTEGER}, 
+    values (#{scenicid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{cityinfoid,jdbcType=VARCHAR},
       #{scenicname,jdbcType=VARCHAR}, #{lever,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{scenicphone,jdbcType=VARCHAR}, #{openhours,jdbcType=VARCHAR}, #{ticketsinfo,jdbcType=VARCHAR}, 
       #{scenicinfo,jdbcType=VARCHAR}, #{scenicphoto,jdbcType=CHAR}, #{scenicmap,jdbcType=VARCHAR}
@@ -89,7 +89,7 @@
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="cityinfoid != null" >
-        #{cityinfoid,jdbcType=INTEGER},
+        #{cityinfoid,jdbcType=VARCHAR},
       </if>
       <if test="scenicname != null" >
         #{scenicname,jdbcType=VARCHAR},
@@ -127,7 +127,7 @@
         UUID = #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="cityinfoid != null" >
-        CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+        CITYINFOID = #{cityinfoid,jdbcType=VARCHAR},
       </if>
       <if test="scenicname != null" >
         SCENICNAME = #{scenicname,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Scenic" >
     update SCENIC
     set UUID = #{uuid,jdbcType=VARCHAR},
-      CITYINFOID = #{cityinfoid,jdbcType=INTEGER},
+      CITYINFOID = #{cityinfoid,jdbcType=VARCHAR},
       SCENICNAME = #{scenicname,jdbcType=VARCHAR},
       LEVER = #{lever,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
