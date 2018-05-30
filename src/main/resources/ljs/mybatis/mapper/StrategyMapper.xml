@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Strategy" >
     <id column="STRATEGYID" property="strategyid" jdbcType="INTEGER" />
     <result column="UUID" property="uuid" jdbcType="VARCHAR" />
-    <result column="SCENICID" property="scenicid" jdbcType="INTEGER" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
     <result column="STRATEGYNAME" property="strategyname" jdbcType="VARCHAR" />
     <result column="STRATEGYCOL" property="strategycol" jdbcType="VARCHAR" />
     <result column="STRATEGYPHOTO" property="strategyphoto" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
     insert into STRATEGY (STRATEGYID, UUID, SCENICID, 
       STRATEGYNAME, STRATEGYCOL, STRATEGYPHOTO, 
       STRATEGYINFO)
-    values (#{strategyid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{scenicid,jdbcType=INTEGER}, 
+    values (#{strategyid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{scenicid,jdbcType=VARCHAR},
       #{strategyname,jdbcType=VARCHAR}, #{strategycol,jdbcType=VARCHAR}, #{strategyphoto,jdbcType=VARCHAR}, 
       #{strategyinfo,jdbcType=VARCHAR})
   </insert>
@@ -64,7 +64,7 @@
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="scenicid != null" >
-        #{scenicid,jdbcType=INTEGER},
+        #{scenicid,jdbcType=VARCHAR},
       </if>
       <if test="strategyname != null" >
         #{strategyname,jdbcType=VARCHAR},
@@ -87,7 +87,7 @@
         UUID = #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="scenicid != null" >
-        SCENICID = #{scenicid,jdbcType=INTEGER},
+        SCENICID = #{scenicid,jdbcType=VARCHAR},
       </if>
       <if test="strategyname != null" >
         STRATEGYNAME = #{strategyname,jdbcType=VARCHAR},
@@ -107,11 +107,24 @@
   <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Strategy" >
     update STRATEGY
     set UUID = #{uuid,jdbcType=VARCHAR},
-      SCENICID = #{scenicid,jdbcType=INTEGER},
+      SCENICID = #{scenicid,jdbcType=VARCHAR},
       STRATEGYNAME = #{strategyname,jdbcType=VARCHAR},
       STRATEGYCOL = #{strategycol,jdbcType=VARCHAR},
       STRATEGYPHOTO = #{strategyphoto,jdbcType=VARCHAR},
       STRATEGYINFO = #{strategyinfo,jdbcType=VARCHAR}
     where STRATEGYID = #{strategyid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByCityUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM STRATEGY
+    WHERE
+    SCENICID IN
+    (SELECT UUID FROM SCENIC WHERE CITYINFOID = #{cityUid});
+  </select>
+
+  <select id="queryBySceUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM STRATEGY
+    WHERE
+    SCENICID = #{SceUid}
+  </select>
 </mapper>

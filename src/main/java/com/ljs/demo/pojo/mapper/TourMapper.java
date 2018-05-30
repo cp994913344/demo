@@ -2,7 +2,11 @@ package com.ljs.demo.pojo.mapper;
 
 
 import com.ljs.demo.pojo.domain.Tour;
+import com.ljs.demo.pojo.vo.TourVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface TourMapper {
@@ -53,6 +57,8 @@ public interface TourMapper {
      * @mbggenerated Thu May 24 20:54:12 CST 2018
      */
     int updateByPrimaryKey(Tour record);
+
+    List<TourVo> queryByCityUID(@Param("cityinfoid") String cityinfoid);
 
 
 }

@@ -48,7 +48,7 @@ public class ToVisitorController {
     public ResponseMessage selectToVisitorList(){
         List<ToVisitor> list = toVisitorService.selectList();
         log.info("|查询同游列表接口出参|[{}]",list);
-        return ResponseMessage.list(list.size(),list);
+        return ResponseMessage.list("",list.size(),list);
     }
 
     /**

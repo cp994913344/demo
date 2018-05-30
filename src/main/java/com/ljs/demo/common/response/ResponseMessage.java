@@ -46,8 +46,9 @@ public class ResponseMessage implements Serializable {
         return new ResponseMessage(CODE_ERROR,message,null);
     }
 
-	public static <T> ResponseMessage list(int total, List<T> list) {
+	public static <T> ResponseMessage list(String message,int total, List<T> list) {
 		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message",message);
 		resultMap.put("total", total);
 		resultMap.put("list", list);
 		return ok(resultMap);

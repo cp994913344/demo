@@ -25,6 +25,31 @@
     <result column="FACE" property="face" jdbcType="VARCHAR" />
     <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="BaseResultMap1" type="com.ljs.demo.pojo.vo.TourVo" >
+    <id column="TOURID" property="tourid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR" />
+    <result column="CITYINFOID" property="cityinfoid" jdbcType="VARCHAR" />
+    <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="DATE" />
+    <result column="LAUGUAGE" property="lauguage" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="CITYSERVICE" property="cityservice" jdbcType="VARCHAR" />
+    <result column="STAYYEAR" property="stayyear" jdbcType="VARCHAR" />
+    <result column="OWNCAR" property="owncar" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="CHAR" />
+    <result column="IDPHOTO" property="idphoto" jdbcType="VARCHAR" />
+    <result column="SCULPTURE" property="sculpture" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="SUBSCRIBE" property="subscribe" jdbcType="VARCHAR" />
+    <result column="APPRAISE" property="appraise" jdbcType="VARCHAR" />
+    <result column="FACE" property="face" jdbcType="VARCHAR" />
+    <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     TOURID, UUID, VISITORID, CITYINFOID, REALNAME, BIRTHDAY, LAUGUAGE, CITY, CITYSERVICE, 
     STAYYEAR, OWNCAR, PHONE, QQ, WECHAT, EMAIL, IDPHOTO, SCULPTURE, STATUS, SUBSCRIBE, 
@@ -291,4 +316,8 @@
       TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR}
     where TOURID = #{tourid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByCityUID" parameterType="String" resultMap="BaseResultMap1">
+    SELECT * FROM TOUR WHERE  CITYINFOID = #{cityinfoid,jdbcType=VARCHAR}
+  </select>
 </mapper>

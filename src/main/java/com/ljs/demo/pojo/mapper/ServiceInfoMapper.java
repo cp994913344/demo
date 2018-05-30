@@ -2,6 +2,9 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.ServiceInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ServiceInfoMapper {
@@ -52,4 +55,6 @@ public interface ServiceInfoMapper {
      * @mbggenerated Thu May 24 21:21:37 CST 2018
      */
     int updateByPrimaryKey(ServiceInfo record);
+
+    List<String> queryByTourUid(@Param("tourUid") String tourUid);
 }

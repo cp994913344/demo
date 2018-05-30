@@ -90,4 +90,12 @@
       SERVICEINFO = #{serviceinfo,jdbcType=VARCHAR}
     where SERVICEID = #{serviceid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByTourUid" parameterType="String" resultType="String">
+    SELECT SERVICENAME FROM sys.SERVICEINFO
+    WHERE
+    UUID = ANY(SELECT SERVICEID FROM sys.MAPPING
+    WHERE
+    TOURID = #{tourUid});
+  </select>
 </mapper>

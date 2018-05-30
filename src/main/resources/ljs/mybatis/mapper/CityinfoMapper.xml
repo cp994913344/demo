@@ -126,6 +126,6 @@
     where CITYINFOID = #{cityinfoid,jdbcType=INTEGER}
   </update>
   <select id="queryByName" parameterType="String" resultMap="BaseResultMap">
-    SELECT  * from CITYINFO WHERE CITYNAME = #{cityname,jdbcType=VARCHAR}
+    SELECT  * from CITYINFO WHERE CITYNAME like CONCAT('%',#{likeName},'%')
   </select>
 </mapper>

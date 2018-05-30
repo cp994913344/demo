@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class StrategyServiceImpl implements StrategyService {
@@ -18,5 +20,15 @@ public class StrategyServiceImpl implements StrategyService {
     @Override
     public Strategy selectByPrimaryKey(Integer id) {
         return strategyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Strategy> queryByCityUid(String cityUid) {
+        return strategyMapper.queryByCityUid(cityUid);
+    }
+
+    @Override
+    public List<Strategy> queryBySceUid(String SceUId) {
+        return strategyMapper.queryByCityUid(SceUId);
     }
 }
