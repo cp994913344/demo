@@ -57,7 +57,23 @@ public interface StrategyMapper {
      */
     int updateByPrimaryKey(Strategy record);
 
+    /**
+     * 根据城市UID查询攻略
+     * @param cityUid
+     * @return
+     */
     List<Strategy> queryByCityUid(@Param("cityUid") String cityUid);
 
+    /**
+     * 根据景点UID查询攻略
+     * @param SceUId
+     * @return
+     */
     List<Strategy> queryBySceUid(@Param("SceUid") String SceUId);
+
+    /**
+     * 查询热门攻略
+     * @return
+     */
+    List<Strategy> queryHotStrategy();
 }

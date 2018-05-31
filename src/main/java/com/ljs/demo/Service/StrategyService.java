@@ -13,4 +13,6 @@ public interface StrategyService {
     List<Strategy> queryByCityUid(String cityUid);
 
     List<Strategy> queryBySceUid(String SceUId);
+
+    List<Strategy> queryHotStrategy();
 }

@@ -49,4 +49,15 @@ public class StrategyController {
         return ResponseMessage.list("",list.size(),list);
     }
 
+    /**
+     * 根据景点Uid查询攻略
+     * @return
+     */
+    @RequestMapping(value = "/queryHotStrategy")
+    public ResponseMessage queryHotStrategy(){
+        List<Strategy> list = strategyService.queryHotStrategy();
+        log.info("|对外接口|返回参数[{}]", list);
+        return ResponseMessage.list("热门攻略列表",list.size(),list);
+    }
+
 }

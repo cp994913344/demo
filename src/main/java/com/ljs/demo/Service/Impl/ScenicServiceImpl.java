@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ScenicServiceImpl implements ScenicService {
@@ -17,5 +19,10 @@ public class ScenicServiceImpl implements ScenicService {
     @Override
     public Scenic selectByPrimaryKey(Integer id) {
         return scenicMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Scenic> queryHotScenic() {
+        return scenicMapper.queryHotScenic();
     }
 }

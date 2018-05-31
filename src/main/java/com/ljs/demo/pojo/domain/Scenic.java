@@ -111,4 +111,9 @@ public class Scenic implements Serializable {
      */
     private String scenicmap;//景点导览图
 
+    /**
+     * 状态 1：热门景点
+     */
+    private String status;
+
 }

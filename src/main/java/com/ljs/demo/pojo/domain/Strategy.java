@@ -70,4 +70,9 @@ public class Strategy implements Serializable {
      * @mbggenerated Fri May 25 01:32:15 CST 2018
      */
     private String strategyinfo;
+
+    /**
+     * 状态1:热门景点
+     */
+    private Integer status;
 }

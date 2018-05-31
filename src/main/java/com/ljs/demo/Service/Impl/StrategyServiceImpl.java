@@ -29,6 +29,11 @@ public class StrategyServiceImpl implements StrategyService {
 
     @Override
     public List<Strategy> queryBySceUid(String SceUId) {
-        return strategyMapper.queryByCityUid(SceUId);
+        return strategyMapper.queryBySceUid(SceUId);
+    }
+
+    @Override
+    public List<Strategy> queryHotStrategy() {
+        return strategyMapper.queryHotStrategy();
     }
 }
