@@ -15,4 +15,11 @@ import java.util.List;
 public class TourVo extends Tour {
 
     private List ServiceList;
+
+    @Override
+    public String toString() {
+        return "TourVo{" + "turbo:"+super.toString()+","+
+                "ServiceList=" + ServiceList +
+                '}';
+    }
 }

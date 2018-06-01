@@ -31,4 +31,9 @@ public class TourServiceImpl implements TourService {
     public List<TourVo> queryByCityUID(String cityinfoid) {
         return tourMapper.queryByCityUID(cityinfoid);
     }
+
+    @Override
+    public List<TourVo> querySelective(Tour tour) {
+        return tourMapper.querySelective(tour);
+    }
 }

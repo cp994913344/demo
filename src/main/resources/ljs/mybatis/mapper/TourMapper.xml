@@ -24,6 +24,7 @@
     <result column="APPRAISE" property="appraise" jdbcType="VARCHAR" />
     <result column="FACE" property="face" jdbcType="VARCHAR" />
     <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
   </resultMap>
 
   <resultMap id="BaseResultMap1" type="com.ljs.demo.pojo.vo.TourVo" >
@@ -49,11 +50,12 @@
     <result column="APPRAISE" property="appraise" jdbcType="VARCHAR" />
     <result column="FACE" property="face" jdbcType="VARCHAR" />
     <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOURID, UUID, VISITORID, CITYINFOID, REALNAME, BIRTHDAY, LAUGUAGE, CITY, CITYSERVICE, 
     STAYYEAR, OWNCAR, PHONE, QQ, WECHAT, EMAIL, IDPHOTO, SCULPTURE, STATUS, SUBSCRIBE, 
-    APPRAISE, FACE, TOVISITORINFO
+    APPRAISE, FACE, TOVISITORINFO,SEX
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -72,7 +74,7 @@
       STAYYEAR, OWNCAR, PHONE, 
       QQ, WECHAT, EMAIL, IDPHOTO, 
       SCULPTURE, STATUS, SUBSCRIBE, 
-      APPRAISE, FACE, TOVISITORINFO
+      APPRAISE, FACE, TOVISITORINFO,SEX
       )
     values (#{tourid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{visitorid,jdbcType=VARCHAR},
       #{cityinfoid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
@@ -80,7 +82,7 @@
       #{stayyear,jdbcType=VARCHAR}, #{owncar,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{idphoto,jdbcType=VARCHAR}, 
       #{sculpture,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{subscribe,jdbcType=VARCHAR}, 
-      #{appraise,jdbcType=VARCHAR}, #{face,jdbcType=VARCHAR}, #{tovisitorinfo,jdbcType=VARCHAR}
+      #{appraise,jdbcType=VARCHAR}, #{face,jdbcType=VARCHAR}, #{tovisitorinfo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Tour" >
@@ -152,6 +154,9 @@
       <if test="tovisitorinfo != null" >
         TOVISITORINFO,
       </if>
+      <if test="sex !=null">
+        SEX
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tourid != null" >
@@ -219,6 +224,9 @@
       </if>
       <if test="tovisitorinfo != null" >
         #{tovisitorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR}
       </if>
     </trim>
   </insert>
@@ -288,6 +296,9 @@
       <if test="tovisitorinfo != null" >
         TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
     </set>
     where TOURID = #{tourid,jdbcType=INTEGER}
   </update>
@@ -314,10 +325,83 @@
       APPRAISE = #{appraise,jdbcType=VARCHAR},
       FACE = #{face,jdbcType=VARCHAR},
       TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR}
+      SEX = #{sex,jdbcType=VARCHAR}
     where TOURID = #{tourid,jdbcType=INTEGER}
   </update>
 
   <select id="queryByCityUID" parameterType="String" resultMap="BaseResultMap1">
     SELECT * FROM TOUR WHERE  CITYINFOID = #{cityinfoid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="querySelective" parameterType="com.ljs.demo.pojo.domain.Tour" resultMap="BaseResultMap1">
+    select * from TOUR
+    <where>
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR}
+      </if>
+      <if test="visitorid != null" >
+        and VISITORID = #{visitorid,jdbcType=VARCHAR}
+      </if>
+      <if test="cityinfoid != null" >
+        and CITYINFOID = #{cityinfoid,jdbcType=VARCHAR}
+      </if>
+      <if test="realname != null" >
+        and REALNAME = #{realname,jdbcType=VARCHAR}
+      </if>
+      <if test="birthday != null" >
+        and BIRTHDAY = #{birthday,jdbcType=DATE}
+      </if>
+      <if test="lauguage != null" >
+        and LAUGUAGE = #{lauguage,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null" >
+        and CITY = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="cityservice != null" >
+        and CITYSERVICE = #{cityservice,jdbcType=VARCHAR}
+      </if>
+      <if test="stayyear != null" >
+        and STAYYEAR = #{stayyear,jdbcType=VARCHAR}
+      </if>
+      <if test="owncar != null" >
+        and OWNCAR = #{owncar,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null" >
+        and PHONE = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="qq != null" >
+        and QQ = #{qq,jdbcType=VARCHAR}
+      </if>
+      <if test="wechat != null" >
+        and WECHAT = #{wechat,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null" >
+        and EMAIL = #{email,jdbcType=CHAR}
+      </if>
+      <if test="idphoto != null" >
+        and IDPHOTO = #{idphoto,jdbcType=VARCHAR}
+      </if>
+      <if test="sculpture != null" >
+        and SCULPTURE = #{sculpture,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="subscribe != null" >
+        and SUBSCRIBE = #{subscribe,jdbcType=VARCHAR}
+      </if>
+      <if test="appraise != null" >
+        and APPRAISE = #{appraise,jdbcType=VARCHAR}
+      </if>
+      <if test="face != null" >
+        and FACE = #{face,jdbcType=VARCHAR}
+      </if>
+      <if test="tovisitorinfo != null" >
+        and TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != null" >
+        and SEX = #{sex,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 </mapper>

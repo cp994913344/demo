@@ -1,16 +1,23 @@
 package com.ljs.demo.controller;
 
 import com.ljs.demo.Service.CityinfoService;
+import com.ljs.demo.Service.ServiceInfoService;
 import com.ljs.demo.Service.TourService;
+import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.pojo.domain.Cityinfo;
+import com.ljs.demo.pojo.domain.ServiceInfo;
 import com.ljs.demo.pojo.domain.Tour;
+import com.ljs.demo.pojo.domain.Visitor;
+import com.ljs.demo.pojo.vo.TourVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -22,6 +29,12 @@ public class TourController {
 
     @Autowired
     CityinfoService cityinfoService;
+
+    @Autowired
+    VisitorServcie visitorServcie;
+
+    @Autowired
+    ServiceInfoService serviceInfoService;
 
     /**
      * 通过导游/伴游ID查询详情
@@ -53,11 +66,41 @@ public class TourController {
         tour.setVisitorid("2b8a0a979ea34e5c84cccd1b908e1cf3");
         tour.setCityinfoid(cityuuid);
         tour.setStatus("0");
+        Visitor visitor = visitorServcie.selectByUid(visitorUuid);
+        tour.setSex(visitor.getSex());
         int i = tourService.insertTour(tour);
         if(i>0){
             return ResponseMessage.ok("申请成功",i);
         }
         return ResponseMessage.error("申请失败");
+    }
+
+    /**
+     * 条件检索导游
+     * @return
+     */
+    @RequestMapping(value = "/querySelective")
+    public ResponseMessage querySelective(/*Tour tour,@RequestParam("service") String service*/){
+        //log.info("|条件检索导游对外接口|入参[{}]",tour);
+        Tour tour = new Tour();
+        String service = "跟拍摄像";
+        tour.setSex("男");
+        tour.setLauguage("英语");
+        List<TourVo> tourList = tourService.querySelective(tour);
+        log.info("|导游个数|[{}]",tourList.size());
+        for(int i = 0; i < tourList.size(); i++){
+            List<String> serviceInfoList = serviceInfoService.queryByTourUid(tourList.get(i).getUuid());
+            log.info("服务列表|[{}]",serviceInfoList);
+            if(serviceInfoList.contains(service)){
+                tourList.get(i).setServiceList(serviceInfoList);
+            }
+            else {
+                tourList.remove(i);
+                i--;
+            }
+        }
+        log.info("接口出参|[{}]",tourList);
+        return ResponseMessage.list("条件检索导游列表",tourList.size(),tourList);
     }
 
 

@@ -34,4 +34,9 @@ public class VisitorServiceImpl implements VisitorServcie {
     public int updateInfo(Visitor visitor,Integer visitorid) {
         return visitorMapper.updateByPrimaryKey(visitor,visitorid);
     }
+
+    @Override
+    public Visitor selectByUid(String visitorUid) {
+        return visitorMapper.selectByUid(visitorUid);
+    }
 }

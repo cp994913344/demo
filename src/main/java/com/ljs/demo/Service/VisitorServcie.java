@@ -13,4 +13,6 @@ public interface VisitorServcie {
     int register(Visitor visitor);
 
     int updateInfo(Visitor visitor,Integer visitorid);
+
+    Visitor selectByUid(String visitorUid);
 }

@@ -58,7 +58,13 @@ public interface TourMapper {
      */
     int updateByPrimaryKey(Tour record);
 
+    /**
+     * 根据城市UID查询导游列表
+     * @param cityinfoid
+     * @return
+     */
     List<TourVo> queryByCityUID(@Param("cityinfoid") String cityinfoid);
 
+    List<TourVo> querySelective(Tour tour);
 
 }

@@ -14,4 +14,6 @@ public interface TourService {
     int insertTour(Tour tour);
 
     List<TourVo> queryByCityUID(String cityinfoid);
+
+    List<TourVo> querySelective(Tour tour);
 }

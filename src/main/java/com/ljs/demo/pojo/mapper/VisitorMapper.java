@@ -57,5 +57,7 @@ public interface VisitorMapper {
 
     Visitor login(@Param("name") String email , @Param("pass") String password);
 
+    Visitor selectByUid(@Param("uuid") String visitorUid);
+
 
 }
