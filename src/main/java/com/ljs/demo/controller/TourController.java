@@ -80,12 +80,12 @@ public class TourController {
      * @return
      */
     @RequestMapping(value = "/querySelective")
-    public ResponseMessage querySelective(/*Tour tour,@RequestParam("service") String service*/){
-        //log.info("|条件检索导游对外接口|入参[{}]",tour);
-        Tour tour = new Tour();
+    public ResponseMessage querySelective(Tour tour,@RequestParam("service") String service){
+        log.info("|条件检索导游对外接口|入参[{}]",tour);
+        /*Tour tour = new Tour();
         String service = "跟拍摄像";
         tour.setSex("男");
-        tour.setLauguage("英语");
+        tour.setLauguage("英语");*/
         List<TourVo> tourList = tourService.querySelective(tour);
         log.info("|导游个数|[{}]",tourList.size());
         for(int i = 0; i < tourList.size(); i++){

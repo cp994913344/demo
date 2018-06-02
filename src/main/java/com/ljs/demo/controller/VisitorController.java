@@ -41,6 +41,15 @@ public class VisitorController {
         return ResponseMessage.ok("", visitor);
     }
 
+    @RequestMapping(value = "/updateByPrimaryKeySelective")
+    public ResponseMessage updateByPrimaryKeySelective(){
+        Visitor visitor = new Visitor();
+        visitor.setVisitorid(1);
+        visitor.setPassword("0421");
+        int i = visitorServcie.updateByPrimaryKeySelective(visitor);
+        return ResponseMessage.ok("修改成功",i);
+    }
+
     /**
      * 登陆
      *
@@ -145,12 +154,18 @@ public class VisitorController {
             if(!visitor.getPassword().equals(oldPass)){
                 return ResponseMessage.error("密码与原密码不同！");
             }
+            if(visitor.getVisitorid() == null){
+                return ResponseMessage.error("用户不正确");
+            }
             Visitor vi = new Visitor();
             vi.setPassword(newPass);
-            visitor.setPassword(newPass);
+            vi.setVisitorid(visitor.getVisitorid());
+            log.info("|修改密码接口入参|[{}]",vi);
+            //visitor.setPassword(newPass);
             redisClient.del(loginUser+ StaticClass.LOGIN_CODE);
             redisClient.set(loginUser+ StaticClass.LOGIN_CODE,visitor);
-            int i = visitorServcie.updateInfo(vi,visitor.getVisitorid());
+
+            int i = visitorServcie.updateByPrimaryKeySelective(vi);
             if (i > 0) {
                 return ResponseMessage.ok("修改成功", i);
             }

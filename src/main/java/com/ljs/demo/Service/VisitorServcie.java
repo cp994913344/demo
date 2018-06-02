@@ -15,4 +15,6 @@ public interface VisitorServcie {
     int updateInfo(Visitor visitor,Integer visitorid);
 
     Visitor selectByUid(String visitorUid);
+
+    int updateByPrimaryKeySelective(Visitor visitor);
 }
