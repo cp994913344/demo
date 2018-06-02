@@ -116,14 +116,14 @@ public class LoginController {
         if(StringUtils.isNotEmpty(user)){
             try {
                 Visitor visitor =(Visitor)redisClient.get(user+StaticClass.LOGIN_CODE);
-                if(visitor!=null&&StringUtils.isNotEmpty(visitor.getName())){
+                if(visitor!=null){
                     return ResponseMessage.ok(visitor.getName());
                 }
             }catch (Exception e){
                 log.info("未登录");
             }
         }
-        return ResponseMessage.ok("");
+        return ResponseMessage.error("");
     }
 
 }
