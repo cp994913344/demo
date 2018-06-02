@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -96,21 +97,22 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/updateInfo")
-    public ResponseMessage updateInfo() {
-        Visitor vi = new Visitor();
-        vi.setUuid(GetUuid.uuid);
-        vi.setPhone(null);
-        vi.setEmail("ljs687421@163.com");
-        vi.setName("ljs");
-        vi.setSex("man");
-        vi.setCity("辽宁,沈阳");
-        vi.setAge("24");
-        log.info("|对外接口|入参[{}]", vi);
-        int i = visitorServcie.updateInfo(vi, 1);
-        if (i > 0) {
-            return ResponseMessage.ok("修改成功", i);
+    public ResponseMessage updateInfo(Visitor visitor, HttpServletRequest request) throws Exception {
+        log.info("|修改个人信息接口入参|[{}]",visitor);
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
+        if(email == null){
+            return ResponseMessage.error("用户未登录");
         }
-        return ResponseMessage.error("修改失败");
+        Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
+        visitor.setVisitorid(vi.getVisitorid());
+        int i = visitorServcie.updateByPrimaryKeySelective(visitor);
+        if (i != 1) {
+            return ResponseMessage.ok("修改失败", i);
+        }
+        Visitor v = visitorServcie.selectByPrimaryKey(vi.getVisitorid());
+        log.info("|修改个人信息接口出参|[{}]",v);
+        return ResponseMessage.ok("修改后个人信息",v);
     }
 
     /**
