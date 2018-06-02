@@ -61,7 +61,7 @@ public class LoginController {
      *
      * @return
      */
-    @GetMapping(value = "/")
+    @GetMapping(value = "/login")
     public String toLogin(){
         return "login";
     }
@@ -71,7 +71,7 @@ public class LoginController {
      *
      * @return
      */
-    @GetMapping(value = "/main")
+    @GetMapping(value = "/")
     public String toMain() {
         return "main";
     }
@@ -126,4 +126,25 @@ public class LoginController {
         return ResponseMessage.error("");
     }
 
+
+
+    /**
+     * 获取当前登录用户
+     */
+    @RequestMapping("/getLoginMessage")
+    @ResponseBody
+    public ResponseMessage getLoginMessage(HttpServletRequest request){
+        String user =(String)request.getSession().getAttribute(StaticClass.LOGIN_CODE);
+        if(StringUtils.isNotEmpty(user)){
+            try {
+                Visitor visitor =(Visitor)redisClient.get(user+StaticClass.LOGIN_CODE);
+                if(visitor!=null){
+                    return ResponseMessage.ok(visitor.getName(),visitor);
+                }
+            }catch (Exception e){
+                log.info("未登录");
+            }
+        }
+        return ResponseMessage.error("");
+    }
 }
