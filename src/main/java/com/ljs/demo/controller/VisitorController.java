@@ -142,17 +142,24 @@ public class VisitorController {
         if(StringUtils.isNotEmpty(loginUser)){
             //判断原密码是否相同
             Visitor visitor = (Visitor) redisClient.get(loginUser+StaticClass.LOGIN_CODE);
-            if(!visitor.getPassword().equals(oldPass)){
-                return ResponseMessage.error("密码与原密码不同！");
-            }
-            Visitor vi = new Visitor();
-            vi.setPassword(newPass);
-            visitor.setPassword(newPass);
-            redisClient.del(loginUser+ StaticClass.LOGIN_CODE);
-            redisClient.set(loginUser+ StaticClass.LOGIN_CODE,visitor);
-            int i = visitorServcie.updateInfo(vi,visitor.getVisitorid());
-            if (i > 0) {
-                return ResponseMessage.ok("修改成功", i);
+            if(visitor!=null&&visitor.getVisitorid()!=null){
+                Visitor DataVisitor = visitorServcie.selectByPrimaryKey(visitor.getVisitorid());
+                if(DataVisitor!=null&&DataVisitor.getPassword().equals(oldPass)){
+                    Visitor vi = new Visitor();
+                    vi.setPassword(newPass);
+                    visitor.setPassword(newPass);
+                    redisClient.del(loginUser+ StaticClass.LOGIN_CODE);
+                    redisClient.set(loginUser+ StaticClass.LOGIN_CODE,visitor);
+                    int i = visitorServcie.updateInfo(vi,visitor.getVisitorid());
+                    if (i > 0) {
+                        return ResponseMessage.ok("修改成功", i);
+                    }
+                }
+                else{
+                    return ResponseMessage.error("密码与原密码不同！");
+                }
+            }else{
+                return ResponseMessage.error("未登录");
             }
         }else{
             return ResponseMessage.error("未登录");
