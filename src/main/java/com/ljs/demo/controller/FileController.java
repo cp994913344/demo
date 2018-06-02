@@ -88,7 +88,7 @@ public class FileController {
         if(i == 0){
             return ResponseMessage.error("存储失败");
         }
-        return ResponseMessage.ok("存储成功",i);
+        return ResponseMessage.ok("存储成功,文件路径为",filename);
     }
 
 
