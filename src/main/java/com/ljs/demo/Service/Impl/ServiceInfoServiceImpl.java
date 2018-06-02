@@ -22,6 +22,11 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     }
 
     @Override
+    public List<ServiceInfo> queryAllService() {
+        return serviceInfoMapper.queryAllService();
+    }
+
+    @Override
     public List<String> queryByTourUid(String tourUid) {
         return serviceInfoMapper.queryByTourUid(tourUid);
     }

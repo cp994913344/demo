@@ -10,5 +10,7 @@ public interface ServiceInfoService {
 
     ServiceInfo selectByPrimaryKey(Integer id);
 
+    List<ServiceInfo> queryAllService();
+
     List<String> queryByTourUid(String tourUid);
 }

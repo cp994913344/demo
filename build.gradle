@@ -52,7 +52,11 @@ dependencies {
 	compile 'javax.servlet:javax.servlet-api:4.0.1'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf:2.0.2.RELEASE'
 
+	//apache常用工具jar包
 	compile 'org.apache.commons:commons-lang3:3.7'
+
+	//springboot分页工具
+	compile 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.2'
 
 
 

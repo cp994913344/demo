@@ -1,5 +1,7 @@
 package com.ljs.demo.common.response;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,6 +53,14 @@ public class ResponseMessage implements Serializable {
 		resultMap.put("message",message);
 		resultMap.put("total", total);
 		resultMap.put("list", list);
+		return ok(resultMap);
+	}
+
+	public static <T> ResponseMessage pageList(String pageMessage, Page pageTotle, PageInfo pageList) {
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("pageMessage",pageMessage);
+		resultMap.put("pageTotle", pageTotle);
+		resultMap.put("pageList", pageList);
 		return ok(resultMap);
 	}
 }

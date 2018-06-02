@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     SERVICEID, UUID, SERVICENAME, SERVICEPRICE, SERVICEINFO
   </sql>
+  <select id="queryAllService" resultMap="BaseResultMap">
+    SELECT * from SERVICEINFO
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

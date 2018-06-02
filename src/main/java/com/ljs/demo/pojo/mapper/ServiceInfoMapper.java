@@ -56,5 +56,7 @@ public interface ServiceInfoMapper {
      */
     int updateByPrimaryKey(ServiceInfo record);
 
+    List<ServiceInfo> queryAllService();
+
     List<String> queryByTourUid(@Param("tourUid") String tourUid);
 }

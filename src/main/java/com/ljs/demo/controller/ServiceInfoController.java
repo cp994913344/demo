@@ -1,11 +1,15 @@
 package com.ljs.demo.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ljs.demo.Service.ServiceInfoService;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.pojo.domain.ServiceInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,6 +31,22 @@ public class ServiceInfoController {
         ServiceInfo serviceInfo = serviceInfoService.selectByPrimaryKey(1);
         log.info("|对外接口|返回参数[{}]", serviceInfo);
         return ResponseMessage.ok("",serviceInfo);
+    }
+
+    /**
+     * 分页查询所有服务
+     * @return
+     */
+    @RequestMapping(value = "/queryAllService")
+    public ResponseMessage queryAllService(/*@RequestParam("pageNum") Integer pageNum,
+                                           @RequestParam("pageSize") Integer pageSize*/){
+        int pageNum = 1;
+        int pageSize = 2;
+        PageHelper.startPage(pageNum,pageSize);
+        List<ServiceInfo> serviceInfoList = serviceInfoService.queryAllService();
+        PageInfo pageInfo = new PageInfo(serviceInfoList);
+        Page page = (Page)serviceInfoList;
+        return ResponseMessage.pageList("服务分页信息",page,pageInfo);
     }
 
     /**
