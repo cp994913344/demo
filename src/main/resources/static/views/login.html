@@ -282,6 +282,10 @@
                     errorShow("请输入密码");
                     return;
                 }
+                if(password.length<6){
+                    errorShow("密码不能小于六位");
+                    return;
+                }
                 $.ajax({
                     url:'/visitor/register',
                     data:{
@@ -329,7 +333,7 @@
                             if(_res.code===500){
                                 errorShow(_res.message);
                             }else if(_res.code===200){
-                                location.href = "/main";
+                                history.back();
                             }
                         }
                     }
