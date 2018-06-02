@@ -147,10 +147,11 @@ public class VisitorController {
             }
             Visitor vi = new Visitor();
             vi.setPassword(newPass);
-            visitor.setPassword(newPass);
+            vi.setVisitorid(visitor.getVisitorid());
+            //visitor.setPassword(newPass);
             redisClient.del(loginUser+ StaticClass.LOGIN_CODE);
             redisClient.set(loginUser+ StaticClass.LOGIN_CODE,visitor);
-            int i = visitorServcie.updateInfo(vi,visitor.getVisitorid());
+            int i = visitorServcie.updateByPrimaryKeySelective(vi);
             if (i > 0) {
                 return ResponseMessage.ok("修改成功", i);
             }
