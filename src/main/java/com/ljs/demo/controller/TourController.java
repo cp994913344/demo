@@ -5,7 +5,9 @@ import com.ljs.demo.Service.ServiceInfoService;
 import com.ljs.demo.Service.TourService;
 import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
+import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
+import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.Cityinfo;
 import com.ljs.demo.pojo.domain.ServiceInfo;
 import com.ljs.demo.pojo.domain.Tour;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -36,6 +40,9 @@ public class TourController {
     @Autowired
     ServiceInfoService serviceInfoService;
 
+    @Autowired
+    RedisClient redisClient;
+
     /**
      * 通过导游/伴游ID查询详情
      *
@@ -54,23 +61,28 @@ public class TourController {
      * @return
      */
     @RequestMapping(value = "/insertTour")
-    public ResponseMessage insertTour(Tour tour1, @RequestParam("visitorUuid") String visitorUuid,
-                                      @RequestParam("birthday") String birthday){
-        log.info("|对外接口|入参[{}]"/*, tour,visitorUuid,birthday*/);
+    public ResponseMessage insertTour(Tour tour1, @RequestParam("birthday") String birthday, HttpServletRequest request) throws Exception {
+        log.info("|对外接口|入参[{}]", tour1,birthday);
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
+        if(email == null){
+            return ResponseMessage.error("用户未登录");
+        }
+        Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
+        Visitor visitor = visitorServcie.selectByUid(vi.getUuid());
+
         //根据服务城市名查询城市信息表的uuid
-        Cityinfo c = cityinfoService.quretByName("沈阳");
-        //Cityinfo c = cityinfoService.quretByName(tour.getCityservice());
+        Cityinfo c = cityinfoService.quretByName(tour1.getCityservice());
         String cityuuid = c.getUuid();
         Tour tour = new Tour();
         tour.setUuid(GetUuid.uuid);
-        tour.setVisitorid("2b8a0a979ea34e5c84cccd1b908e1cf3");
+        tour.setVisitorid(vi.getUuid());
         tour.setCityinfoid(cityuuid);
-        tour.setStatus("0");
-        Visitor visitor = visitorServcie.selectByUid(visitorUuid);
+        tour.setStatus("0");//0 待审核
         tour.setSex(visitor.getSex());
         int i = tourService.insertTour(tour);
-        if(i>0){
-            return ResponseMessage.ok("申请成功",i);
+        if(i > 0){
+            return ResponseMessage.ok("申请成功,请等待审核",i);
         }
         return ResponseMessage.error("申请失败");
     }
