@@ -206,6 +206,13 @@
       var userName;
       var visitor;
       var ageValue = 0;
+      _init_area();
+      var Gid  = document.getElementById ;
+      var showArea = function(){
+         Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+             Gid('s_city').value + " - 县/区" +
+              Gid('s_county').value + "</h3>"
+      }
       $(function(){
           $.ajax({
               url: '/getLoginMessage',
@@ -234,6 +241,33 @@
                               }
                           }
                           $("#ageSelect").append(ageHtml);
+
+                          if(visitor.city) {
+                              var cityS = visitor.city.split(",");
+                             if(cityS[0]){
+                                 $("#s_province option").each(function(){
+                                     if($(this).text()==cityS[0]){
+                                         $(this).attr("selected","selected");
+                                     }
+                                 })
+                             }
+                              change(1);
+                              if(cityS[1]){
+                                  $("#s_city option").each(function(){
+                                      if($(this).text()==cityS[1]){
+                                          $(this).attr("selected","selected");
+                                      }
+                                  })
+                              }
+                              change(2);
+                              if(cityS[2]){
+                                  $("#s_county option").each(function(){
+                                      if($(this).text()==cityS[2]){
+                                          $(this).attr("selected","selected");
+                                      }
+                                  })
+                              }
+                          }
                       }
                   } else if (_res.code===500) {
                       layer.msg("请登录");
@@ -241,14 +275,6 @@
               }
           });
       });
-      _init_area();
-      var Gid  = document.getElementById ;
-      var showArea = function(){
-          Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
-              Gid('s_city').value + " - 县/区" +
-              Gid('s_county').value + "</h3>"
-      }
-
       function saveData(){
          var name = $("input[name='name']").val();
          var email = $("input[name='email']").val();
@@ -285,7 +311,7 @@
                   "city":s_province
               },
               success: function (_res) {
-                  layer.mes(_res.message);
+                  layer.msg(_res.message);
               }
           });
       }
