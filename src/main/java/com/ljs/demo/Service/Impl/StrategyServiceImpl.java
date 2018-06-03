@@ -32,6 +32,9 @@ public class StrategyServiceImpl implements StrategyService {
         return strategyMapper.queryBySceUid(SceUId);
     }
 
+    /**
+     *查询热门攻略
+     */
     @Override
     public List<Strategy> queryHotStrategy() {
         return strategyMapper.queryHotStrategy();

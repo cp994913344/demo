@@ -21,6 +21,9 @@ public class ScenicServiceImpl implements ScenicService {
         return scenicMapper.selectByPrimaryKey(id);
     }
 
+    /**
+     *查询热门景点
+     */
     @Override
     public List<Scenic> queryHotScenic() {
         return scenicMapper.queryHotScenic();

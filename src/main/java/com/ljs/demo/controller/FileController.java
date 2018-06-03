@@ -79,7 +79,11 @@ public class FileController {
         String name = file.getOriginalFilename();
         String filename = path + GetUuid.uuid+name;
         log.info("|文件存储路径|[{}]",filename);
-        file.transferTo(new File(filename));
+        File targetfile = new File(filename);
+        if(!targetfile.exists()){
+            targetfile.mkdirs();
+        }
+        file.transferTo(targetfile);
         return ResponseMessage.ok("文件存储路径",filename);
     }
 

@@ -40,4 +40,9 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     public ToVisitor queryByVisitorId(String visitorid) {
         return toVisitorMapper.queryByVisitorId(visitorid);
     }
+
+    @Override
+    public List<ToVisitor> queryBySelective(ToVisitor toVisitor) {
+        return toVisitorMapper.queryBySelective(toVisitor);
+    }
 }
