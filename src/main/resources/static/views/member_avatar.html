@@ -241,9 +241,10 @@
             }
 
             function uploadFile(){
-                $("#fileForm").ajaxSubmit(this,function(_res){
+                $("#fileForm").ajaxSubmit(function(_res){
                     if (_res.code===200) {
-                        $("#j-curimg").attr("src",_res.data);
+                        var filename = _res.data;
+                        $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
                     } else if (_res.code===500) {
                         layer.msg("上传失败");
                     }
