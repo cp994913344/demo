@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequestMapping("/")
-public class LoginController {
+public class MainController {
 
     @Autowired
     UserService userService;
@@ -146,5 +146,26 @@ public class LoginController {
             }
         }
         return ResponseMessage.error("");
+    }
+
+
+    /**
+     * 申请成为向导
+     *
+     * @return
+     */
+    @GetMapping(value = "/toApply")
+    public String toApply(){
+        return "apply/apply";
+    }
+
+    /**
+     * 申请成为向导填写信息1页面
+     *
+     * @return
+     */
+    @GetMapping(value = "/toApplyMessageOne")
+    public String toApplyMessageOne(){
+        return "apply/apply_message_one";
     }
 }

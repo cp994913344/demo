@@ -49,7 +49,7 @@
                 <div class="box">
                     <a href="/" class="logo"><img src="../images/logo.png" alt="联途" /></a>
                     <div class="link">
-                        <a href="apply.html">申请成为向导</a>
+                        <a href="/toApply">申请成为向导</a>
                     </div>
                     <div class="login pl-login-info displayNone" id="pl-login-info" >
                         <div class="user" >
@@ -122,7 +122,7 @@
                         <div class="box-portrait" id="uploader-demo">
                             <div class="portrait"> 
                                 <div class="pic200 uploader-list" id="fileList">
-                                    <img src="../images/man.jpg" id="j-curimg" class="cur-portrait" alt="当前头像" width="200" height="200" />
+                                    <img src="images/man.jpg" id="j-curimg" class="cur-portrait" alt="当前头像" width="200" height="200" />
                                 </div> 
                             </div>
 
@@ -241,7 +241,7 @@
             }
 
             function uploadFile(){
-                $("#fileForm").ajaxSubmit(function(_res){
+                $("#fileForm").ajaxSubmit(this,function(_res){
                     if (_res.code===200) {
                         var filename = _res.data;
                         $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
