@@ -21,7 +21,7 @@
     <div class="box">
      <a href="/" class="logo"><img src="../images/logo.png" alt="联途" /></a>
      <div class="link">
-      <a href="apply.html">申请成为向导</a>
+      <a href="/toApply">申请成为向导</a>
      </div>
      <div class="login pl-login-info displayNone" id="pl-login-info" >
       <div class="user" >
@@ -213,6 +213,10 @@
               Gid('s_county').value + "</h3>"
       }
       $(function(){
+          if(!userName){
+              layer.msg('请先登录！');
+              return;
+          }
           $.ajax({
               url: '/getLoginMessage',
               type: 'post',
@@ -275,6 +279,10 @@
           });
       });
       function saveData(){
+          if(!userName){
+              layer.msg('请先登录！');
+              return;
+          }
          var name = $("input[name='name']").val();
          var email = $("input[name='email']").val();
          var phone = $("input[name='phone']").val();

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <title>申请向导 申请成为向导 联途导游申请 联途</title>
+    <link rel="shortcut icon" href="http://static.liantu.cn/image/public/favicon.ico"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <link rel="stylesheet" type="text/css" href="css/apply_common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/apply_form.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript">
+        var TU = {
+            wwwUrl: 'http://www.liantu.cn',
+            myUrl: 'http://my.liantu.cn',
+            imageUrl: 'http://static.liantu.cn/image/',
+            domain: '',
+            today: '2016-03-13'
+        };
+        var isMobi = (function() {
+            var u = navigator.userAgent.toLowerCase();
+            return  u.indexOf("mobi") > 0 || u.indexOf("nexus 7") > 0 || u.indexOf("480") > 0;
+        })();
+        PL = {
+            'MID': 0}
+    </script>
+    <script type="text/javascript" id="js-prelogin" src="js/cas.js"></script></head>
+<style>
+    .displayNone{
+        display: none;
+    }
+    .mod-head .login .name {
+        display: -webkit-inline-box;
+    }
+    .mod-form .btn {
+        position: relative;
+        zoom: 1;
+         bottom:0px;
+        margin: 0px 80px 0px 0px;
+    }
+</style>
+<body>
+<div class="header">
+    <div class="top-bg"></div>
+    <div class="mod-head">
+        <div class="box">
+            <a href="/" class="logo"><img src="../images/logo.png" alt="联途" /></a>
+            <div class="link">
+                <a href="/toApply">申请成为向导</a>
+            </div>
+            <div class="login pl-login-info displayNone" id="pl-login-info" >
+                <div class="user" >
+                    <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+                    <span class="name" id="login_user_name"></span>
+                    <span class="ico"></span>
+                </div>
+                <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+                    <div class="ico">
+                    </div>
+                    <ul>
+                        <li class="d-pc">
+                            <a href="/toMemberInfo">个人信息</a>
+                        </li>
+                        <li>
+                            <a href="http://my.liantu.cn/member/order/">我的订单</a>
+                        </li>
+                        <li>
+                            <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+                        </li>
+                        <li class="d-m">
+                            <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+                        </li>
+                        <li class="d-m">
+                            <a href="/banyou/">伴游</a>
+                        </li>
+                        <li class="d-m">
+                            <a href="/daoyou/">导游</a>
+                        </li>
+                        <li class="d-m">
+                            <a href="/tongyou/">同游</a>
+                        </li>
+                        <li class="d-pc">
+                            <a onclick="loginOut()">退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="login pl-login-info displayNone" id="loginDiv">
+                <div class="info">
+                    <a  href="/login">登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="warpper">
+    <div class="container">
+        <div class="mod-step">
+            <ul>
+                <li class="active">
+                    <span class="step-bg"></span>
+                    <span class="step">STEP01</span>
+                    <span>填写申请资料</span>
+                </li>
+                <li>
+                    <span class="step-bg"></span>
+                    <span class="step">STEP02</span>
+                    <span>提交审核</span>
+                </li>
+                <li>
+                    <span class="step-bg"></span>
+                    <span class="step">STEP03</span>
+                    <span>等待工作人员联系</span>
+                </li>
+            </ul>
+        </div>
+        <div class="mod-form" id="messageDetails">
+                <div class="info-form">
+                    <div class="info">
+                        <label>基本信息</label>
+                        <p>我们会严格保护您的个人隐私<br>仅当客人付款后才能看到</p>
+                    </div>
+                    <div class="form">
+                        <ul>
+                            <li>
+                                <label class="title">姓名 *</label>
+                                <input type="text" name="name" class="input-text " maxlength="4" value="">                            </li>
+                            <li>
+                                <label class="title">性别 *</label>
+                                <input type="hidden" class="gender" name="gender" value="">
+                                <span class="changes">
+                                            <i name="gender " data-gender="M" ></i>
+                                            男士
+                                        </span>
+                                <span class="changes">
+                                            <i name="gender " data-gender="F" ></i>
+                                            女士
+                                        </span>
+                            </li>
+                            <li class="zindex6">
+                                <label class="title">出生年月 *</label>
+                                <input type="text" class="input-text birthday " name="birthday" id="birthday" readonly="readonly" data-value="" value="">
+                                <label for="birthday" class="calendar"></label>
+                            </li>
+                            <li class="zindex4 city-now">
+                                <label class="title">
+                                    申请服务城市 *
+                                    <p>(填写你想申请哪座城市的当地向导)</p>
+                                </label>
+                                <label class="title">
+                                    <select id="s_province" name="s_province" style="width: 80px;height: 30px;"></select>  
+                                    <select id="s_city" name="s_city" style="width: 80px;height: 30px;"></select>  
+                                </label>
+                            </li>
+                            <li>
+                                <label class="title">
+                                    在该城市停留时间（年） *
+                                    <p>(填写数字即可)</p>
+                                </label>
+                                <input type="text" class="input-text " name="stayyear" maxlength="2" value="">                            </li>
+                            <li class="zindex3">
+                                <label class="title">目前身份 *</label>
+                                <div class="now-status" onselectstart="return false;">
+                                    <select name="job" id="" class="status " data-id="">
+                                        <option value="-1">请选择</option>
+                                        <option value="1" >学生</option>
+                                        <option value="2" >上班族</option>
+                                        <option value="3" >专车司机</option>
+                                        <option value="4" >导游</option>
+                                        <option value="5" >自由职业者</option>
+                                        <option value="6" >当地居民</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                            <li class="last">
+                                <label class="title">是否自己有车 *</label>
+                                <input type="hidden" name="iscar" class="iscar" value="">
+                                <span class="changes hascar"><i name="iscar " data-iscar="1" ></i>有</span>
+                                <span class="changes nohascar"><i name="iscar " data-iscar="0" ></i>没有</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="contact line">
+                    <div class="info">
+                        <label>联系方式</label>
+                        <p>我们会严格保护您的个人隐私<br>仅当客人付款后才能看到</p>
+                    </div>
+                    <div class="contact-main">
+                        <ul>
+                            <li>
+                                <label class="title">手机 *</label>
+                                <input type="hidden" name="phone" class="mobile" value="">
+                                <input type="text" class="input-text" name="mobile_phone" maxlength="11" value="">
+                            </li>
+                            <li>
+                                <label class="title">微信 *</label>
+                                <input type="text" class="input-text " name="wechat" value="">
+                            </li>
+                            <li>
+                                <label class="title">E-Mail *</label>
+                                <input type="text" class="input-text " name="email" value="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn">
+                    <input value="提交审核" type="button" onclick="saveData()" name="submit">
+                </div>
+        </div>
+        <div class="mod-form displayNone" id="messageApproval">
+            <div class="btn">审核中...</div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="mod-back">
+                <span class="qrcode">
+                    <span class="ico"></span>
+                    <img src="http://static.liantu.cn/image/public/qrcode.jpg" alt="联途微信二维码" width="200" height="200"/>官方微信服务号
+                </span>
+        <a href="javascript:" class="code" id="code"></a>
+        <a href="/" class="customer"></a>
+        <a href="#" class="goback"></a>
+    </div>
+    <div class="mod-foot">
+        <div class="info">
+            <div class="contact">
+                <p class="logo">
+                    <a href="/"><img src="http://static.liantu.cn/image/public/logo.png" alt="联途" width="136" height="50"/></a>
+                    <span>同行之路，有你才有意义</span>
+                </p>
+
+                <p class="tell">4006 666863</p>
+
+                <p>24小时服务热线</p>
+            </div>
+            <dl>
+                <dt>公司信息</dt>
+                <dd><a href="http://www.liantu.cn/about/aboutus/" target="_blank"  rel="nofollow">关于我们</a></dd>
+                <dd><a href="http://www.liantu.cn/about/copyrightstatement/" target="_blank"  rel="nofollow">免责声明</a></dd>
+                <dd><a href="http://www.liantu.cn/about/contactus/" target="_blank"  rel="nofollow">联系我们</a></dd>
+                <dd><a href="http://www.liantu.cn/about/joinus/" target="_blank" rel="nofollow">加入我们</a></dd>
+            </dl>
+            <dl>
+                <dt>帮助中心</dt>
+                <dd><a href="http://www.liantu.cn/about/userprotocol/" target="_blank"  rel="nofollow">用户协议</a></dd>
+                <dd><a href="http://www.liantu.cn/about/safetyassurance/" target="_blank"  rel="nofollow">安全保障</a></dd>
+                <dd><a href="http://www.liantu.cn/about/bookingprocess/" target="_blank"  rel="nofollow">预定流程</a></dd>
+            </dl>
+            <dl class="app">
+                <dt>发现</dt>
+                <dd><a href="http://www.liantu.cn/app/" target="_blank">Android客户端</a></dd>
+                <dd><a href="http://www.liantu.cn/app/" target="_blank">iOS客户端</a></dd>
+                <dd><a href="http://www.liantu.cn/app/huilv/" target="_blank">联途汇率</a></dd>
+                <dd><a href="http://www.liantu.cn/app/tongyou/" target="_blank">联途同游</a></dd>
+            </dl>
+        </div>
+
+
+        <div class="copyright">
+            <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a>
+            Copyright &copy; 2016 liantu.cn, All Rights Reserved stat
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery-3.3.1.js" ></script>
+<script type="text/javascript" src="/js/jquery-form.js" ></script>
+<script  src="/js/city_area.js" type="text/javascript"></script>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/all_common.js"></script>
+<script type="text/javascript" src="js/jquery.seajs.js" id="seajsnode"></script>
+<script type="text/javascript">
+    seajs.config({
+        base: 'http://static.liantu.cn/script/dist',
+        paths: {
+            'modules': 'http://static.liantu.cn/script/dist'
+        },
+        map: [
+            [/^(.*?\/script\/(?:src|dist)\/.*?\/.*?\.js$)(?:.*)$/i, '$1?version=v1']
+        ],
+        charset: 'utf-8'
+    });
+    seajs.use('modules/my/common/common.login.js');
+    seajs.use('modules/my/merchant/apply/form.js');
+</script>
+<script type="text/javascript">
+    var userName;
+    _init_area();
+    var Gid  = document.getElementById ;
+    var showArea = function(){
+        Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+            Gid('s_city').value + " - 县/区" +
+            Gid('s_county').value + "</h3>"
+    }
+
+    function saveData(){
+        if(!userName){
+            layer.msg('请先登录！');
+            return;
+        }
+        var name = $("input[name='name']").val();
+        var email = $("input[name='email']").val();
+        var wechat = $("input[name='wechat']").val();
+        var phone = $("input[name='phone']").val();
+        var job = $("input[name='job']:checked").val();
+        var birthday = $("#birthday").val();
+        var s_province = $("#s_province").val();
+        var s_city = $("#s_city").val();
+        var iscar = $("#iscar").val();
+        var sex = $("#gender").val();
+        s_province=s_province+","+s_city;
+        var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+        var phoneText = /^1[3|5|8]\d{9}$/;
+        if(!name||name.length<=2){
+            layer.msg("姓名不能小于两位");
+            return;
+        }
+        if(!email||!myreg.test(email)){
+            layer.msg("请输入正确的邮箱号");
+            return;
+        }
+        if(!phone||!phoneText.test(phone)){
+            layer.msg("请输入正确的手机号");
+            return;
+        }
+        if(!s_province){
+            layer.msg("请选择申请服务城市");
+            return;
+        }
+        $.ajax({
+            url: '/visitor/updateInfo',
+            type: 'post',
+            data:{
+                "name":name,
+                "email":email,
+                "phone":phone,
+                "age":age,
+                "sex":sex,
+                "city":s_province
+            },
+            success: function (_res) {
+                if(res.code===200){
+                    $("messageApproval").removeClass("displayNone");
+                    $("messageDetails").addClass("displayNone");
+                }
+                layer.msg(_res.message);
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -4,50 +4,71 @@
   <meta charset="utf-8" /> 
   <meta name="renderer" content="webkit" /> 
   <title>申请成为向导</title> 
-  <link rel="shortcut icon" href="images/favicon.ico" /> 
+  <link rel="shortcut icon" href="../../images/favicon.ico" />
   <meta http-equiv="Cache-Control" content="no-transform" /> 
-  <link rel="stylesheet" type="text/css" href="css/apply_common.css" /> 
-  <link rel="stylesheet" type="text/css" href="css/apply_index.css" /> 
-  <script type="text/javascript">
-    var TU = {
-        wwwUrl: 'http://www.liantu.cn',
-        myUrl: 'http://my.liantu.cn',
-        imageUrl: 'http://static.liantu.cn/image/',
-        domain: '',
-        today: '2016-03-08'
-    };
-    var isMobi = (function(){
-        var u = navigator.userAgent.toLowerCase();
-        return  u.indexOf("mobi") > 0 || u.indexOf("nexus 7") > 0 || u.indexOf("480") > 0;
-    })();
-    PL = {
-        'MID':0    }
-</script> 
-  <script type="text/javascript" id="js-prelogin" src="js/cas.js"></script>
- </head> 
+  <link rel="stylesheet" type="text/css" href="../../css/apply_common.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/apply_index.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <style>
+   .displayNone{
+    display: none;
+   }
+
+   .mod-head .login .name {
+    display: -webkit-inline-box;
+   }
+  </style>
+
+ </head>
  <body> 
   <div class="header"> 
    <div class="top-bg"></div> 
    <div class="mod-head"> 
-    <a href="views/main.html" class="logo"><img src="images/logo.png" alt="联途" /></a>
-    <div class="search"> 
-     <div class="box"> 
-      <div class="sbox"> 
-       <input type="text" class="text" id="search_text" placeholder="输入想去的地方（例如：北京）" /> 
-       <div class="ico" id="search_ico">
-        <span></span>
-       </div> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="link">
-     <a href="apply.html" target="_blank">申请成为向导</a>
-    </div> 
-    <div class="login pl-login-info" id="pl-login-info"> 
-     <div class="info"> 
-      <a href="javascript:;" onclick="TU.login();">登录</a> 
-     </div> 
-    </div> 
+
+     <div class="box">
+        <a href="/" class="logo"><img src="../../images/logo.png" alt="联途" /></a>
+      <div class="login pl-login-info displayNone" id="pl-login-info" >
+       <div class="user" >
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <span class="name" id="login_user_name"></span>
+        <span class="ico"></span>
+       </div>
+       <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+        <div class="ico">
+        </div>
+        <ul>
+         <li class="d-pc">
+          <a href="/toMemberInfo">个人信息</a>
+         </li>
+         <li>
+          <a href="">我的订单</a>
+         </li>
+         <li>
+          <a href="">我的同游</a>
+         </li>
+         <li class="d-m">
+          <a href="">我的钱包</a>
+         </li>
+         <li class="d-m">
+          <a href="/banyou/">伴游</a>
+         </li>
+         <li class="d-m">
+          <a href="/daoyou/">导游</a>
+         </li>
+         <li class="d-m">
+          <a href="/tongyou/">同游</a>
+         </li>
+         <li class="d-pc">
+          <a onclick="loginOut()">退出</a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="login pl-login-info displayNone" id="loginDiv">
+       <div class="info">
+        <a  href="/login">登录</a>
+       </div>
+      </div>
    </div> 
   </div>
   <div class="mod-hd"> 
@@ -56,7 +77,7 @@
      <li class="first"> <span class="text"> <span class="mask-p"></span> <span class="big">为什么要成为向导!</span> </span> </li> 
      <li> <span class="text"> <span class="mask-p"></span> <span>假如您热爱您所在的城市，这个独一无二的平台，可以帮助您</span> </span> </li> 
      <li> <span class="text"> <span class="mask-p"></span> <span>向全世界推介您的城市，展示您设计的新鲜又独特的服务</span> </span> </li> 
-     <li class="last"> <a href="/merchant/apply/form/">申请成为向导</a> </li> 
+     <li class="last"> <a href="/toApplyMessageOne">申请成为向导</a> </li>
     </ul> 
    </div> 
   </div> 
@@ -102,19 +123,19 @@
   <div class="mod-apply"> 
    <i></i> 
    <p>做一次你所在城市的主人，让旅客有一次不一样的体验</p> 
-   <a href="/merchant/apply/form/" class="apply-btn" mid="0">申请成为向导</a> 
+   <a href="/toApplyMessageOne" class="apply-btn" mid="0">申请成为向导</a>
   </div> 
   <div class="footer"> 
    <div class="mod-back"> 
-    <span class="qrcode"> <span class="ico"></span> <img src="images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span> 
+    <span class="qrcode"> <span class="ico"></span> <img src="../../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
     <a href="javascript:" class="code" id="code"></a> 
-    <a href="views/main.html" class="customer"></a>
+    <a href="../main.html" class="customer"></a>
     <a href="#" class="goback"></a> 
    </div> 
    <div class="mod-foot"> 
     <div class="info"> 
      <div class="contact"> 
-      <p class="logo"> <a href="views/main.html"><img src="images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+      <p class="logo"> <a href="../main.html"><img src="../../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
       <p class="tell">4006 666863</p> 
       <p>24小时服务热线</p> 
      </div> 
@@ -171,22 +192,12 @@
      <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat 
     </div> 
    </div> 
-  </div>  
-  <script type="text/javascript" src="js/jquery.seajs.js" id="seajsnode"></script> 
+  </div>
+  <script src="/js/jquery-3.3.1.js"></script>
+  <script src="/js/all_common.js"></script>
   <script type="text/javascript">
-	seajs.config({
-		base: 'http://static.liantu.cn/script/dist',
-		paths: {
-			'modules': 'http://static.liantu.cn/script/dist'
-		},
-		map: [
-			[/^(.*?\/script\/(?:src|dist)\/.*?\/.*?\.js$)(?:.*)$/i, '$1?version=v1']
-		],
-		charset: 'utf-8'
-	});
-	seajs.use('modules/my/common/common.login.js');
-	</script> 
-  <div class="hide"> 
-  </div>  
+      var userName = $("#login_user_name").text();
+  </script>
+  </div>
  </body>
 </html>

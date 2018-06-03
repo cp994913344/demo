@@ -49,7 +49,7 @@
                 <div class="box">
                     <a href="/" class="logo"><img src="../images/logo.png" alt="联途" /></a>
                     <div class="link">
-                        <a href="apply.html">申请成为向导</a>
+                        <a href="/toApply">申请成为向导</a>
                     </div>
                     <div class="login pl-login-info displayNone" id="pl-login-info" >
                         <div class="user" >
@@ -241,6 +241,10 @@
             }
 
             function uploadFile(){
+                if(!userName){
+                    layer.msg('请先登录！');
+                    return;
+                }
                 $("#fileForm").ajaxSubmit(this,function(_res){
                     if (_res.code===200) {
                         $("#j-curimg").attr("src",res.data);
@@ -251,6 +255,10 @@
             }
 
             function saveFile(){
+                if(!userName){
+                    layer.msg('请先登录！');
+                    return;
+                }
                 $.ajax({
                     url: '/file/uploadPhoto',
                     data:{"filename": $("#j-curimg").attr("src")},
