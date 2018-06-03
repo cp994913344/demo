@@ -62,7 +62,7 @@ public class VisitorController {
     }
 
     /**
-     * 登陆
+     * 退出
      *
      * @return
      */
@@ -125,14 +125,25 @@ public class VisitorController {
             return ResponseMessage.error("用户未登录");
         }
         Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
-        visitor.setVisitorid(vi.getVisitorid());
-        int i = visitorServcie.updateByPrimaryKeySelective(visitor);
-        if (i != 1) {
-            return ResponseMessage.ok("修改失败", i);
+        if(vi!=null&&vi.getVisitorid()!=null){
+            Visitor dataVsitor  = visitorServcie.selectByPrimaryKey(vi.getVisitorid());
+            if(dataVsitor!=null){
+                dataVsitor.setName(visitor.getName());
+                dataVsitor.setEmail(visitor.getEmail());
+                dataVsitor.setPhone(visitor.getPhone());
+                dataVsitor.setAge(visitor.getAge());
+                dataVsitor.setCity(visitor.getCity());
+                dataVsitor.setSex(visitor.getSex());
+                int i = visitorServcie.updateByPrimaryKeySelective(visitor);
+                if (i != 1) {
+                    return ResponseMessage.ok("修改失败", i);
+                }
+                redisClient.del(email + StaticClass.LOGIN_CODE);
+                redisClient.set(email+ StaticClass.LOGIN_CODE,dataVsitor);
+                log.info("|修改个人信息接口出参|[{}]",dataVsitor);
+            }
         }
-        Visitor v = visitorServcie.selectByPrimaryKey(vi.getVisitorid());
-        log.info("|修改个人信息接口出参|[{}]",v);
-        return ResponseMessage.ok("修改后个人信息",v);
+        return ResponseMessage.ok("修改成功");
     }
 
     /**
