@@ -241,13 +241,10 @@
             }
 
             function uploadFile(){
-                if(!userName){
-                    layer.msg('请先登录！');
-                    return;
-                }
                 $("#fileForm").ajaxSubmit(this,function(_res){
                     if (_res.code===200) {
-                        $("#j-curimg").attr("src",res.data);
+                        var filename = _res.data;
+                        $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
                     } else if (_res.code===500) {
                         layer.msg("上传失败");
                     }
@@ -255,10 +252,6 @@
             }
 
             function saveFile(){
-                if(!userName){
-                    layer.msg('请先登录！');
-                    return;
-                }
                 $.ajax({
                     url: '/file/uploadPhoto',
                     data:{"filename": $("#j-curimg").attr("src")},

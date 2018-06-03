@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 
 @RestController
@@ -75,16 +75,40 @@ public class FileController {
         if(file.isEmpty()){
             return ResponseMessage.error("文件不能为空");
         }
-        String path = request.getServletContext().getRealPath("/images/");
+        String uuid = GetUuid.uuid;
+        String path = "/Users/ljs/IdeaProjects/Agent/teamProjects/src/main/resources/static/images/";
         String name = file.getOriginalFilename();
-        String filename = path + GetUuid.uuid+name;
+        String filename = path + uuid + name;
         log.info("|文件存储路径|[{}]",filename);
         File targetfile = new File(filename);
-        if(!targetfile.exists()){
-            targetfile.mkdirs();
-        }
         file.transferTo(targetfile);
+        File file1 = new File(filename);
+        System.out.println(file1.getName());
         return ResponseMessage.ok("文件存储路径",filename);
+    }
+
+    /**
+     * 
+     * @param filename
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("/outStream")
+    public void outStream(@RequestParam("filename") String filename, HttpServletResponse response) throws IOException {
+        File file = new File(filename);
+        if(!file.exists()){
+
+        }
+        InputStream is = new FileInputStream(file);
+        OutputStream os = response.getOutputStream();
+        int n = 0;
+        byte [] data = new byte[1024];
+        while((n =is.read(data)) != -1){
+            os.write(data,0,n);
+        }
+        os.flush();
+        os.close();
+        is.close();
     }
 
     /**
