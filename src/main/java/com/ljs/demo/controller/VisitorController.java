@@ -134,7 +134,7 @@ public class VisitorController {
                 dataVsitor.setAge(visitor.getAge());
                 dataVsitor.setCity(visitor.getCity());
                 dataVsitor.setSex(visitor.getSex());
-                int i = visitorServcie.updateByPrimaryKeySelective(visitor);
+                int i = visitorServcie.updateByPrimaryKeySelective(dataVsitor);
                 if (i != 1) {
                     return ResponseMessage.ok("修改失败", i);
                 }
