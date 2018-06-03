@@ -83,7 +83,7 @@
                                     <a href="/tongyou/">同游</a>
                                 </li>
                                 <li class="d-pc">
-                                    <a href="javascript:" onclick="">退出</a>
+                                    <a onclick="loginOut()">退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -127,13 +127,13 @@
                                 </div> 
                             </div>
 
-                            <form action="/file/uploadPhoto" method="POST" id="fileForm" enctype="multipart/form-data" >
-                                <input class="input-file displayNone" onchange="saveFile()" type="file" name="file"  />
+                            <form action="/file/savaPhoto" method="POST" id="fileForm" enctype="multipart/form-data" >
+                                <input class="input-file displayNone" onchange="uploadFile()" type="file" name="file"  />
                                 <a onclick="optionImage()" id="j-upload" class="btn-portrait" title="选择头像">
                                     <span>选择头像</span>
                                 </a>
                             </form>
-                            <a onclick="" id="j-confirm" class="btn-confirm" title="保存">保存</a>
+                            <a onclick="saveFile()" class="btn-confirm" title="保存">保存</a>
                         </div>
                     </div> 
                 </div> 
@@ -241,19 +241,32 @@
                 }
             }
 
-            function saveFile(){
-                alert($("input[name='file']").val());
+            function uploadFile(){
                 $("#fileForm").ajaxSubmit(this,function(_res){
                     if (_res.code===200) {
-
-                        $("#login_user_name").text(_res.message);
-                        $("#pl-login-info").removeClass("displayNone");
-                        userName=_res.message;
+                        $("#j-curimg").attr("src",res.data);
                     } else if (_res.code===500) {
-                        $("#loginDiv").removeClass("displayNone");
+                        layer.msg("上传失败");
                     }
                 });
             }
+
+            function saveFile(){
+                $.ajax({
+                    url: '/file/uploadPhoto',
+                    data:{"filename": $("#j-curimg").attr("src")},
+                    type: 'post',
+                    success: function (_res) {
+                        if (_res.code===200) {
+                            layer.msg('保存成功!');
+                        } else if (_res.code===500) {
+                            layer.msg('保存失败!');
+                        }
+                    }
+                });
+            }
+
+
 
         </script>
     </body>

@@ -17,3 +17,22 @@ window.onload=function(){
 $("#pl-login-info").hover(function(){
     $("#loginInfo").toggle();
 });
+
+function loginOut(){
+    $.ajax({
+        url: '/visitor/loginOut',
+        type: 'post',
+        success: function (_res) {
+            if (_res.code===200) {
+                if(!$("#pl-login-info").hasClass("displayNone")){
+                    $("#pl-login-info").addClass("displayNone");
+                }
+                if($("#loginDiv").hasClass("displayNone")){
+                    $("#loginDiv").removeClass("displayNone");
+                }
+            } else if (_res.code===500) {
+               layer.msg("退出失败");
+            }
+        }
+    });
+}

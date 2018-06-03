@@ -62,6 +62,28 @@ public class VisitorController {
     }
 
     /**
+     * 登陆
+     *
+     * @return
+     */
+    @RequestMapping(value = "/loginOut")
+    public ResponseMessage loginOut(HttpServletRequest request) throws Exception {
+        String user =(String)request.getSession().getAttribute(StaticClass.LOGIN_CODE);
+        if(StringUtils.isNotEmpty(user)) {
+            Visitor visitor = (Visitor) redisClient.get(user + StaticClass.LOGIN_CODE);
+            if (visitor != null) {
+                if (redisClient.get(user + StaticClass.LOGIN_CODE) != null) {
+                    redisClient.del(user + StaticClass.LOGIN_CODE);
+                }
+            }
+            request.getSession().setAttribute(StaticClass.LOGIN_CODE, null);
+        }
+        log.info("redis数据库存储的对象|参数[{}]", redisClient.get(user+ StaticClass.LOGIN_CODE));
+        return ResponseMessage.ok("已退出");
+    }
+
+
+    /**
      * 注册
      *
      * @param emailCode  //邮箱验证码
