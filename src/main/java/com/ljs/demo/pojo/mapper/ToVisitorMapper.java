@@ -59,4 +59,6 @@ public interface ToVisitorMapper {
     List<ToVisitor> selectList();
 
     ToVisitor queryByVisitorId(String visitorid);
+
+    List<ToVisitor> queryBySelective(ToVisitor toVisitor);
 }

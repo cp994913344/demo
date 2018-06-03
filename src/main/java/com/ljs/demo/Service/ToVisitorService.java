@@ -17,4 +17,6 @@ public interface ToVisitorService {
     int updateTovisitor(ToVisitor toVisitor);
 
     ToVisitor queryByVisitorId(String visitorid);
+
+    List<ToVisitor> queryBySelective(ToVisitor toVisitor);
 }

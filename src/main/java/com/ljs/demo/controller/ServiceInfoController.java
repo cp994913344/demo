@@ -7,6 +7,7 @@ import com.ljs.demo.Service.ServiceInfoService;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.pojo.domain.ServiceInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,10 +39,13 @@ public class ServiceInfoController {
      * @return
      */
     @RequestMapping(value = "/queryAllService")
-    public ResponseMessage queryAllService(/*@RequestParam("pageNum") Integer pageNum,
-                                           @RequestParam("pageSize") Integer pageSize*/){
-        int pageNum = 1;
-        int pageSize = 2;
+    public ResponseMessage queryAllService(@RequestParam("pageNum") Integer pageNum,
+                                           @RequestParam("pageSize") Integer pageSize){
+        if(StringUtils.isBlank(pageNum.toString()) || StringUtils.isBlank(pageSize.toString())){
+            return ResponseMessage.error("分页信息不能为空");
+        }
+        /*int pageNum = 1;
+        int pageSize = 2;*/
         PageHelper.startPage(pageNum,pageSize);
         List<ServiceInfo> serviceInfoList = serviceInfoService.queryAllService();
         PageInfo pageInfo = new PageInfo(serviceInfoList);

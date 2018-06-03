@@ -194,4 +194,45 @@
     from TOVISITOR
     where VISITORID = #{visitorid,jdbcType=VARCHAR}
   </select>
+  <select id="queryBySelective" parameterType="com.ljs.demo.pojo.domain.ToVisitor" resultMap="BaseResultMap">
+    select * from TOVISITOR
+    <where>
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        and PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        and DEPARTURE = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        and DESTINATION = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        and DATE = #{date,jdbcType=DATE},
+      </if>
+      <if test="timenum != null" >
+        and TIMENUM = #{timenum,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        and TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        and DETAILS = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        and STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="part != null" >
+        and PART = #{part,jdbcType=INTEGER},
+      </if>
+      <if test="visitorid != null" >
+        and VISITORID = #{visitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="presentpart != null" >
+        and PRESENTPART = #{presentpart,jdbcType=INTEGER},
+      </if>
+    </where>
+  </select>
 </mapper>
