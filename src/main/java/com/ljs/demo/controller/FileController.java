@@ -75,14 +75,11 @@ public class FileController {
         if(file.isEmpty()){
             return ResponseMessage.error("文件不能为空");
         }
-        String path = request.getServletContext().getRealPath("/images/");
+        String path = "/Users/ljs/IdeaProjects/Agent/teamProjects/src/main/resources/static/images/";
         String name = file.getOriginalFilename();
         String filename = path + GetUuid.uuid+name;
         log.info("|文件存储路径|[{}]",filename);
         File targetfile = new File(filename);
-        if(!targetfile.exists()){
-            targetfile.mkdirs();
-        }
         file.transferTo(targetfile);
         return ResponseMessage.ok("文件存储路径",filename);
     }

@@ -19,15 +19,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from FILE
+    from MFile
     where FILEID = #{fileid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from FILE
+    delete from MFile
     where FILEID = #{fileid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.MFile" >
-    insert into FILE (FILEID, FILENAME, FILEPATH, 
+    insert into MFile (FILEID, FILENAME, FILEPATH,
       USERID, CREATEDATE, CREATEUSERID, 
       UPDATEDATE, UPDATEUSERID, DELETED
       )
@@ -37,7 +37,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.MFile" >
-    insert into FILE
+    insert into MFile
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="fileid != null" >
         FILEID,
@@ -98,7 +98,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.MFile" >
-    update FILE
+    update MFile
     <set >
       <if test="filename != null" >
         FILENAME = #{filename,jdbcType=VARCHAR},
@@ -128,7 +128,7 @@
     where FILEID = #{fileid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.MFile" >
-    update FILE
+    update MFile
     set FILENAME = #{filename,jdbcType=VARCHAR},
       FILEPATH = #{filepath,jdbcType=VARCHAR},
       USERID = #{userid,jdbcType=INTEGER},
