@@ -11,10 +11,12 @@
     <result column="CHILDCOUNT" property="childcount" jdbcType="VARCHAR" />
     <result column="JOURNEYNEED" property="journeyneed" jdbcType="VARCHAR" />
     <result column="OUDERINFO" property="ouderinfo" jdbcType="VARCHAR" />
+    <result column="TOTALPRICE" property="totalprice" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOURORDERID, UUID, TOURID, STARTTIME, ENDTIME, MANCOUNT, CHILDCOUNT, JOURNEYNEED, 
-    OUDERINFO
+    OUDERINFO, TOTALPRICE, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,11 +31,12 @@
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
     insert into TOURORDER (TOURORDERID, UUID, TOURID, 
       STARTTIME, ENDTIME, MANCOUNT, 
-      CHILDCOUNT, JOURNEYNEED, OUDERINFO
+      CHILDCOUNT, JOURNEYNEED, OUDERINFO, TOTALPRICE, STATE
       )
     values (#{tourorderid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{tourid,jdbcType=INTEGER}, 
       #{starttime,jdbcType=DATE}, #{endtime,jdbcType=DATE}, #{mancount,jdbcType=VARCHAR}, 
       #{childcount,jdbcType=VARCHAR}, #{journeyneed,jdbcType=VARCHAR}, #{ouderinfo,jdbcType=VARCHAR}
+      #{totalprice,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
@@ -66,6 +69,12 @@
       <if test="ouderinfo != null" >
         OUDERINFO,
       </if>
+      <if test="totalprice != null" >
+        TOTALPRICE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tourorderid != null" >
@@ -94,6 +103,12 @@
       </if>
       <if test="ouderinfo != null" >
         #{ouderinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -124,6 +139,12 @@
       <if test="ouderinfo != null" >
         OUDERINFO = #{ouderinfo,jdbcType=VARCHAR},
       </if>
+      <if test="totalprice != null" >
+        TOTALPRICE = #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
     </set>
     where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
   </update>
@@ -136,7 +157,9 @@
       MANCOUNT = #{mancount,jdbcType=VARCHAR},
       CHILDCOUNT = #{childcount,jdbcType=VARCHAR},
       JOURNEYNEED = #{journeyneed,jdbcType=VARCHAR},
-      OUDERINFO = #{ouderinfo,jdbcType=VARCHAR}
+      OUDERINFO = #{ouderinfo,jdbcType=VARCHAR},
+      TOTALPRICE = #{totalprice,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
     where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
   </update>
 </mapper>
