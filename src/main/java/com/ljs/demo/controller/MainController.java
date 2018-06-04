@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -167,5 +168,15 @@ public class MainController {
     @GetMapping(value = "/toApplyMessageOne")
     public String toApplyMessageOne(){
         return "apply/apply_message_one";
+    }
+
+    /**
+     * 搜索导游
+     *
+     * @return
+     */
+    @GetMapping(value = "/toTour")
+    public String toTour(){
+        return "apply/tour";
     }
 }
