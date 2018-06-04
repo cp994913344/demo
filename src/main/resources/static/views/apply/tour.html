@@ -11,6 +11,8 @@
   <link rel="shortcut icon" href="../../images/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="../../css/common.css" />
   <link rel="stylesheet" type="text/css" href="../../css/city.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="/js/page/pagination.css" media="screen">
   <script type="text/javascript">
 var TU={
 wwwUrl:'http://www.liantu.cn',
@@ -47,7 +49,12 @@ $body.removeClass("media-small").removeClass("media-medium");
 }).resize();
 });
 </script>
-<![endif]--> 
+<![endif]-->
+  <style>
+   .mod-head .login .name {
+    display: -webkit-inline-box;
+   }
+  </style>
  </head> 
  <body> 
   <div class="wrapper"> 
@@ -60,12 +67,53 @@ $body.removeClass("media-small").removeClass("media-medium");
       </div> 
       <div class="J_search search"> 
        <div class="sbox"> 
-        <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" /> 
+        <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" id="search_text" />
         <span class="ico"><span></span></span> 
        </div> 
-      </div> 
-      <div class="login pl-login-info" id="pl-login-info"></div> 
-     </div> 
+      </div>
+      <div class="login pl-login-info displayNone" id="pl-login-info" >
+       <div class="user" >
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <span class="name" id="login_user_name"></span>
+        <span class="ico"></span>
+       </div>
+       <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+        <div class="ico">
+        </div>
+        <ul>
+         <li class="d-pc">
+          <a href="/toMemberInfo">个人信息</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/order/">我的订单</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+         </li>
+         <li class="d-m">
+          <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+         </li>
+         <li class="d-m">
+          <a href="/banyou/">伴游</a>
+         </li>
+         <li class="d-m">
+          <a href="/daoyou/">导游</a>
+         </li>
+         <li class="d-m">
+          <a href="/tongyou/">同游</a>
+         </li>
+         <li class="d-pc">
+          <a onclick="loginOut()">退出</a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="login pl-login-info displayNone" id="loginDiv">
+       <div class="info">
+        <a  href="/login">登录</a>
+       </div>
+      </div>
+     </div>
     </div> 
    </div>
    <div class="container"> 
@@ -208,7 +256,8 @@ $body.removeClass("media-small").removeClass("media-medium");
           <p> <span class="praise">好评率：0%</span> <span class="order">预约量：0</span> <span class="nice">颜值：0%</span> </p> 
          </div> </li> 
        </ul> 
-       <p class="no-more">没有更多了</p> 
+       <p class="no-more">没有更多了</p>
+       <div class="m-style M-box3"></div>
        <div class="more"> 
         <a href="javascript:"><span></span>查看更多导游</a> 
        </div> 
@@ -404,34 +453,65 @@ var pl_status=0;
   <script src="/js/jquery.cookie.js"></script>
   <script src="/js/layer/layer.js"></script>
   <script src="/js/all_common.js"></script>
-
+  <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
       var userName = $("#login_user_name").text();
       var mesa = Cookies.get('mesa');
       $(function(){
-         if(mesa){
-             $.ajax({
-                 url:'/cityinfo/queryByName',
-                 data:{'cityname':mesa},
-                 type: 'post',
-                 success:function(res_){
-                     Cookies.remove('mesa');
-                 }
-             })
-         }
+        if(mesa){
+            searchCity();
+            searchTourList();
+        }
       });
-//      document.onkeydown = function(e){
-//          var ev = document.all ? window.event : e;
-//          if(ev.keyCode==13) {
-//              var mesa = $("#search_text").val();
-//              if(mesa){
-//                  Cookies.set("mesa",mesa);
-//                  location.href="/toTour";
-//              }else{
-//                  layer.msg("请输入要搜索的城市信息");
-//              }
-//          }
-//      }
+
+      function searchCity(){
+          $.ajax({
+              url:'/cityinfo/queryByName',
+              data:{'cityname':mesa},
+              type: 'post',
+              success:function(res_){
+                  Cookies.remove('mesa');
+              }
+          });
+      }
+
+
+      function searchTourList(pageCount,totalData,current){
+          $('.M-box3').pagination({
+              pageCount: pageCount,
+              totalData:totalData,
+              current:current,
+              jump: true,
+              coping: true,
+              homePage: '首页',
+              endPage: '末页',
+              prevContent: '上页',
+              nextContent: '下页',
+              callback: function (api) {
+                  console.log(api.getCurrent());
+//                  var data = {
+//                      page: api.getCurrent(),
+//                      name: 'mss',
+//                      say: 'oh'
+//                  };
+//                  $.getJSON('https://www.easy-mock.com/mock/58fff7a5739ac1685205ad5d/example/pagination#!method=get', data, function (json) {
+//                      console.log(json);
+//                  });
+              }
+          });
+      }
+
+      document.onkeydown = function(e){
+          var ev = document.all ? window.event : e;
+          if(ev.keyCode==13) {
+              var mesa = $("#search_text").val();
+              if(mesa){
+                  searchCity()
+              }else{
+                  layer.msg("请输入要搜索的城市信息");
+              }
+          }
+      }
   </script>
  </body>
 </html>
