@@ -179,4 +179,5 @@ public class MainController {
     public String toTour(){
         return "apply/tour";
     }
+
 }

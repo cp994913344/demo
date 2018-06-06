@@ -24,6 +24,7 @@
     <result column="APPRAISE" property="appraise" jdbcType="VARCHAR" />
     <result column="FACE" property="face" jdbcType="VARCHAR" />
     <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
+    <result column="IDENTITYS" property="identity" jdbcType="VARCHAR" />
     <result column="SEX" property="sex" jdbcType="VARCHAR" />
   </resultMap>
 
@@ -50,12 +51,13 @@
     <result column="APPRAISE" property="appraise" jdbcType="VARCHAR" />
     <result column="FACE" property="face" jdbcType="VARCHAR" />
     <result column="TOVISITORINFO" property="tovisitorinfo" jdbcType="VARCHAR" />
+    <result column="IDENTITYS" property="identity" jdbcType="VARCHAR" />
     <result column="SEX" property="sex" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOURID, UUID, VISITORID, CITYINFOID, REALNAME, BIRTHDAY, LAUGUAGE, CITY, CITYSERVICE, 
     STAYYEAR, OWNCAR, PHONE, QQ, WECHAT, EMAIL, IDPHOTO, SCULPTURE, STATUS, SUBSCRIBE, 
-    APPRAISE, FACE, TOVISITORINFO,SEX
+    APPRAISE, FACE, TOVISITORINFO,IDENTITYS,SEX
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -74,7 +76,7 @@
       STAYYEAR, OWNCAR, PHONE, 
       QQ, WECHAT, EMAIL, IDPHOTO, 
       SCULPTURE, STATUS, SUBSCRIBE, 
-      APPRAISE, FACE, TOVISITORINFO,SEX
+      APPRAISE, FACE, TOVISITORINFO,IDENTITYS,SEX
       )
     values (#{tourid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{visitorid,jdbcType=VARCHAR},
       #{cityinfoid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
@@ -82,7 +84,8 @@
       #{stayyear,jdbcType=VARCHAR}, #{owncar,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{idphoto,jdbcType=VARCHAR}, 
       #{sculpture,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{subscribe,jdbcType=VARCHAR}, 
-      #{appraise,jdbcType=VARCHAR}, #{face,jdbcType=VARCHAR}, #{tovisitorinfo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}
+      #{appraise,jdbcType=VARCHAR}, #{face,jdbcType=VARCHAR}, #{tovisitorinfo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{identity,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Tour" >
@@ -153,6 +156,9 @@
       </if>
       <if test="tovisitorinfo != null" >
         TOVISITORINFO,
+      </if>
+      <if test="identity != null" >
+        IDENTITYS,
       </if>
       <if test="sex !=null">
         SEX
@@ -225,6 +231,9 @@
       <if test="tovisitorinfo != null" >
         #{tovisitorinfo,jdbcType=VARCHAR},
       </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
       <if test="sex != null">
         #{sex,jdbcType=VARCHAR}
       </if>
@@ -296,6 +305,9 @@
       <if test="tovisitorinfo != null" >
         TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR},
       </if>
+      <if test="identity != null" >
+        SEX = #{identity,jdbcType=VARCHAR},
+      </if>
       <if test="sex != null" >
         SEX = #{sex,jdbcType=VARCHAR},
       </if>
@@ -324,7 +336,8 @@
       SUBSCRIBE = #{subscribe,jdbcType=VARCHAR},
       APPRAISE = #{appraise,jdbcType=VARCHAR},
       FACE = #{face,jdbcType=VARCHAR},
-      TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR}
+      TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR},
+      IDENTIYS = #{identity,jdbcType=VARCHAR}
       SEX = #{sex,jdbcType=VARCHAR}
     where TOURID = #{tourid,jdbcType=INTEGER}
   </update>
@@ -398,6 +411,9 @@
       </if>
       <if test="tovisitorinfo != null" >
         and TOVISITORINFO = #{tovisitorinfo,jdbcType=VARCHAR}
+      </if>
+      <if test="identity != null" >
+        and SEX = #{IDENTIY,jdbcType=VARCHAR}
       </if>
       <if test="sex != null" >
         and SEX = #{sex,jdbcType=VARCHAR}

@@ -44,4 +44,10 @@ public class VisitorServiceImpl implements VisitorServcie {
     public int updateByPrimaryKeySelective(Visitor visitor) {
         return visitorMapper.updateByPrimaryKeySelective(visitor);
     }
+
+    @Override
+    public int resetPass(String email) {
+        return visitorMapper.resetPass(email);
+    }
+
 }

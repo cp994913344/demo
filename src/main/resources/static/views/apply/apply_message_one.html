@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit"/>
-    <title>申请向导 申请成为向导 联途导游申请 联途</title>
+    <title>申请向导 申请成为向导 随心游导游申请 </title>
     <link rel="shortcut icon" href="http://static.liantu.cn/image/public/favicon.ico"/>
     <meta http-equiv="Cache-Control" content="no-transform"/>
-    <link rel="stylesheet" type="text/css" href="css/apply_common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/apply_form.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/apply_common.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/apply_form.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
     <script type="text/javascript">
         var TU = {
             wwwUrl: 'http://www.liantu.cn',
@@ -44,7 +44,7 @@
     <div class="top-bg"></div>
     <div class="mod-head">
         <div class="box">
-            <a href="/" class="logo"><img src="../images/logo.png" alt="联途" /></a>
+            <a href="/" class="logo"><img src="../../images/logo.png" alt="联途" /></a>
             <div class="link">
                 <a href="/toApply">申请成为向导</a>
             </div>
@@ -129,11 +129,11 @@
                                 <label class="title">性别 *</label>
                                 <input type="hidden" class="gender" name="gender" value="">
                                 <span class="changes">
-                                            <i name="gender " data-gender="M" ></i>
+                                            <input type="radio" name="radio" value="1">
                                             男士
                                         </span>
                                 <span class="changes">
-                                            <i name="gender " data-gender="F" ></i>
+                                            <input type="radio" name="radio" value="1">
                                             女士
                                         </span>
                             </li>
@@ -191,8 +191,7 @@
                         <ul>
                             <li>
                                 <label class="title">手机 *</label>
-                                <input type="hidden" name="phone" class="mobile" value="">
-                                <input type="text" class="input-text" name="mobile_phone" maxlength="11" value="">
+                                <input type="text" class="input-text" name="phone" maxlength="11" value="">
                             </li>
                             <li>
                                 <label class="title">微信 *</label>
@@ -228,7 +227,7 @@
         <div class="info">
             <div class="contact">
                 <p class="logo">
-                    <a href="/"><img src="http://static.liantu.cn/image/public/logo.png" alt="联途" width="136" height="50"/></a>
+                    <a href="/"><img src="../../images/logo.png" alt="联途" width="136" height="50"/></a>
                     <span>同行之路，有你才有意义</span>
                 </p>
 
@@ -304,6 +303,7 @@
         var email = $("input[name='email']").val();
         var wechat = $("input[name='wechat']").val();
         var phone = $("input[name='phone']").val();
+        var stayyear = $("input[name='stayyear']").val();
         var job = $("input[name='job']:checked").val();
         var birthday = $("#birthday").val();
         var s_province = $("#s_province").val();
@@ -330,18 +330,22 @@
             return;
         }
         $.ajax({
-            url: '/visitor/updateInfo',
+            url: '/tour/insertTour',
             type: 'post',
             data:{
                 "name":name,
+                "stayyear":stayyear,
                 "email":email,
                 "phone":phone,
-                "age":age,
                 "sex":sex,
-                "city":s_province
+                "city":s_province,
+                "wechat":wechat,
+                "identity":job,
+                "birthday":birthday,
+                "owncar":iscar
             },
             success: function (_res) {
-                if(res.code===200){
+                if(_res.code===200){
                     $("messageApproval").removeClass("displayNone");
                     $("messageDetails").addClass("displayNone");
                 }

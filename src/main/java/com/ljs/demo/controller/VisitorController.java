@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -192,6 +193,24 @@ public class VisitorController {
             return ResponseMessage.error("未登录");
         }
         return ResponseMessage.error("修改失败");
+    }
+
+    /**
+     *
+     * @param emailCode
+     * @return
+     */
+    @RequestMapping(value = "/resetPass")
+    public ResponseMessage resetPass(@RequestParam("emailCode") String emailCode, @RequestParam("email") String email , HttpServletResponse response) throws Exception {
+        if(StringUtils.isNotEmpty(emailCode)){
+            String code  = (String)redisClient.get(email+ SendVerificationCodeUtil.REDIS_EMAIL_CODE);
+            if(code.equals(emailCode)){
+                visitorServcie.resetPass(email);
+                return ResponseMessage.ok("重置成功");
+            }
+            return ResponseMessage.error("验证码错误");
+        }
+        return ResponseMessage.error("验证码不能为空");
     }
 
 }

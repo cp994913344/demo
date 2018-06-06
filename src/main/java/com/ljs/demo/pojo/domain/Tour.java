@@ -192,6 +192,8 @@ public class Tour implements Serializable {
      */
     private String tovisitorinfo;//导游简介
 
+    private String identity;//目前身份
+
     /**
      * 性别
      */

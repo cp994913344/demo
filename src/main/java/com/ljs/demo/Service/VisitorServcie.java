@@ -17,4 +17,6 @@ public interface VisitorServcie {
     Visitor selectByUid(String visitorUid);
 
     int updateByPrimaryKeySelective(Visitor visitor);
+
+    int resetPass(String email);
 }

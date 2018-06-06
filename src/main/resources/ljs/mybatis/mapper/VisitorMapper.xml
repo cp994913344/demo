@@ -219,4 +219,7 @@
     from VISITOR
     WHERE EMAIL = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
   </select>
+  <update id="resetPass">
+    UPDATE VISITOR SET PASSWORD = '111111' WHERE EMAIL = #{email,jdbcType=VARCHAR}
+  </update>
 </mapper>
