@@ -220,6 +220,6 @@
     WHERE EMAIL = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
   </select>
   <update id="resetPass">
-    UPDATE VISITOR SET PASSWORD = '111111' WHERE EMAIL = #{email,jdbcType=VARCHAR}
+    UPDATE VISITOR SET PASSWORD = #{pass,jdbcType=VARCHAR} WHERE EMAIL = #{email,jdbcType=VARCHAR}
   </update>
 </mapper>

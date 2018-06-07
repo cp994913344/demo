@@ -1,221 +1,231 @@
 <!DOCTYPE html>
 <html>
- <head> 
-  <meta charset="utf-8" /> 
-  <meta name="renderer" content="webkit" /> 
-  <title>忘记密码</title> 
-  <link rel="shortcut icon" href="../images/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="../css/common.css" />
-  <link rel="stylesheet" type="text/css" href="../css/phone.css" />
- </head> 
- <body> 
-  <div class="content">
-   <div class="main"> 
-    <div class="hd"> 
-     <a href="main.html" class="logo"> <img src="../images/logo_blue.png" alt="联途旅游" /> </a>
-     <p>同行之路，有你才有意义</p> 
-    </div>
-    <div id="errordiv" class="displayNone" >
-     <p class="error" ><span ></span></p>
-    </div>
-    <div class="formbox panel"> 
-     <ul> 
-      <li class="title">验证邮箱重置密码</li>
-      <li class="num"> <label>请输入邮箱</label> <input type="text" name = "emailCode" placeholder="请输入邮箱" id="email" autocomplete="off" maxlength="20" name="phonenumber" /> <span class="hint"></span> </li>
-      <li class="captcha"> <label>验证码</label> <input type="text" placeholder="验证码" name = "captcha" id="codeImage" onclick="changeCode()" autocomplete="off" maxlength="10" name="captcha" /> <a href="javascript:"><img src="/registration/kaptchaServlet.jpg" alt="更换验证码" title="更换验证码" /></a> <span class="hint"></span> </li>
-      <li class="code"> <label>发送邮箱验证码</label> <input class="text" style="width: 140px;" type="text" name="emailCaptcha" placeholder="请输入邮箱验证码" id ="emailcode"  maxlength="6"> <a style="margin-left: 4%;"  onclick="sendEmailCode(this)">发送邮箱验证码</a> <span class="hint"></span> </li>
-      <li class="btn"> <a href="javascript:" class="next" onclick="reset()">重置密码</a> </li>
-     </ul> 
-    </div> 
-    <div class="nextbox panel"> 
-     <ul> 
-      <li class="title">找回密码</li> 
-      <li class="newPass"> <label>新密码</label> <input type="password" class="newPass" placeholder="新密码" id="newPass" autocomplete="off" name="password" /> <span class="hint"></span> </li> 
-      <li clas="checkPass"> <label>确认新密码</label> <input type="password" class="checkPass" placeholder="确认新密码" id="checkPass" autocomplete="off" name="checkPass" /> <span class="hint"></span> </li> 
-      <li class="btn"><a href="javascript:" class="submit">确认</a></li> 
-     </ul> 
-    </div> 
-    <div class="other"></div> 
-   </div> 
-  </div> 
-  <div class="flclear"></div> 
-  <div class="footer"> 
-   <div class="mod-back"> 
-    <span class="qrcode"> <span class="ico"></span> <img src="../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
-    <a href="javascript:" class="code" id="code"></a> 
-    <a href="#" class="goback"></a> 
-   </div> 
-   <div class="mod-foot"> 
-    <div class="info"> 
-     <div class="contact"> 
-      <p class="logo"> <a href="main.html"><img src="../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
-      <p class="tell">4006 666863</p> 
-      <p>24小时服务热线</p> 
-     </div> 
-     <dl> 
-      <dt>
-       公司信息
-      </dt> 
-      <dd>
-       <a href="http://www.liantu.cnabout.html" target="_blank" rel="nofollow">关于我们</a>
-      </dd> 
-      <dd>
-       <a href="http://www.liantu.cncopyright.html" target="_blank" rel="nofollow">免责声明</a>
-      </dd> 
-      <dd>
-       <a href="http://www.liantu.cncontact.html" target="_blank" rel="nofollow">联系我们</a>
-      </dd> 
-      <dd>
-       <a href="http://www.liantu.cnjoin.html" target="_blank" rel="nofollow">加入我们</a>
-      </dd> 
-     </dl> 
-     <dl> 
-      <dt>
-       帮助中心
-      </dt> 
-      <dd>
-       <a href="http://www.liantu.cnxieyi.html" target="_blank" rel="nofollow">用户协议</a>
-      </dd> 
-      <dd>
-       <a href="http://www.liantu.cnsafe.html" target="_blank" rel="nofollow">安全保障</a>
-      </dd> 
-      <dd>
-       <a href="http://www.liantu.cnprocess.html" target="_blank" rel="nofollow">预定流程</a>
-      </dd> 
-     </dl> 
-     <dl class="app"> 
-      <dt>
-       发现
-      </dt> 
-      <dd> 
-       <a href="http://www.liantu.cn/app/" target="_blank">Android客户端</a>
-       <br /> 
-       <a href="http://www.liantu.cn/app/" target="_blank">iOS客户端</a> 
-      </dd> 
-     </dl> 
-    </div> 
-    <div class="copyright"> 
-     <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat 
-    </div> 
-   </div> 
-  </div> 
-  <script type="text/javascript" src="../js/jquery.seajs.js" id="seajsnode"></script>
-  <script type="text/javascript">
-        seajs.config({
-            base: 'http://static.liantu.cn/script/dist',
-            paths: {
-                'modules': 'http://static.liantu.cn/script/dist'
-            },
-            map: [
-                [/^(.*?\/script\/(?:src|dist)\/.*?\/.*?\.js$)(?:.*)$/i, '$1?version=v1']
-            ],
-            charset: 'utf-8'
-        });
-                                    seajs.use('modules/my/member/passwd/phone.js');
-                        </script> 
-  <div class="hide"> 
+<head>
+ <meta charset="utf-8" />
+ <meta name="renderer" content="webkit" />
+ <title>忘记密码</title>
+ <link rel="shortcut icon" href="../images/favicon.ico" />
+ <link rel="stylesheet" type="text/css" href="../css/common.css" />
+ <link rel="stylesheet" type="text/css" href="../css/phone.css" />
+</head>
+<body>
+<div class="content">
+ <div class="main">
+  <div class="hd">
+   <a href="main.html" class="logo"> <img src="../images/logo_blue.png" alt="联途旅游" /> </a>
+   <p>同行之路，有你才有意义</p>
   </div>
-  <script src="/js/jquery-3.3.1.js"></script>
-  <script>
+  <div id="errordiv" class="displayNone" >
+   <p class="error" ><span ></span></p>
+  </div>
+  <div class="formbox panel">
+   <ul>
+    <li class="title" style="    margin-left: 13%;">验证邮箱重置密码</li>
+    <li class="num"> <label>请输入邮箱</label> <input type="text" name = "emailCode" placeholder="请输入邮箱" id="email" autocomplete="off" maxlength="20" name="phonenumber" /> <span class="hint"></span> </li>
+    <li class="captcha">
+     <label>验证码</label>
+     <input type="text" style="width: 30%;" placeholder="请输入验证码" name = "captcha" autocomplete="off" maxlength="5" name="captcha" />
+     <div onclick="changeCode()">
+      <img src="/registration/kaptchaServlet.jpg" id="codeImage"  alt="更换验证码" title="更换验证码" />
+     </div>
+    </li>
+    <li class="code">
+     <label>发送邮箱验证码</label>
+     <input class="text" style="width: 30%;" type="text" name="emailCaptcha" placeholder="请输入邮箱验证码" id ="emailcode"  maxlength="6">
+     <a style="    margin-left: 10%; "  onclick="sendEmailCode(this)">发送邮箱验证码</a>
+     <a style="margin-left: 12%;display: none" ></a>
+     <a style="margin-left: 4%;display: none;" >正在发送...</a>
+    </li>
+    <li class="newPass"> <label>新密码</label> <input type="password" class="newPass" placeholder="新密码" id="newPass" autocomplete="off" name="password" /> <span class="hint"></span> </li>
+    <li class="btn"> <a href="javascript:" class="next" onclick="reset()">重置密码</a> </li>
+   </ul>
+  </div>
+  <div class="other"></div>
+ </div>
+</div>
+<div class="flclear"></div>
+<div class="footer">
+ <div class="mod-back">
+  <span class="qrcode"> <span class="ico"></span> <img src="../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
+  <a href="javascript:" class="code" id="code"></a>
+  <a href="#" class="goback"></a>
+ </div>
+ <div class="mod-foot">
+  <div class="info">
+   <div class="contact">
+    <p class="logo"> <a href="main.html"><img src="../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+    <p class="tell">4006 666863</p>
+    <p>24小时服务热线</p>
+   </div>
+   <dl>
+    <dt>
+     公司信息
+    </dt>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">关于我们</a>
+    </dd>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">免责声明</a>
+    </dd>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">联系我们</a>
+    </dd>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">加入我们</a>
+    </dd>
+   </dl>
+   <dl>
+    <dt>
+     帮助中心
+    </dt>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">用户协议</a>
+    </dd>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">安全保障</a>
+    </dd>
+    <dd>
+     <a href="/" target="_blank" rel="nofollow">预定流程</a>
+    </dd>
+   </dl>
+   <dl class="app">
+    <dt>
+     发现
+    </dt>
+    <dd>
+     <a href="/" target="_blank">Android客户端</a>
+     <br />
+     <a href="/" target="_blank">iOS客户端</a>
+    </dd>
+   </dl>
+  </div>
+  <div class="copyright">
+   <a href="/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat
+  </div>
+ </div>
+</div>
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/layer/layer.js"></script>
+<script src="/js/jquery.cookie.js"></script>
+<script>
 
-      function sendEmailCode(thes) {
-          var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
-          var temp = $("input[name='emailCode']").val();
-          var captcha = $("input[name='captcha']").val();
-          if(!myreg.test(temp)){
-              errorShow("请输入正确的邮箱号")
-              return;
-          }
-          if(!captcha||captcha.length<5){
-              errorShow("请输入正确的验证码")
-              return;
-          }
-          $(thes).hide();
-          $(thes).next().show();
-          $.ajax({
-              url:'/getEmailCode',
-              data:{
-                  "saveCode":captcha.trim(),
-                  "email" : temp
-              },
-              type :'post',
-              success:function(_res){
-                  if(_res){
-                      if(_res.code===500){
-                          errorShow(_res.message);
-                      }
-                  }
-              }
-          });
-          sendEmailCodeFunc($(thes).next(),60);
-      }
-      function sendEmailCodeFunc($thes,leftTime) {
-          if(leftTime>0){
-              $thes.text(leftTime+"s重新获取");
-              setTimeout(function(){
-                  leftTime = parseInt(leftTime-1);
-                  sendEmailCodeFunc($thes,leftTime);
-              },1000);
-          }else{
-              $thes.hide();
-              $thes.prev().show();
-          }
-      }
+    function sendEmailCode(thes) {
+        var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+        var temp = $("input[name='emailCode']").val();
+        var captcha = $("input[name='captcha']").val();
+        if(!myreg.test(temp)){
+            layer.msg("请输入正确的邮箱号")
+            return;
+        }
+        if(!captcha||captcha.length<5){
+            layer.msg("请输入正确的验证码")
+            return;
+        }
+        layer.msg("正在发送验证码");
+        $(thes).hide();
+        $(thes).next().next().show();
+        $.ajax({
+            url:'/getEmailCode',
+            data:{
+                "saveCode":captcha.trim(),
+                "email" : temp
+            },
+            type :'post',
+            success:function(_res){
+                if(_res){
+                    if(_res.code===500){
+                        layer.msg(_res.message);
+                        $(thes).show();
+                        $(thes).next().next().hide();
+                    }
+                    if(_res.code===200){
+                        $(thes).next().next().hide();
+                        $(thes).next().show();
+                        sendEmailCodeFunc($(thes).next(),60);
+                    }
+                }
+            }
+        });
+    }
+    function sendEmailCodeFunc($thes,leftTime) {
+        if(leftTime>0){
+            $thes.text(leftTime+"s重新获取");
+            setTimeout(function(){
+                leftTime = parseInt(leftTime-1);
+                sendEmailCodeFunc($thes,leftTime);
+            },1000);
+        }else{
+            $thes.next().hide();
+            $thes.hide();
+            $thes.prev().show();
+        }
+    }
 
-      function changeCode(){
-          $("#codeImage").attr("src","/registration/kaptchaServlet.jpg");
-      }
+    function changeCode(){
+        $("#codeImage").attr("src","/registration/kaptchaServlet.jpg");
+    }
 
-      function errorHide(leftTime){
-          if(leftTime>0){
-              setTimeout(function(){
-                  leftTime = parseInt(leftTime-1);
-                  errorHide(leftTime);
-              },1000);
-          }else{
-              if(!$("#errordiv").hasClass("displayNone")){
-                  $("#errordiv").addClass("displayNone");
-              }
-          }
-      }
+    function errorHide(leftTime){
+        if(leftTime>0){
+            setTimeout(function(){
+                leftTime = parseInt(leftTime-1);
+                errorHide(leftTime);
+            },1000);
+        }else{
+            if(!$("#errordiv").hasClass("displayNone")){
+                $("#errordiv").addClass("displayNone");
+            }
+        }
+    }
 
-      function errorShow(showText){
-          $("#errordiv span").text(showText);
-          if($("#errordiv").hasClass("displayNone")){
-              $("#errordiv").removeClass("displayNone");
-          }
-          errorHide(5);
-      }
-
-      function reset() {
-          var email = $("input[name='emailCode']").val();
-          var captcha = $("input[name='emailCaptcha']").val();
+    function reset() {
+        var email = $("input[name='emailCode']").val();
+        var captcha = $("input[name='emailCaptcha']").val();
+        var newPass = $("#newPass").val();
+        if(!email){
+            layer.msg("请输入正确的邮箱");
+            changeCode();
+            return;
+        }
+        if(!captcha||captcha.size<6){
+            layer.msg("请输入正确的邮箱验证码");
+            return;
+        }
+        if(!newPass){
+            layer.msg("请输入密码");
+            return;
+        }
+        if(newPass.length<6){
+            layer.msg("密码不能小于六位");
+            return;
+        }
+        debugger;
           $.ajax({
               url:'/visitor/resetPass',
               data:{
                   "email":email,
-                  "emailCode" : captcha
+                  "emailCode" : captcha,
+                  "newPass":newPass
               },
               type :'post',
               success:function(_res){
                   if(_res){
                       if(_res.code===500){
-                          errorShow(_res.message);
+                          layer.msg(_res.message);
+                          changeCode();
                       }
                       if(_res.code===200){
-                          errorShow(_res.message);
-                          $.ajax({
-                              url:'/login',
-                              data:{},
-                              type:'post'
-                          })
+                          layer.msg(_res.message);
+                          Cookies.set("loginUserEmail",email);
+                          Cookies.set("loginUserPassword",newPass);
+                          location.href = "/";
                       }
                   }
               }
           })
 
-      }
+    }
 
-  </script>
- </body>
+</script>
+</body>
 </html>

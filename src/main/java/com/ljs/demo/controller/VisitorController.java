@@ -201,12 +201,16 @@ public class VisitorController {
      * @return
      */
     @RequestMapping(value = "/resetPass")
-    public ResponseMessage resetPass(@RequestParam("emailCode") String emailCode, @RequestParam("email") String email , HttpServletResponse response) throws Exception {
+    public ResponseMessage resetPass(@RequestParam("emailCode") String emailCode, @RequestParam("email") String email,
+                                     @RequestParam("newPass") String newPass) throws Exception {
+        log.info("接口入参|[{}]|",newPass);
         if(StringUtils.isNotEmpty(emailCode)){
             String code  = (String)redisClient.get(email+ SendVerificationCodeUtil.REDIS_EMAIL_CODE);
+            log.info("|验证码|[{}]",code);
             if(code.equals(emailCode)){
-                visitorServcie.resetPass(email);
-                return ResponseMessage.ok("重置成功");
+                int i =visitorServcie.resetPass(newPass,email);
+                log.info("修改结果|[{}]|",i);
+                return ResponseMessage.ok("重置成功",i);
             }
             return ResponseMessage.error("验证码错误");
         }

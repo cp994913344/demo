@@ -18,5 +18,5 @@ public interface VisitorServcie {
 
     int updateByPrimaryKeySelective(Visitor visitor);
 
-    int resetPass(String email);
+    int resetPass(String newPass,String email);
 }

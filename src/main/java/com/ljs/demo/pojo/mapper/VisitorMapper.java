@@ -59,7 +59,7 @@ public interface VisitorMapper {
 
     Visitor selectByUid(@Param("uuid") String visitorUid);
 
-    int resetPass(@Param("email") String email);
+    int resetPass(@Param("pass") String newPass,@Param("email") String email);
 
 
 }

@@ -46,8 +46,8 @@ public class VisitorServiceImpl implements VisitorServcie {
     }
 
     @Override
-    public int resetPass(String email) {
-        return visitorMapper.resetPass(email);
+    public int resetPass(String newPass, String email) {
+        return visitorMapper.resetPass(newPass,email);
     }
 
 }
