@@ -19,4 +19,6 @@ public interface CityinfoService {
     String queryProvince(String cityname);
 
     String queryArea(String province);
+
+    int deleteCity(Integer id);
 }

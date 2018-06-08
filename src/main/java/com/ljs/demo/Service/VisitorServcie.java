@@ -3,6 +3,8 @@ package com.ljs.demo.Service;
 import com.ljs.demo.pojo.domain.Visitor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface VisitorServcie {
 
@@ -19,4 +21,8 @@ public interface VisitorServcie {
     int updateByPrimaryKeySelective(Visitor visitor);
 
     int resetPass(String newPass,String email);
+
+    List<Visitor> queryVisitor();
+
+    int deleteVisitor(Integer id);
 }

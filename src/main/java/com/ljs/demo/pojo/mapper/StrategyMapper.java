@@ -76,4 +76,6 @@ public interface StrategyMapper {
      * @return
      */
     List<Strategy> queryHotStrategy();
+
+    List<Strategy> queryStrategy();
 }

@@ -152,4 +152,7 @@
   <select id="queryArea" resultType="String" parameterType="String">
     SELECT AREA FROM CITYINFO WHERE CITYINFOID = #{province,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteCity" parameterType="java.lang.Integer">
+    DELETE FROM CITYINFO WHERE CITYINFOID = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

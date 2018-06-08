@@ -39,4 +39,14 @@ public class StrategyServiceImpl implements StrategyService {
     public List<Strategy> queryHotStrategy() {
         return strategyMapper.queryHotStrategy();
     }
+
+    @Override
+    public List<Strategy> queryStrategy() {
+        return strategyMapper.queryStrategy();
+    }
+
+    @Override
+    public int deleteStrategy(Integer id) {
+        return strategyMapper.deleteByPrimaryKey(id);
+    }
 }

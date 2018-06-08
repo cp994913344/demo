@@ -11,4 +11,8 @@ public interface ScenicService {
     Scenic selectByPrimaryKey(Integer id);
 
     List<Scenic> queryHotScenic();
+
+    List<Scenic> queryScenic();
+
+    int deleteScenic(Integer id);
 }

@@ -189,4 +189,8 @@
   <select id="queryHotScenic" resultMap="BaseResultMap">
     SELECT * FROM SCENIC WHERE STATUS = 1;
   </select>
+
+  <select id="queryScenic" resultMap="BaseResultMap">
+    SELECT * FROM SCENIC
+  </select>
 </mapper>

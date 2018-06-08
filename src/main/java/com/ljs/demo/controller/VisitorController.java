@@ -1,5 +1,8 @@
 package com.ljs.demo.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
@@ -11,13 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @RestController
@@ -216,5 +220,34 @@ public class VisitorController {
         }
         return ResponseMessage.error("验证码不能为空");
     }
+
+    /**
+     * 后台管理查询所有用户
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/queryVisitor")
+    public ResponseMessage queryScenic(@RequestParam("pageNum") Integer pageNum){
+        PageHelper.startPage(pageNum, StaticClass.pageSize);
+        List<Visitor> visitorList = visitorServcie.queryVisitor();
+        log.info("查询景点链表|[{}]|",visitorList);
+        PageInfo pageInfo = new PageInfo(visitorList);
+        Page page = (Page)visitorList;
+        log.info("查询景点接口出参|[{}]|",visitorList);
+        return ResponseMessage.pageList("用户分页链表",page,pageInfo);
+    }
+
+    /**
+     * 删除用户
+     * @param visitorid
+     * @return
+     */
+    @GetMapping(value = "/deleteVisitor")
+    public ResponseMessage deleteCity(@RequestParam("visitorid") Integer visitorid){
+        log.info("接口传入数据cityinfoid|[{}]|",visitorid);
+        visitorServcie.deleteVisitor(visitorid);
+        return ResponseMessage.ok("删除成功!");
+    }
+
 
 }

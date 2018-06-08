@@ -28,4 +28,14 @@ public class ScenicServiceImpl implements ScenicService {
     public List<Scenic> queryHotScenic() {
         return scenicMapper.queryHotScenic();
     }
+
+    @Override
+    public List<Scenic> queryScenic() {
+        return scenicMapper.queryScenic();
+    }
+
+    @Override
+    public int deleteScenic(Integer id) {
+        return scenicMapper.deleteByPrimaryKey(id);
+    }
 }

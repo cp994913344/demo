@@ -11,6 +11,7 @@ import com.ljs.demo.pojo.domain.*;
 import com.ljs.demo.pojo.vo.TourVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,9 +115,14 @@ public class CityInfoController {
         return ResponseMessage.ok("城市所有信息",cityMap);
     }
 
+    /**
+     * 后台检索城市
+     * @param pageNum
+     * @return
+     */
     @RequestMapping(value = "/queryCity")
     public ResponseMessage queryCity(@RequestParam("pageNum")Integer pageNum){
-        log.info("接口传入数据|[{}]|",pageNum);
+        log.info("接口传入数据pageNum|[{}]|",pageNum);
         int pageSize = StaticClass.pageSize;
         PageHelper.startPage(pageNum,pageSize);
         List<Cityinfo> cityinfoList = cityinfoService.queryCity();
@@ -124,5 +130,17 @@ public class CityInfoController {
         Page page = (Page)cityinfoList;
         log.info("查询城市接口出参|[{}]|",cityinfoList);
         return ResponseMessage.pageList("城市分页链表",page,pageInfo);
+    }
+
+    /**
+     * 删除城市
+     * @param cityinfoid
+     * @return
+     */
+    @GetMapping(value = "/deleteCity")
+    public ResponseMessage deleteCity(@RequestParam("cityinfoid") Integer cityinfoid){
+        log.info("接口传入数据cityinfoid|[{}]|",cityinfoid);
+        cityinfoService.deleteCity(cityinfoid);
+        return ResponseMessage.ok("删除成功!");
     }
 }

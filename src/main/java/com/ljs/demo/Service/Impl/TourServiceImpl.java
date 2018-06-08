@@ -41,4 +41,19 @@ public class TourServiceImpl implements TourService {
     public List<Tour> queryHotTour() {
         return tourMapper.queryHotTour();
     }
+
+    @Override
+    public List<Tour> queryTour() {
+        return tourMapper.queryTour();
+    }
+
+    @Override
+    public int deleteTour(Integer id) {
+        return tourMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int tourPass(Integer id) {
+        return tourMapper.tourPass(id);
+    }
 }

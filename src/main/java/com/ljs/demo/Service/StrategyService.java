@@ -15,4 +15,8 @@ public interface StrategyService {
     List<Strategy> queryBySceUid(String SceUId);
 
     List<Strategy> queryHotStrategy();
+
+    List<Strategy> queryStrategy();
+
+    int deleteStrategy(Integer id);
 }

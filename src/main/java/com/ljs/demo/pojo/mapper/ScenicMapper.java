@@ -56,4 +56,6 @@ public interface ScenicMapper {
     int updateByPrimaryKey(Scenic record);
 
     List<Scenic> queryHotScenic();
+
+    List<Scenic> queryScenic();
 }

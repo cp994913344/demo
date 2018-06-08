@@ -1,5 +1,8 @@
 package com.ljs.demo.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ljs.demo.Service.CityinfoService;
 import com.ljs.demo.Service.ServiceInfoService;
 import com.ljs.demo.Service.TourService;
@@ -8,13 +11,11 @@ import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.StaticClass;
-import com.ljs.demo.pojo.domain.Cityinfo;
-import com.ljs.demo.pojo.domain.ServiceInfo;
-import com.ljs.demo.pojo.domain.Tour;
-import com.ljs.demo.pojo.domain.Visitor;
+import com.ljs.demo.pojo.domain.*;
 import com.ljs.demo.pojo.vo.TourVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,6 +115,61 @@ public class TourController {
         log.info("接口出参|[{}]",tourList);
         return ResponseMessage.list("条件检索导游列表",tourList.size(),tourList);
     }
+
+    /**
+     * 后台管理查询所有导游
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/queryTour")
+    public ResponseMessage queryScenic(@RequestParam("pageNum") Integer pageNum){
+        PageHelper.startPage(pageNum, StaticClass.pageSize);
+        List<Tour> tourList = tourService.queryTour();
+        log.info("查询导游链表|[{}]|",tourList);
+        PageInfo pageInfo = new PageInfo(tourList);
+        Page page = (Page)tourList;
+        log.info("查询导游接口出参|[{}]|",tourList);
+        return ResponseMessage.pageList("导游分页链表",page,pageInfo);
+    }
+
+    /**
+     * 后台管理删除导游
+     * @param tourid
+     * @return
+     */
+    @GetMapping(value = "/deleteTour")
+    public ResponseMessage deleteCity(@RequestParam("tourid") Integer tourid){
+        log.info("接口传入数据tourid|[{}]|",tourid);
+        tourService.deleteTour(tourid);
+        return ResponseMessage.ok("删除成功!");
+    }
+
+    /**
+     * 后台管理通过导游
+     * @param tourid
+     * @return
+     */
+    @GetMapping(value = "/tourPass")
+    public ResponseMessage tourPass(@RequestParam("tourid") Integer tourid){
+        log.info("接口传入数据tourid|[{}]|",tourid);
+        tourService.tourPass(tourid);
+        return ResponseMessage.ok("操作成功!");
+    }
+
+    /**
+     * 后台管理不通过导游
+     * @param tourid
+     * @return
+     */
+    @GetMapping(value = "/tourNoPass")
+    public ResponseMessage tourNoPass(@RequestParam("tourid") Integer tourid){
+        log.info("接口传入数据tourid|[{}]|",tourid);
+        tourService.deleteTour(tourid);
+        return ResponseMessage.ok("操作成功!");
+    }
+
+
+
 
 
 }

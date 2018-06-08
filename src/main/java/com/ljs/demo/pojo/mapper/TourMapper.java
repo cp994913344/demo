@@ -69,4 +69,9 @@ public interface TourMapper {
 
     List<Tour> queryHotTour();
 
+    List<Tour> queryTour();
+
+    int tourPass(@Param("id") Integer id);
+
+
 }

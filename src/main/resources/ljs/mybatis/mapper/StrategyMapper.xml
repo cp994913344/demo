@@ -142,4 +142,8 @@
   <select id="queryHotStrategy" resultMap="BaseResultMap">
     SELECT * FROM STRATEGY WHERE STATUS = 1
   </select>
+
+  <select id="queryStrategy" resultMap="BaseResultMap">
+    select * from STRATEGY
+  </select>
 </mapper>

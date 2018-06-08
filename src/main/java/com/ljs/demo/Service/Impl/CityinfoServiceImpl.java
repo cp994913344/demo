@@ -45,4 +45,9 @@ public class CityinfoServiceImpl implements CityinfoService {
     public String queryArea(String province) {
         return cityinfoMapper.queryArea(province);
     }
+
+    @Override
+    public int deleteCity(Integer id) {
+        return cityinfoMapper.deleteCity(id);
+    }
 }

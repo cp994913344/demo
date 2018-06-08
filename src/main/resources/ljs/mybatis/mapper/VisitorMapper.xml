@@ -222,4 +222,7 @@
   <update id="resetPass">
     UPDATE VISITOR SET PASSWORD = #{pass,jdbcType=VARCHAR} WHERE EMAIL = #{email,jdbcType=VARCHAR}
   </update>
+  <select id="queryVisitor" resultMap="BaseResultMap">
+    SELECT * FROM VISITOR
+  </select>
 </mapper>

@@ -18,4 +18,10 @@ public interface TourService {
     List<TourVo> querySelective(Tour tour);
 
     List<Tour> queryHotTour();
+
+    List<Tour> queryTour();
+
+    int deleteTour(Integer id);
+
+    int tourPass(Integer id);
 }

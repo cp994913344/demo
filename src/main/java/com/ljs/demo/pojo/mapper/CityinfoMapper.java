@@ -66,4 +66,6 @@ public interface CityinfoMapper {
     String queryProvince(@Param("cityname")String cityname);
 
     String queryArea(@Param("province") String province);
+
+    int deleteCity(@Param("id") Integer id);
 }

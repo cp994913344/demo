@@ -88,9 +88,9 @@ public class MainController {
      * 管理员页面
      * @return
      */
-    @GetMapping(value = "/admin")
+    @GetMapping(value = "/adminIndex")
     public String toAdmin(){
-        return "admin";
+        return "admin/adminIndex";
     }
 
     /**

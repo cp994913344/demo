@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class VisitorServiceImpl implements VisitorServcie {
@@ -48,6 +50,16 @@ public class VisitorServiceImpl implements VisitorServcie {
     @Override
     public int resetPass(String newPass, String email) {
         return visitorMapper.resetPass(newPass,email);
+    }
+
+    @Override
+    public List<Visitor> queryVisitor() {
+        return visitorMapper.queryVisitor();
+    }
+
+    @Override
+    public int deleteVisitor(Integer id) {
+        return visitorMapper.deleteByPrimaryKey(id);
     }
 
 }
