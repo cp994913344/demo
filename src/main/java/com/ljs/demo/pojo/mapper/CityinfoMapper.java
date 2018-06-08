@@ -60,4 +60,10 @@ public interface CityinfoMapper {
     Cityinfo queryByName(@Param("likeName") String cityname);
 
     List<Cityinfo> queryHotCity();
+
+    List<Cityinfo> queryCity();
+
+    String queryProvince(@Param("cityname")String cityname);
+
+    String queryArea(@Param("province") String province);
 }

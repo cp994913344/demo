@@ -30,4 +30,19 @@ public class CityinfoServiceImpl implements CityinfoService {
     public List<Cityinfo> queryHotCity() {
         return cityinfoMapper.queryHotCity();
     }
+
+    @Override
+    public List<Cityinfo> queryCity() {
+        return cityinfoMapper.queryCity();
+    }
+
+    @Override
+    public String queryProvince(String cityname) {
+        return cityinfoMapper.queryProvince(cityname);
+    }
+
+    @Override
+    public String queryArea(String province) {
+        return cityinfoMapper.queryArea(province);
+    }
 }

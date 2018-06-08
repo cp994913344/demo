@@ -1,8 +1,12 @@
 package com.ljs.demo.controller;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ljs.demo.Service.*;
 import com.ljs.demo.common.response.ResponseMessage;
+import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.*;
 import com.ljs.demo.pojo.vo.TourVo;
 import lombok.extern.slf4j.Slf4j;
@@ -108,5 +112,17 @@ public class CityInfoController {
         cityMap.put("tourlist",tourList);//导游列表
         cityMap.put("strategyList",strategyList);//攻略列表
         return ResponseMessage.ok("城市所有信息",cityMap);
+    }
+
+    @RequestMapping(value = "/queryCity")
+    public ResponseMessage queryCity(@RequestParam("pageNum")Integer pageNum){
+        log.info("接口传入数据|[{}]|",pageNum);
+        int pageSize = StaticClass.pageSize;
+        PageHelper.startPage(pageNum,pageSize);
+        List<Cityinfo> cityinfoList = cityinfoService.queryCity();
+        PageInfo pageInfo = new PageInfo(cityinfoList);
+        Page page = (Page)cityinfoList;
+        log.info("查询城市接口出参|[{}]|",cityinfoList);
+        return ResponseMessage.pageList("城市分页链表",page,pageInfo);
     }
 }

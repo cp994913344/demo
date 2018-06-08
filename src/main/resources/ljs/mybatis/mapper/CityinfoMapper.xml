@@ -142,4 +142,14 @@
   <select id="queryHotCity" resultMap="BaseResultMap">
     SELECT * FROM CITYINFO WHERE STATUS = 1
   </select>
+  <select id="queryCity" resultMap="BaseResultMap">
+    SELECT * FROM CITYINFO
+  </select>
+
+  <select id="queryProvince" resultType="String" parameterType="String">
+    SELECT PROVINCE FROM CITYINFO WHERE CITYNAME = #{cityname,jdbcType=VARCHAR}
+  </select>
+  <select id="queryArea" resultType="String" parameterType="String">
+    SELECT AREA FROM CITYINFO WHERE CITYINFOID = #{province,jdbcType=VARCHAR}
+  </select>
 </mapper>

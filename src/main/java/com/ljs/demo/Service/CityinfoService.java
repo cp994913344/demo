@@ -13,4 +13,10 @@ public interface CityinfoService {
     Cityinfo quretByName(String cityname);
 
     List<Cityinfo> queryHotCity();
+
+    List<Cityinfo> queryCity();
+
+    String queryProvince(String cityname);
+
+    String queryArea(String province);
 }

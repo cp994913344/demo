@@ -85,6 +85,15 @@ public class MainController {
     }
 
     /**
+     * 管理员页面
+     * @return
+     */
+    @GetMapping(value = "/admin")
+    public String toAdmin(){
+        return "admin";
+    }
+
+    /**
      * 主页
      *
      * @return
