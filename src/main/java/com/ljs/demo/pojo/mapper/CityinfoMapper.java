@@ -5,6 +5,8 @@ import com.ljs.demo.pojo.domain.Cityinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface CityinfoMapper {
     /**
@@ -56,4 +58,6 @@ public interface CityinfoMapper {
     int updateByPrimaryKey(Cityinfo record);
 
     Cityinfo queryByName(@Param("likeName") String cityname);
+
+    List<Cityinfo> queryHotCity();
 }

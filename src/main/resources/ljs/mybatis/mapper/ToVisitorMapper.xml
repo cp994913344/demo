@@ -15,10 +15,12 @@
     <result column="PART" property="part" jdbcType="INTEGER" />
     <result column="VISITORID" property="visitorid" jdbcType="VARCHAR" />
     <result column="PRESENTPART" property="presentpart" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOVISITORID, UUID, PHONE, DEPARTURE, DESTINATION, DATE, TIMENUM, TITLE, DETAILS, 
-    STATUS, PART, VISITORID, PRESENTPART
+    STATUS, PART, VISITORID, PRESENTPART, STATE, PICTURE
   </sql>
   <select id="selectList" resultMap="BaseResultMap">
     SELECT * FROM TOVISITOR
@@ -38,12 +40,12 @@
       DEPARTURE, DESTINATION, DATE,
       TIMENUM, TITLE, DETAILS,
       STATUS, PART, VISITORID,
-      PRESENTPART)
+      PRESENTPART,STATE,PICTURE)
     values (#{tovisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{departure,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
       #{timenum,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{part,jdbcType=INTEGER}, #{visitorid,jdbcType=VARCHAR},
-      #{presentpart,jdbcType=INTEGER})
+      #{presentpart,jdbcType=INTEGER},#{state,jdbcType=INTEGER},#{picture,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.ToVisitor" >
     insert into TOVISITOR
@@ -87,6 +89,12 @@
       <if test="presentpart != null" >
         PRESENTPART,
       </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tovisitorid != null" >
@@ -127,6 +135,12 @@
       </if>
       <if test="presentpart != null" >
         #{presentpart,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{sate,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=PICTURE},
       </if>
     </trim>
   </insert>
@@ -169,6 +183,12 @@
       <if test="presentpart != null" >
         PRESENTPART = #{presentpart,jdbcType=INTEGER},
       </if>
+      <if test="state != null" >
+        PRESENTPART = #{sate,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
     </set>
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </update>
@@ -186,6 +206,8 @@
       PART = #{part,jdbcType=INTEGER},
       VISITORID = #{visitorid,jdbcType=VARCHAR},
       PRESENTPART = #{presentpart,jdbcType=INTEGER}
+      STATE = #{state,jdbcType=INTEGER}
+      PICTURE = #{picture,jdbcType=VARCHAR}
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </update>
   <select id="queryByVisitorId" parameterType="String" resultMap="BaseResultMap">
@@ -233,6 +255,15 @@
       <if test="presentpart != null" >
         and PRESENTPART = #{presentpart,jdbcType=INTEGER},
       </if>
+      <if test="state != null" >
+        and STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        and PICTURE = #{picture,jdbcType=PICTURE},
+      </if>
     </where>
+  </select>
+  <select id="queryHotToVisitor" resultMap="BaseResultMap">
+    SELECT  * FROM TOVISITOR WHERE STATE = 1
   </select>
 </mapper>

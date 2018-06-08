@@ -1,15 +1,9 @@
 package com.ljs.demo.controller;
 
 
-import com.ljs.demo.Service.CityinfoService;
-import com.ljs.demo.Service.ServiceInfoService;
-import com.ljs.demo.Service.StrategyService;
-import com.ljs.demo.Service.TourService;
+import com.ljs.demo.Service.*;
 import com.ljs.demo.common.response.ResponseMessage;
-import com.ljs.demo.pojo.domain.Cityinfo;
-import com.ljs.demo.pojo.domain.ServiceInfo;
-import com.ljs.demo.pojo.domain.Strategy;
-import com.ljs.demo.pojo.domain.Tour;
+import com.ljs.demo.pojo.domain.*;
 import com.ljs.demo.pojo.vo.TourVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +27,42 @@ public class CityInfoController {
     TourService tourService;
 
     @Autowired
+    ToVisitorService toVisitorService;
+
+    @Autowired
+    ScenicService scenicService;
+
+    @Autowired
     StrategyService strategyService;
 
     @Autowired
     ServiceInfoService serviceInfoService;
+
+    /**
+     * 进入首页查询热门数据接口
+     * @return
+     */
+    @RequestMapping(value = "/queryHot")
+    public ResponseMessage queryHot(){
+        List<Cityinfo> cityinfoList = cityinfoService.queryHotCity();
+        log.info("热门城市列表[{}]",cityinfoList);
+        List<Tour> tourList = tourService.queryHotTour();
+        log.info("精选导游列表[{}]",tourList);
+        List<ToVisitor> toVisitorList = toVisitorService.queryHotToVisitor();
+        log.info("最新同游列表[{}]",toVisitorList);
+        List<Scenic> scenicList =  scenicService.queryHotScenic();
+        log.info("热门景点列表[{}]",scenicList);
+        List<Strategy> strategyList = strategyService.queryHotStrategy();
+        log.info("热门攻略列表[{}]",strategyList);
+
+        Map map = new HashMap();
+        map.put("cityinfoList",cityinfoList);
+        map.put("tourList",tourList);
+        map.put("toVisitorList",toVisitorList);
+        map.put("scenicList",scenicList);
+        map.put("strategyList",strategyList);
+        return ResponseMessage.ok("首页热门数据",map);
+    }
 
     /**
      * 根据ID查询城市信息

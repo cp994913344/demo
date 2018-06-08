@@ -120,4 +120,8 @@ public class ToVisitor implements Serializable {
      */
     private Integer presentpart;//目前人数
 
+    private Integer state;//最新同游标识1
+
+    private String picture;//同游图片
+
 }

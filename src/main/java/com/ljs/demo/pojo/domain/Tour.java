@@ -199,4 +199,9 @@ public class Tour implements Serializable {
      */
     private String sex;
 
+    /**
+     * 精选导游标识 1
+     */
+    private Integer state;
+
 }

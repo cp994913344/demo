@@ -36,4 +36,9 @@ public class TourServiceImpl implements TourService {
     public List<TourVo> querySelective(Tour tour) {
         return tourMapper.querySelective(tour);
     }
+
+    @Override
+    public List<Tour> queryHotTour() {
+        return tourMapper.queryHotTour();
+    }
 }

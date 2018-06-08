@@ -345,7 +345,15 @@
                     if(_res.code===500){
                         layer.msg(_res.message);
                     }else if(_res.code===200){
-                        history.back();
+                        if(_res.data.state===0){
+                            history.back();
+                        }
+                        else if(_res.data.state===1){
+                            alert("是导游");
+                        }
+                        else if(_res.data.state===2){
+                            alert("是管理员");
+                        }
                     }
                 }
             }

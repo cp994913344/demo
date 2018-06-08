@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class CityinfoServiceImpl implements CityinfoService {
@@ -22,5 +24,10 @@ public class CityinfoServiceImpl implements CityinfoService {
     @Override
     public Cityinfo quretByName(String cityname) {
         return cityinfoMapper.queryByName(cityname);
+    }
+
+    @Override
+    public List<Cityinfo> queryHotCity() {
+        return cityinfoMapper.queryHotCity();
     }
 }

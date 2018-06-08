@@ -72,7 +72,7 @@ public class Strategy implements Serializable {
     private String strategyinfo;
 
     /**
-     * 状态1:热门景点
+     * 状态1:热门景点攻略
      */
     private Integer status;
 }

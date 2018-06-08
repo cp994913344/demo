@@ -79,4 +79,9 @@ public class Cityinfo implements Serializable {
      */
     private String cityinfo;
 
+    /**
+     * 状态1  热门城市 0  普通城市
+     */
+    private Integer status;
+
 }

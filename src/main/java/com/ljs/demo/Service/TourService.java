@@ -16,4 +16,6 @@ public interface TourService {
     List<TourVo> queryByCityUID(String cityinfoid);
 
     List<TourVo> querySelective(Tour tour);
+
+    List<Tour> queryHotTour();
 }

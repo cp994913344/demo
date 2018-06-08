@@ -67,4 +67,6 @@ public interface TourMapper {
 
     List<TourVo> querySelective(Tour tour);
 
+    List<Tour> queryHotTour();
+
 }

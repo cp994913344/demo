@@ -1,12 +1,11 @@
 package com.ljs.demo.controller;
 
-import com.ljs.demo.Service.UserService;
+import com.ljs.demo.Service.*;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.SendVerificationCodeUtil;
 import com.ljs.demo.common.utils.StaticClass;
-import com.ljs.demo.pojo.domain.User;
-import com.ljs.demo.pojo.domain.Visitor;
+import com.ljs.demo.pojo.domain.*;
 import com.sun.deploy.net.HttpResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -30,6 +31,21 @@ public class MainController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    CityinfoService cityinfoService;
+
+    @Autowired
+    TourService tourService;
+
+    @Autowired
+    ToVisitorService toVisitorService;
+
+    @Autowired
+    StrategyService strategyService;
+
+    @Autowired
+    ScenicService scenicService;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -56,6 +72,7 @@ public class MainController {
         }
         return ResponseMessage.error("未知的错误");
     }
+
 
     /**
      * 登录

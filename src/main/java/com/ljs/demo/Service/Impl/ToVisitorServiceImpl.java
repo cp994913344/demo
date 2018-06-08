@@ -45,4 +45,9 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     public List<ToVisitor> queryBySelective(ToVisitor toVisitor) {
         return toVisitorMapper.queryBySelective(toVisitor);
     }
+
+    @Override
+    public List<ToVisitor> queryHotToVisitor() {
+        return toVisitorMapper.queryHotToVisitor();
+    }
 }

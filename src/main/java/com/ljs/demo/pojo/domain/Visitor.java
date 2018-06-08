@@ -130,7 +130,7 @@ public class Visitor implements Serializable {
     /**
      * 状态:  0 普通用户  1:导游伴游  2:管理员
      */
-    private String state;
+    private Integer state;
 
 
 }

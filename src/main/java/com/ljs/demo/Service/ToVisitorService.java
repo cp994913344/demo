@@ -19,4 +19,6 @@ public interface ToVisitorService {
     ToVisitor queryByVisitorId(String visitorid);
 
     List<ToVisitor> queryBySelective(ToVisitor toVisitor);
+
+    List<ToVisitor> queryHotToVisitor();
 }
