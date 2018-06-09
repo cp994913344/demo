@@ -38,4 +38,9 @@ public class ScenicServiceImpl implements ScenicService {
     public int deleteScenic(Integer id) {
         return scenicMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<Scenic> queryByCityUid(String id) {
+        return scenicMapper.queryByCityUid(id);
+    }
 }

@@ -193,4 +193,8 @@
   <select id="queryScenic" resultMap="BaseResultMap">
     SELECT * FROM SCENIC
   </select>
+
+  <select id="queryByCityUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM SCENIC WHERE CITYINFOID = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>
