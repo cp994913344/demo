@@ -93,6 +93,12 @@ public class MainController {
         return "admin/adminIndex";
     }
 
+    @GetMapping(value = "/tourIndex")
+    public String tourIndex(){
+        return "tourManage/tourIndex";
+    }
+
+
     /**
      * 主页
      *

@@ -104,6 +104,10 @@ public class CityInfoController {
             tourList.get(i).setServiceList(serviceInfoList);
         }
 
+        //根据城市UID查询对应的景点列表
+        List<Scenic> scenicList = scenicService.queryByCityUid(cityinfo.getUuid());
+        log.info("|对外接口|返回城市攻略信息[{}]",scenicList);
+
         //根据城市UID查询对应的城市攻略
         List<Strategy> strategyList = strategyService.queryByCityUid(cityinfo.getUuid());
         log.info("|对外接口|返回城市攻略信息[{}]",strategyList);
@@ -111,6 +115,7 @@ public class CityInfoController {
         Map cityMap = new HashMap();
         cityMap.put("cityinfo",cityinfo);//城市信息
         cityMap.put("tourlist",tourList);//导游列表
+        cityMap.put("scenicList",scenicList);//景点列表
         cityMap.put("strategyList",strategyList);//攻略列表
         return ResponseMessage.ok("城市所有信息",cityMap);
     }

@@ -15,4 +15,6 @@ public interface ScenicService {
     List<Scenic> queryScenic();
 
     int deleteScenic(Integer id);
+
+    List<Scenic> queryByCityUid(String id);
 }
