@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ljs.demo.Service.*;
+import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.*;
@@ -147,5 +148,20 @@ public class CityInfoController {
         log.info("接口传入数据cityinfoid|[{}]|",cityinfoid);
         cityinfoService.deleteCity(cityinfoid);
         return ResponseMessage.ok("删除成功!");
+    }
+
+    /**
+     * 管理员插入城市
+     * @param filename
+     * @param cityinfo
+     * @return
+     */
+    @RequestMapping(value = "/insertCity")
+    public ResponseMessage insertCity(@RequestParam("filename") String filename, Cityinfo cityinfo){
+        log.info("接口传入数据cityinfoid|[{}]|",cityinfo,filename);
+        cityinfo.setUuid(GetUuid.uuid);
+        cityinfo.setStatus(0);
+        int i = cityinfoService.insertSelective(cityinfo);
+        return ResponseMessage.ok("i");
     }
 }

@@ -175,8 +175,6 @@ public class ToVisitorController {
      * 条件查询同游列表
      * @param departure
      * @param destination
-     * @param startTime
-     * @param endTime
      * @param pageNum
      * @param pageSize
      * @return
@@ -185,14 +183,12 @@ public class ToVisitorController {
     @RequestMapping(value = "/queryBySelective")
     public ResponseMessage queryBySelective(@RequestParam("departure") String departure,
                                             @RequestParam("destination") String destination,
-                                            @RequestParam("startTime") String startTime,
-                                            @RequestParam("endTime") String endTime,
                                             @RequestParam("pageNum") Integer pageNum,
                                             @RequestParam("pageSize") Integer pageSize) throws ParseException {
         ToVisitor toVisitor = new ToVisitor();
         toVisitor.setDeparture(departure);
         toVisitor.setDestination(destination);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+       /* SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(StringUtils.isEmpty(startTime)){
             toVisitor.setTimenum(null);
         }
@@ -203,7 +199,7 @@ public class ToVisitorController {
             String time = String.valueOf(date1.getTime() - date.getTime()/(24*60*60*1000));
             toVisitor.setTimenum(time);
             log.info("|行程共几天|[{}]",time);
-        }
+        }*/
         PageHelper.startPage(pageNum,pageSize);
         List<ToVisitor> toVisitorList = toVisitorService.queryBySelective(toVisitor);
         PageInfo pageInfo = new PageInfo(toVisitorList);

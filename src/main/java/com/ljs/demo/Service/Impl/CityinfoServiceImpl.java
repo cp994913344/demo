@@ -50,4 +50,9 @@ public class CityinfoServiceImpl implements CityinfoService {
     public int deleteCity(Integer id) {
         return cityinfoMapper.deleteCity(id);
     }
+
+    @Override
+    public int insertSelective(Cityinfo cityinfo) {
+        return cityinfoMapper.insertSelective(cityinfo);
+    }
 }

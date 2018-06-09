@@ -46,6 +46,25 @@ public class VisitorController {
     }
 
     /**
+     * 获取用户信息
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getVisitor")
+    public ResponseMessage getVisittor(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
+        if(email == null){
+            return ResponseMessage.error("用户未登录");
+        }
+        Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
+        return ResponseMessage.ok("",vi);
+    }
+
+
+
+    /**
      * 登陆
      *
      * @return

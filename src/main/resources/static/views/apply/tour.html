@@ -378,7 +378,9 @@ var pl_status=0;
               url:'/cityinfo/queryByName',
               data:{'cityname':cityname},
               type: 'post',
-              success:function(res_){
+              dataType:"json",
+              success:function(res){
+                  alert(res);
                   if(res.data){
                       var cityinfo = res.data.cityinfo;
                       $("#cityName").text(cityinfo.cityname);

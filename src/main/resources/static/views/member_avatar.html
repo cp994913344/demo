@@ -231,10 +231,10 @@
         <script type="text/javascript">
             var userName;
             loginFun();
-            window.location = function(){
+            /*window.location = function(){
                 $.ajax({
-                    url: '/getLoginMessage',
-                    type: 'post',
+                    url: "/visitor/getVisitor",
+                    type: "post",
                     success: function (_res) {
                         if (_res.code===200) {
                             if(res.data){
@@ -248,7 +248,7 @@
                         }
                     }
                 });
-            }
+            }*/
             function optionImage(){
                 if(!userName){
                     layer.msg('请先登录！');
@@ -261,8 +261,10 @@
 
             function uploadFile(){
                 $("#fileForm").ajaxSubmit(this,function(_res){
+                    alert(_res);
                     if (_res.code===200) {
                         var filename = _res.data;
+                        alert(filename);
                         $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
                         $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
                     } else if (_res.code===500) {

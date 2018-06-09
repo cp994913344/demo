@@ -95,6 +95,7 @@ public class FileController {
      */
     @RequestMapping("/outStream")
     public void outStream(@RequestParam("filename") String filename, HttpServletResponse response) throws IOException {
+        log.info("输出流接口传入参数|[{}]|",filename);
         File file = new File(filename);
         if(!file.exists()){
 

@@ -21,4 +21,6 @@ public interface CityinfoService {
     String queryArea(String province);
 
     int deleteCity(Integer id);
+
+    int insertSelective(Cityinfo cityinfo);
 }

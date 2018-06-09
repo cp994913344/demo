@@ -226,10 +226,10 @@
         and PHONE = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="departure != null" >
-        and DEPARTURE = #{departure,jdbcType=VARCHAR},
+        and DEPARTURE LIKE CONCAT(CONCAT('%',#{departure,jdbcType=VARCHAR},'%'))
       </if>
       <if test="destination != null" >
-        and DESTINATION = #{destination,jdbcType=VARCHAR},
+        and DESTINATION LIKE CONCAT(CONCAT('%',#{destination,jdbcType=VARCHAR},'%'))
       </if>
       <if test="date != null" >
         and DATE = #{date,jdbcType=DATE},
