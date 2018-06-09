@@ -13,6 +13,7 @@ import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.StaticClass;
 import com.ljs.demo.pojo.domain.*;
 import com.ljs.demo.pojo.vo.TourVo;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -62,25 +65,32 @@ public class TourController {
      * @return
      */
     @RequestMapping(value = "/insertTour")
-    public ResponseMessage insertTour(Tour tour1, @RequestParam("birthday") String birthday, HttpServletRequest request) throws Exception {
-        log.info("|对外接口|入参[{}]", tour1,birthday);
+    public ResponseMessage insertTour(Tour tour, @RequestParam("birthday1") String birthday, HttpServletRequest request) throws Exception {
+        log.info("服务城市|[{}]|",tour.getCityservice());
+        log.info("|对外接口|入参[{}]", tour,birthday);
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
         if(email == null){
             return ResponseMessage.error("用户未登录");
         }
         Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
-        Visitor visitor = visitorServcie.selectByUid(vi.getUuid());
+        //Visitor visitor = visitorServcie.selectByUid(vi.getUuid());
 
         //根据服务城市名查询城市信息表的uuid
-        Cityinfo c = cityinfoService.quretByName(tour1.getCityservice());
+        Cityinfo c = cityinfoService.quretByName(tour.getCityservice().split(",")[1]);
+        System.out.println(birthday+"**********");
         String cityuuid = c.getUuid();
-        Tour tour = new Tour();
+        /*Tour tour = new Tour();*/
+        tour.setCity(vi.getCity());
         tour.setUuid(GetUuid.uuid);
         tour.setVisitorid(vi.getUuid());
         tour.setCityinfoid(cityuuid);
         tour.setStatus("0");//0 待审核
-        tour.setSex(visitor.getSex());
+        tour.setStatus("1");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = simpleDateFormat.parse(birthday);
+        tour.setBirthday(date);
         int i = tourService.insertTour(tour);
         if(i > 0){
             return ResponseMessage.ok("申请成功,请等待审核",i);

@@ -50,7 +50,7 @@
             </div>
             <div class="login pl-login-info displayNone" id="pl-login-info" >
                 <div class="user" >
-                    <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+                    <img src="http://static.liantu.cn/image/public/man_100x100.jpg"  id="topUserImage" alt="cp" width="40" height="40">
                     <span class="name" id="login_user_name"></span>
                     <span class="ico"></span>
                 </div>
@@ -311,7 +311,7 @@
         s_province=s_province+","+s_city;
         var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         var phoneText = /^1[3|5|8]\d{9}$/;
-        if(!name||name.length<=2){
+        if(!name||name.length<2){
             layer.msg("姓名不能小于两位");
             return;
         }
@@ -336,16 +336,19 @@
                 "email":email,
                 "phone":phone,
                 "sex":sex,
-                "city":s_province,
+                "cityservice":s_province,
                 "wechat":wechat,
                 "identity":job,
-                "birthday":birthday,
+                "birthday1":birthday,
                 "owncar":iscar
             },
             success: function (_res) {
                 if(_res.code===200){
+                    alert(_res.message);
+                    layer.msg(_res.message);
                     $("messageApproval").removeClass("displayNone");
                     $("messageDetails").addClass("displayNone");
+                    location.href = "/";
                 }
                 layer.msg(_res.message);
             }
