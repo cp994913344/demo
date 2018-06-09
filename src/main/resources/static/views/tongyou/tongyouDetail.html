@@ -288,7 +288,6 @@ seajs.use('modules/www/travel/detail.js');
       $(function(){
           if(mainId){
              searchData();
-             Cookies.remove("tongyouMainId");
           }
       });
 
@@ -340,7 +339,7 @@ seajs.use('modules/www/travel/detail.js');
                              messageInfoHtml+='<p class="contact-off" id="phoneWay">联系方式报名后可见</p>';
                              messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span><span>';
                              messageInfoHtml+='<img src="../../images/65768.png" alt="" />' ;
-                             messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="TU.login(\'reg\');">报名参加</a> </div> </div>';
+                             messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="openSub()">报名参加</a> </div> </div>';
                              messageInfoHtml+=' <a class="launch" href="/views/tongyou/createtoungyou.html"  rel="nofollow"> <span class="plus"></span>发起同游 </a>';
                              $("#messageInfo") .html(messageInfoHtml)
                        //  }
@@ -419,6 +418,18 @@ seajs.use('modules/www/travel/detail.js');
           var d = "0"+date.getDate();
           return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
       }
+      function openSub(){
+          Cookies.set('mainId',mainId);
+          layer.open({
+              title:'报名参加',
+              type: 2,
+              area: ['410px', '770px'],
+              fixed: false, //不固定
+              maxmin: true,
+              content: '/views/tongyou/baoming.html'
+          });
+      }
+
   </script>
  </body>
 </html>
