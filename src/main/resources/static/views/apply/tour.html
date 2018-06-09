@@ -439,15 +439,14 @@ var pl_status=0;
       $(function(){
         if(mesa){
             searchCity();
-            searchTourList();
             Cookies.remove("mesa");
         }
       });
 
-      function searchCity(){
+      function searchCity(cityname){
           $.ajax({
               url:'/cityinfo/queryByName',
-              data:{'cityname':mesa},
+              data:{'cityname':cityname},
               type: 'post',
               success:function(res_){
                   if(res.data){
@@ -565,9 +564,9 @@ var pl_status=0;
       document.onkeydown = function(e){
           var ev = document.all ? window.event : e;
           if(ev.keyCode==13) {
-              var mesa = $("#search_text").val();
-              if(mesa){
-                  searchCity();
+              var cityname = $("#search_text").val();
+              if(cityname){
+                  searchCity(cityname);
               }else{
                   layer.msg("请输入要搜索的城市信息");
               }
