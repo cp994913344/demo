@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>同游</title> 
+  <meta name="renderer" content="webkit" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <meta name="keywords" content="同游,结伴自助游,结伴游,结伴出游,结伴旅游,结伴同游,结伴同行" /> 
+  <meta name="description" content="联途同游：旅途乐趣，也许不由风景决定。方便快速的免费发布同游信息，寻找志同道合的伙伴一起旅行，随时随地结伴旅游，结伴自助游，在联途安全放心旅游。" /> 
+  <meta http-equiv="Cache-Control" content="no-transform" /> 
+  <link rel="shortcut icon" href="../../images/favicon.ico" />
+  <link rel="canonical" href="http://www.liantu.cn/tongyou/" /> 
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/tongyou_index.css" />
+  <script type="text/javascript">
+var TU={
+wwwUrl:'http://www.liantu.cn',
+myUrl:'http://my.liantu.cn',
+imageUrl:'http://static.liantu.cn/image/',
+domain:'liantu.cn',
+today:'2016-03-08',
+mobile_agent:''
+};
+var isMobi = (function(){
+var u = navigator.userAgent.toLowerCase();
+return  u.indexOf("mobi") > 0 || u.indexOf("nexus 7") > 0 || u.indexOf("480") > 0;
+})();
+if(isMobi&&TU.mobile_agent!=''){
+location.href = TU.mobile_agent;
+}
+</script> 
+  <script type="text/javascript" id="js-prelogin" src="../../js/cas.js"></script>
+  <script type="text/javascript" src="../../js/jquery.seajs.js" id="seajsnode"></script>
+ </head>
+ <body> 
+  <div class="wrapper"> 
+   <div class="header"> 
+    <div class="mod-head"> 
+     <div class="bg"></div> 
+     <div class="box">
+      <div class="logo">
+       <a href="/"><img src="../../images/logo.png" alt="联途" /></a>
+      </div>
+      <div class="J_search search">
+       <div class="sbox">
+        <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" id="search_text" />
+        <span class="ico"><span></span></span>
+       </div>
+      </div>
+      <div class="login pl-login-info displayNone" id="pl-login-info" >
+       <div class="user" >
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <span class="name" id="login_user_name"></span>
+        <span class="ico"></span>
+       </div>
+       <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+        <div class="ico">
+        </div>
+        <ul>
+         <li class="d-pc">
+          <a href="/toMemberInfo">个人信息</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/order/">我的订单</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+         </li>
+         <li class="d-m">
+          <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+         </li>
+         <li class="d-m">
+          <a href="/banyou/">伴游</a>
+         </li>
+         <li class="d-m">
+          <a href="/daoyou/">导游</a>
+         </li>
+         <li class="d-m">
+          <a href="/tongyou/">同游</a>
+         </li>
+         <li class="d-pc">
+          <a onclick="loginOut()">退出</a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="login pl-login-info displayNone" id="loginDiv">
+       <div class="info">
+        <a  href="/login">登录</a>
+       </div>
+      </div>
+     </div> 
+    </div> 
+    <div class="mod-mhead"> 
+     <div class="box"> 
+      <a class="pulish" href="tongyou_add.html" rel="nofollow" onclick="TU.login('reg');">发布</a> 
+      <a class="icon-menu" href="javascript:;" rel="nofollow">菜单</a> 
+      <a class="logo" href="../main.html"><img src="../../images/logo.png" alt="联途" /></a>
+     </div> 
+     <div class="sidebar"> 
+      <div class="mask"></div> 
+      <div class="panel pl-login-info"></div> 
+     </div> 
+    </div> 
+    <div class="mod-mcity"> 
+     <div class="hd">
+      <a class="close" href="javascript:;"></a>
+      <span>寻找城市</span>
+     </div> 
+     <div class="bd"> 
+      <form method="get" action=""> 
+       <div class="item"> 
+        <input type="text" class="station" name="from" placeholder="出发地" value="" data-text="" autocomplete="off" /> 
+        <label></label> 
+       </div> 
+       <div class="item"> 
+        <input type="text" class="station" name="to" placeholder="目的地" value="" data-text="" autocomplete="off" data-list="8" /> 
+        <label></label> 
+       </div> 
+       <div>
+        <input class="btn" type="submit" value="寻 找" />
+       </div> 
+      </form> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="container"> 
+    <div class="full-column"> 
+     <div class="mod-bg"> 
+      <img class="fixed" src="../../images/1.jpg" />
+      <img class="static" src="../../images/1.jpg" />
+     </div> 
+     <div class="mod-sort"> 
+      <h1>同游</h1> 
+      <h2><span>旅途的乐趣</span> <span>也许不由风景决定</span></h2> 
+     </div> 
+     <div class="mod-condition"> 
+      <div class="bg"></div> 
+      <div class="search"> 
+       <div class="place first box" style="    width: 50%;">
+        <input type="text" class="station" name="departure" onchange="clearCity()" placeholder="出发地" value="" data-text="" autocomplete="off" />
+        <label class=""></label> 
+       </div> 
+       <div class="place box" style="    width: 50%;">
+        <input type="text" class="station" name="destination" onchange="clearCity()" placeholder="目的地" value="" data-text="" autocomplete="off" data-list="8" />
+        <label class=""></label> 
+       </div> 
+      </div>
+     </div> 
+     <div class="mod-mcondition"> 
+      <div class="box"> 
+       <input class="input-button" type="button" value="搜索" /> 
+       <input class="input-text" type="text" value="" placeholder="你想去哪里？" /> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="inner"> 
+     <div class="main"> 
+      <div class="content"> 
+       <div class="mod-list"> 
+        <div class="nodata"> 
+         <img src="../../images/nodata.png" alt="这个城市暂时还没有人发布同游，赶紧发布一个吧!" />
+         <br /> 这个城市暂时还没有人发布同游，赶紧发布一个吧! 
+        </div> 
+        <ul id="toVisitorlist" class="list" >
+        </ul>
+        <div class="more"> 
+         <a onclick="searchCity()"><span></span>查看更多</a>
+        </div> 
+       </div> 
+      </div> 
+      <div class="side"> 
+       <div class="mod-travel"> 
+        <img src="../../images/travel.png" width="100%" />
+        <a href="tongyou_add.html" rel="nofollow" class="box" target="_blank" onclick="TU.login('reg');"> <span>发起同游</span> </a> 
+        <a href="member_tongyou.html" class="manage">管理我的同游</a> 
+       </div> 
+       <div class="mod-raiders"> 
+        <div class="hd"> 
+         <h1>热门<a href="../jingdian/gonglue.html" target="_blank">旅游攻略</a></h1>
+         <span>/</span> 
+         <a href="../jingdian/gonglue.html" class="hmore" target="_blank" title="旅游攻略">更多</a>
+        </div> 
+        <div class="bd"> 
+         <ul> 
+          <li> <a href="/gonglue/zhusu/" target="_blank" class="tag">[住宿攻略]</a> <a href="/gonglue/3255.htm" target="_blank">五大道住宿推荐 去天津五大道旅游住哪里好</a> </li> 
+          <li> <a href="/gonglue/meishi/" target="_blank" class="tag">[美食攻略]</a> <a href="/gonglue/3254.htm" target="_blank">天津五大道美食指南 五大道附近有吃饭的地方吗</a> </li> 
+          <li> <a href="/gonglue/gouwu/" target="_blank" class="tag">[购物攻略]</a> <a href="/gonglue/3253.htm" target="_blank">天津五大道特产有什么值得带 五大道购物指南</a> </li> 
+          <li> <a href="/gonglue/zizhuyou/" target="_blank" class="tag">[自助游攻略]</a> <a href="/gonglue/3252.htm" target="_blank">天津五大道怎么去 天津站到五大道乘车指南</a> </li> 
+          <li> <a href="/gonglue/gouwu/" target="_blank" class="tag">[购物攻略]</a> <a href="/gonglue/3251.htm" target="_blank">扬州宋夹城景区周边有什么特产 宋夹城周边购物推荐</a> </li> 
+          <li> <a href="/gonglue/zhusu/" target="_blank" class="tag">[住宿攻略]</a> <a href="/gonglue/3250.htm" target="_blank">扬州宋夹城附近酒店哪家好 宋夹城住宿推荐</a> </li> 
+          <li> <a href="/gonglue/meishi/" target="_blank" class="tag">[美食攻略]</a> <a href="/gonglue/3249.htm" target="_blank">宋夹城体育休闲公园附近有什么好吃的</a> </li> 
+         </ul> 
+        </div> 
+       </div> 
+       <div class="mod-spot"> 
+        <div class="hd"> 
+         <h1>热门<a href="../jingdian/jingdian.html" target="_blank">旅游景点</a></h1>
+         <span>/</span> 
+         <a href="../jingdian/jingdian.html" class="hmore" target="_blank" title="旅游景点">更多</a>
+        </div> 
+        <div class="bd"> 
+         <ul> 
+          <li> <a href="/jingdian/1910.htm" target="_blank">扬州宋夹城</a> <p>扬州市邗江区长春路48号（近瘦西湖天沐温泉度假村）</p> </li> 
+          <li> <a href="/jingdian/1909.htm" target="_blank">大阳山国家森林公园</a> <p>苏州市高新区浒关经济开发区山神湾路</p> </li> 
+          <li> <a href="/jingdian/1908.htm" target="_blank">宿迁三台山森林公园</a> <p>江苏省宿迁市宿豫区249省道</p> </li> 
+          <li> <a href="/jingdian/1907.htm" target="_blank">东台西溪景区</a> <p>盐城市东台市惠阳路</p> </li> 
+          <li> <a href="/jingdian/1906.htm" target="_blank">龙宫大白鲸欢乐世界</a> <p>江苏省淮安市经济开发区南马厂大道99号</p> </li> 
+          <li> <a href="/jingdian/1905.htm" target="_blank">灵山小镇拈花湾</a> <p>滨湖区马山环山西路88号</p> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="footer"> 
+    <div class="mod-back"> 
+     <span class="qrcode"> <span class="ico"></span> <img src="../../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
+     <a href="javascript:" class="code" id="code"></a> 
+     <a href="../main.html" class="customer"></a>
+     <a href="#" class="goback"></a> 
+    </div> 
+    <div class="mod-foot"> 
+     <div class="info"> 
+      <div class="contact"> 
+       <p class="logo"> <a href="../main.html"><img src="../../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+       <p class="tell">4006 666863</p> 
+       <p>24小时服务热线</p> 
+      </div> 
+      <dl> 
+       <dt>
+        公司信息
+       </dt> 
+       <dd>
+        <a href="about.html" target="_blank" rel="nofollow">关于我们</a>
+       </dd> 
+       <dd>
+        <a href="../../copyright.html" target="_blank" rel="nofollow">免责声明</a>
+       </dd> 
+       <dd>
+        <a href="contact.html" target="_blank" rel="nofollow">联系我们</a>
+       </dd> 
+       <dd>
+        <a href="join.html" target="_blank" rel="nofollow">加入我们</a>
+       </dd> 
+      </dl> 
+      <dl> 
+       <dt>
+        帮助中心
+       </dt> 
+       <dd>
+        <a href="../../xieyi.html" target="_blank" rel="nofollow">用户协议</a>
+       </dd> 
+       <dd>
+        <a href="../../safe.html" target="_blank" rel="nofollow">安全保障</a>
+       </dd> 
+       <dd>
+        <a href="process.html" target="_blank" rel="nofollow">预定流程</a>
+       </dd> 
+      </dl> 
+      <dl class="app"> 
+       <dt>
+        发现
+       </dt> 
+       <dd>
+        <a href="/app/" target="_blank">Android客户端</a>
+       </dd> 
+       <dd>
+        <a href="/app/" target="_blank">iOS客户端</a>
+       </dd> 
+       <dd>
+        <a href="/app/huilv/" target="_blank">联途汇率</a>
+       </dd> 
+       <dd>
+        <a href="/app/tongyou/" target="_blank">联途同游</a>
+       </dd> 
+      </dl> 
+     </div> 
+     <div class="copyright"> 
+      <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat 
+     </div> 
+    </div> 
+    <div class="mod-mfoot"> 
+     <div class="info"> 
+      <ul> 
+       <li><a href="about.html" target="_blank" rel="nofollow">关于我们</a></li> 
+       <li><a href="../apply/apply.html" target="_blank" rel="nofollow">申请成为向导</a></li>
+       <li><a href="/app/" target="_blank" rel="nofollow">APP下载</a></li> 
+      </ul> 
+      <div class="contact"> 
+       <p class="logo"> <a href="../main.html"><img src="../../images/logo.png" alt="联途" width="100" /></a> </p>
+       <p class="tell">4006-6668-63</p> 
+      </div> 
+     </div> 
+     <div class="copyright">
+       Copyright &copy; 2016 liantu.cn 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script src="/js/jquery-3.3.1.js"></script>
+  <script src="/js/jquery.cookie.js"></script>
+  <script src="/js/layer/layer.js"></script>
+  <script src="/js/all_common.js"></script>
+  <script src="/js/page/jquery.pagination.js"></script>
+  <script type="text/javascript">
+   var pageNum=1;
+   var pageSize = 10;
+      loginFun();
+      var userName = $("#login_user_name").text();
+     // var mesa = Cookies.get('mesa');
+      $(function(){
+//          if(mesa){
+//              searchCity(mesa);
+//              Cookies.remove("mesa");
+//          }
+          searchCity()
+      });
+
+      function clearCity(){
+          $("#toVisitorlist").html("");
+          pageNum=1;
+          searchCity();
+      }
+
+      function searchCity(){
+          var departure = $("input[name='departure']").val();
+          var destination = $("input[name='destination']").val();
+          $.ajax({
+              url:'/tovisitor/queryBySelective',
+              data:{
+                  'departure': departure,
+                  'destination': destination,
+                  'pageNum':pageNum,
+                  'pageSize':pageSize
+              },
+              type: 'post',
+              success:function(res){
+                  if(res.data.pageList.list){
+                      var pageList = res.data.pageList.list;
+                      if(pageList&&pageList.length>0){
+                          var pageListHtml = "";
+                          for(var i=0;i<pageList.length;i++){
+                              var stateName= "结伴中";
+                              if(pageList[i].status=="0"){
+                                  stateName= "停止结伴";
+                              }
+                              var pageDate = "";
+                              if(pageList[i].date){
+                                  pageDate = fmtDate(new Date(parseInt(pageList[i].date)));
+                              }
+                              pageListHtml+=' <li class="J_blocklink"><div class="pic"> <div class="avatar">';
+                              pageListHtml+='<img src="'+pageList[i].picture+'" alt="程校长" width="120" height="120" />';
+                              pageListHtml+='</div> </div> <div class="text">';
+                              pageListHtml+=' <div class="title"> <a onclick="toDetail(\''+pageList[i].tovisitorid+'\')" target="_blank">';
+                              pageListHtml+=pageDate+'  '+pageList[i].departure+' 到 '+pageList[i].destination+' '+pageList[i].timenum+'日游'+' '+stateName
+                              pageListHtml+='</a> <span class="in">'
+                              pageListHtml+=stateName;
+                              pageListHtml+='</span> </div> <div class="road"> 路线：';
+                              pageListHtml+=pageList[i].departure+' ~ '+pageList[i].destination;
+                              pageListHtml+=' </div> <div class="info"> <div class="time"> <div class="label">开始时间 <span>（共';
+                              pageListHtml+=pageList[i].timenum;
+                              pageListHtml+='天）</span></div><p>';
+                              pageListHtml+=pageDate+'<span></span></p> </div>';
+                              pageListHtml+='<div class="num"> <div class="label"> 参加人数 </div> <p>';
+                              pageListHtml+=pageList[i].presentpart+'/'+pageList[i].part;
+
+                              pageListHtml+=' </p> </div> </div> <p class="intro">';
+                              pageListHtml+=pageList[i].details;
+                              pageListHtml+=' </p> </div> </li>';
+                          }
+
+                          $("#toVisitorlist").append(pageListHtml);
+                          pageNum++;
+                      }else{
+                         layer.msg("没有更多了");
+                      }
+                  }
+              }
+          });
+      }
+
+
+
+      document.onkeydown = function(e){
+          var ev = document.all ? window.event : e;
+          if(ev.keyCode==13) {
+              var cityname = $("#search_text").val();
+              if(cityname){
+                  searchCity(cityname);
+              }else{
+                  layer.msg("请输入要搜索的城市信息");
+              }
+          }
+      }
+
+      function toDetail(mainId){
+          Cookies.set("tongyouMainId",mainId);
+          location.href="/views/tongyou/tongyouDetail.html";
+      }
+  </script>
+  <div class="hide"> 
+  </div>
+ </body>
+</html>
