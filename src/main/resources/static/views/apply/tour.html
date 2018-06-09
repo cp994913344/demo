@@ -54,6 +54,9 @@ $body.removeClass("media-small").removeClass("media-medium");
    .mod-head .login .name {
     display: -webkit-inline-box;
    }
+   .displayNone{
+    display: none;
+   }
   </style>
  </head> 
  <body> 
@@ -118,7 +121,7 @@ $body.removeClass("media-small").removeClass("media-medium");
    </div>
    <div class="container"> 
     <div class="full-column"> 
-     <div class="mod-bg" style="background-image:url(/file/outStream?filename=/Users/ljs/IdeaProjects/Agent/teamProjects/src/main/resources/static/images/b659587b1a314f1cabb7b0cf3cea4dd0timg2.jpg)"></div>
+     <div class="mod-bg" style="background-image:url(../../images/201507271645065916.jpg);" id="backGroundImg"></div>
      <div class="mod-sort" data-id="1"> 
       <h1 id="cityName">北京</h1>
      </div>
@@ -241,61 +244,37 @@ $body.removeClass("media-small").removeClass("media-medium");
        </div> 
       </div> 
       <div class="mod-list"> 
-       <ul class="data" data-type="daoyou"> 
-        <li class="J_blocklink"> <a href="/daoyou/65581.html" target="_blank" class="pic"><img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" /></a> <p class="name"><span class="woman">乔蕊</span></p> <p class="add"><span>北京，70后</span></p>
-         <div class="service"> 
-          <span>伴游向导</span> 
-          <span>行程规划</span> 
-          <span>代订服务</span> 
-         </div> <p class="info"> 节假日来北京玩，旅途很寂寞？不要担心，我来带你玩转北京，去南锣鼓巷体验一把老北京胡同的热闹，去798感受一下艺术气息，去颐和园、故宫看看皇家园林的气派，去看看长城的宏伟，还有很多逼格很高、很小资的别样小馆，如果你想去，我都可以带你去…… </p> 
-         <div class="price"> 
-          <span class="unit">￥<span>100.00</span>元/天</span> (不含车) 
-         </div> 
-         <div class="ft"> 
-          <p> <span class="praise">好评率：0%</span> <span class="order">预约量：0</span> <span class="nice">颜值：0%</span> </p> 
-         </div> </li> 
-       </ul> 
-       <p class="no-more">没有更多了</p>
-       <div class="m-style M-box3"></div>
+       <ul class="data" data-type="daoyou" id="tourListUl">
+       </ul>
+       <p class="no-more displayNone" id="hasNoTour" >没有更多了</p>
+       <!--<div class="m-style M-box3"></div>-->
        <div class="more"> 
         <a href="javascript:"><span></span>查看更多导游</a> 
        </div> 
       </div> 
       <div class="mod-raiders mod-hot"> 
        <div class="hd"> 
-        <span class="tit"><a href="/jingdian/1/" target="_blank">北京旅游攻略</a></span> 
+        <span class="tit"><a id="strateA" target="_blank"><span id="whereStrategy">北京</span> 旅游攻略</a></span>
         <span>/</span> 
-        <a href="" class="hmore" target="_blank" title="北京旅游攻略">更多</a>
+        <a onclick="toScienicOrStrate(1)" class="hmore" target="_blank" title="北京旅游攻略">更多</a>
        </div> 
        <div class="bd"> 
         <div class="raiders"> 
-         <ul> 
-          <li> <p><a href="" class="tag" target="_blank">[自驾游攻略]</a> <a href="/gonglue/2514.htm" target="_blank">松山森林旅游区自驾车地图 松山国家自然保护区自驾指南</a> </p> <span>目的地：北京,延庆县,松山国家自然保护区</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[自助游攻略]</a> <a href="/gonglue/2512.htm" target="_blank">北京到松山国家自然保护区怎么坐车</a> </p> <span>目的地：北京,延庆县,松山国家自然保护区</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[住宿攻略]</a> <a href="/gonglue/2511.htm" target="_blank">松山国家自然保护区景区住宿推荐</a> </p> <span>目的地：北京,延庆县,松山国家自然保护区</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[住宿攻略]</a> <a href="/gonglue/2509.htm" target="_blank">野鸭湖湿地公园住宿推荐 去野鸭湖住哪里好</a> </p> <span>目的地：北京,延庆县,野鸭湖湿地公园</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[自助游攻略]</a> <a href="/gonglue/2506.htm" target="_blank">延庆火车站到野鸭湖怎么坐车 野鸭湖怎么去</a> </p> <span>目的地：北京,延庆县,野鸭湖湿地公园</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[美食攻略]</a> <a href="/gonglue/2505.htm" target="_blank">野鸭湖湿地公园有什么特色美食</a> </p> <span>目的地：北京,延庆县,野鸭湖湿地公园</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[自助游攻略]</a> <a href="/gonglue/2501.htm" target="_blank">八达岭水关长城怎么去 到八达岭水关长城怎么坐车</a> </p> <span>目的地：北京,延庆县,水关长城</span> </li>
-          <li> <p><a href="" class="tag" target="_blank">[美食攻略]</a> <a href="/gonglue/2500.htm" target="_blank">龙庆峡附近有吃饭的地方吗 龙庆峡就餐指南</a> </p> <span>目的地：北京,延庆县,龙庆峡</span> </li>
-         </ul> 
+         <ul id="strateUl">
+         </ul>
         </div> 
        </div> 
       </div> 
       <div class="mod-spot mod-hot"> 
        <div class="hd"> 
-        <span class="tit"><a href="/jingdian/1/" target="_blank">北京旅游景点</a></span> 
+        <span class="tit"><a id="scenicA" target="_blank"><span id="whereScenic">北京</span>旅游景点</a></span>
         <span>/</span> 
-        <a href="/jingdian/1/" class="hmore" target="_blank" title="北京旅游景点">更多</a> 
+        <a onclick="toScienicOrStrate(2)" class="hmore" target="_blank" title="北京旅游景点">更多</a>
        </div> 
        <div class="bd"> 
         <div class="spot"> 
-         <ul> 
-          <li> <a href="" target="_blank">古北水镇</a> <span class="address">北京市密云县古北口镇</span> </li>
-          <li> <a href="" target="_blank">古钱币展览馆</a> <span class="address">北京市西城区德胜门东大街9号（德胜门箭楼下）</span> </li>
-          <li> <a href="" target="_blank">月坛公园</a> <span class="address">北京市西城区月坛北街6号</span> </li>
-          <li> <a href="" target="_blank">中国地质博物馆</a> <span class="address">北京市西城区西四羊肉胡同15号</span> </li>
-         </ul> 
+         <ul id="scenicUl">
+         </ul>
         </div> 
        </div> 
       </div> 
@@ -454,6 +433,7 @@ var pl_status=0;
   <script src="/js/all_common.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
+      loginFun();
       var userName = $("#login_user_name").text();
       var mesa = Cookies.get('mesa');
       $(function(){
@@ -471,53 +451,116 @@ var pl_status=0;
               type: 'post',
               success:function(res_){
                   if(res.data){
-                      $("cityName").text(res.data.cityname);
+                      var cityinfo = res.data.cityinfo;
+                      $("cityName").text(cityinfo.cityname);
+                      $("whereStrategy").text(cityinfo.cityname);
+                      $("whereScenic").text(cityinfo.cityname);
+                      $("backGroundImg").css("background-image","url(" + cityinfo.cityphoto + ")");
+                      var tourList = res.data.tourList;
+                      if(tourList){
+                          var TourListHtml = "";
+                          for(var i=0;i<tourList.length;i++){
+                              TourListHtml+=' <li class="J_blocklink">';
+                              TourListHtml+='<a href="/daoyou/65581.html" target="_blank" class="pic">';
+                              TourListHtml+='<img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" />'
+                              TourListHtml+='</a>';
+                              TourListHtml+='<p class="name"><span class="woman">';
+                              TourListHtml+=tourList[i].realname;
+                              TourListHtml+='</span></p> <p class="add"><span>';
+                              TourListHtml+=tourList[i].city;
+                              TourListHtml+='</span></p><div class="service">';
+                              for(var j=0;j<tourList[i].ServiceList.length;j++){
+                                  TourListHtml+='<span>'+ServiceList[j]+'</span>';
+                              }
+                              TourListHtml+='</div> <p class="info"> ';
+                              TourListHtml+=tourList[i].tovisitorinfo;
+                              TourListHtml+='</p>';
+                              TourListHtml+='<div class="ft"><p> <span class="praise">好评率：';
+                              TourListHtml+=tourList[i].appraise;
+                              TourListHtml+='%</span> <span class="order">预约量：';
+                              TourListHtml+=tourList[i].subscribe;
+                              TourListHtml+='</span> <span class="nice">颜值：';
+                              TourListHtml+=tourList[i].face;
+                              TourListHtml+='%</span> </p>';
+                              TourListHtml+='</div> </li>';
+                          }
+                          $("#tourListUl").html(TourListHtml);
+                      }else{
+                          $("#hasNoTour").removeClass("displayNone");
+                      }
+                      //攻略
+                      var strategyList = res.data.strategyList;
+                      if(strategyList){
+                          var strateListHtml = "";
+                          for(var i=0;i<strategyList.length;i++){
+                              strateListHtml += '<li> <p><a href="" class="tag" target="_blank">[';
+                              strateListHtml += strategyList[i].strategyname;
+                              strateListHtml += ']</a> <a onclick="toScienicOrStrate(1,'+strategyList[i].strategyname+')" target="_blank">';
+                              strateListHtml += strategyList[i].strategycol;
+                              strateListHtml += '</a> </p> <span>攻略详情：';
+                              strateListHtml += strategyList[i].strategyinfo;
+                              strateListHtml += '</span> </li>';
+                          }
+                          $("#strateUl").html("strateListHtml");
+                      }
+                      //景点
+                      var scenicList = res.data.scenicList;
+                      if(scenicList){
+                          var scenicListHtml = "";
+                          for(var i=0;i<scenicList.length;i++){
+                              scenicListHtml += '<li> <a onclick="toScienicOrStrate(2,'+scenicList[i].scenicname+')" target="_blank">';
+                              scenicListHtml += scenicList[i].scenicname;
+                              scenicListHtml += '</a> <span class="address">';
+                              scenicListHtml += scenicList[i].address;
+                              scenicListHtml += '</span> </li>';
+                          }
+                          $("#scenicUl").html("scenicListHtml");
+                      }
                   }
-
               }
           });
       }
 
 
-      function searchTourList(pageCount,totalData,current){
-          $('.M-box3').pagination({
-              pageCount: pageCount,
-              totalData:totalData,
-              current:current,
-              jump: true,
-              coping: true,
-              homePage: '首页',
-              endPage: '末页',
-              prevContent: '上页',
-              nextContent: '下页',
-              callback: function (api) {
-                  console.log(api.getCurrent());
-
-//              <li class="J_blocklink"> <a href="/daoyou/65581.html" target="_blank" class="pic"><img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" /></a> <p class="name"><span class="woman">乔蕊</span></p> <p class="add"><span>北京，70后</span></p>
-//                  <div class="service">
-//                      <span>伴游向导</span>
-//                      <span>行程规划</span>
-//                      <span>代订服务</span>
-//                      </div> <p class="info"> 节假日来北京玩，旅途很寂寞？不要担心，我来带你玩转北京，去南锣鼓巷体验一把老北京胡同的热闹，去798感受一下艺术气息，去颐和园、故宫看看皇家园林的气派，去看看长城的宏伟，还有很多逼格很高、很小资的别样小馆，如果你想去，我都可以带你去…… </p>
-//                  <div class="price">
-//                      <span class="unit">￥<span>100.00</span>元/天</span> (不含车)
-//                  </div>
-//                  <div class="ft">
-//                      <p> <span class="praise">好评率：0%</span> <span class="order">预约量：0</span> <span class="nice">颜值：0%</span> </p>
-//                  </div> </li>
-
-
-//                  var data = {
-//                      page: api.getCurrent(),
-//                      name: 'mss',
-//                      say: 'oh'
-//                  };
-//                  $.getJSON('https://www.easy-mock.com/mock/58fff7a5739ac1685205ad5d/example/pagination#!method=get', data, function (json) {
-//                      console.log(json);
-//                  });
-              }
-          });
-      }
+//      function searchTourList(pageCount,totalData,current){
+//          $('.M-box3').pagination({
+//              pageCount: pageCount,
+//              totalData:totalData,
+//              current:current,
+//              jump: true,
+//              coping: true,
+//              homePage: '首页',
+//              endPage: '末页',
+//              prevContent: '上页',
+//              nextContent: '下页',
+//              callback: function (api) {
+//                  console.log(api.getCurrent());
+//
+////              <li class="J_blocklink"> <a href="/daoyou/65581.html" target="_blank" class="pic"><img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" /></a> <p class="name"><span class="woman">乔蕊</span></p> <p class="add"><span>北京，70后</span></p>
+////                  <div class="service">
+////                      <span>伴游向导</span>
+////                      <span>行程规划</span>
+////                      <span>代订服务</span>
+////                      </div> <p class="info"> 节假日来北京玩，旅途很寂寞？不要担心，我来带你玩转北京，去南锣鼓巷体验一把老北京胡同的热闹，去798感受一下艺术气息，去颐和园、故宫看看皇家园林的气派，去看看长城的宏伟，还有很多逼格很高、很小资的别样小馆，如果你想去，我都可以带你去…… </p>
+////                  <div class="price">
+////                      <span class="unit">￥<span>100.00</span>元/天</span> (不含车)
+////                  </div>
+////                  <div class="ft">
+////                      <p> <span class="praise">好评率：0%</span> <span class="order">预约量：0</span> <span class="nice">颜值：0%</span> </p>
+////                  </div> </li>
+//
+//
+////                  var data = {
+////                      page: api.getCurrent(),
+////                      name: 'mss',
+////                      say: 'oh'
+////                  };
+////                  $.getJSON('https://www.easy-mock.com/mock/58fff7a5739ac1685205ad5d/example/pagination#!method=get', data, function (json) {
+////                      console.log(json);
+////                  });
+//              }
+//          });
+//      }
 
       document.onkeydown = function(e){
           var ev = document.all ? window.event : e;
@@ -529,6 +572,22 @@ var pl_status=0;
                   layer.msg("请输入要搜索的城市信息");
               }
           }
+      }
+
+      $("#strateA").click(function(){
+          var queryName = $("whereStrategy").text();
+          toScienicOrStrate(2,queryName);
+      });
+
+      $("#scenicA").click(function(){
+          var queryName = $("whereScenic").text();
+          toScienicOrStrate(1,queryName);
+      });
+
+      function toScienicOrStrate(type,queryName){
+          Cookies.set("ScienicOrStrateType",type);
+          Cookies.set("ScienicOrStrateQueryName",queryName);
+          location.href="/views/jingdian/jingdian.html";
       }
   </script>
  </body>
