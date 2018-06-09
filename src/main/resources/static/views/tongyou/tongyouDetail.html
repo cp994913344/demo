@@ -65,13 +65,13 @@ $body.removeClass("media-small").removeClass("media-medium");
         <span class="ico"><span></span></span>
        </div>
       </div>
-      <div class="login pl-login-info displayNone" id="pl-login-info" >
+      <div class="login pl-login-info_detail displayNone" id="pl-login-info_detail" >
        <div class="user" >
         <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
-        <span class="name" id="login_user_name"></span>
+        <span class="name" id="login_user_name_detail"></span>
         <span class="ico"></span>
        </div>
-       <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+       <div class="list" id="loginInfo_detail" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
         <div class="ico">
         </div>
         <ul>
@@ -102,7 +102,7 @@ $body.removeClass("media-small").removeClass("media-medium");
         </ul>
        </div>
       </div>
-      <div class="login pl-login-info displayNone" id="loginDiv">
+      <div class="login pl-login-info_detail displayNone" id="loginDiv_detail">
        <div class="info">
         <a  href="/login">登录</a>
        </div>
@@ -113,16 +113,8 @@ $body.removeClass("media-small").removeClass("media-medium");
    <div class="container"> 
     <div class="inner"> 
      <div class="main"> 
-      <div class="mod-crumbs"> 
-       <a href="../main.html">首页</a>
-       <span class="symbol"> &gt; </span> 
-       <a href="/tongyou/tongyou.html">同游</a>
-       <span class="symbol"> &gt; </span>
-       <span id="allMessage"></span>
-      </div> 
       <div class="mod-content" data-mateid="113" id="messageInfo">
-
-      </div> 
+      </div>
       <div class="mod-in"> 
        <div class="hd"> 
         <h1>报名参与</h1> 
@@ -155,12 +147,7 @@ $body.removeClass("media-small").removeClass("media-medium");
        <div class="ft"></div> 
       </div> 
       <div class="mod-mask"></div> 
-      <div class="mod-share"> 
-       <p>分享到：</p> 
-       <div class="bdsharebuttonbox"> 
-       </div> 
-      </div> 
-      <div class="box-hot"> 
+      <div class="box-hot">
        <div class="mod-raiders mod-hot"> 
         <div class="hd"> 
          <span class="tit">热门<a href="../jingdian/gonglue.html" target="_blank">旅游攻略</a></span>
@@ -275,7 +262,6 @@ $body.removeClass("media-small").removeClass("media-medium");
   <script type="text/javascript">
 var pl_status=0;
 </script> 
-  <script type="text/javascript" src="member_info.htmlpre/login?v1457429277"></script> 
   <script type="text/javascript">
 seajs.config({
 base: 'http://static.liantu.cn/script/dist',
@@ -294,13 +280,10 @@ seajs.use('modules/www/travel/detail.js');
 <script src="/js/jquery-3.3.1.js"></script>
   <script src="/js/jquery.cookie.js"></script>
   <script src="/js/layer/layer.js"></script>
-  <script src="/js/all_common.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
       var pageNum=1;
       var pageSize = 10;
-      loginFun();
-      var userName = $("#login_user_name").text();
       var mainId = Cookies.get('tongyouMainId');
       $(function(){
           if(mainId){
@@ -325,31 +308,42 @@ seajs.use('modules/www/travel/detail.js');
               success:function(res){
                   if (res.code===200) {
                      if(res.data){
-                         $("#allMessage").text();
-                        var messageInfoHtml="";
-                         messageInfoHtml+='<img class="head" src="../../images/65768.png" alt="" />';
-                         messageInfoHtml+='<div class="hd"> <p>';
-                         messageInfoHtml+='征途奇兵';
-                         messageInfoHtml+='<span class="sex male"> </span> </p><span class="location">';
-                         messageInfoHtml+=' 四川 • 成都，80后';
-                         messageInfoHtml+='</span> </div> <div class="bd"><h1 class="title">';
-                         messageInfoHtml+='  #3月28日 成都到拉萨，青藏，川藏，可可西里16日游 求结伴#';
-                         messageInfoHtml+='<span class="state finish">';
-                         messageInfoHtml+=' 结伴中';
-                         messageInfoHtml+='</span> </h1> <p class="subtit">路线：';
-                         messageInfoHtml+=' 成都~拉萨，青藏，川藏，可可西里';
-                         messageInfoHtml+='</p> <div class="date"> <ul> <li> <p> 出发时间 </p> <p class="time"> ';
-                         messageInfoHtml+='2016-03-28 ';
-                         messageInfoHtml+='</p> </li> <li> <p> 参加人数 </p> <p class="time">';
-                         messageInfoHtml+='1/8';
-                         messageInfoHtml+='  </p> </li> </ul> </div> <div class="detail"><div class="hd"> 结伴详情 </div> <div class="bd">';
-                         messageInfoHtml+=' 3.28号我们出发，走318国道川藏进，时间够的还可以青藏出，一起是16天。目前8名队友报名，再约5-7名队友，我们计划2-3台';
-                         messageInfoHtml+='<p class="contact-off">联系方式报名后可见</p>';
-                         messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span><span>';
-                         messageInfoHtml+='<img src="../../images/65768.png" alt="" />' ;
-                         messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="TU.login(\'reg\');">报名参加</a> </div> </div>';
-                         messageInfoHtml+=' <a class="launch" href="tongyou_add.html" onclick="TU.login(\'reg\');" rel="nofollow"> <span class="plus"></span>发起同游 </a>';
-                        $("#messageInfo") .html()
+                         //if(res.data.toVisitor){
+                             var toVisitor = res.data;
+                             var stateName= "结伴中";
+                             if(toVisitor.status=="0"){
+                                 stateName= "停止结伴";
+                             }
+                             var pageDate = "";
+                             if(toVisitor.date){
+                                 pageDate = fmtDate(new Date(parseInt(toVisitor.date)));
+                             }
+                             var allMessage =pageDate+'  '+toVisitor.departure+' 到 '+toVisitor.destination+' '+toVisitor.timenum+'日游'+' '+stateName
+                             var messageInfoHtml="";
+                             messageInfoHtml+='<img class="head" src="\''+toVisitor.picture+'\'" alt="" />';
+                             messageInfoHtml+='<div class="hd"> <p>';
+                             messageInfoHtml+='征途奇兵';
+                             messageInfoHtml+='<span class="sex male"> </span> </p><span class="location">';
+                             messageInfoHtml+=' 四川 • 成都，80后';
+                             messageInfoHtml+='</span> </div> <div class="bd"><h1 class="title">';
+                             messageInfoHtml+= allMessage;
+                             messageInfoHtml+='<span class="state finish">';
+                             messageInfoHtml+=stateName;
+                             messageInfoHtml+='</span> </h1> <p class="subtit">路线：';
+                             messageInfoHtml+=toVisitor.departure+' ~ '+toVisitor.destination;;
+                             messageInfoHtml+='</p> <div class="date"> <ul> <li> <p> 出发时间 </p> <p class="time"> ';
+                             messageInfoHtml+=pageDate;
+                             messageInfoHtml+='</p> </li> <li> <p> 参加人数 </p> <p class="time">';
+                             messageInfoHtml+= toVisitor.presentpart+'/'+toVisitor.part;
+                             messageInfoHtml+='  </p> </li> </ul> </div> <div class="detail"><div class="hd"> 结伴详情 </div> <div class="bd">';
+                             messageInfoHtml+= toVisitor.details;
+                             messageInfoHtml+='<p class="contact-off" id="phoneWay">联系方式报名后可见</p>';
+                             messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span><span>';
+                             messageInfoHtml+='<img src="../../images/65768.png" alt="" />' ;
+                             messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="TU.login(\'reg\');">报名参加</a> </div> </div>';
+                             messageInfoHtml+=' <a class="launch" href="/views/tongyou/createtoungyou.html"  rel="nofollow"> <span class="plus"></span>发起同游 </a>';
+                             $("#messageInfo") .html(messageInfoHtml)
+                       //  }
                      }
                   } else if (res.code===500) {
                       layer.msg(res.message);
@@ -376,9 +370,55 @@ seajs.use('modules/www/travel/detail.js');
           Cookies.set("tongyouMainId",mainId);
           location.href="/views/tongyou/tongyouDetail.html";
       }
+
+      var userName ;
+      var loginFun = function(){
+          $.ajax({
+              url: '/returnLogin',
+              type: 'post',
+              success: function (_res) {
+                  if (_res.code===200) {
+                      $("#login_user_name_detail").text(_res.message);
+                      $("#pl-login-info_detail").removeClass("displayNone");
+                      var userName =_res.message;
+                  } else if (_res.code===500) {
+                      $("#loginDiv_detail").removeClass("displayNone");
+                  }
+              }
+          });
+      };
+      //控制头像登录 滑入滑出
+      $("#pl-login-info_detail").hover(function(){
+          $("#loginInfo_detail").toggle();
+      });
+
+      function loginOut(){
+          $.ajax({
+              url: '/visitor/loginOut',
+              type: 'post',
+              success: function (_res) {
+                  if (_res.code===200) {
+                      if(!$("#pl-login-info_detail").hasClass("displayNone")){
+                          $("#pl-login-info_detail").addClass("displayNone");
+                      }
+                      if($("#loginDiv_detail").hasClass("displayNone")){
+                          $("#loginDiv_detail").removeClass("displayNone");
+                      }
+                  } else if (_res.code===500) {
+                      layer.msg("退出失败");
+                  }
+              }
+          });
+      }
+      loginFun();
+
+      function fmtDate(obj){
+          var date =  new Date(obj);
+          var y = 1900+date.getYear();
+          var m = "0"+(date.getMonth()+1);
+          var d = "0"+date.getDate();
+          return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+      }
   </script>
-</script> 
-  <div class="hide"> 
-  </div>
  </body>
 </html>

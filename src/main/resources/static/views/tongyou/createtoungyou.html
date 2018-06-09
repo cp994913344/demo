@@ -6,9 +6,9 @@
   <meta name="renderer" content="webkit" /> 
   <meta http-equiv="mobile-agent" content="format=html5; url=http://m.liantu.cntongyou_add.html" /> 
   <meta http-equiv="Cache-Control" content="no-transform" /> 
-  <link rel="shortcut icon" href="images/favicon.ico" /> 
-  <link rel="stylesheet" type="text/css" href="css/common.css" /> 
-  <link rel="stylesheet" type="text/css" href="css/create.css" /> 
+  <link rel="shortcut icon" href="../../images/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/create.css" />
   <script type="text/javascript">
 var TU={
 wwwUrl:'http://www.liantu.cn',
@@ -26,8 +26,9 @@ if(isMobi&&TU.mobile_agent!=''){
 location.href = TU.mobile_agent;
 }
 </script> 
-  <script type="text/javascript" id="js-prelogin" src="js/cas.js"></script> 
-  <script type="text/javascript" src="js/jquery.seajs.js" id="seajsnode"></script> 
+  <script type="text/javascript" id="js-prelogin" src="../../js/cas.js"></script>
+  <script type="text/javascript" src="../../js/jquery.seajs.js" id="seajsnode"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
   <!--[if lte IE 8]>
 <script type="text/javascript">
 $(function(){
@@ -45,32 +46,73 @@ $body.removeClass("media-small").removeClass("media-medium");
 }).resize();
 });
 </script>
-<![endif]--> 
- </head> 
+<![endif]-->
+ </head>
  <body> 
   <div class="wrapper"> 
    <div class="header"> 
     <div class="mod-head"> 
-     <div class="bg"></div> 
-     <div class="box"> 
+     <div class="bg"></div>
+     <div class="box">
       <div class="logo">
-       <a href="views/main.html"><img src="images/logo.png" alt="联途" /></a>
-      </div> 
-      <div class="J_search search"> 
-       <div class="sbox"> 
-        <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" /> 
-        <span class="ico"><span></span></span> 
-       </div> 
-      </div> 
-      <div class="login pl-login-info" id="pl-login-info"></div> 
-     </div> 
+       <a href="/"><img src="../../images/logo.png" alt="联途" /></a>
+      </div>
+      <div class="J_search search">
+       <div class="sbox">
+        <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" id="search_text" />
+        <span class="ico"><span></span></span>
+       </div>
+      </div>
+      <div class="login pl-login-info_detail displayNone" id="pl-login-info_detail" >
+       <div class="user" >
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <span class="name" id="login_user_name_detail"></span>
+        <span class="ico"></span>
+       </div>
+       <div class="list" id="loginInfo_detail" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+        <div class="ico">
+        </div>
+        <ul>
+         <li class="d-pc">
+          <a href="/toMemberInfo">个人信息</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/order/">我的订单</a>
+         </li>
+         <li>
+          <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+         </li>
+         <li class="d-m">
+          <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+         </li>
+         <li class="d-m">
+          <a href="/banyou/">伴游</a>
+         </li>
+         <li class="d-m">
+          <a href="/daoyou/">导游</a>
+         </li>
+         <li class="d-m">
+          <a href="/tongyou/">同游</a>
+         </li>
+         <li class="d-pc">
+          <a onclick="loginOut()">退出</a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="login pl-login-info_detail displayNone" id="loginDiv_detail">
+       <div class="info">
+        <a  href="/login">登录</a>
+       </div>
+      </div>
+     </div>
     </div> 
    </div>
    <div class="container"> 
     <div class="inner"> 
      <div class="main"> 
       <div class="mod-crumbs"> 
-       <a href="views/main.html">首页</a>
+       <a href="../main.html">首页</a>
        <span class="symbol"> &gt; </span> 
        <a href="/tongyou/">同游</a>
        <span class="symbol"> &gt; </span>
@@ -84,17 +126,17 @@ $body.removeClass("media-small").removeClass("media-medium");
         <ul> 
          <li class="item z-index5"> <label>哪里</label> 
           <div class="suggset box"> 
-           <input type="text" class="input-text place station " name="from" placeholder="出发地" value="" data-error="请输入出发地" /> 
+           <input type="text" class="input-text place station " name="departure" placeholder="出发地" value="" data-error="请输入出发地" />
           </div> <span class="text txt-place">~</span> 
           <div class="suggset box"> 
-           <input type="text" class="input-text place station" name="to" placeholder="目的地" value="" data-error="请输入目的地" /> 
+           <input type="text" class="input-text place station" name="destination" placeholder="目的地" value="" data-error="请输入目的地" />
           </div> <span class="date-text"> <input type="text" class="input-text mouse-click day date" placeholder="出发日期" id="date" name="startdate" value="" readonly="" /> <label for="date" class="calendar"></label> </span> <span class="text">日</span> <span class="text">共</span> 
           <div class="select-div select-date" onselectstart="return false;"> 
            <select name="day" class="select"> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option> <option value="15">15</option> <option value="16">16</option> <option value="17">17</option> <option value="18">18</option> <option value="19">19</option> <option value="20">20</option> <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="24">24</option> <option value="25">25</option> <option value="26">26</option> <option value="27">27</option> <option value="28">28</option> <option value="29">29</option> <option value="30">30</option> <option value="31">31</option> </select> 
           </div> <span class="text">天</span> </li> 
          <li class="item"> <label>标题</label> 
           <div class="suggset tit"> 
-           <input type="text" class="input-text title long-text" name="title" value="" readonly="readonly" disabled="disabled" /> 
+           <input type="text" class="input-text title long-text" name="title" value=""  />
           </div> </li> 
          <li class="item"> <label>内容</label> 
           <div class="suggset tit"> 
@@ -104,13 +146,11 @@ $body.removeClass("media-small").removeClass("media-medium");
          <li class="item z-index5"> 
           <div class="info"> 
            <label>联系方式</label> 
-           <div class="select-div contact-div"> 
-            <select name="contacttype" class="contact-type"> <option value="qq">QQ</option> <option value="mobile">手机</option> <option value="wechat">微信</option> </select> 
-           </div> 
-           <div class="suggset way"> 
-            <input type="text" class="input-text contactnumber" name="contactnumber" data-error="请输入联系方式" data-mobile="18005151538" data-qq="" /> 
-           </div> 
-          </div> 
+           <div >
+             <span> phone:</span>
+            <input type="text" style="    margin-left: 10px;" class="input-text contactnumber" name="contactnumber" data-error="请输入联系方式"  />
+           </div>
+          </div>
           <div class="more"> 
            <label>最多</label> 
            <div class="select-div"> 
@@ -122,18 +162,13 @@ $body.removeClass("media-small").removeClass("media-medium");
           <div class="ajaxmsg"></div> </li> 
          <li class="item pd20"> 
           <div class="btn"> 
-           <input type="submit" class="submit" value="发布同游" /> 
+           <input type="button" class="submit" onclick="saveData()" value="发布同游" /> 
           </div> </li> 
         </ul> 
        </div> 
       </div> 
       <div class="mod-newshare"> 
-       <div class="share"> 
-        <span>分享到：</span> 
-        <div class="bdsharebuttonbox"> 
-        </div> 
-       </div> 
-       <p>友情提示：</p> 
+       <p>友情提示：</p>
        <p>1.标题有新意、附带真实头像和详细行程的结伴更受欢迎</p> 
        <p>2.非旅行相关的诸如租房、求职、征婚、招聘类帖子将被删除</p> 
       </div> 
@@ -142,15 +177,15 @@ $body.removeClass("media-small").removeClass("media-medium");
    </div> 
    <div class="footer"> 
     <div class="mod-back"> 
-     <span class="qrcode"> <span class="ico"></span> <img src="images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span> 
+     <span class="qrcode"> <span class="ico"></span> <img src="../../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
      <a href="javascript:" class="code" id="code"></a> 
-     <a href="views/main.html" class="customer"></a>
+     <a href="../main.html" class="customer"></a>
      <a href="#" class="goback"></a> 
     </div> 
     <div class="mod-foot"> 
      <div class="info"> 
       <div class="contact"> 
-       <p class="logo"> <a href="views/main.html"><img src="images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+       <p class="logo"> <a href="../main.html"><img src="../../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
        <p class="tell">4006 666863</p> 
        <p>24小时服务热线</p> 
       </div> 
@@ -162,7 +197,7 @@ $body.removeClass("media-small").removeClass("media-medium");
         <a href="about.html" target="_blank" rel="nofollow">关于我们</a>
        </dd> 
        <dd>
-        <a href="copyright.html" target="_blank" rel="nofollow">免责声明</a>
+        <a href="../../copyright.html" target="_blank" rel="nofollow">免责声明</a>
        </dd> 
        <dd>
         <a href="contact.html" target="_blank" rel="nofollow">联系我们</a>
@@ -176,10 +211,10 @@ $body.removeClass("media-small").removeClass("media-medium");
         帮助中心
        </dt> 
        <dd>
-        <a href="xieyi.html" target="_blank" rel="nofollow">用户协议</a>
+        <a href="../../xieyi.html" target="_blank" rel="nofollow">用户协议</a>
        </dd> 
        <dd>
-        <a href="safe.html" target="_blank" rel="nofollow">安全保障</a>
+        <a href="../../safe.html" target="_blank" rel="nofollow">安全保障</a>
        </dd> 
        <dd>
         <a href="process.html" target="_blank" rel="nofollow">预定流程</a>
@@ -208,67 +243,13 @@ $body.removeClass("media-small").removeClass("media-medium");
      </div> 
     </div> 
    </div> 
-  </div> 
+  </div>
+  <script src="/js/jquery-3.3.1.js"></script>
+  <script src="/js/jquery.cookie.js"></script>
+  <script src="/js/layer/layer.js"></script>
+  <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
-(function(){
-var $info3 = $('.pl-login-info');
-PL.init({
-domain:'http://my.liantu.cn',
-callback:function(nickName,html){
-!PL.MID ? (function () {
-html.push('<div class="info"><a href="javascript:;" onclick="TU.login();">登录</a></div>');
-})() : (function () {
-var num=PL.type?(PL.merchantlaunchordernum+PL.merchantordernum):PL.memberordernum;
-html.push('<div class="user">'+(num>0?'<span class="num"><span>'+num+'</span></span>':'')+'<img src="'+PL.avatar+'" alt="' + nickName + '" width="40" height="40"/><span class="name">' + nickName + '</span><span class="ico"></span></div>');
-if(PL.type){
-html.push('\
-<div class="list">\
-<div class="ico"></div>\
-<ul>\
-<li class="d-pc"><a href="http://my.liantu.cn/merchant/">商户信息</a></li>\
-<li><a href="http://my.liantu.cn/merchant/order/reserve/">'+(PL.merchantlaunchordernum?'<span class="num"><span>'+PL.merchantlaunchordernum+'</span></span>':'')+'预约管理</a></li>\
-<li><a href="http://my.liantu.cn/merchant/order/">'+(PL.merchantordernum?'<span class="num"><span>'+PL.merchantordernum+'</span></span>':'')+'订单管理</a></li>\
-<li class="d-m"><a href="http://my.liantu.cn/merchant/account/">我的钱包</a></li>\
-<li class="d-m"><a href="/banyou/">伴游</a></li>\
-<li class="d-m"><a href="/daoyou/">导游</a></li>\
-<li class="d-m"><a href="/tongyou/">同游</a></li>\
-<li class="d-pc"><a href="javascript:;" onclick="TU.logout();">退出</a></li>\
-</ul>\
-</div>');
-}else{
-html.push('\
-<div class="list">\
-<div class="ico"></div>\
-<ul>\
-<li class="d-pc"><a href="member_info.html">个人信息</a></li>\
-<li><a href="member_order.html">'+(PL.memberordernum>0?'<span class="num"><span>'+PL.memberordernum+'</span></span>':'')+'我的订单</a></li>\
-<li><a href="member_tongyou.html">我的同游</a></li>\
-<li class="d-m"><a href="http://my.liantu.cnmember_withdraw.html">我的钱包</a></li>\
-<li class="d-m"><a href="/banyou/">伴游</a></li>\
-<li class="d-m"><a href="/daoyou/">导游</a></li>\
-<li class="d-m"><a href="/tongyou/">同游</a></li>\
-<li class="d-pc"><a href="javascript:" onclick="TU.logout();">退出</a></li>\
-</ul>\
-</div>');
-}
-})();
-if (!pl_status &&!PL.type) {
-var div=document.createElement('div');
-div.className='link';
-div.innerHTML='<a href="views/apply/apply.html" target="_blank">申请成为向导</a>';
-var $info=document.getElementById('pl-login-info');
-if($info){
-$info.parentNode.insertBefore(div,$info);
-}
-}
-pl_status=1;
-}
-});
-})();
 var pl_status=0;
-</script> 
- 
-  <script type="text/javascript">
 seajs.config({
 base: 'http://static.liantu.cn/script/dist',
 paths: {
@@ -281,8 +262,122 @@ charset: 'utf-8'
 });
 seajs.use('modules/www/public/common.js');
 seajs.use('modules/www/travel/create.js');
-</script> 
-  <div class="hide"> 
-  </div>
+</script>
+
+  <script type="text/javascript">
+
+      function saveData(){
+          var phoneText = /^1[3|5|8]\d{9}$/;
+          var  phone =$("input[name='contactnumber']").val();
+          var  departure  = $("input[name='departure']").val();//出发地
+          var  destination  = $("input[name='destination']").val();;//目的地
+          var  date = $("input[name='startdate']").val();//出发时间
+          var  timenum =$("select[name='day']").next().find(".active").text();//共几天
+          var title =$("input[name='title']").val();//同游标题
+          var details =$("textarea[name='description']").val();;//同游说明
+          var part =$("select[name='person']").next().find(".active").text();//同行总人数
+
+          if(!departure){
+              layer.msg("请输入出发地");
+              return;
+          }
+          if(destination){
+              layer.msg("请输入目的地");
+              return;
+          }
+          if(date){
+              layer.msg("请选择出发时间");
+              return;
+          }
+          if(!title||title.length<=6){
+              layer.msg("标题不能小于六个字");
+              return;
+          }
+          if(!phone||!phoneText.test(phone)){
+              layer.msg("请输入正确的手机号");
+              return;
+          }
+          debugger;
+          $.ajax({
+              url:'/tovisitor/insertTovisitor',
+              data:{
+              'phone':phone,
+              'departure':departure,
+              'destination':destination,
+              'date':date,
+              'timenum':timenum,
+              'title':title,
+              'details':details,
+              'part':part
+              },
+              type: 'post',
+              success:function(res){
+                  if (res.code===200) {
+                      if(res.data){
+                          layer.msg(res.message);
+                          Location.href =" /views/tongyou/tongyou.html" ;
+                      }
+                  } else if (res.code===500) {
+                      layer.msg(res.message);
+                  }
+              }
+          });
+      }
+
+
+
+      document.onkeydown = function(e){
+          var ev = document.all ? window.event : e;
+          if(ev.keyCode==13) {
+              var cityname = $("#search_text").val();
+              if(cityname){
+                  searchCity(cityname);
+              }else{
+                  layer.msg("请输入要搜索的城市信息");
+              }
+          }
+      }
+
+      var userName ;
+      var loginFun = function(){
+          $.ajax({
+              url: '/returnLogin',
+              type: 'post',
+              success: function (_res) {
+                  if (_res.code===200) {
+                      $("#login_user_name_detail").text(_res.message);
+                      $("#pl-login-info_detail").removeClass("displayNone");
+                      var userName =_res.message;
+                  } else if (_res.code===500) {
+                      $("#loginDiv_detail").removeClass("displayNone");
+                  }
+              }
+          });
+      };
+      //控制头像登录 滑入滑出
+      $("#pl-login-info_detail").hover(function(){
+          $("#loginInfo_detail").toggle();
+      });
+
+      function loginOut(){
+          $.ajax({
+              url: '/visitor/loginOut',
+              type: 'post',
+              success: function (_res) {
+                  if (_res.code===200) {
+                      if(!$("#pl-login-info_detail").hasClass("displayNone")){
+                          $("#pl-login-info_detail").addClass("displayNone");
+                      }
+                      if($("#loginDiv_detail").hasClass("displayNone")){
+                          $("#loginDiv_detail").removeClass("displayNone");
+                      }
+                  } else if (_res.code===500) {
+                      layer.msg("退出失败");
+                  }
+              }
+          });
+      }
+      loginFun();
+  </script>
  </body>
 </html>
