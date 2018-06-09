@@ -189,8 +189,8 @@
       <if test="sculpture != null" >
         SCULPTURE = #{sculpture,jdbcType=CHAR},
       </if>
-      <if test="status != null" >
-        #{state,jdbcType=INTEGER},
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
       </if>
     </set>
     where VISITORID = #{visitorid,jdbcType=INTEGER}
