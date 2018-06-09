@@ -66,7 +66,7 @@ $body.removeClass("media-small").removeClass("media-medium");
      <div class="bg"></div> 
      <div class="box"> 
       <div class="logo">
-       <a href="/main"><img src="../../images/logo.png" alt="联途" /></a>
+       <a href="/"><img src="../../images/logo.png" alt="联途" /></a>
       </div> 
       <div class="J_search search"> 
        <div class="sbox"> 
@@ -451,10 +451,10 @@ var pl_status=0;
               success:function(res_){
                   if(res.data){
                       var cityinfo = res.data.cityinfo;
-                      $("cityName").text(cityinfo.cityname);
-                      $("whereStrategy").text(cityinfo.cityname);
-                      $("whereScenic").text(cityinfo.cityname);
-                      $("backGroundImg").css("background-image","url(" + cityinfo.cityphoto + ")");
+                      $("#cityName").text(cityinfo.cityname);
+                      $("#whereStrategy").text(cityinfo.cityname);
+                      $("#whereScenic").text(cityinfo.cityname);
+                      $("#backGroundImg").css("background-image","url(" + cityinfo.cityphoto + ")");
                       var tourList = res.data.tourList;
                       if(tourList){
                           var TourListHtml = "";
