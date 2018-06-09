@@ -1,4 +1,4 @@
-window.onload=function(){
+var loginFun = function(){
     $.ajax({
         url: '/returnLogin',
         type: 'post',
@@ -12,7 +12,7 @@ window.onload=function(){
             }
         }
     });
-}
+};
 //控制头像登录 滑入滑出
 $("#pl-login-info").hover(function(){
     $("#loginInfo").toggle();

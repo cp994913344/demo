@@ -212,7 +212,8 @@
              Gid('s_city').value + " - 县/区" +
               Gid('s_county').value + "</h3>"
       }
-      $(function(){
+      loginFun();
+      window.onload= function(){
           if(!userName){
               layer.msg('请先登录！');
               return;
@@ -277,7 +278,7 @@
                   }
               }
           });
-      });
+      }
       function saveData(){
           if(!userName){
               layer.msg('请先登录！');
