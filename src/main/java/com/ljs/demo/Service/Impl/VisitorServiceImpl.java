@@ -33,8 +33,8 @@ public class VisitorServiceImpl implements VisitorServcie {
     }
 
     @Override
-    public int updateInfo(Visitor visitor,Integer visitorid) {
-        return visitorMapper.updateByPrimaryKey(visitor,visitorid);
+    public int updateInfo(Visitor visitor) {
+        return visitorMapper.updateByPrimaryKeySelective(visitor);
     }
 
     @Override

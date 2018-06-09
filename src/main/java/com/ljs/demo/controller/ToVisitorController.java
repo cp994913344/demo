@@ -20,9 +20,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -103,7 +101,7 @@ public class ToVisitorController {
      * @return
      */
     @RequestMapping(value = "/insertTovisitor")
-    public ResponseMessage insertTovisitor(ToVisitor toVisitor, @RequestParam("datetime") String datetime,
+    public ResponseMessage insertTovisitor(ToVisitor toVisitor, /*@RequestParam("date") String date,*/
                                            HttpServletRequest request) throws Exception {
         log.info("|发布同游接口入参|[{}]",toVisitor);
         HttpSession session = request.getSession();
@@ -113,16 +111,16 @@ public class ToVisitorController {
         }
         Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
 
-        if(datetime == null || toVisitor.getTimenum() == null){
+        /*if(date == null || toVisitor.getTimenum() == null){
             return ResponseMessage.error("请输入出发日期和旅行天数！");
-        }
+        }*/
         toVisitor.setUuid(GetUuid.uuid);
         toVisitor.setStatus("1");
         toVisitor.setPresentpart(1);
         toVisitor.setVisitorid(vi.getUuid());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = dateFormat.parse(datetime);
-        toVisitor.setDate(date);
+        /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = dateFormat.parse(date);
+        toVisitor.setDate(date1);*/
         int i = toVisitorService.insertTovisitor(toVisitor);
         if(i == 1){
             ToVisitor visitor = toVisitorService.queryByVisitorId(vi.getUuid());

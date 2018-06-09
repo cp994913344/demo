@@ -76,7 +76,7 @@ $body.removeClass("media-small").removeClass("media-medium");
       </div>
       <div class="login pl-login-info displayNone" id="pl-login-info" >
        <div class="user" >
-        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id="topUserImage" alt="cp" width="40" height="40">
         <span class="name" id="login_user_name"></span>
         <span class="ico"></span>
        </div>
@@ -363,6 +363,18 @@ var pl_status=0;
   <script src="/js/all_common.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
+      $(function(){
+          $.ajax({
+              type:"post",
+              url:"visitor/getVisitor",
+              success:function(_res){
+                  if(_res.code == "200") {
+                      $('#topUserImage').attr('src', _res.data.sculpture);
+                      console.log(_res);
+                  }
+              }
+          });
+      });
       loginFun();
       var userName = $("#login_user_name").text();
       var mesa = Cookies.get('mesa');
@@ -380,38 +392,42 @@ var pl_status=0;
               type: 'post',
               dataType:"json",
               success:function(res){
-                  alert(res);
-                  if(res.data){
+                  console.log(res);
+                  if(res.data.code = "200"){
                       var cityinfo = res.data.cityinfo;
                       $("#cityName").text(cityinfo.cityname);
                       $("#whereStrategy").text(cityinfo.cityname);
                       $("#whereScenic").text(cityinfo.cityname);
                       $("#backGroundImg").css("background-image","url(" + cityinfo.cityphoto + ")");
-                      var tourList = res.data.tourList;
-                      if(tourList){
+                      var tourList1 = res.data.tourlist;
+                      if(tourList1){
                           var TourListHtml = "";
-                          for(var i=0;i<tourList.length;i++){
+                          for(var i=0;i<tourList1.length;i++){
                               TourListHtml+=' <li class="J_blocklink">';
                               TourListHtml+='<a href="/daoyou/65581.html" target="_blank" class="pic">';
                               TourListHtml+='<img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" />'
                               TourListHtml+='</a>';
-                              TourListHtml+='<p class="name"><span class="woman">';
-                              TourListHtml+=tourList[i].realname;
+                              if(tourList1[i].sex == "女"){
+                                  TourListHtml+='<p class="name"><span class="woman">';
+                              }else{
+                                  TourListHtml+='<p class="name"><span class="man">';
+                              }
+                              TourListHtml+=tourList1[i].realname;
                               TourListHtml+='</span></p> <p class="add"><span>';
-                              TourListHtml+=tourList[i].city;
+                              TourListHtml+=tourList1[i].city;
                               TourListHtml+='</span></p><div class="service">';
-                              for(var j=0;j<tourList[i].ServiceList.length;j++){
-                                  TourListHtml+='<span>'+ServiceList[j]+'</span>';
+                              for(var j=0;j<tourList1[i].serviceList.length;j++){
+                                  TourListHtml+='<span>'+tourList1[i].serviceList[j]+'</span>';
                               }
                               TourListHtml+='</div> <p class="info"> ';
-                              TourListHtml+=tourList[i].tovisitorinfo;
+                              TourListHtml+=tourList1[i].tovisitorinfo;
                               TourListHtml+='</p>';
                               TourListHtml+='<div class="ft"><p> <span class="praise">好评率：';
-                              TourListHtml+=tourList[i].appraise;
+                              TourListHtml+=tourList1[i].appraise;
                               TourListHtml+='%</span> <span class="order">预约量：';
-                              TourListHtml+=tourList[i].subscribe;
+                              TourListHtml+=tourList1[i].subscribe;
                               TourListHtml+='</span> <span class="nice">颜值：';
-                              TourListHtml+=tourList[i].face;
+                              TourListHtml+=tourList1[i].face;
                               TourListHtml+='%</span> </p>';
                               TourListHtml+='</div> </li>';
                           }
@@ -420,32 +436,32 @@ var pl_status=0;
                           $("#hasNoTour").removeClass("displayNone");
                       }
                       //攻略
-                      var strategyList = res.data.strategyList;
-                      if(strategyList){
+                      var strategyList1 = res.data.strategyList;
+                      if(strategyList1){
                           var strateListHtml = "";
-                          for(var i=0;i<strategyList.length;i++){
+                          for(var i=0;i<strategyList1.length;i++){
                               strateListHtml += '<li> <p><a href="" class="tag" target="_blank">[';
-                              strateListHtml += strategyList[i].strategyname;
-                              strateListHtml += ']</a> <a onclick="toScienicOrStrate(1,'+strategyList[i].strategyname+')" target="_blank">';
-                              strateListHtml += strategyList[i].strategycol;
+                              strateListHtml += strategyList1[i].strategyname;
+                              strateListHtml += ']</a> <a onclick="toScienicOrStrate(1,'+strategyList1[i].strategyname+')" target="_blank">';
+                              strateListHtml += strategyList1[i].strategycol;
                               strateListHtml += '</a> </p> <span>攻略详情：';
-                              strateListHtml += strategyList[i].strategyinfo;
+                              strateListHtml += strategyList1[i].strategyinfo;
                               strateListHtml += '</span> </li>';
                           }
-                          $("#strateUl").html("strateListHtml");
+                          $("#strateUl").html(strateListHtml);
                       }
                       //景点
-                      var scenicList = res.data.scenicList;
-                      if(scenicList){
+                      var scenicList1 = res.data.scenicList;
+                      if(scenicList1){
                           var scenicListHtml = "";
-                          for(var i=0;i<scenicList.length;i++){
-                              scenicListHtml += '<li> <a onclick="toScienicOrStrate(2,'+scenicList[i].scenicname+')" target="_blank">';
-                              scenicListHtml += scenicList[i].scenicname;
+                          for(var i=0;i<scenicList1.length;i++){
+                              scenicListHtml += '<li> <a onclick="toScienicOrStrate(2,'+scenicList1[i].scenicname+')" target="_blank">';
+                              scenicListHtml += scenicList1[i].scenicname;
                               scenicListHtml += '</a> <span class="address">';
-                              scenicListHtml += scenicList[i].address;
+                              scenicListHtml += scenicList1[i].address;
                               scenicListHtml += '</span> </li>';
                           }
-                          $("#scenicUl").html("scenicListHtml");
+                          $("#scenicUl").html(scenicListHtml);
                       }
                   }
               }

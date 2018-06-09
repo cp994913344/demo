@@ -2,6 +2,7 @@ package com.ljs.demo.controller;
 
 
 import com.ljs.demo.Service.FileService;
+import com.ljs.demo.Service.VisitorServcie;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
@@ -31,6 +32,9 @@ public class FileController {
 
     @Autowired
     RedisClient redisClient;
+
+    @Autowired
+    VisitorServcie visitorServcie;
 
     /**
      * 根据ID查询
@@ -139,7 +143,14 @@ public class FileController {
             f.setUserid(visitor.getUuid());
             f.setDeleted(0);
 
+
             i = fileService.insert(f);
+
+            visitor.setSculpture(filename);
+            visitorServcie.updateInfo(visitor);
+
+            redisClient.del(email + StaticClass.LOGIN_CODE);
+            redisClient.set(email+ StaticClass.LOGIN_CODE,visitor);
         }
         if(i == 0){
             return ResponseMessage.error("存储失败");

@@ -130,7 +130,7 @@ $body.removeClass("media-small").removeClass("media-medium");
           </div> <span class="text txt-place">~</span> 
           <div class="suggset box"> 
            <input type="text" class="input-text place station" name="destination" placeholder="目的地" value="" data-error="请输入目的地" />
-          </div> <span class="date-text"> <input type="text" class="input-text mouse-click day date" placeholder="出发日期" id="date" name="startdate" value="" readonly="" /> <label for="date" class="calendar"></label> </span> <span class="text">日</span> <span class="text">共</span> 
+          </div> <span class="date-text"> <input type="text" class="input-text mouse-click day date" placeholder="出发日期" id="startdate" name="startdate" value="" readonly="" /> <label for="date" class="calendar"></label> </span> <span class="text">日</span> <span class="text">共</span>
           <div class="select-div select-date" onselectstart="return false;"> 
            <select name="day" class="select"> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option> <option value="15">15</option> <option value="16">16</option> <option value="17">17</option> <option value="18">18</option> <option value="19">19</option> <option value="20">20</option> <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="24">24</option> <option value="25">25</option> <option value="26">26</option> <option value="27">27</option> <option value="28">28</option> <option value="29">29</option> <option value="30">30</option> <option value="31">31</option> </select> 
           </div> <span class="text">天</span> </li> 
@@ -271,7 +271,8 @@ seajs.use('modules/www/travel/create.js');
           var  phone =$("input[name='contactnumber']").val();
           var  departure  = $("input[name='departure']").val();//出发地
           var  destination  = $("input[name='destination']").val();;//目的地
-          var  date = $("input[name='startdate']").val();//出发时间
+          var  date = $("#startdate").val();//出发时间
+          alert(date);
           var  timenum =$("select[name='day']").next().find(".active").text();//共几天
           var title =$("input[name='title']").val();//同游标题
           var details =$("textarea[name='description']").val();;//同游说明
@@ -281,11 +282,11 @@ seajs.use('modules/www/travel/create.js');
               layer.msg("请输入出发地");
               return;
           }
-          if(destination){
+          if(!destination){
               layer.msg("请输入目的地");
               return;
           }
-          if(date){
+          if(!date){
               layer.msg("请选择出发时间");
               return;
           }
@@ -297,20 +298,20 @@ seajs.use('modules/www/travel/create.js');
               layer.msg("请输入正确的手机号");
               return;
           }
-          debugger;
+          //debugger;
           $.ajax({
               url:'/tovisitor/insertTovisitor',
               data:{
               'phone':phone,
               'departure':departure,
               'destination':destination,
-              'date':date,
+              //'date':date,
               'timenum':timenum,
               'title':title,
               'details':details,
               'part':part
               },
-              type: 'post',
+              type: 'get',
               success:function(res){
                   if (res.code===200) {
                       if(res.data){
@@ -321,6 +322,12 @@ seajs.use('modules/www/travel/create.js');
                       layer.msg(res.message);
                   }
               }
+          });
+
+          $.ajax({
+              type:'post',
+              url:'',
+
           });
       }
 

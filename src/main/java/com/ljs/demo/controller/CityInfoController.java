@@ -125,6 +125,7 @@ public class CityInfoController {
      * 后台检索城市
      * @param pageNum
      * @return
+     *
      */
     @RequestMapping(value = "/queryCity")
     public ResponseMessage queryCity(@RequestParam("pageNum")Integer pageNum){

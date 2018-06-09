@@ -53,7 +53,7 @@
                     </div>
                     <div class="login pl-login-info displayNone" id="pl-login-info" >
                         <div class="user" >
-                            <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+                            <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id="selectImg" alt="cp" width="40" height="40">
                             <span class="name" id="login_user_name"></span>
                             <span class="ico"></span>
                         </div>
@@ -223,12 +223,25 @@
             </div> 
         </div>
 
-        <script type="text/javascript" src="/js/jquery-3.3.1.js" ></script>
+        <script type="text/javascript" src="/js/jquery.min.2.1.1.js" ></script>
         <script type="text/javascript" src="/js/jquery-form.js" ></script>
         <script type="text/javascript" src="/js/all_common.js" ></script>
         <script src="/js/layer/layer.js"></script>
         <script src="/js/all_common.js"></script>
         <script type="text/javascript">
+            $(function(){
+                $.ajax({
+                    type:"post",
+                    url:"visitor/getVisitor",
+                    success:function(_res){
+                        $('#userCenterImg').attr('src',_res.data.sculpture);
+                        $('#selectImg').attr('src',_res.data.sculpture);
+                        $('#j-curimg').attr('src',_res.data.sculpture);
+
+                        console.log(_res);
+                    }
+                });
+            });
             var userName;
             loginFun();
             /*window.location = function(){
@@ -260,17 +273,35 @@
 
 
             function uploadFile(){
-                $("#fileForm").ajaxSubmit(this,function(_res){
-                    alert(_res);
-                    if (_res.code===200) {
-                        var filename = _res.data;
-                        alert(filename);
-                        $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
-                        $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
-                    } else if (_res.code===500) {
-                        layer.msg("上传失败");
+                $("#fileForm").ajaxSubmit({
+                    type : "POST",
+                    url : '/file/savaPhoto',
+                    dataType:'JSON',
+                    success : function(_res) {
+                        if(_res){
+                            console.log(_res);
+                            var filename = _res.data;
+                            $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
+                            $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
+                        }
+                    },
+                    error : function(e) {
+                        alert("操作失败！");
                     }
-                });
+                })
+
+//                $("#fileForm").ajaxSubmit(this,function(_res){
+//
+//                    alert(_res);
+//                    if (_res.code===200) {
+//                        var filename = _res.data;
+//                        alert(filename);
+//                        $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
+//                        $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
+//                    } else if (_res.code===500) {
+//                        layer.msg("上传失败");
+//                    }
+//                });
             }
 
             function saveFile(){

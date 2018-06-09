@@ -180,7 +180,7 @@ public class VisitorController {
         vi.setUuid(GetUuid.uuid);
         vi.setWallet(200.00);
         log.info("|对外接口|入参[{}]", vi);
-        int i = visitorServcie.updateInfo(vi, 1);
+        int i = visitorServcie.updateInfo(vi);
         if (i > 0) {
             return ResponseMessage.ok("充值成功", i);
         }
