@@ -125,17 +125,14 @@
                             <li>
                                 <label class="title">姓名 *</label>
                                 <input type="text" name="name" class="input-text " maxlength="4" value="">                            </li>
-                            <li>
+                            <li id="sexLi">
                                 <label class="title">性别 *</label>
-                                <input type="hidden" class="gender" name="gender" value="">
-                                <span class="changes">
-                                            <input type="radio" name="radio" value="1">
-                                            男士
+                                <span class="changes" style="font-size: 15px;font-family: serif;">
+                                            <input type="radio" name="sexRadio" value="1" style="width: 30px;height: 20px;">男
                                         </span>
-                                <span class="changes">
-                                            <input type="radio" name="radio" value="1">
-                                            女士
-                                        </span>
+                                <span class="changes" style="font-size: 15px;font-family: serif;">
+                                    <input type="radio" name="sexRadio" value="0" style="width: 30px;height: 20px;">女
+                                </span>
                             </li>
                             <li class="zindex6">
                                 <label class="title">出生年月 *</label>
@@ -160,7 +157,7 @@
                                 <input type="text" class="input-text " name="stayyear" maxlength="2" value="">                            </li>
                             <li class="zindex3">
                                 <label class="title">目前身份 *</label>
-                                <div class="now-status" onselectstart="return false;">
+                                <div class="now-status" onselectstart="return false;" id="jobDiv">
                                     <select name="job" id="" class="status " data-id="">
                                         <option value="-1">请选择</option>
                                         <option value="1" >学生</option>
@@ -176,8 +173,8 @@
                             <li class="last">
                                 <label class="title">是否自己有车 *</label>
                                 <input type="hidden" name="iscar" class="iscar" value="">
-                                <span class="changes hascar"><i name="iscar " data-iscar="1" ></i>有</span>
-                                <span class="changes nohascar"><i name="iscar " data-iscar="0" ></i>没有</span>
+                                <span class="changes hascar iscarHave"><i name="iscar " data-iscar="1" ></i>有</span>
+                                <span class="changes nohascar iscarHave"><i name="iscar " data-iscar="0" ></i>没有</span>
                             </li>
                         </ul>
                     </div>
@@ -285,6 +282,7 @@
     seajs.use('modules/my/merchant/apply/form.js');
 </script>
 <script type="text/javascript">
+    loginFun();
     var userName;
     _init_area();
     var Gid  = document.getElementById ;
@@ -304,12 +302,12 @@
         var wechat = $("input[name='wechat']").val();
         var phone = $("input[name='phone']").val();
         var stayyear = $("input[name='stayyear']").val();
-        var job = $("input[name='job']:checked").val();
+        var job = $("#jobDiv .active").text();
         var birthday = $("#birthday").val();
         var s_province = $("#s_province").val();
         var s_city = $("#s_city").val();
-        var iscar = $("#iscar").val();
-        var sex = $("#gender").val();
+        var iscar = $("input[name='iscar']").val();
+        var sex = $("input[name='sexRadio']").val();
         s_province=s_province+","+s_city;
         var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         var phoneText = /^1[3|5|8]\d{9}$/;
