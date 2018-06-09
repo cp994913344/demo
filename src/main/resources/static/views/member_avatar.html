@@ -103,7 +103,7 @@
             <div class="wrap"> 
                 <div class="side"> 
                     <div class="avatar"> 
-                        <img src="images/man_160x160.jpg" alt="用户中心" /> 
+                        <img src="images/man_160x160.jpg" id="userCenterImg" alt="用户中心" />
                     </div>
                     <ul class="menu">
                         <li> <a href="/toMemberInfo" class="info">基本信息</a>
@@ -231,6 +231,24 @@
         <script type="text/javascript">
             var userName;
             loginFun();
+            window.location = function(){
+                $.ajax({
+                    url: '/getLoginMessage',
+                    type: 'post',
+                    success: function (_res) {
+                        if (_res.code===200) {
+                            if(res.data){
+                                if(res.data.filename) {
+                                    $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename=" + filename);
+                                    $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename=" + filename);
+                                }
+                            }
+                        } else if (_res.code===500) {
+                            layer.msg('保存失败!');
+                        }
+                    }
+                });
+            }
             function optionImage(){
                 if(!userName){
                     layer.msg('请先登录！');
@@ -240,11 +258,13 @@
                 }
             }
 
+
             function uploadFile(){
                 $("#fileForm").ajaxSubmit(this,function(_res){
                     if (_res.code===200) {
                         var filename = _res.data;
                         $("#j-curimg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
+                        $("#userCenterImg").attr("src", "http://localhost:8080/file/outStream?filename="+filename);
                     } else if (_res.code===500) {
                         layer.msg("上传失败");
                     }

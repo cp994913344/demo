@@ -53,6 +53,8 @@ public class MainController {
     @Autowired
     RedisClient redisClient;
 
+    @Autowired
+    VisitorServcie visitorServcie;
 
     @PostMapping(value = "/getEmailCode")
     @ResponseBody
@@ -182,7 +184,8 @@ public class MainController {
             try {
                 Visitor visitor =(Visitor)redisClient.get(user+StaticClass.LOGIN_CODE);
                 if(visitor!=null){
-                    return ResponseMessage.ok(visitor.getName(),visitor);
+                    Visitor visitor1 = visitorServcie.selectByPrimaryKey(visitor.getVisitorid());
+                    return ResponseMessage.ok(visitor.getName(),visitor1);
                 }
             }catch (Exception e){
                 log.info("未登录");
