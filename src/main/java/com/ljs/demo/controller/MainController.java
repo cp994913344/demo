@@ -85,6 +85,16 @@ public class MainController {
     }
 
     /**
+     * 登录
+     *
+     * @return
+     */
+    @GetMapping(value = "/towallet")
+    public String towallet(){
+        return "wallet";
+    }
+
+    /**
      * 管理员页面
      * @return
      */
