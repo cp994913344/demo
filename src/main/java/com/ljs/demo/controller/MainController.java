@@ -61,18 +61,17 @@ public class MainController {
     public ResponseMessage getEmailCode(HttpServletRequest request, String saveCode,String email){
         String code = (String)request.getSession().getAttribute("KAPTCHA_SESSION_KEY");
         if(StringUtils.isEmpty(saveCode)){
-            ResponseMessage.error("请输入验证码");
+            return ResponseMessage.error("请输入验证码");
         }else if(saveCode.equals(code)){
             String  emailCode =  SendVerificationCodeUtil.sendSixCodeMail(email);
             try{
                 redisClient.set(email.trim()+SendVerificationCodeUtil.REDIS_EMAIL_CODE,emailCode);
             }catch (Exception e){
             }
-            ResponseMessage.ok("success");
+            return ResponseMessage.ok("success");
         }else{
-            ResponseMessage.error("请输入正确的验证码");
+            return ResponseMessage.error("请输入正确的验证码");
         }
-        return ResponseMessage.error("未知的错误");
     }
 
 
