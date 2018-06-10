@@ -21,4 +21,6 @@ public interface ToVisitorService {
     List<ToVisitor> queryBySelective(ToVisitor toVisitor);
 
     List<ToVisitor> queryHotToVisitor();
+
+    int delTovisitorById(Integer id);
 }

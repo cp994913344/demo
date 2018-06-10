@@ -106,7 +106,7 @@ public class ToVisitorController {
      * @return
      */
     @RequestMapping(value = "/insertTovisitor")
-    public ResponseMessage insertTovisitor(ToVisitor toVisitor, /*@RequestParam("date") String date,*/
+    public ResponseMessage insertTovisitor(ToVisitor toVisitor, @RequestParam("date1") String date1,
                                            HttpServletRequest request) throws Exception {
         log.info("|发布同游接口入参|[{}]",toVisitor);
         HttpSession session = request.getSession();
@@ -116,21 +116,21 @@ public class ToVisitorController {
         }
         Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
 
-        /*if(date == null || toVisitor.getTimenum() == null){
+        if(date1 == null || toVisitor.getTimenum() == null){
             return ResponseMessage.error("请输入出发日期和旅行天数！");
-        }*/
+        }
         toVisitor.setUuid(GetUuid.uuid);
         toVisitor.setStatus("1");
         toVisitor.setPresentpart(1);
         toVisitor.setVisitorid(vi.getUuid());
-        /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = dateFormat.parse(date);
-        toVisitor.setDate(date1);*/
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date2 = dateFormat.parse(date1);
+        toVisitor.setDate(date2);
         int i = toVisitorService.insertTovisitor(toVisitor);
         if(i == 1){
-            ToVisitor visitor = toVisitorService.queryByVisitorId(vi.getUuid());
-            log.info("|发布同游接口出参|同游信息[{}]",visitor);
-            return ResponseMessage.ok("我的同游信息",visitor);
+            /*ToVisitor visitor = toVisitorService.queryByVisitorId(vi.getUuid());
+            log.info("|发布同游接口出参|同游信息[{}]",visitor);*/
+            return ResponseMessage.ok("发布成功！！！");
         }
         return ResponseMessage.error("发布失败");
     }
@@ -151,27 +151,42 @@ public class ToVisitorController {
         Date date = dateFormat.parse(datetime);
         toVisitor.setDate(date);
         int i = toVisitorService.updateTovisitor(toVisitor);
-        if(i > 0){
-            return ResponseMessage.ok("修改成功",i);
-        }
-        return ResponseMessage.error("修改失败");
+        return ResponseMessage.error("修改成功");
     }
 
     /**
      * 根据visitor表的uuid去查该用户发布的同游
      *
-     * @param visitorUuid
      * @return
      */
     @RequestMapping(value = "/queryByVisitorId")
-    public ResponseMessage queryByVisitorId(@RequestParam ("visitorUuid") String visitorUuid){
-        log.info("|查询用户发布的同游接口入参|[{}]",visitorUuid);
-        //ToVisitor toVisitor = toVisitorService.queryByVisitorId("2b8a0a979ea34e5c84cccd1b908e1cf3");
-        ToVisitor toVisitor = toVisitorService.queryByVisitorId(visitorUuid);
+    public ResponseMessage queryByVisitorId(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
+        if(email == null){
+            return ResponseMessage.error("用户未登录");
+        }
+
+        Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
+        ToVisitor toVisitor = toVisitorService.queryByVisitorId(vi.getUuid());
+
         if(toVisitor == null){
             return ResponseMessage.error("查询失败,该用户还未发布同游");
         }
         return ResponseMessage.ok("该用户发布的同游信息",toVisitor);
+    }
+
+
+    /**
+     * 根据id删除用户发布的同游
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delTovisitorById")
+    public ResponseMessage delTovisitorById(@RequestParam("id") Integer id){
+        log.info("删除同游信息接口入参|[{}]|",id);
+        toVisitorService.delTovisitorById(id);
+        return ResponseMessage.ok("删除成功");
     }
 
     /**

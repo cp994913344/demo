@@ -33,7 +33,7 @@ public class ToVisitorServiceImpl implements ToVisitorService {
 
     @Override
     public int updateTovisitor(ToVisitor toVisitor) {
-        return toVisitorMapper.updateByPrimaryKey(toVisitor);
+        return toVisitorMapper.updateByPrimaryKeySelective(toVisitor);
     }
 
     @Override
@@ -49,5 +49,10 @@ public class ToVisitorServiceImpl implements ToVisitorService {
     @Override
     public List<ToVisitor> queryHotToVisitor() {
         return toVisitorMapper.queryHotToVisitor();
+    }
+
+    @Override
+    public int delTovisitorById(Integer id) {
+        return toVisitorMapper.deleteByPrimaryKey(id);
     }
 }

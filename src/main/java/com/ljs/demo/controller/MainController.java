@@ -234,4 +234,10 @@ public class MainController {
         return "apply/tour";
     }
 
+    @GetMapping(value = "/towith")
+    public String towith(){
+        return "wodetongyou";
+    }
+
+
 }

@@ -49,7 +49,7 @@ location.href = TU.mobile_agent;
       </div>
       <div class="login pl-login-info displayNone" id="pl-login-info" >
        <div class="user" >
-        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id = "topUserImage" alt="cp" width="40" height="40">
         <span class="name" id="login_user_name"></span>
         <span class="ico"></span>
        </div>
@@ -305,6 +305,20 @@ location.href = TU.mobile_agent;
   <script src="/js/all_common.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
+
+      $(function(){
+          $.ajax({
+              type:"post",
+              url:"/visitor/getVisitor",
+              success:function(_res){
+                  if(_res.code == "200") {
+                      $('#topUserImage').attr('src', _res.data.sculpture);
+                      console.log(_res);
+                  }
+              }
+          });
+      });
+
    var pageNum=1;
    var pageSize = 10;
       loginFun();
@@ -338,6 +352,7 @@ location.href = TU.mobile_agent;
               type: 'post',
               success:function(res){
                   if(res.data.pageList.list){
+                      console.log(res);
                       var pageList = res.data.pageList.list;
                       if(pageList&&pageList.length>0){
                           var pageListHtml = "";
@@ -350,6 +365,7 @@ location.href = TU.mobile_agent;
                               if(pageList[i].date){
                                   pageDate = fmtDate(new Date(parseInt(pageList[i].date)));
                               }
+
                               pageListHtml+=' <li class="J_blocklink"><div class="pic"> <div class="avatar">';
                               pageListHtml+='<img src="'+pageList[i].picture+'" alt="程校长" width="120" height="120" />';
                               pageListHtml+='</div> </div> <div class="text">';

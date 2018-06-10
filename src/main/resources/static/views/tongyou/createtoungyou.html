@@ -65,7 +65,7 @@ $body.removeClass("media-small").removeClass("media-medium");
       </div>
       <div class="login pl-login-info_detail displayNone" id="pl-login-info_detail" >
        <div class="user" >
-        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" id = "topUserImage" width="40" height="40">
         <span class="name" id="login_user_name_detail"></span>
         <span class="ico"></span>
        </div>
@@ -265,6 +265,18 @@ seajs.use('modules/www/travel/create.js');
 </script>
 
   <script type="text/javascript">
+      $(function(){
+          $.ajax({
+              type:"post",
+              url:"/visitor/getVisitor",
+              success:function(_res){
+                  if(_res.code == "200") {
+                      $('#topUserImage').attr('src', _res.data.sculpture);
+                      console.log(_res);
+                  }
+              }
+          });
+      });
 
       function saveData(){
           var phoneText = /^1[3|5|8]\d{9}$/;
@@ -272,7 +284,6 @@ seajs.use('modules/www/travel/create.js');
           var  departure  = $("input[name='departure']").val();//出发地
           var  destination  = $("input[name='destination']").val();;//目的地
           var  date = $("#startdate").val();//出发时间
-          alert(date);
           var  timenum =$("select[name='day']").next().find(".active").text();//共几天
           var title =$("input[name='title']").val();//同游标题
           var details =$("textarea[name='description']").val();;//同游说明
@@ -305,30 +316,31 @@ seajs.use('modules/www/travel/create.js');
               'phone':phone,
               'departure':departure,
               'destination':destination,
-              //'date':date,
+              'date1':date,
               'timenum':timenum,
               'title':title,
               'details':details,
               'part':part
               },
-              type: 'get',
+              type: 'post',
               success:function(res){
+                  console.log(res);
+/*                  console.log(res);
+                  alert(res.code);*/
                   if (res.code===200) {
-                      if(res.data){
-                          layer.msg(res.message);
+                      alert(res.message);
+                      window.open("http://localhost:8080/toMemberInfo","_self");
+
+                      /*if(res.data){
+                          //layer.msg(res.message);
                           Location.href =" /views/tongyou/tongyou.html" ;
-                      }
+                      }*/
                   } else if (res.code===500) {
                       layer.msg(res.message);
                   }
               }
           });
 
-          $.ajax({
-              type:'post',
-              url:'',
-
-          });
       }
 
 

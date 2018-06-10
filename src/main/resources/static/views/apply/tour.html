@@ -367,7 +367,7 @@ var pl_status=0;
       $(function(){
           $.ajax({
               type:"post",
-              url:"visitor/getVisitor",
+              url:"/visitor/getVisitor",
               success:function(_res){
                   if(_res.code == "200") {
                       $('#topUserImage').attr('src', _res.data.sculpture);
