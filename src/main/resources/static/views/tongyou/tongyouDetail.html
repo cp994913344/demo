@@ -323,7 +323,9 @@ seajs.use('modules/www/travel/detail.js');
                              }
                              var allMessage =pageDate+'  '+toVisitor.departure+' 到 '+toVisitor.destination+' '+toVisitor.timenum+'日游'+' '+stateName
                              var messageInfoHtml="";
-                             messageInfoHtml+='<img class="head" src="\''+toVisitor.picture+'\'" alt="" />';
+                             if(visitor) {
+                                 messageInfoHtml += '<img class="head" src="\'' + toVisitor.picture + '\'" alt="" />';
+                             }
                              messageInfoHtml+='<div class="hd"> <p>';
                              if(visitor){
                                  messageInfoHtml+=visitor.name;
