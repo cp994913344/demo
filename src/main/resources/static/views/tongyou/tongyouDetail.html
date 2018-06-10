@@ -285,11 +285,6 @@ seajs.use('modules/www/travel/detail.js');
       var pageNum=1;
       var pageSize = 10;
       var mainId = Cookies.get('tongyouMainId');
-      $(function(){
-          if(mainId){
-             searchData();
-          }
-      });
 
       function clearCity(){
           $("#toVisitorlist").html("");
@@ -298,6 +293,11 @@ seajs.use('modules/www/travel/detail.js');
       }
 
       function searchData(){
+          if(!userName){
+              layer.msg("请先登录")
+              return;
+          }
+
           $.ajax({
               url:'/tovisitor/selectById',
               data:{
@@ -351,8 +351,6 @@ seajs.use('modules/www/travel/detail.js');
           });
       }
 
-
-
       document.onkeydown = function(e){
           var ev = document.all ? window.event : e;
           if(ev.keyCode==13) {
@@ -366,22 +364,33 @@ seajs.use('modules/www/travel/detail.js');
       }
 
       function toDetail(mainId){
+          if(!userName){
+              layer.msg("请点击登录");
+              return;
+          }
           Cookies.set("tongyouMainId",mainId);
           location.href="/views/tongyou/tongyouDetail.html";
       }
 
       var userName ;
+
       var loginFun = function(){
           $.ajax({
               url: '/returnLogin',
               type: 'post',
               success: function (_res) {
+                  userName =_res.message;
                   if (_res.code===200) {
                       $("#login_user_name_detail").text(_res.message);
                       $("#pl-login-info_detail").removeClass("displayNone");
-                      var userName =_res.message;
+                      if(mainId){
+                          searchData();
+                      }
                   } else if (_res.code===500) {
                       $("#loginDiv_detail").removeClass("displayNone");
+                      if(!userName){
+                          layer.msg("请点击登录");
+                      }
                   }
               }
           });

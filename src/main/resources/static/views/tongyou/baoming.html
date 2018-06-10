@@ -57,27 +57,26 @@ location.href = TU.mobile_agent;
       <div class="mod-in">
        <div class="hd">
         <h1>报名参与</h1> 
-        <a href="javascript:;"> <img src="../../images/man_160x160.jpg" /> </a>
+        <a href=""> <img id="imgSrc"  src="../../images/man_160x160.jpg" /> </a>
        </div> 
        <div class="bd"> 
         <div class="info"> 
          <ul> 
-          <li class="infoli index10"> <label>　　我是</label> 
-           <div class="select-div pd-r20" onselectstart="return false;"> 
-            <select name="age" class="age"> <option value="70">70后</option><option value="80">80后</option><option value="90">90后</option> </select> 
-           </div> 
-           <div class="select-div" onselectstart="return false;"> 
-            <select name="gender" class="gender"> <option value="男" selected="selected">男</option> <option value="女">女</option> </select> 
-           </div> </li> 
-          <li class="infoli index9"> <label>现居住地</label> <input type="text" class="input-text text pcc" name="from" data-text="1" value="北京" /> </li> 
-          <li class="infoli index8 pd23"> <label>联系方式</label> 
-           <div class="select-div contact" onselectstart="return false;"> 
-            <select name="contacttype" class="contact-type"> <option value="qq">QQ</option> <option value="mobile">手机</option> <option value="wechat">微信</option> </select> 
-           </div> <input type="text" name="contactnumber" data-mobile="18005151538" class="input-text contact-input" /> </li> 
-          <li class="infoli"> <label>　　备注</label> <textarea name="message" class="input-text area-text message"></textarea> <span class="text-count"> <span class="word">0</span> / <span class="max">60</span> </span> </li> 
+          <li class="infoli index9"> <label>现居住地</label>
+              <input type="text" class="input-text text pcc" name="palce"  value="" placeholder="例：北京" />
+          </li>
+          <li class="infoli index8 pd23">
+              <label>手&nbsp;机&nbsp;号&nbsp;</label>
+              <input type="text" name="contactnumber" placeholder="例：18005151538" class="input-text text pcc" maxlength="11"/>
+          </li>
+          <li class="infoli">
+              <label>&nbsp;备&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;</label>
+              <textarea name="message" class="input-text area-text message"></textarea>
+              <span class="text-count"> <span class="word">0</span> / <span class="max">60</span> </span>
+          </li>
           <li class="infoli index7 mg-t84"> 
            <div class="btn"> 
-            <a href="javascript:" class="send submit">提交申请</a> 
+            <a onclick="saveData()" class="send submit">提交申请</a>
            </div> </li> 
          </ul> 
         </div> 
@@ -90,67 +89,38 @@ location.href = TU.mobile_agent;
   <script src="/js/layer/layer.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
   <script type="text/javascript">
-      var pageNum=1;
-      var pageSize = 10;
       var mainId = Cookies.get('mainId');
-      $(function(){
-          if(mainId){
-             Cookies.remove("mainId");
+      function saveData(){
+          if(!userName){
+              layer.msg("请点击登录");
+              return;
           }
-      });
-
-      function clearCity(){
-          $("#toVisitorlist").html("");
-          pageNum=1;
-          searchCity();
-      }
-
-      function searchData(){
+          var phoneText = /^1[3|5|8]\d{9}$/;
+          var area = $("input[name='palce']").val();
+          var phone = $("input[name='contactnumber']").val();
+          var message = $("textarea[name='message']").val();
+          if(!area){
+              layer.msg("请输入居住地");
+              return;
+          }
+          if(!phone||!phoneText.test(phone)){
+              layer.msg("请输入正确的手机号");
+              return;
+          }
           $.ajax({
-              url:'/tovisitor/selectById',
+              url:'',
               data:{
-                  'tovisitorid':mainId
+                  'tovisitorid':mainId,
+                  'area':area,
+                  'phone':phone,
+                  'message':message
               },
               type: 'post',
               success:function(res){
                   if (res.code===200) {
                      if(res.data){
-                         //if(res.data.toVisitor){
-                             var toVisitor = res.data;
-                             var stateName= "结伴中";
-                             if(toVisitor.status=="0"){
-                                 stateName= "停止结伴";
-                             }
-                             var pageDate = "";
-                             if(toVisitor.date){
-                                 pageDate = fmtDate(new Date(parseInt(toVisitor.date)));
-                             }
-                             var allMessage =pageDate+'  '+toVisitor.departure+' 到 '+toVisitor.destination+' '+toVisitor.timenum+'日游'+' '+stateName
-                             var messageInfoHtml="";
-                             messageInfoHtml+='<img class="head" src="\''+toVisitor.picture+'\'" alt="" />';
-                             messageInfoHtml+='<div class="hd"> <p>';
-                             messageInfoHtml+='征途奇兵';
-                             messageInfoHtml+='<span class="sex male"> </span> </p><span class="location">';
-                             messageInfoHtml+=' 四川 • 成都，80后';
-                             messageInfoHtml+='</span> </div> <div class="bd"><h1 class="title">';
-                             messageInfoHtml+= allMessage;
-                             messageInfoHtml+='<span class="state finish">';
-                             messageInfoHtml+=stateName;
-                             messageInfoHtml+='</span> </h1> <p class="subtit">路线：';
-                             messageInfoHtml+=toVisitor.departure+' ~ '+toVisitor.destination;;
-                             messageInfoHtml+='</p> <div class="date"> <ul> <li> <p> 出发时间 </p> <p class="time"> ';
-                             messageInfoHtml+=pageDate;
-                             messageInfoHtml+='</p> </li> <li> <p> 参加人数 </p> <p class="time">';
-                             messageInfoHtml+= toVisitor.presentpart+'/'+toVisitor.part;
-                             messageInfoHtml+='  </p> </li> </ul> </div> <div class="detail"><div class="hd"> 结伴详情 </div> <div class="bd">';
-                             messageInfoHtml+= toVisitor.details;
-                             messageInfoHtml+='<p class="contact-off" id="phoneWay">联系方式报名后可见</p>';
-                             messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span><span>';
-                             messageInfoHtml+='<img src="../../images/65768.png" alt="" />' ;
-                             messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="TU.login(\'reg\');">报名参加</a> </div> </div>';
-                             messageInfoHtml+=' <a class="launch" href="/views/tongyou/createtoungyou.html"  rel="nofollow"> <span class="plus"></span>发起同游 </a>';
-                             $("#messageInfo") .html(messageInfoHtml)
-                       //  }
+                         var index = parent.layer.getFrameIndex(window.name);
+                         setTimeout(function(){parent.layer.close(index)}, 1000);
                      }
                   } else if (res.code===500) {
                       layer.msg(res.message);
@@ -172,24 +142,30 @@ location.href = TU.mobile_agent;
               }
           }
       }
-
-      function toDetail(mainId){
-          Cookies.set("tongyouMainId",mainId);
-          location.href="/views/tongyou/tongyouDetail.html";
-      }
-
       var userName ;
       var loginFun = function(){
           $.ajax({
               url: '/returnLogin',
               type: 'post',
               success: function (_res) {
+                  userName =_res.message;
                   if (_res.code===200) {
-                      $("#login_user_name_detail").text(_res.message);
-                      $("#pl-login-info_detail").removeClass("displayNone");
-                      var userName =_res.message;
+                      if(mainId){
+                          $.ajax({
+                              type:"post",
+                              url:"/visitor/getVisitor",
+                              success:function(_res){
+                                  $('#imgSrc').attr('src',_res.data.sculpture);
+                              }
+                          });
+                          Cookies.remove("mainId");
+                      }
                   } else if (_res.code===500) {
                       $("#loginDiv_detail").removeClass("displayNone");
+                      if(!userName){
+                          layer.msg("请点击登录");
+                          return;
+                      }
                   }
               }
           });
