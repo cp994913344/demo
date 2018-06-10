@@ -151,6 +151,16 @@ public class MainController {
     }
 
     /**
+     * 导游详情
+     *
+     * @return
+     */
+    @GetMapping(value = "/toTourDetails")
+    public String toTourDetails(){
+        return "apply/tour_details";
+    }
+
+    /**
      * 验证是否登录
      */
     @RequestMapping("/returnLogin")

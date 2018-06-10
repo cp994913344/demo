@@ -3,6 +3,7 @@ package com.ljs.demo.pojo.mapper;
 import com.ljs.demo.pojo.domain.ServiceInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -59,4 +60,6 @@ public interface ServiceInfoMapper {
     List<ServiceInfo> queryAllService();
 
     List<String> queryByTourUid(@Param("tourUid") String tourUid);
+
+    List<ServiceInfo> queryByTourUID(@Param("tourUid") String tourUid);
 }

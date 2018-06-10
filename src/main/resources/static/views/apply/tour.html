@@ -362,6 +362,7 @@ var pl_status=0;
   <script src="/js/layer/layer.js"></script>
   <script src="/js/all_common.js"></script>
   <script src="/js/page/jquery.pagination.js"></script>
+  <script type="text/javascript" src="/js/ljs.js" ></script>
   <script type="text/javascript">
       $(function(){
           $.ajax({
@@ -402,9 +403,11 @@ var pl_status=0;
                       var tourList1 = res.data.tourlist;
                       if(tourList1){
                           var TourListHtml = "";
+                          var tourIdTmp;
                           for(var i=0;i<tourList1.length;i++){
+                              tourIdTmp = tourList1[i].tourid;
                               TourListHtml+=' <li class="J_blocklink">';
-                              TourListHtml+='<a href="/daoyou/65581.html" target="_blank" class="pic">';
+                              TourListHtml+='<a onclick="setGloableTourid('+tourIdTmp+');"  href="/toTourDetails" target="_blank" class="pic">';
                               TourListHtml+='<img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" />'
                               TourListHtml+='</a>';
                               if(tourList1[i].sex == "女"){
