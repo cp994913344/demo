@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head> 
+        <meta charset="utf-8" /> 
+        <title>填写预约申请 导游</title> 
+        <meta name="renderer" content="webkit" /> 
+        <meta http-equiv="mobile-agent" content="format=html5; url=http://m.liantu.cn/order/guide/?gid=65581&amp;type=daoyou&amp;startdate=2016-03-10&amp;enddate=2016-03-18&amp;adult=1&amp;service=" /> 
+        <meta http-equiv="Cache-Control" content="no-transform" /> 
+        <link rel="shortcut icon" href="../../images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/guide.css" />
+        <script type="text/javascript">
+            var TU = {
+                wwwUrl: 'http://www.liantu.cn',
+                myUrl: 'http://my.liantu.cn',
+                imageUrl: 'http://static.liantu.cn/image/',
+                domain: 'liantu.cn',
+                today: '2016-03-08',
+                mobile_agent: 'http://m.liantu.cn/order/guide/?gid=65581&type=daoyou&startdate=2016-03-10&enddate=2016-03-18&adult=1&service='
+            };
+            var isMobi = (function() {
+                var u = navigator.userAgent.toLowerCase();
+                return  u.indexOf("mobi") > 0 || u.indexOf("nexus 7") > 0 || u.indexOf("480") > 0;
+            })();
+            if (isMobi && TU.mobile_agent != '') {
+                location.href = TU.mobile_agent;
+            }
+        </script> 
+        <script type="text/javascript" id="js-prelogin" src="../../js/cas.js"></script>
+        <script type="text/javascript" src="../../js/jquery.seajs.js" id="seajsnode"></script>
+        <!--[if lte IE 8]>
+      <script type="text/javascript">
+      $(function(){
+      var $body=$('body');
+      var $window =  $(window);
+      $window.resize(function() {
+      var width = $window.width();
+      if(width<768){
+      $body.addClass("media-small").removeClass("media-medium");
+      }else if(width<1300){
+      $body.addClass("media-medium").removeClass("media-small");
+      }else{
+      $body.removeClass("media-small").removeClass("media-medium");
+      }
+      }).resize();
+      });
+      </script>
+      <![endif]-->
+        <style>
+            .mod-head .login .name {
+                display: -webkit-inline-box;
+            }
+            .displayNone{
+                display: none;
+            }
+        </style>
+    </head> 
+    <body> 
+        <div class="wrapper"> 
+            <div class="header"> 
+                <div class="mod-head"> 
+                    <div class="bg"></div>
+                    <div class="box">
+                        <div class="logo">
+                            <a href="/"><img src="../../images/logo.png" alt="联途" /></a>
+                        </div>
+                        <div class="J_search search">
+                            <div class="sbox">
+                                <input type="text" class="text" placeholder="输入想去的地方（例如：北京）" id="search_text" />
+                                <span class="ico"><span></span></span>
+                            </div>
+                        </div>
+                        <div class="login pl-login-info displayNone" id="pl-login-info" >
+                            <div class="user" >
+                                <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id="topUserImage" alt="cp" width="40" height="40">
+                                <span class="name" id="login_user_name"></span>
+                                <span class="ico"></span>
+                            </div>
+                            <div class="list" id="loginInfo" style="display: none;height: 138px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px; right: -26px;">
+                                <div class="ico">
+                                </div>
+                                <ul>
+                                    <li class="d-pc">
+                                        <a href="/toMemberInfo">个人信息</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://my.liantu.cn/member/order/">我的订单</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://my.liantu.cn/member/travel/createlist/">我的同游</a>
+                                    </li>
+                                    <li class="d-m">
+                                        <a href="http://my.liantu.cn/member/account/">我的钱包</a>
+                                    </li>
+                                    <li class="d-m">
+                                        <a href="/banyou/">伴游</a>
+                                    </li>
+                                    <li class="d-m">
+                                        <a href="/daoyou/">导游</a>
+                                    </li>
+                                    <li class="d-m">
+                                        <a href="/tongyou/">同游</a>
+                                    </li>
+                                    <li class="d-pc">
+                                        <a onclick="loginOut()">退出</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="login pl-login-info displayNone" id="loginDiv">
+                            <div class="info">
+                                <a  href="/login">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+            <div class="container"> 
+                <div class="inner"> 
+                    <div class="main"> 
+                        <div class="mod-order-step"> 
+                            <ul> 
+                                <li> <span class="step-bg"></span> <span class="step">STEP01</span> <span>选择导游或伴游</span> </li> 
+                                <li class="active"> <span class="step-bg"></span> <span class="step">STEP02</span> <span>填写预约申请</span> </li> 
+                                <li> <span class="step-bg"></span> <span class="step">STEP03</span> <span>等待导/伴游接受</span> </li> 
+                                <li> <span class="step-bg"></span> <span class="step">STEP04</span> <span>在线支付费用</span> </li> 
+                            </ul> 
+                        </div> 
+                        <div class="content"> 
+                            <div class="mod-base"> 
+                                <div class="hd">
+                                    基础信息
+                                </div> 
+                                <input type="hidden" name="gid" value="65581" /> 
+                                <div class="bd"> 
+                                    <div class="list"> 
+                                        <div class="fixed"> 
+                                            <div class="inner"> 
+                                                <div class="steps"> 
+                                                    <p><span class="ico"></span><span class="step">1</span>选择导游或伴游</p> 
+                                                    <p class="active"><span class="ico"></span><span class="step">2</span>填写预约申请</p> 
+                                                    <p><span class="ico"></span><span class="step">3</span>等待导/伴游接受</p> 
+                                                    <p><span class="ico"></span><span class="step">4</span>在线支付费用</p> 
+                                                </div> 
+                                                <div class="items"> 
+                                                    <div class="time"> 
+                                                        <span class="titles">出行时间</span> 
+                                                        <div class="date"> 
+                                                            <input type="input" class="input-date" onchange="getDateNum()" name="startdate" value="2016-03-10" readonly="readonly" id="from" />
+                                                            <label for="from"></label>
+                                                        </div>
+                                                        <span class="between">~</span>
+                                                        <div class="date">
+                                                            <input type="input" class="input-date" onchange="getDateNum()" name="enddate" value="2016-03-18" readonly="readonly" id="to" />
+                                                            <label for="to"></label>
+                                                        </div>
+                                                        <span>共<label class="diff-day" id="dataDif">9</label>天</span>
+                                                    </div>
+                                                    <div class="count">
+                                                        <span class="titles">同行人数</span>
+                                                        <p> <a  class="btn min"></a> <input type="input" class="num" name="adult" value="1" readonly data-max="100" data-min="1" /> <span class="label">成人</span> <a  class="btn plus"></a> </p>
+                                                        <p> <a  class="btn min"></a> <input type="input" class="num" name="children" value="0" readonly data-max="100" data-min="1"  /> <span class="label">儿童</span> <a  class="btn plus"></a> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mod-demand">
+                                <div class="hd">
+                                    行程需求
+                                </div>
+                                <div class="bd">
+                                    <ul class="trip-list">
+                                        <li class="title">
+                                            <div class="sub-list">
+                                                <div class="part-one">
+                                                    日期
+                                                </div>
+                                                <div class="part-two">
+                                                    选择所需服务
+                                                </div>
+                                                <div class="part-three">
+                                                    行程内容
+                                                </div>
+                                            </div> </li>
+                                        <div id="everyDayData">
+
+                                            <li class="order">
+                                                <div class="sub-list">
+                                                    <div class="cols">
+                                                        <div class="part-one">
+                                                            <div class="count">
+                                                                Day
+                                                                <span>1</span>
+                                                            </div>
+                                                            <p class="day">2016-03-10</p>
+                                                        </div>
+                                                        <div class="part-two">
+                                                            <div class="item">
+                                                                <div class="select-div">
+                                                                    <select name="service[0]"> <option value="">请选择</option> <option value="28" data-type="base" data-unit="元/天" data-price="100">基础导游服务 ￥100元/天</option> </select>
+                                                                </div>
+                                                                <a href="javascript:" class="del"></a>
+                                                            </div>
+                                                            <a href="javascript:" class="add"><span></span>添加服务</a>
+                                                        </div>
+                                                        <div class="price">
+                                                            ￥
+                                                            <span>0</span>元/天
+                                                        </div>
+                                                    </div>
+                                                    <div class="part-three">
+                                                        <div class="info">
+                                                            <textarea class="remark input-placeholder" placeholder="可备注当日行程安排、航班、酒店等信息" name="remark"> </textarea>
+                                                            <label class="placeholder">可备注当日行程安排、航班、酒店等信息</label>
+                                                        </div>
+                                                    </div>
+                                                </div> </li>
+                                        </div>
+                                    </ul>
+                                    <div class="balance">
+                                        <p>应付费用<span>￥<span class="bigger" id="total">0</span>元</span></p>
+                                        <p class="hint">(提示：如果对方同意了您的预订申请，您就可以在线支付所需支付费用)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mod-btn">
+                                <input type="button" class="submit" value="提交预订申请" onclick="saveData()"/>
+                            </div>
+                        </div>
+                        <div class="side">
+                            <div class="mod-service">
+                                <p class="title" id="tourName"></p>
+                                <ul>
+                                    <li> <p>基础导游服务</p> <p class="price">￥<span><span class="bigger" id="serviceprice">  </span>元/天</span></p> </li>
+                                </ul>
+                            </div>
+                            <div class="mod-calendar" id="j-calendar">
+                                <div class="hd">
+                                    服务日历
+                                </div>
+                                <div class="calendar cal-pd"></div>
+                            </div>
+                            <div class="mod-help">
+                                <div class="hd">
+                                    帮助
+                                </div>
+                                <div class="bd">
+                                    <ul>
+                                        <li> <p><a href="javascript:">如何知道我的预订申请被对方接受？</a></p> <p class="intro active"> 向导会在预订申请提交后3个小时内处理你的订单，向导若接受或者拒绝订单，系统会短信通知你。详情请登入个人中心【我的订单】查看。 </p> </li>
+                                        <li> <p><a href="javascript:">我什么时候可以得到导游的联系方式</a></p> <p class="intro"> 支付成功后，在个人中心【我的订单】中，可查看导游的联系方式。 </p> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="mod-back">
+                    <span class="qrcode"> <span class="ico"></span> <img src="../../images/qrcode.jpg" alt="联途微信二维码" width="200" height="200" />官方微信服务号 </span>
+                    <a href="javascript:" class="code" id="code"></a>
+                    <a href="../main.html" class="customer"></a>
+                    <a href="#" class="goback"></a>
+                </div>
+                <div class="mod-foot">
+                    <div class="info">
+                        <div class="contact">
+                            <p class="logo"> <a href="../main.html"><img src="../../images/logo.png" alt="联途" width="136" height="50" /></a> <span>同行之路，有你才有意义</span> </p>
+                            <p class="tell">4006 666863</p>
+                            <p>24小时服务热线</p>
+                        </div>
+                        <dl>
+                            <dt>
+                            公司信息
+                            </dt>
+                            <dd>
+                                <a href="about.html" target="_blank" rel="nofollow">关于我们</a>
+                            </dd>
+                            <dd>
+                                <a href="../../copyright.html" target="_blank" rel="nofollow">免责声明</a>
+                            </dd>
+                            <dd>
+                                <a href="contact.html" target="_blank" rel="nofollow">联系我们</a>
+                            </dd>
+                            <dd>
+                                <a href="join.html" target="_blank" rel="nofollow">加入我们</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                            帮助中心
+                            </dt>
+                            <dd>
+                                <a href="../../xieyi.html" target="_blank" rel="nofollow">用户协议</a>
+                            </dd>
+                            <dd>
+                                <a href="../../safe.html" target="_blank" rel="nofollow">安全保障</a>
+                            </dd>
+                            <dd>
+                                <a href="process.html" target="_blank" rel="nofollow">预定流程</a>
+                            </dd>
+                        </dl>
+                        <dl class="app">
+                            <dt>
+                            发现
+                            </dt>
+                            <dd>
+                                <a href="/app/" target="_blank">Android客户端</a>
+                            </dd>
+                            <dd>
+                                <a href="/app/" target="_blank">iOS客户端</a>
+                            </dd>
+                            <dd>
+                                <a href="/app/huilv/" target="_blank">联途汇率</a>
+                            </dd>
+                            <dd>
+                                <a href="/app/tongyou/" target="_blank">联途同游</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="copyright">
+                        <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var pl_status = 0;
+            seajs.config({
+                base: 'http://static.liantu.cn/script/dist',
+                paths: {
+                    'modules': 'http://static.liantu.cn/script/dist'
+                },
+                map: [
+                    [/^(.*?\/script\/(?:src|dist)\/.*?\/.*?\.js$)(?:.*)$/i, '$1?version=v1']
+                ],
+                charset: 'utf-8'
+            });
+            seajs.use('modules/www/public/common.js');
+            seajs.use('modules/www/order/guide.js');
+        </script>
+        <script src="/js/jquery-3.3.1.js"></script>
+        <script src="/js/jquery.cookie.js"></script>
+        <script src="/js/layer/layer.js"></script>
+        <script src="/js/all_common.js"></script>
+        <script src="/js/page/jquery.pagination.js"></script>
+        <script type="text/javascript" src="/js/ljs.js" ></script>
+        <script type="text/javascript">
+            loginFun();
+            var userName = $("#login_user_name").text();
+            var tourid = Cookies.get('tourid');
+            $(function(){
+                if(tourid){
+                    searchTourDetail(tourid);
+                }
+            });
+            function searchTourDetail(tourid){
+//                $.ajax({
+//                    url:'/tour/selectById',
+//                    data:{'tourid':tourid},
+//                    type: 'post',
+//                    dataType:"json",
+//                    success:function(res){
+//                        if(res.data.code = "200"){
+//                            var tour = res.data;
+//                            $("#sculpture").css("background-image","url(" + tour.sculpture + ")");
+//                            $("#name").text(tour.name);
+//                            $("#sex").text(tour.sex);
+//                            $("#cityservice").append(tour.cityservice);
+//                            $("#lauguage").text(tour.lauguage);
+//                            $("#appraise").text(tour.appraise);
+//                            $("#subscribe").text(tour.subscribe);
+//                            $("#face").text(tour.face);
+//                            $("#tovisitorinfo").text(tour.tovisitorinfo);
+//                            if(tour){
+//                                if(tour.serviceList){
+//                                    var serviceList = tour.serviceList;
+//                                    var serviceListHtml="";
+//                                    for(var i=0;i<serviceList.length;i++){
+//                                        serviceListHtml+='<li data-type="base" data-base-id="6"><div class="block">';
+//                                        serviceListHtml+=' <img src="../../images/base.jpg" alt="基础服务" />';
+//                                        serviceListHtml+='<span class="cover"></span><div class="text"><span class="info">';
+//                                        serviceListHtml+=serviceList[I].servicename;
+//                                        serviceListHtml+=' </span>';
+//                                        serviceListHtml+=' <span class="name">';
+//                                        serviceListHtml+=serviceList[I].serviceinfo;
+//                                        serviceListHtml+='</span> </div> </div> <div class="price"> <span class="num">￥';
+//                                        serviceListHtml+=serviceList[I].serviceprice;
+//                                        serviceListHtml+='</span>元/天';
+//                                        serviceListHtml+='<span class="ico"></span> </div> </li>';
+//                                        if(serviceList[I].servicename=="基础导游服务"){
+//                                            $("#servicetitle").text(serviceList[I].servicename);
+//                                            $("#serviceprice").text(serviceList[I].serviceprice+"/天");
+//                                            if(tour.owncar=="1"){
+//                                                $("#owncar").text("(含车)");
+//                                            }else{
+//                                                $("#owncar").text("(不含车)");
+//                                            }
+//                                        }
+//                                    }
+//                                    $("#serviceList").html(serviceListHtml);
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
+            }
+
+
+            //      function searchTourList(pageCount,totalData,current){
+            //          $('.M-box3').pagination({
+            //              pageCount: pageCount,
+            //              totalData:totalData,
+            //              current:current,
+            //              jump: true,
+            //              coping: true,
+            //              homePage: '首页',
+            //              endPage: '末页',
+            //              prevContent: '上页',
+            //              nextContent: '下页',
+            //              callback: function (api) {
+            //                  console.log(api.getCurrent());
+            //
+            ////              <li class="J_blocklink"> <a href="/daoyou/65581.html" target="_blank" class="pic"><img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" /></a> <p class="name"><span class="woman">乔蕊</span></p> <p class="add"><span>北京，70后</span></p>
+            ////                  <div class="service">
+            ////                      <span>伴游向导</span>
+            ////                      <span>行程规划</span>
+            ////                      <span>代订服务</span>
+            ////                      </div> <p class="info"> 节假日来北京玩，旅途很寂寞？不要担心，我来带你玩转北京，去南锣鼓巷体验一把老北京胡同的热闹，去798感受一下艺术气息，去颐和园、故宫看看皇家园林的气派，去看看长城的宏伟，还有很多逼格很高、很小资的别样小馆，如果你想去，我都可以带你去…… </p>
+            ////                  <div class="price">
+            ////                      <span class="unit">￥<span>100.00</span>元/天</span> (不含车)
+            ////                  </div>
+            ////                  <div class="ft">
+            ////                      <p> <span class="praise">好评率：0%</span> <span class="order">预约量：0</span> <span class="nice">颜值：0%</span> </p>
+            ////                  </div> </li>
+            //
+            //
+            ////                  var data = {
+            ////                      page: api.getCurrent(),
+            ////                      name: 'mss',
+            ////                      say: 'oh'
+            ////                  };
+            ////                  $.getJSON('https://www.easy-mock.com/mock/58fff7a5739ac1685205ad5d/example/pagination#!method=get', data, function (json) {
+            ////                      console.log(json);
+            ////                  });
+            //              }
+            //          });
+            //      }
+
+            document.onkeydown = function(e){
+                var ev = document.all ? window.event : e;
+                if(ev.keyCode==13) {
+                    var cityname = $("#search_text").val();
+                    if(cityname){
+                        searchCity(cityname);
+                    }else{
+                        layer.msg("请输入要搜索的城市信息");
+                    }
+                }
+            }
+
+            $("#strateA").click(function(){
+                var queryName = $("whereStrategy").text();
+                toScienicOrStrate(2,queryName);
+            });
+
+            $("#scenicA").click(function(){
+                var queryName = $("whereScenic").text();
+                toScienicOrStrate(1,queryName);
+            });
+
+            function toScienicOrStrate(type,queryName){
+                Cookies.set("ScienicOrStrateType",type);
+                Cookies.set("ScienicOrStrateQueryName",queryName);
+                location.href="/views/jingdian/jingdian.html";
+            }
+
+            function toTourApply(){
+                location.href = "/views/apply/touryuyueshenqing.html";
+            }
+
+
+            function datAddselect(){
+
+            }
+            
+            function getDateNum(){
+                var dateNum = $("#dataDif").text();
+                alert(dateNum);
+            }
+        </script>
+    </body>
+</html>
