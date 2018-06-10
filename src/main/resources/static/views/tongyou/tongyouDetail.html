@@ -306,6 +306,7 @@ seajs.use('modules/www/travel/detail.js');
               type: 'post',
               success:function(res){
                   if (res.code===200) {
+                      debugger;
                      if(res.data){
                          var toVisitor = res.data.toVisitor;
                          var visitor = res.data.visitor;
@@ -324,9 +325,13 @@ seajs.use('modules/www/travel/detail.js');
                              var messageInfoHtml="";
                              messageInfoHtml+='<img class="head" src="\''+toVisitor.picture+'\'" alt="" />';
                              messageInfoHtml+='<div class="hd"> <p>';
-                             messageInfoHtml+=visitor.name;
+                             if(visitor){
+                                 messageInfoHtml+=visitor.name;
+                             }
                              messageInfoHtml+='<span class="sex male"> </span> </p><span class="location">';
-                             messageInfoHtml+=visitor.city;
+                             if(visitor) {
+                                 messageInfoHtml += visitor.city;
+                             }
                              messageInfoHtml+='</span> </div> <div class="bd"><h1 class="title">';
                              messageInfoHtml+= allMessage;
                              messageInfoHtml+='<span class="state finish">';

@@ -61,9 +61,9 @@ public class ToVisitorController {
         Visitor visitor = visitorServcie.selectByUid(toVisitor.getVisitorid());
         List<MyVisitor> myVisitorList = myVisitorService.queryByToUid(toVisitor.getUuid());
         Map map = new HashMap();
-        map.put("同游信息",toVisitor);
-        map.put("该用户信息",visitor);
-        map.put("报名的同游用户信息",myVisitorList);
+        map.put("toVisitor",toVisitor);
+        map.put("visitor",visitor);
+        map.put("myVisitorList",myVisitorList);
         return ResponseMessage.ok("同游集合信息",map);
     }
 
