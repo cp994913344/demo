@@ -5,9 +5,9 @@ var loginFun = function(){
         success: function (_res) {
             console.log(_res);
             if (_res.code===200) {
+                $("#pl-login-info").removeClass("displayNone");
                 $("#login_user_name").text(_res.message);
                 $("#topUserImage").attr("src","123");
-                $("#pl-login-info").removeClass("displayNone");
                 userName=_res.message;
             } else if (_res.code===500) {
                 $("#loginDiv").removeClass("displayNone");

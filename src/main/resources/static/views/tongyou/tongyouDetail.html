@@ -307,8 +307,11 @@ seajs.use('modules/www/travel/detail.js');
               success:function(res){
                   if (res.code===200) {
                      if(res.data){
-                         //if(res.data.toVisitor){
-                             var toVisitor = res.data;
+                         var toVisitor = res.data;
+                         var visitor = res.visitor;
+                         var myVisitorList = res.myVisitorList;
+                     }
+                         if(res.data.toVisitor){
                              var stateName= "结伴中";
                              if(toVisitor.status=="0"){
                                  stateName= "停止结伴";
@@ -321,9 +324,9 @@ seajs.use('modules/www/travel/detail.js');
                              var messageInfoHtml="";
                              messageInfoHtml+='<img class="head" src="\''+toVisitor.picture+'\'" alt="" />';
                              messageInfoHtml+='<div class="hd"> <p>';
-                             messageInfoHtml+='征途奇兵';
+                             messageInfoHtml+=visitor.name;
                              messageInfoHtml+='<span class="sex male"> </span> </p><span class="location">';
-                             messageInfoHtml+=' 四川 • 成都，80后';
+                             messageInfoHtml+=visitor.city;
                              messageInfoHtml+='</span> </div> <div class="bd"><h1 class="title">';
                              messageInfoHtml+= allMessage;
                              messageInfoHtml+='<span class="state finish">';
@@ -337,9 +340,11 @@ seajs.use('modules/www/travel/detail.js');
                              messageInfoHtml+='  </p> </li> </ul> </div> <div class="detail"><div class="hd"> 结伴详情 </div> <div class="bd">';
                              messageInfoHtml+= toVisitor.details;
                              messageInfoHtml+='<p class="contact-off" id="phoneWay">联系方式报名后可见</p>';
-                             messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span><span>';
-                             messageInfoHtml+='<img src="../../images/65768.png" alt="" />' ;
-                             messageInfoHtml+=  '</span></div> <div class="btn"> <a href="javascript:" class="send" onclick="openSub()">报名参加</a> </div> </div>';
+                             messageInfoHtml+='</div> <div class="ft"></div> <span class="line"></span> </div> <div class="join"> <span>参与的人：</span>';
+                             for(var i=0;i<myVisitorList.length;i++){
+                                 messageInfoHtml+='<span><img src="'+myVisitorList[i].withphoto+'" alt="" /></span>' ;
+                             }
+                             messageInfoHtml+=   '</div> <div class="btn"> <a href="javascript:" class="send" onclick="openSub()">报名参加</a> </div> </div>';
                              messageInfoHtml+=' <a class="launch" href="/views/tongyou/createtoungyou.html"  rel="nofollow"> <span class="plus"></span>发起同游 </a>';
                              $("#messageInfo") .html(messageInfoHtml)
                        //  }
