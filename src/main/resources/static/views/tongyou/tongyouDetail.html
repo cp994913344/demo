@@ -307,9 +307,9 @@ seajs.use('modules/www/travel/detail.js');
               success:function(res){
                   if (res.code===200) {
                      if(res.data){
-                         var toVisitor = res.data;
-                         var visitor = res.visitor;
-                         var myVisitorList = res.myVisitorList;
+                         var toVisitor = res.data.toVisitor;
+                         var visitor = res.data.visitor;
+                         var myVisitorList = res.data.myVisitorList;
                      }
                          if(res.data.toVisitor){
                              var stateName= "结伴中";

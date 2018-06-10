@@ -98,77 +98,42 @@
             <div class="hd">结伴同游</div>
             <div class="bd">
                 <div class="mod-create">
-                                    <table class="table" cellspacing="0">
-                        <tr class="create-hd">
-                            <td class="detail" colspan="2">
-                                03月17日 南京到北京 4日游 求结伴同游                        </td>
-                            <td class="date" colspan="2">
-                                2016-03-08                        </td>
-                        </tr>
-                        <tr class="create-bd">
-                            <td width="37%">
-                                <dl>
-                                    <dt>出发时间<span>（共1天）</span></dt>
-                                    <dd class="time">
-                                         2016-03-17<span class="to">至</span>2016-03-18                                </dd>
-                                </dl>
-                            </td>
-                            <td width="23%">
-                                <dl>
-                                    <dt>行程路线</dt>
-                                    <dd class="termini">南京~北京</dd>
-                                </dl>
-                            </td>
-                            <td width="16%">
-                                <dl>
-                                    <dt>参加人数</dt>
-                                    <dd>1<span>/</span>2</dd>
-                                </dl>
-                            </td>
-                            <td class="btn">
-                                <a class="submit" value="" href='http://www.liantu.cn/tongyou/115.html'>查看详情</a>
-                                                            <a href="javascript:;" class="delete" data-id="115">删除</a>
-                                <span class="divide">|</span>
-                                <a href="javascript:;" data-src="member_travel_edit.html?tid=115" class="edit">编辑</a>
-                                                        </td>
-                        </tr>
-                    </table>
-                                    <table class="table" cellspacing="0">
-                        <tr class="create-hd">
-                            <td class="detail" colspan="2">
-                                03月17日 南京到北京 4日游 求结伴同游                        </td>
-                            <td class="date" colspan="2">
-                                2016-03-08                        </td>
-                        </tr>
-                        <tr class="create-bd">
-                            <td width="37%">
-                                <dl>
-                                    <dt>出发时间<span>（共4天）</span></dt>
-                                    <dd class="time">
-                                         2016-03-17<span class="to">至</span>2016-03-21                                </dd>
-                                </dl>
-                            </td>
-                            <td width="23%">
-                                <dl>
-                                    <dt>行程路线</dt>
-                                    <dd class="termini">南京~北京</dd>
-                                </dl>
-                            </td>
-                            <td width="16%">
-                                <dl>
-                                    <dt>参加人数</dt>
-                                    <dd>1<span>/</span>2</dd>
-                                </dl>
-                            </td>
-                            <td class="btn">
-                                <a class="submit" value="" href='http://www.liantu.cn/tongyou/114.html'>查看详情</a>
-                                                            <a href="javascript:;" class="delete" data-id="114">删除</a>
-                                <span class="divide">|</span>
-                                <a href="javascript:;" data-src="/member/travel/edit/?tid=114" class="edit">编辑</a>
-                                                        </td>
-                        </tr>
-                    </table>
-                                </div>
+                    <table class="table" cellspacing="0">
+        <tr class="create-hd">
+            <td class="detail" colspan="2">
+                03月17日 南京到北京 4日游 求结伴同游                        </td>
+            <td class="date" colspan="2">
+                2016-03-08                        </td>
+        </tr>
+        <tr class="create-bd">
+            <td width="37%">
+                <dl>
+                    <dt>出发时间<span>（共4天）</span></dt>
+                    <dd class="time">
+                         2016-03-17<span class="to">至</span>2016-03-21                                </dd>
+                </dl>
+            </td>
+            <td width="23%">
+                <dl>
+                    <dt>行程路线</dt>
+                    <dd class="termini">南京~北京</dd>
+                </dl>
+            </td>
+            <td width="16%">
+                <dl>
+                    <dt>参加人数</dt>
+                    <dd>1<span>/</span>2</dd>
+                </dl>
+            </td>
+            <td class="btn">
+                <a class="submit" value="" href='http://www.liantu.cn/tongyou/114.html'>查看详情</a>
+                                            <a href="javascript:;" class="delete" data-id="114">删除</a>
+                <span class="divide">|</span>
+                <a href="javascript:;" data-src="/member/travel/edit/?tid=114" class="edit">编辑</a>
+                                        </td>
+        </tr>
+    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -229,23 +194,79 @@
 <script type="text/javascript" src="/js/jquery.min.2.1.1.js" ></script>
 <script type="text/javascript" src="/js/jquery-form.js" ></script>
 <script type="text/javascript" src="/js/all_common.js" ></script>
+<script src="/js/jquery.cookie.js"></script>
 <script src="/js/layer/layer.js"></script>
 <script type="text/javascript">
     var userName;
     loginFun();
-    function saveFile(){
+    window.onload = function saveFile(){
         $.ajax({
             url: '/file/uploadPhoto',
             data:{"filename": $("#j-curimg").attr("src")},
             type: 'post',
             success: function (_res) {
                 if (_res.code===200) {
-                    layer.msg('保存成功!');
+                 var   tableHtml = "";
+                    tableHtml+='<table class="table" cellspacing="0">';
+                    tableHtml+='<tr class="create-hd"><td class="detail" colspan="2">';
+                    tableHtml+='03月17日 南京到北京 4日游 求结伴同游';
+                    tableHtml+='</td> <td class="date" colspan="2">';
+                    tableHtml+='2016-03-08   ';
+                    tableHtml+='</td> </tr> <tr class="create-bd"> <td width="37%"> <dl> <dt>出发时间<span>（共';
+                    tableHtml+='1';
+                    tableHtml+='）天';
+                    tableHtml+='</span></dt><dd class="time">';
+                    tableHtml+='2016-03-17';
+                    tableHtml+=' </dd>';
+                    tableHtml+='</dl> </td> <td width="23%"> <dl> <dt>行程路线</dt> <dd class="termini">';
+                    tableHtml+='南京~北京';
+                    tableHtml+='</dd> </dl> </td> <td width="16%"> <dl> <dt>参加人数</dt> <dd>';
+                    tableHtml+='1';
+                    tableHtml+='<span>/</span>';
+                    tableHtml+='2';
+                    tableHtml+='  </dd> </dl> </td> <td class="btn">';
+                    tableHtml+='<a class="submit" value="" onclick="toDetailed()">查看详情</a>';
+                    tableHtml+='<a  class="delete" onclick="deleteData()">删除</a>';
+                    tableHtml+=' <span class="divide">|</span>';
+                    tableHtml+='<a onclick="updateData()" class="edit">编辑</a>';
+                    tableHtml+='</td> </tr> </table>';
                 } else if (_res.code===500) {
                     layer.msg('保存失败!');
                 }
             }
         });
+    }
+
+    function toDetailed(mainId){
+        Cookies.set("tongyouMainId",mainId);
+        location.href="/views/tongyou/tongyouDetail.html";
+    }
+
+    function deleteData(mainId) {
+        Cookies.set("tongyouMainId",mainId);
+        layer.confirm('是否真的要删除？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: '/file/uploadPhoto',
+                data:{"toVisitorId": mainId},
+                type: 'post',
+                success: function (_res) {
+                    if (_res.code===200) {
+                        layer.msg(res.message);
+                    } else if (_res.code===500) {
+                        layer.msg('删除失败!');
+                    }
+                }
+            });
+        }, function(){
+            layer.close();
+        });
+    }
+    function updateData(mainid){
+        Cookies.set("updatetongyouMainId",mainId);
+
+        location.href="/views/tongyou/updatetoungyou.html"
     }
 </script>
 </body>
