@@ -3,17 +3,13 @@ package com.ljs.demo.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ljs.demo.Service.ScenicService;
-import com.ljs.demo.Service.StrategyService;
-import com.ljs.demo.Service.ToVisitorService;
+import com.ljs.demo.Service.*;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
 import com.ljs.demo.common.response.ResponseMessage;
 import com.ljs.demo.common.utils.StaticClass;
-import com.ljs.demo.pojo.domain.Scenic;
-import com.ljs.demo.pojo.domain.Strategy;
-import com.ljs.demo.pojo.domain.ToVisitor;
-import com.ljs.demo.pojo.domain.Visitor;
+import com.ljs.demo.pojo.domain.*;
+
 import java.util.Date;
 
 import lombok.Data;
@@ -47,19 +43,28 @@ public class ToVisitorController {
     @Autowired
     RedisClient redisClient;
 
+    @Autowired
+    VisitorServcie visitorServcie;
+
+    @Autowired
+    MyVisitorService myVisitorService;
+
     /**
-     * 根据ID查询同游
+     * 根据ID查询同游详情
      *
      * @return tovisitorid
      */
     @RequestMapping(value = "/selectById")
     public ResponseMessage selectById(@RequestParam("tovisitorid") Integer tovisitorid){
+        log.info("|对外接口|入参[{}]", tovisitorid);
         ToVisitor toVisitor = toVisitorService.selectByPrimaryKey(tovisitorid);
-        log.info("|对外接口|返回参数[{}]", toVisitor);
-        if(toVisitor == null){
-            return ResponseMessage.error("查询失败");
-        }
-        return ResponseMessage.ok("查询成功",toVisitor);
+        Visitor visitor = visitorServcie.selectByUid(toVisitor.getVisitorid());
+        List<MyVisitor> myVisitorList = myVisitorService.queryByToUid(toVisitor.getUuid());
+        Map map = new HashMap();
+        map.put("同游信息",toVisitor);
+        map.put("该用户信息",visitor);
+        map.put("报名的同游用户信息",myVisitorList);
+        return ResponseMessage.ok("同游集合信息",map);
     }
 
     /**

@@ -2,7 +2,9 @@ package com.ljs.demo.pojo.mapper;
 
 
 import com.ljs.demo.pojo.domain.ToVisitor;
+import com.ljs.demo.pojo.domain.Visitor;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

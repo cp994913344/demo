@@ -113,7 +113,7 @@
           <div>
              <select id="s_province" name="s_province" style="width: 80px;height: 30px;"></select>  
              <select id="s_city" name="s_city" style="width: 80px;height: 30px;"></select>  
-             <select id="s_county" name="s_county" style="width: 80px;height: 30px;"></select>
+             <!--<select id="s_county" name="s_county" style="width: 80px;height: 30px;"></select>-->
           </div>
           <div id="show"></div>
        </div>
@@ -220,8 +220,8 @@
       var Gid  = document.getElementById ;
       var showArea = function(){
          Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
-             Gid('s_city').value + " - 县/区" +
-              Gid('s_county').value + "</h3>"
+             Gid('s_city').value /*+ " - 县/区" +
+              Gid('s_county').value +*/ "</h3>"
       }
       loginFun();
       window.onload= function(){
@@ -274,14 +274,14 @@
                                       }
                                   })
                               }
-                              change(2);
+                              /*change(2);
                               if(cityS[2]){
                                   $("#s_county option").each(function(){
                                       if($(this).text()==cityS[2]){
                                           $(this).attr("selected","selected");
                                       }
                                   })
-                              }
+                              }*/
                           }
                       }
                   } else if (_res.code===500) {
@@ -302,8 +302,8 @@
          var age = $("#ageSelect").val();
          var s_province = $("#s_province").val();
          var s_city = $("#s_city").val();
-         var s_county = $("#s_county").val();
-          s_province=s_province+","+s_city+","+s_county;
+         //var s_county = $("#s_county").val();
+          s_province=s_province+","+s_city/*+","+s_county*/;
           var myreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
           var phoneText = /^1[3|5|8]\d{9}$/;
          if(!name||name.length<=2){

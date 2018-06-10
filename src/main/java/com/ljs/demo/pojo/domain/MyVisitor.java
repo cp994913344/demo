@@ -79,4 +79,11 @@ public class MyVisitor implements Serializable{
      */
     private String visitorid;
 
+    /**
+     * 同游表外键
+     */
+    private String tovisitorid;
+
+    private Integer status;
+
 }
