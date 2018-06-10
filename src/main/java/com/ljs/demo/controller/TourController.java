@@ -53,9 +53,12 @@ public class TourController {
      * @return
      */
     @RequestMapping(value = "/selectById")
-    public ResponseMessage selectById(){
-        Tour tour = tourService.selectByPrimaryKey(1);
+    public ResponseMessage selectById(@RequestParam("id") Integer tourid){
+        TourVo tour = tourService.selectByPrimaryKey(tourid);
         log.info("|对外接口|返回参数[{}]", tour);
+        List<ServiceInfo> serviceInfoList = serviceInfoService.queryByTourUID(tour.getUuid());
+        log.info(String.valueOf(serviceInfoList));
+        tour.setServiceList(serviceInfoList);
         return ResponseMessage.ok("",tour);
     }
 

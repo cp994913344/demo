@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface TourService {
 
-    Tour selectByPrimaryKey(Integer id);
+    TourVo selectByPrimaryKey(Integer id);
 
     int insertTour(Tour tour);
 

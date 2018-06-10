@@ -13,4 +13,6 @@ public interface ServiceInfoService {
     List<ServiceInfo> queryAllService();
 
     List<String> queryByTourUid(String tourUid);
+
+    List<ServiceInfo> queryByTourUID(String tourUid);
 }
