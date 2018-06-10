@@ -108,20 +108,21 @@ location.href = TU.mobile_agent;
               return;
           }
           $.ajax({
-              url:'',
+              url:'/myvisitor/insertMyvisitor',
               data:{
                   'tovisitorid':mainId,
-                  'area':area,
-                  'phone':phone,
-                  'message':message
+                  'withcity':area,
+                  'withphone':phone,
+                  'withinfo':message
               },
               type: 'post',
               success:function(res){
                   if (res.code===200) {
-                     if(res.data){
-                         var index = parent.layer.getFrameIndex(window.name);
-                         setTimeout(function(){parent.layer.close(index)}, 1000);
-                     }
+                      alert(res.message);
+                      layer.msg(res.message);
+                      var index = parent.layer.getFrameIndex(window.name);
+                      setTimeout(function(){parent.layer.close(index)}, 1000);
+                      parent.location.href = '/toMemberInfo';
                   } else if (res.code===500) {
                       layer.msg(res.message);
                   }

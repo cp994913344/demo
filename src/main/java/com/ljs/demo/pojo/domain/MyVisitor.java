@@ -84,6 +84,8 @@ public class MyVisitor implements Serializable{
      */
     private String tovisitorid;
 
-    private Integer status;
+    private Integer status;//1 待审核 2审核通过
+
+    private String withinfo;//备注
 
 }
