@@ -12,9 +12,10 @@
     <result column="VISITORID" property="visitorid" jdbcType="VARCHAR"/>
     <result column="TOVISITORID" property="tovisitorid" jdbcType="VARCHAR"/>
     <result column="STATUS" property="status" jdbcType="INTEGER"/>
+    <result column="WITHINFO" property="withinfo" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO,TOVISITORID,STATUS
+    MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO,TOVISITORID,STATUS,WITHINFO
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,10 +30,10 @@
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR (MYVISITORID, UUID, WITHNAME, 
       WITHPHONE, WITHSEX, WITHCITY, 
-      WITHPHOTO,VISITORID,TOVISITORID,STATUS)
+      WITHPHOTO,VISITORID,TOVISITORID,STATUS,WITHINFO)
     values (#{myvisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{withname,jdbcType=VARCHAR}, 
       #{withphone,jdbcType=VARCHAR}, #{withsex,jdbcType=VARCHAR}, #{withcity,jdbcType=VARCHAR}, 
-      #{withphoto,jdbcType=VARCHAR}),#{visitorid,jdbcType=VARCHAR},#{tovisitorid,jdbcType=VARCHAR},#{status,jdbcType=INTEGER})
+      #{withphoto,jdbcType=VARCHAR},#{visitorid,jdbcType=VARCHAR},#{tovisitorid,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{withinfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR
@@ -67,6 +68,9 @@
       <if test="status != null" >
         STATUS,
       </if>
+      <if test="withinfo !=NULL">
+        WITHINFO,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="myvisitorid != null" >
@@ -98,6 +102,9 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="withinfo != null" >
+        #{withinfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -131,6 +138,9 @@
       <if test="status != null" >
         STATUS = #{status,jdbcType=INTEGER},
       </if>
+      <if test="withinfo != null" >
+        WITHINFO = #{withinfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
   </update>
@@ -144,7 +154,8 @@
       WITHPHOTO = #{withphoto,jdbcType=VARCHAR},
       VISITORID = #{visitorid,jdbcType=VARCHAR},
       TOVISITORID = #{tovisitorid,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=VARCHAR}
+      STATUS = #{status,jdbcType=INTEGER}
+      WITHINFO = #{withinfo,jdbcType=VARCHAR}
     where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
   </update>
 

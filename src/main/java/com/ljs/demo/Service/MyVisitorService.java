@@ -11,4 +11,6 @@ public interface MyVisitorService {
     MyVisitor selectByPrimaryKey(Integer id);
 
     List<MyVisitor> queryByToUid(String toUid);
+
+    int insert(MyVisitor myVisitor);
 }

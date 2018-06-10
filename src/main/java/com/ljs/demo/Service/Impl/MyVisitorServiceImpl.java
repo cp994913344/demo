@@ -25,4 +25,9 @@ public class MyVisitorServiceImpl implements MyVisitorService {
     public List<MyVisitor> queryByToUid(String toUid) {
         return myVisitorMapper.queryByToUid(toUid);
     }
+
+    @Override
+    public int insert(MyVisitor myVisitor) {
+        return myVisitorMapper.insert(myVisitor);
+    }
 }
