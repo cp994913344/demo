@@ -73,5 +73,6 @@ public interface TourMapper {
 
     int tourPass(@Param("id") Integer id);
 
+    Tour queryByVisitorUid(@Param("uuid") String uuid);
 
 }

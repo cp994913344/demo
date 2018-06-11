@@ -24,4 +24,6 @@ public interface TourService {
     int deleteTour(Integer id);
 
     int tourPass(Integer id);
+
+    Tour queryByVisitorUid(String uuid);
 }

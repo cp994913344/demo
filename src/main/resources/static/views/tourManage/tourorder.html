@@ -92,7 +92,7 @@ function getCityData(currentPage){
 		type:"post",
 		url:"",
 		data:{"page":currentPage},
-		dataType:"json"
+		dataType:"json",
 		success:function(_res){
 			var str = "";
 			for(var i=0;i<_res.data.pageTotle.length;i++){

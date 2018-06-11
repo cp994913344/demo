@@ -443,4 +443,7 @@
   <update id="tourPass" parameterType="java.lang.Integer">
     UPDATE TOUR SET STATUS = "1" WHERE TOURID = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryByVisitorUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM TOUR WHERE VISITORID = #{uuid,jdbcType = VARCHAR}
+  </select>
 </mapper>

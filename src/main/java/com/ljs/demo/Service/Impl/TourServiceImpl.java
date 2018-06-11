@@ -56,4 +56,9 @@ public class TourServiceImpl implements TourService {
     public int tourPass(Integer id) {
         return tourMapper.tourPass(id);
     }
+
+    @Override
+    public Tour queryByVisitorUid(String uuid) {
+        return tourMapper.queryByVisitorUid(uuid);
+    }
 }
