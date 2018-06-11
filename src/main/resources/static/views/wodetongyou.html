@@ -38,13 +38,10 @@
                             <a href="/toMemberInfo">个人信息</a>
                         </li>
                         <li>
-                            <a href="http://my.liantu.cn/member/order/">我的订单</a>
+                            <a href="/views/tourOrder.html">我的订单</a>
                         </li>
                         <li>
                             <a href="/views/wodetongyou.html">我的同游</a>
-                        </li>
-                        <li class="d-m">
-                            <a href="http://my.liantu.cn/member/account/">我的钱包</a>
                         </li>
                         <li class="d-pc">
                             <a onclick="loginOut()">退出</a>
@@ -73,26 +70,16 @@
                 </p>
             </div>
             <ul class="menu">
-                <li>
-                    <a href="/toMemberInfo" class="info">基本信息</a>
-
+                <li> <a href="/toMemberInfo" class="info">基本信息</a>
                     <div class="sub-menu">
                         <p><a href="/toMemberAvatar" class="sc2">更换头像</a></p>
-
                         <p><a href="/toUpdatePassword" class="sc2">修改密码</a></p>
-                    </div>
-                </li>
-                <li>
-                    <a href="/member/order/" class="order">我的订单</a>
-                </li>
-                <li>
-                    <a href="/member/account/" class="wallet">我的钱包</a>
-                </li>
-                <li>
-                    <a href="/views/wodetongyou.html" class="gowith">我的同游</a>
-                </li>
-            </ul>
+                    </div> </li>
 
+                <li> <a href="/totourOrder" class="order">我的订单</a> </li>
+                <li> <a href="/towallet" class="wallet">我的钱包</a> </li>
+                <li> <a href="/towith" class="gowith">结伴同游</a> </li>
+            </ul>
         </div>
         <div class="content">
             <div class="hd">结伴同游</div>
@@ -225,11 +212,9 @@
                     tableHtml+='<table class="table" cellspacing="0">';
                     tableHtml+='<tr class="create-hd"><td class="detail" colspan="2">';
                     var date = new Date(_res.data.date);
-
                     var Y = date.getFullYear() + '-';
                     var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
                     var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
-
                     tableHtml+=_res.data.title;
                     tableHtml+='</td> <td class="date" colspan="2">';
                     tableHtml+=Y+M+D;
@@ -239,11 +224,7 @@
                     tableHtml+='</span></dt><dd class="time">';
                     tableHtml+=Y+M+D;
                     tableHtml+='至';
-
-
-
                     var date1 = new Date(_res.data.date+(_res.data.timenum*24*3600*1000));
-
                     var Y1 = date1.getFullYear() + '-';
                     var M1 = (date1.getMonth()+1 < 10 ? '0'+(date1.getMonth()+1) : date1.getMonth()+1) + '-';
                     var D1 = (date1.getDate() < 10 ? '0' + (date1.getDate()) : date1.getDate()) + ' ';
@@ -257,14 +238,13 @@
                     tableHtml+='<span>/</span>';
                     tableHtml+=_res.data.part;
                     tableHtml+='  </dd> </dl> </td> <td class="btn">';
-                    tableHtml+='<a class="submit" value="" onclick="toDetailed()">查看详情</a>';
-                    tableHtml+='<a  class="delete" onclick="deleteData()">删除</a>';
+                    tableHtml+='<a class="submit" value="" onclick="toDetailed(\''+_res.data.tovisitorid+'\')">查看详情</a>';
+                    tableHtml+='<a  class="delete" onclick="deleteData(\''+_res.data.tovisitorid+'\')">删除</a>';
                     tableHtml+=' <span class="divide">|</span>';
-                    tableHtml+='<a onclick="updateData()" class="edit">编辑</a>';
+                    tableHtml+='<a onclick="updateData(\''+_res.data.tovisitorid+'\')" class="edit">编辑</a>';
                     tableHtml+='</td> </tr> </table>';
                     $('.table').html(tableHtml);
                 } else if (_res.code===500) {
-                    layer.msg('保存失败!');
                 }
             }
         });
@@ -298,7 +278,6 @@
     }
     function updateData(mainid){
         Cookies.set("updatetongyouMainId",mainId);
-
         location.href="/views/tongyou/updatetoungyou.html"
     }
 </script>
