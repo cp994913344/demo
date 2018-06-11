@@ -26,7 +26,7 @@
             </div>
             <div class="login pl-login-info displayNone" id="pl-login-info" >
                 <div class="user" >
-                    <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id="selectImg" alt="cp" width="40" height="40">
+                    <img src="http://static.liantu.cn/image/public/man_100x100.jpg" id="topUserImage" id = "topUserImage" alt="cp" width="40" height="40">
                     <span class="name" id="login_user_name"></span>
                     <span class="ico"></span>
                 </div>
@@ -69,7 +69,7 @@
     <div class="wrap">
         <div class="side">
             <div class="avatar">
-                <img src="http://static.liantu.cn/image/public/man_160x160.jpg" alt="用户中心"/>
+                <img src="http://static.liantu.cn/image/public/man_160x160.jpg" id="atopUserImage" alt="用户中心"/>
                 </p>
             </div>
             <ul class="menu">
@@ -197,39 +197,72 @@
 <script src="/js/jquery.cookie.js"></script>
 <script src="/js/layer/layer.js"></script>
 <script type="text/javascript">
+
+    $(function(){
+        $.ajax({
+            type:"post",
+            url:"/visitor/getVisitor",
+            success:function(_res){
+                if(_res.code == "200") {
+                    $('#topUserImage').attr('src', _res.data.sculpture);
+                    $('#atopUserImage').attr('src', _res.data.sculpture);
+                    console.log(_res);
+                }
+            }
+        });
+    });
+
     var userName;
     loginFun();
-    window.onload = function saveFile(){
+    window.onload = function getTripToghterData(){
         $.ajax({
-            url: '/file/uploadPhoto',
-            data:{"filename": $("#j-curimg").attr("src")},
+            url: '/tovisitor/queryByVisitorId',
             type: 'post',
             success: function (_res) {
+                console.log(_res);
                 if (_res.code===200) {
                  var   tableHtml = "";
                     tableHtml+='<table class="table" cellspacing="0">';
                     tableHtml+='<tr class="create-hd"><td class="detail" colspan="2">';
-                    tableHtml+='03月17日 南京到北京 4日游 求结伴同游';
+                    var date = new Date(_res.data.date);
+
+                    var Y = date.getFullYear() + '-';
+                    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+
+                    tableHtml+=_res.data.title;
                     tableHtml+='</td> <td class="date" colspan="2">';
-                    tableHtml+='2016-03-08   ';
+                    tableHtml+=Y+M+D;
                     tableHtml+='</td> </tr> <tr class="create-bd"> <td width="37%"> <dl> <dt>出发时间<span>（共';
-                    tableHtml+='1';
+                    tableHtml+=_res.data.timenum;
                     tableHtml+='）天';
                     tableHtml+='</span></dt><dd class="time">';
-                    tableHtml+='2016-03-17';
+                    tableHtml+=Y+M+D;
+                    tableHtml+='至';
+
+
+
+                    var date1 = new Date(_res.data.date+(_res.data.timenum*24*3600*1000));
+
+                    var Y1 = date1.getFullYear() + '-';
+                    var M1 = (date1.getMonth()+1 < 10 ? '0'+(date1.getMonth()+1) : date1.getMonth()+1) + '-';
+                    var D1 = (date1.getDate() < 10 ? '0' + (date1.getDate()) : date1.getDate()) + ' ';
+
+                    tableHtml+=Y1+M1+D1;
                     tableHtml+=' </dd>';
                     tableHtml+='</dl> </td> <td width="23%"> <dl> <dt>行程路线</dt> <dd class="termini">';
-                    tableHtml+='南京~北京';
+                    tableHtml+=_res.data.departure+'~'+_res.data.destination;
                     tableHtml+='</dd> </dl> </td> <td width="16%"> <dl> <dt>参加人数</dt> <dd>';
-                    tableHtml+='1';
+                    tableHtml+=_res.data.presentpart;
                     tableHtml+='<span>/</span>';
-                    tableHtml+='2';
+                    tableHtml+=_res.data.part;
                     tableHtml+='  </dd> </dl> </td> <td class="btn">';
                     tableHtml+='<a class="submit" value="" onclick="toDetailed()">查看详情</a>';
                     tableHtml+='<a  class="delete" onclick="deleteData()">删除</a>';
                     tableHtml+=' <span class="divide">|</span>';
                     tableHtml+='<a onclick="updateData()" class="edit">编辑</a>';
                     tableHtml+='</td> </tr> </table>';
+                    $('.table').html(tableHtml);
                 } else if (_res.code===500) {
                     layer.msg('保存失败!');
                 }

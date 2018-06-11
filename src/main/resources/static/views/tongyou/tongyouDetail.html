@@ -319,8 +319,8 @@ seajs.use('modules/www/travel/detail.js');
               },
               type: 'post',
               success:function(res){
+                  console.log(res);
                   if (res.code===200) {
-                      debugger;
                      if(res.data){
                          var toVisitor = res.data.toVisitor;
                          var visitor = res.data.visitor;
@@ -338,7 +338,7 @@ seajs.use('modules/www/travel/detail.js');
                              var allMessage =pageDate+'  '+toVisitor.departure+' 到 '+toVisitor.destination+' '+toVisitor.timenum+'日游'+' '+stateName
                              var messageInfoHtml="";
                              if(visitor) {
-                                 messageInfoHtml += '<img class="head" src="\'' + toVisitor.picture + '\'" alt="" />';
+                                 messageInfoHtml += '<img class="head" src=" ' + toVisitor.picture + ' " alt="" />';
                              }
                              messageInfoHtml+='<div class="hd"> <p>';
                              if(visitor){
