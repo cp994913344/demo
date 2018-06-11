@@ -244,5 +244,9 @@ public class MainController {
         return "tourManage/TourIndex";
     }
 
+    @GetMapping(value = "/totourOrder")
+    public String totourOrder(){
+        return "tourOrder";
+    }
 
 }
