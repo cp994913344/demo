@@ -89,7 +89,7 @@ public class TourController {
         tour.setVisitorid(vi.getUuid());
         tour.setCityinfoid(cityuuid);
         tour.setStatus("0");//0 待审核
-        tour.setStatus("1");
+        tour.setState(1);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = simpleDateFormat.parse(birthday);

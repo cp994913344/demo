@@ -239,5 +239,10 @@ public class MainController {
         return "wodetongyou";
     }
 
+    @GetMapping(value = "/tourManage")
+    public String tourManage(){
+        return "tourManage/TourIndex";
+    }
+
 
 }

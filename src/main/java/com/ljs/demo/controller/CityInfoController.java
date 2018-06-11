@@ -153,16 +153,15 @@ public class CityInfoController {
 
     /**
      * 管理员插入城市
-     * @param filename
      * @param cityinfo
      * @return
      */
     @RequestMapping(value = "/insertCity")
-    public ResponseMessage insertCity(@RequestParam("filename") String filename, Cityinfo cityinfo){
-        log.info("接口传入数据cityinfoid|[{}]|",cityinfo,filename);
+    public ResponseMessage insertCity(Cityinfo cityinfo){
+        log.info("接口传入数据cityinfoid|[{}]|",cityinfo);
         cityinfo.setUuid(GetUuid.uuid);
         cityinfo.setStatus(0);
-        int i = cityinfoService.insertSelective(cityinfo);
-        return ResponseMessage.ok("i");
+        cityinfoService.insertSelective(cityinfo);
+        return ResponseMessage.ok("添加成功");
     }
 }

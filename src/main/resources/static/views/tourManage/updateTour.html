@@ -47,7 +47,7 @@
 			type:"post",
 			url:"",
 			data:{"tourid":tourid},
-			datatype:"json"
+			datatype:"json",
 			async:false,
 			success:function(_res){
 				$("#realname").val(_res.data.pageTotle.realname);
@@ -119,9 +119,9 @@
 <td><div class="txtbox floatL"><input style="width:210px;" id="cityservice" type="text" size="5"></div></td>
 </tr>
 <tr>
-<th width="100">历史预约量 <span class="f_cB">*</span></th>
+<!--<th width="100">历史预约量 <span class="f_cB">*</span></th>
 <td><div class="txtbox floatL"><input style="width:210px;" id="subscribe" readonly="readonly" type="text" size="5"></div></td>
-</tr>
+</tr>-->
 <tr>
 <th width="100">手机号 <span class="f_cB">*</span></th>
 <td><div class="txtbox floatL"><input style="width:210px;" id="phone" type="text" size="5" ></div></td>

@@ -56,7 +56,6 @@
 <th>邮箱</th>
 <th>历史预约量</th>
 <th>好评率</th>
-<th>导游简介</th>
 <th>状态</th>
 <th>身份</th>
 <th>操作</th>
@@ -109,7 +108,7 @@ function getTourData(currentPage){
 				str += "<td>"+_res.data.pageTotle[i].email+"</td>";
 				str += "<td>"+_res.data.pageTotle[i].subscribe+"</td>";
 				str += "<td>"+_res.data.pageTotle[i].appraise+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].tovisitorinfo+"</td>";
+				//str += "<td>"+_res.data.pageTotle[i].tovisitorinfo+"</td>";
 				if(_res.data.pageTotle[i].state == "1" || _res.data.pageTotle[i].state == 1){
 					str += "<td>精选导游</td>";
 				}

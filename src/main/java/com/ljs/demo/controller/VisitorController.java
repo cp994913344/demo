@@ -125,6 +125,7 @@ public class VisitorController {
                 visitor.setEmail(email);
                 visitor.setPassword(password);
                 visitor.setName(StaticClass.LOGIN_NAME+email);
+                visitor.setState(0);
                 log.info("|对外接口|入参[{}]", visitor);
                 int i = visitorServcie.register(visitor);
                 if (i > 0) {
