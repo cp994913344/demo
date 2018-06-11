@@ -83,62 +83,8 @@
                         <h2>我的订单</h2> 
                         <span>（共有 1 个订单）</span> 
                     </div> 
-                    <div class="mod-bd"> 
-                        <div class="mod-order"> 
-                            <div class="tb-order"> 
-                                <div class="order-hd"> 
-                                    <span class="status reject"> 等待导游接受 </span> 
-                                    <span class="tip"> ID：<em>G308291319026980</em> </span> 
-                                </div> 
-                                <table class="order-bd"> 
-                                    <thead> 
-                                        <tr> 
-                                            <th width="17%">导游/伴游</th> 
-                                            <th width="13%">服务地点</th> 
-                                            <th width="28%">服务日期</th> 
-                                            <th width="20%">订单价格</th> 
-                                            <th>&nbsp;</th> 
-                                        </tr> 
-                                    </thead> 
-                                    <tbody> 
-                                        <tr> 
-                                            <td>乔蕊</td> 
-                                            <td>北京</td> 
-                                            <td>2016-03-10 ~ 2016-03-18</td> 
-                                            <td class="td-price">￥<span class="price">200.00</span>元</td> 
-                                            <td class="text-right"> <input type="submit" class="submit cancel" data-id="68" data-status="pending" value="取消" /> </td> 
-                                        </tr> 
-                                    </tbody> 
-                                </table> 
-                                <div class="order-ft"> 
-                                    <span class="text">预定的服务：基础导游服务</span> 
-                                    <span class="btn"><a href="member_order_detail.html" target="_blank"><em></em>查看详情</a></span> 
-                                </div> 
-                                <div class="mod-box"> 
-                                    <div class="mod-detail"> 
-                                        <div class="hd"> 
-                                            <span class="day">第1天</span> 
-                                            <span class="date">（2016-03-10 星期四）</span> 
-                                        </div> 
-                                        <div class="bd"> 
-                                            <p>基础导游服务 ￥<em>100</em>元/天</p> 
-                                        </div> 
-                                    </div> 
-                                    <div class="mod-detail"> 
-                                        <div class="hd"> 
-                                            <span class="day">第2天</span> 
-                                            <span class="date">（2016-03-11 星期五）</span> 
-                                        </div> 
-                                        <div class="bd"> 
-                                            <p>基础导游服务 ￥<em>100</em>元/天</p> 
-                                        </div> 
-                                    </div> 
-                                    <div class="btn-up"> 
-                                        <a href="javascript:" title="收起">收起<i></i></a> 
-                                    </div> 
-                                </div> 
-                            </div> 
-                        </div> 
+                    <div class="mod-bd" id="dataList">
+
                     </div> 
                     <!-- page --> 
                 </div> 
@@ -250,7 +196,45 @@
         <script type="text/javascript">
             var userName;
             loginFun();
-
+            window.onload = function getTripToghterData(){
+                $.ajax({
+                    url: '',
+                    type: 'post',
+                    success: function (_res) {
+                        console.log(_res);
+                        if (_res.code===200) {
+                            var   tableHtml = "";
+                            tableHtml += '<div class="mod-order"> <div class="tb-order"> <div class="order-hd"><span class="status reject">';
+                            tableHtml += '等待导游接受';
+                            tableHtml += '</span> <span class="tip"> ID：<em>';
+                            tableHtml += 'G308291319026980';
+                            tableHtml += '</em> </span> </div> <table class="order-bd"> <thead> <tr> <th width="17%">';
+                            tableHtml += '导游/伴游';
+                            tableHtml += '</th> <th width="13%">';
+                            tableHtml += '服务地点';
+                            tableHtml += '</th> <th width="28%">';
+                            tableHtml += '服务日期';
+                            tableHtml += '</th><th width="20%"> ';
+                            tableHtml += '订单价格';
+                            tableHtml += '</th> <th>&nbsp;</th> ';
+                            tableHtml += '</tr> </thead> <tbody> <tr> <td>';
+                            tableHtml += '乔蕊';
+                            tableHtml += '</td> <td>';
+                            tableHtml += '北京';
+                            tableHtml += '</td> <td>';
+                            tableHtml += '2016-03-10 ~ 2016-03-18';
+                            tableHtml += '</td> <td class="td-price">￥<span class="price">';
+                            tableHtml += '200.00';
+                            tableHtml += ' </span>元</td>';
+                            tableHtml += ' <td class="text-right"> <input type="submit" class="submit cancel" data-id="68" data-status="pending" value="取消" /> </td> </tr> </tbody> </table> <div class="order-ft"> <span class="text">预定的服务：';
+                            tableHtml += '基础导游服务';
+                            tableHtml += '</span> <span class="btn"><a href="member_order_detail.html" target="_blank"><em></em>查看详情</a></span> </div> </div> </div> ';
+                            $('#dataList').html(tableHtml);
+                        } else if (_res.code===500) {
+                        }
+                    }
+                });
+            }
         </script>
     </body>
 </html>
