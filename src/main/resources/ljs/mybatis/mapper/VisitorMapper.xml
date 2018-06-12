@@ -225,4 +225,8 @@
   <select id="queryVisitor" resultMap="BaseResultMap">
     SELECT * FROM VISITOR
   </select>
+
+  <update id="toBeTour" parameterType="java.lang.String">
+    update VISITOR SET STATE = 1 WHERE UUID = #{uuid,jdbcType = VARCHAR}
+  </update>
 </mapper>

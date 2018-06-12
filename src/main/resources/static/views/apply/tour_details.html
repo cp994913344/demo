@@ -14,6 +14,7 @@
         <script type="text/javascript" src="/js/jquery-3.3.1.js" ></script>
         <script type="text/javascript" src="/js/ljs.js" ></script>
         <script type="text/javascript">
+
             var TU = {
                 wwwUrl: 'http://www.liantu.cn',
                 myUrl: 'http://my.liantu.cn',
@@ -34,6 +35,7 @@
         <script type="text/javascript" src="../../js/jquery.seajs.js" id="seajsnode"></script>
         <!--[if lte IE 8]>
       <script type="text/javascript">
+
       $(function(){
       var $body=$('body');
       var $window =  $(window);
@@ -342,7 +344,7 @@
                         <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15007411号-1</a> Copyright &copy; 2016 liantu.cn, All Rights Reserved stat 
                     </div> 
                 </div> 
-            </div> 
+            </div>
         </div> 
         <script type="text/javascript">
             var pl_status = 0;
@@ -364,21 +366,39 @@
         <script src="/js/page/jquery.pagination.js"></script>
         <script type="text/javascript" src="/js/ljs.js" ></script>
         <script type="text/javascript">
-            loginFun();
-            var userName = $("#login_user_name").text();
-            var tourid = Cookies.get('tourid');
+
             $(function(){
+                $.ajax({
+                    type:"post",
+                    url:"/visitor/getVisitor",
+                    success:function(_res){
+                        if(_res.code == "200") {
+                            $('#topUserImage').attr('src', _res.data.sculpture);
+                            $('#atopUserImage').attr('src', _res.data.sculpture);
+                            console.log(_res);
+                        }
+                    }
+                });
+            });
+            $(function(){
+                var userName = $("#login_user_name").text();
+                var tourid = Cookies.get('tourid');
                 if(tourid){
                     searchTour(tourid);
                 }
             });
+            loginFun();
+
+
             function searchTour(tourid){
                 $.ajax({
                     url:'/tour/selectById',
                     data:{'tourid':tourid},
                     type: 'post',
+                    data:{id:tourid},
                     dataType:"json",
                     success:function(res){
+                        console.log(res);
                         if(res.data.code = "200"){
                             var tour = res.data;
                             $("#sculpture").css("background-image","url(" + tour.sculpture + ")");
@@ -390,6 +410,7 @@
                             $("#subscribe").text(tour.subscribe);
                             $("#face").text(tour.face);
                             $("#tovisitorinfo").text(tour.tovisitorinfo);
+                            $('#sculpture').attr('src',tour.sculpture);
                             if(tour){
                                if(tour.serviceList){
                                    var serviceList = tour.serviceList;
@@ -398,17 +419,17 @@
                                        serviceListHtml+='<li data-type="base" data-base-id="6"><div class="block">';
                                        serviceListHtml+=' <img src="../../images/base.jpg" alt="基础服务" />';
                                        serviceListHtml+='<span class="cover"></span><div class="text"><span class="info">';
-                                       serviceListHtml+=serviceList[I].servicename;
+                                       serviceListHtml+=serviceList[i].servicename;
                                        serviceListHtml+=' </span>';
                                        serviceListHtml+=' <span class="name">';
-                                       serviceListHtml+=serviceList[I].serviceinfo;
+                                       serviceListHtml+=serviceList[i].serviceinfo;
                                        serviceListHtml+='</span> </div> </div> <div class="price"> <span class="num">￥';
-                                       serviceListHtml+=serviceList[I].serviceprice;
+                                       serviceListHtml+=serviceList[i].serviceprice;
                                        serviceListHtml+='</span>元/天';
                                        serviceListHtml+='<span class="ico"></span> </div> </li>';
-                                       if(serviceList[I].servicename=="基础导游服务"){
-                                           $("#servicetitle").text(serviceList[I].servicename);
-                                           $("#serviceprice").text(serviceList[I].serviceprice+"/天");
+                                       if(serviceList[i].servicename=="基础导游服务"){
+                                           $("#servicetitle").text(serviceList[i].servicename);
+                                           $("#serviceprice").text(serviceList[i].serviceprice+"/天");
                                            if(tour.owncar=="1"){
                                                $("#owncar").text("(含车)");
                                            }else{

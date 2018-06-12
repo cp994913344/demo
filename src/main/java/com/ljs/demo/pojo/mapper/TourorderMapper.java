@@ -58,4 +58,6 @@ public interface TourorderMapper {
     int updateByPrimaryKey(Tourorder record);
 
     List<Tourorder> queryOrderByTourUid(@Param("uuid") String uuid);
+
+    int passOrder(@Param("id") Integer id);
 }

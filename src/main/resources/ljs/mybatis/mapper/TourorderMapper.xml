@@ -166,4 +166,7 @@
   <select id="queryOrderByTourUid" parameterType="String" resultMap="BaseResultMap">
     SELECT * from TOURORDER WHERE TOURID = #{uuid,jdbcType=VARCHAR}
   </select>
+  <update id="passOrder" parameterType="java.lang.Integer">
+    UPDATE TOURORDER SET STATE = 1 WHERE TOURORDERID = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

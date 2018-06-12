@@ -65,7 +65,7 @@ $body.removeClass("media-small").removeClass("media-medium");
       </div>
       <div class="login pl-login-info_detail displayNone" id="pl-login-info_detail" >
        <div class="user" >
-        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" width="40" height="40">
+        <img src="http://static.liantu.cn/image/public/man_100x100.jpg" alt="cp" id = "topUserImage" width="40" height="40">
         <span class="name" id="login_user_name_detail"></span>
         <span class="ico"></span>
        </div>
@@ -264,6 +264,8 @@ seajs.use('modules/www/public/common.js');
 seajs.use('modules/www/travel/create.js');
 </script>
 
+
+
   <script type="text/javascript">
       var mainId = Cookies.get('updatetongyouMainId');
       function updateData(){
@@ -421,6 +423,21 @@ seajs.use('modules/www/travel/create.js');
           });
       }
       loginFun();
+
+      $(function(){
+          $.ajax({
+              type:"post",
+              url:"/visitor/getVisitor",
+              success:function(_res){
+                  if(_res.code == "200") {
+                      $('#topUserImage').attr('src', _res.data.sculpture);
+                      $('#atopUserImage').attr('src', _res.data.sculpture);
+                      console.log(_res);
+                  }
+              }
+          });
+      });
+
   </script>
  </body>
 </html>

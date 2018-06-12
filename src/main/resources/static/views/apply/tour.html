@@ -408,7 +408,7 @@ var pl_status=0;
                               tourIdTmp = tourList1[i].tourid;
                               TourListHtml+=' <li class="J_blocklink">';
                               TourListHtml+='<a onclick="setGloableTourid('+tourIdTmp+');"  href="/toTourDetails" target="_blank" class="pic">';
-                              TourListHtml+='<img src="../../images/65581.jpg" alt="乔蕊" width="200" height="200" />'
+                              TourListHtml+='<img src="'+tourList1[i].sculpture+'" alt="乔蕊" width="200" height="200" />'
                               TourListHtml+='</a>';
                               if(tourList1[i].sex == "女"){
                                   TourListHtml+='<p class="name"><span class="woman">';

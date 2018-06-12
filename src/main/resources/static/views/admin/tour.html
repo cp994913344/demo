@@ -137,6 +137,7 @@ function getTourData(currentPage){
 			$("#lastpage").attr("href","javascript:goLastPage("+_res.data.pageList["pages"]+")");
             $("#nextPage").attr("href","javascript:goNextPage("+_res.data.pageList["pages"]+")");
             $(".msg").html("共找到"+_res.data.pageList["total"]+"条数据");
+
 			$("#tableinfo tbody").html(str);
 		}
 	});

@@ -11,6 +11,7 @@ import com.ljs.demo.pojo.domain.Visitor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class TourOrderController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "queryOrderByTourUid")
+    @RequestMapping(value = "/queryOrderByTourUid")
     public ResponseMessage queryOrderByTourUid(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
@@ -62,5 +63,24 @@ public class TourOrderController {
         log.info("导游后台查询订单接口返回数据|[{}]|",tourorderList);
 
         return ResponseMessage.list("订单列表",tourorderList.size(),tourorderList);
+    }
+
+    /**
+     * 后台管理员审批订单通过
+     * @param tourorderid
+     * @return
+     */
+    @RequestMapping(value = "/passOrder")
+    public ResponseMessage passOrder(@RequestParam("tourorderid") Integer tourorderid){
+        log.info("审批接口入参|[{}]|",tourorderid);
+        tourOrderService.passOrder(tourorderid);
+        return ResponseMessage.ok("审批通过已完成");
+    }
+
+    @RequestMapping(value = "/failOrder")
+    public ResponseMessage failOrder(@RequestParam("tourorderid") Integer tourorderid){
+        log.info("审批接口入参|[{}]|",tourorderid);
+        tourOrderService.deleteByPrimaryKey(tourorderid);
+        return ResponseMessage.ok("审批不通过");
     }
 }

@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                             <div class="mod-btn">
-                                <input type="button" class="submit" value="提交预订申请" onclick="saveData()"/>
+                                <input type="button" id="ljsisanoob" class="submit" value="提交预订申请" />
                             </div>
                         </div>
                         <div class="side">
@@ -328,6 +328,11 @@
             </div>
         </div>
         <script type="text/javascript">
+            $(function(){
+               $('#ljsisanoob').click(function(){
+                   location.href="waitTour.html";
+               }) ;
+            });
             var pl_status = 0;
             seajs.config({
                 base: 'http://static.liantu.cn/script/dist',
@@ -349,6 +354,19 @@
         <script src="/js/page/jquery.pagination.js"></script>
         <script type="text/javascript" src="/js/ljs.js" ></script>
         <script type="text/javascript">
+            $(function(){
+
+                $.ajax({
+                    url: '/tour/selectById',
+                    data: {'tourid': tourid},
+                    type: 'post',
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.data.code = "200") {
+                        }
+                    }
+                };
+            });
             loginFun();
             var userName = $("#login_user_name").text();
             var tourid = Cookies.get('tourid');

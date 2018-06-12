@@ -25,4 +25,6 @@ public interface VisitorServcie {
     List<Visitor> queryVisitor();
 
     int deleteVisitor(Integer id);
+
+    int toBeTour(String uuid);
 }

@@ -62,4 +62,9 @@ public class VisitorServiceImpl implements VisitorServcie {
         return visitorMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public int toBeTour(String uuid) {
+        return visitorMapper.toBeTour(uuid);
+    }
+
 }

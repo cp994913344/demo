@@ -25,4 +25,14 @@ public class TourOrderServiceImpl implements TourOrderService {
     public List<Tourorder> queryOrderByTourUid(String uuid) {
         return tourorderMapper.queryOrderByTourUid(uuid);
     }
+
+    @Override
+    public int passOrder(Integer id) {
+        return tourorderMapper.passOrder(id);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return tourorderMapper.deleteByPrimaryKey(id);
+    }
 }

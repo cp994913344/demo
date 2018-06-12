@@ -226,4 +226,11 @@ public class ToVisitorController {
         return ResponseMessage.pageList("条件查询同游列表",page,pageInfo);
     }
 
+    @RequestMapping("/delTovisitor")
+    public ResponseMessage delTovisitor(@RequestParam("toVisitorId") Integer tovisitorid){
+        log.info("删除同游接口入参|[{}]|",tovisitorid);
+        toVisitorService.delTovisitorById(tovisitorid);
+        return ResponseMessage.ok("删除成功！");
+    }
+
 }

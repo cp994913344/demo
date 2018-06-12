@@ -11,7 +11,8 @@
 <link href="../../css/haiersoft.css" rel="stylesheet" type="text/css" media="screen,print" />
 <link href="../../css/print.css" rel="stylesheet" type="text/css" media="print" />
 <script src="../../js/jquery-1.10.1.min.js"></script>
-<script src="../../js/side.js" type="text/javascript"></script>
+    <script src="/js/layer/layer.js"></script>
+    <script src="../../js/side.js" type="text/javascript"></script>
 
 </head>
 
@@ -67,14 +68,6 @@
 </div>
 
 </div>
- 
-<ul id="PageNum">
-<li><a href="javascript:goFirstPage()">首页</a></li>
-<li><a href="javascript:goPreviousPage()">上一页</a></li>
-<li><span id="currentPage">1</span></li>
-<li><a href="javascript:goNextPage()">下一页</a></li>
-<li><a id="lastpage" href="">尾页</a></li>
-</ul>
 
 </div>
 
@@ -85,88 +78,65 @@
 </body>
 <script type="text/javascript">
 $(function(){
-	getCityData(1);
+    $.ajax({
+        type:"post",
+        url:"/tourorder/queryOrderByTourUid",
+        dataType:"json",
+        success:function(_res){
+            console.log(_res);
+            var str = "";
+            for(var i=0;i<_res.data.list.length;i++){
+                str += "<tr>";
+                str += "<td>"+_res.data.list[i].tourorderid+"</td>";
+                str += "<td>"+_res.data.list[i].starttime+"</td>";
+                str += "<td>"+_res.data.list[i].endtime+"</td>";
+                str += "<td>"+_res.data.list[i].mancount+"</td>";
+                str += "<td>"+_res.data.list[i].childcount+"</td>";
+                str += "<td>"+_res.data.list[i].journeyneed+"</td>";
+                str += "<td>"+_res.data.list[i].ouderinfo+"</td>";
+                if(_res.data.list[i].state == "1" || _res.data.list[i].state == 1){
+                    str += "<td>审批完成</td>";
+                }
+                else{
+                    str += "<td>待审核</td>"
+                }
+                str += "<td class='last'>";
+                if(_res.data.list[i].state == "0" || _res.data.list[i].state == 0){
+                    str += "<a href='javascript:checkOrderTrue("+_res.data.list[i].tourorderid+")'>通过</a>";
+                    str += "<a href='javascript:checkOrderFalse("+_res.data.list[i].tourorderid+")'>不通过</a>";
+                }
+                str += "</tr>";
+            }
+            $('.msg').html(str);
+        }
+    });
 });
-function getCityData(currentPage){
-	$.ajax({
-		type:"post",
-		url:"",
-		data:{"page":currentPage},
-		dataType:"json",
-		success:function(_res){
-			var str = "";
-			for(var i=0;i<_res.data.pageTotle.length;i++){
-				str += "<tr>";
-				str += "<td>"+_res.data.pageTotle[i].tourorderid+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].starttime+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].endtime+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].mancount+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].childcount+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].journeyneed+"</td>";
-				str += "<td>"+_res.data.pageTotle[i].ouderinfo+"</td>";
-				if(_res.data.pageTotle[i].state == "1" || _res.data.pageTotle[i].state == 1){
-					str += "<td>审批完成</td>";
-				}
-				else{
-					str += "<td>待审核</td>"
-				}
-				str += "<td class='last'>";
-				if(_res.data.pageTotle[i].state == "0" || _res.data.pageTotle[i].state == 0){
-					str += "<a href='javascript:checkOrderTrue("+_res.data.pageTotle[i].tourorderid+")'>通过</a>";
-					str += "<a href='javascript:checkOrderFalse("+_res.data.pageTotle[i].tourorderid+")'>不通过</a>";
-				}
-				str += "</tr>";
-			}
-			$("currentPage").html(data.pageList["pageNum"]);
-			$("#lastpage").attr("href","javascript:goLastPage("+data.pageList["pages"]+")");
-			$(".msg").html("共找到"+_res.data.pageList["total"]+"条数据");
-			$("tableinfo tbody").html(str);
-		}
-	});
-}
-function goNextPage(){
-	var currentPage = $("#currentPage").html();
-	currentPage = currentPage + 1;
-	getCityData(currentPage);
-}
-function goPreviousPage(){
-	var currentPage = $("#currentPage").html();
-	currentPage = currentPage - 1;
-	getCityData(currentPage);
-}
-function goLastPage(pages){
-	getCityData(pages);
-}
-function goFirstPage(){
-	getCityData(1);
-}
+
 function checkOrderTrue(tourorderid){
-	
-	layer.confirm('确认要通过审核吗？',function(index){ 
-		$.ajax({
-			type:"post",
-			url:"",
-			data:{"tourorderid":tourorderid},
-			success:function(_res){
-				layer.msg(_res.message);
-				getCityData(1);
-			}
-		})
-	});
+
+    layer.confirm('确认要通过审核吗？',function(index){
+        $.ajax({
+            type:"post",
+            url:"",
+            data:{"tourorderid":tourorderid},
+            success:function(_res){
+                layer.msg(_res.message);
+            }
+        })
+    });
 }
 function checkOrderFalse(tourorderid){
-	
-	layer.confirm('确认不通过审核吗？',function(index){ 
-		$.ajax({
-			type:"post",
-			url:"",
-			data:{"tourorderid":tourorderid},
-			success:function(_res){
-				layer.msg(_res.message);
-				getCityData(1);
-			}
-		})
-	});
+
+    layer.confirm('确认不通过审核吗？',function(index){
+        $.ajax({
+            type:"post",
+            url:"",
+            data:{"tourorderid":tourorderid},
+            success:function(_res){
+                layer.msg(_res.message);
+            }
+        })
+    });
 }
 </script>
 

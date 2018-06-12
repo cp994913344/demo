@@ -166,6 +166,8 @@ public class TourController {
     public ResponseMessage tourPass(@RequestParam("tourid") Integer tourid){
         log.info("接口传入数据tourid|[{}]|",tourid);
         tourService.tourPass(tourid);
+        Tour tour = tourService.selectByPrimaryKey(tourid);
+        visitorServcie.toBeTour(tour.getVisitorid());
         return ResponseMessage.ok("操作成功!");
     }
 

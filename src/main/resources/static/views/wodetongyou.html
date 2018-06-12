@@ -240,8 +240,8 @@
                     tableHtml+='  </dd> </dl> </td> <td class="btn">';
                     tableHtml+='<a class="submit" value="" onclick="toDetailed(\''+_res.data.tovisitorid+'\')">查看详情</a>';
                     tableHtml+='<a  class="delete" onclick="deleteData(\''+_res.data.tovisitorid+'\')">删除</a>';
-                    tableHtml+=' <span class="divide">|</span>';
-                    tableHtml+='<a onclick="updateData(\''+_res.data.tovisitorid+'\')" class="edit">编辑</a>';
+                    //tableHtml+=' <span class="divide">|</span>';
+                    //tableHtml+='<a onclick="updateData(\''+_res.data.tovisitorid+'\')" class="edit">编辑</a>';
                     tableHtml+='</td> </tr> </table>';
                     $('.table').html(tableHtml);
                 } else if (_res.code===500) {
@@ -261,12 +261,13 @@
             btn: ['确定','取消'] //按钮
         }, function(){
             $.ajax({
-                url: '/file/uploadPhoto',
+                url: '/tovisitor/delTovisitor',
                 data:{"toVisitorId": mainId},
                 type: 'post',
                 success: function (_res) {
                     if (_res.code===200) {
                         layer.msg(res.message);
+                        location.href = '/toMemberInfo';
                     } else if (_res.code===500) {
                         layer.msg('删除失败!');
                     }
@@ -276,10 +277,7 @@
             layer.close();
         });
     }
-    function updateData(mainid){
-        Cookies.set("updatetongyouMainId",mainId);
-        location.href="/views/tongyou/updatetoungyou.html"
-    }
+
 </script>
 </body>
 </html>

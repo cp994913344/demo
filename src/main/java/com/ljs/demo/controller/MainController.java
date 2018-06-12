@@ -249,4 +249,9 @@ public class MainController {
         return "tourOrder";
     }
 
+    @GetMapping(value = "/tomember")
+    public String tomember(){
+        return "member_info";
+    }
+
 }

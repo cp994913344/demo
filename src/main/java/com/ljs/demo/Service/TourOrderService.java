@@ -11,4 +11,8 @@ public interface TourOrderService {
     Tourorder selectByPrimaryKey(Integer id);
 
     List<Tourorder> queryOrderByTourUid(String uuid);
+
+    int passOrder(Integer id);
+
+    int deleteByPrimaryKey(Integer id);
 }

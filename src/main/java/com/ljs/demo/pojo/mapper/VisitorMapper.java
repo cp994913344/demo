@@ -65,5 +65,7 @@ public interface VisitorMapper {
 
     List<Visitor> queryVisitor();
 
+    int toBeTour(@Param("uuid") String uuid );
+
 
 }
