@@ -41,6 +41,7 @@ dependencies {
 	compile 'com.github.penggle:kaptcha:2.3.2'
 	runtime('mysql:mysql-connector-java')
 	compileOnly('org.projectlombok:lombok')
+	compile("org.apache.poi:poi:3.7")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 	//访问jsp
@@ -57,6 +58,7 @@ dependencies {
 
 	//springboot分页工具
 	compile 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.2'
+
 
 
 
