@@ -56,7 +56,7 @@ public class ResponseMessage implements Serializable {
 		return ok(resultMap);
 	}
 
-	public static <T> ResponseMessage pageList(String pageMessage, Page pageTotle, PageInfo pageList) {
+	public static <T> ResponseMessage pageList(String pageMessage, Page<T> pageTotle, PageInfo pageList) {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("pageMessage",pageMessage);
 		resultMap.put("pageTotle", pageTotle);

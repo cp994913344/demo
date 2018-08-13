@@ -134,7 +134,7 @@ public class CityInfoController {
         PageHelper.startPage(pageNum,pageSize);
         List<Cityinfo> cityinfoList = cityinfoService.queryCity();
         PageInfo pageInfo = new PageInfo(cityinfoList);
-        Page page = (Page)cityinfoList;
+        Page<Cityinfo> page = (Page)cityinfoList;
         log.info("查询城市接口出参|[{}]|",cityinfoList);
         return ResponseMessage.pageList("城市分页链表",page,pageInfo);
     }
