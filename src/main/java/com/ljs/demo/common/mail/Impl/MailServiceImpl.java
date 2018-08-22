@@ -15,8 +15,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 
-@Component(value="mailService")
-public class MailServiceImpl implements MailService{
+@Component(value = "mailService")
+public class MailServiceImpl implements MailService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -59,11 +59,11 @@ public class MailServiceImpl implements MailService{
     public void sendMimeMessageMail(String to, String subject, String content) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message,true);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(content,true);
+            helper.setText(content, true);
             mailSender.send(message);
             logger.info("简单邮件已经发送。");
         } catch (MessagingException e) {
@@ -75,12 +75,12 @@ public class MailServiceImpl implements MailService{
      * 发送带附件的邮件
      *
      * @param to
-     * @param subject 邮件主题
-     * @param content html类型字符串
+     * @param subject  邮件主题
+     * @param content  html类型字符串
      * @param filePath 文件路径
      */
     @Override
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath){
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);

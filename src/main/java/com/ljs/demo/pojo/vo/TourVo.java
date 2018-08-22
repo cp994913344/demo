@@ -8,6 +8,9 @@ import lombok.ToString;
 
 import java.util.List;
 
+/**
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +21,7 @@ public class TourVo extends Tour {
 
     @Override
     public String toString() {
-        return "TourVo{" + "turbo:"+super.toString()+","+
+        return "TourVo{" + "turbo:" + super.toString() + "," +
                 "ServiceList=" + ServiceList +
                 '}';
     }
