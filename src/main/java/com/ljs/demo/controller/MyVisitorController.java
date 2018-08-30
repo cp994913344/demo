@@ -1,6 +1,7 @@
 package com.ljs.demo.controller;
 
 
+import com.google.gson.JsonObject;
 import com.ljs.demo.Service.MyVisitorService;
 import com.ljs.demo.common.constant.GetUuid;
 import com.ljs.demo.common.constant.redis.RedisClient;
