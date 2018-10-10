@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Calendar;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
@@ -66,6 +68,11 @@ public class DemoApplicationTests {
 		User user = new User();
 		user.setId("1");
 		user.setName("ljs");
+	}
+
+	public void calendarTest(){
+		Calendar calendar = Calendar.getInstance();
+
 	}
 
 }
