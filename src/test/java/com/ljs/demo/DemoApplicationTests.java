@@ -6,12 +6,14 @@ import com.ljs.demo.common.utils.StringRealLengthUtils;
 import com.ljs.demo.pojo.domain.Good;
 import com.ljs.demo.pojo.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 @RunWith(SpringRunner.class)
@@ -64,15 +66,45 @@ public class DemoApplicationTests {
 		log.info("json|{}|",user);
 	}
 
+	@Test
 	public void beanTest(){
 		User user = new User();
 		user.setId("1");
 		user.setName("ljs");
+		String a = null;
+		for (int i = 0;i<=6;i++){
+			if (i>1&&i<3){
+				user.setName("zll");
+				a="2";
+			}
+			a = "2";
+		}
+		System.out.println(user.toString());
 	}
 
 	public void calendarTest(){
 		Calendar calendar = Calendar.getInstance();
+	}
 
+	@Test
+	public void aVoid(){
+
+		String maccArray[] = {"5811","5812","5813"};
+		Boolean b = ArrayUtils.contains(maccArray,"5814");
+		if(!ArrayUtils.contains(maccArray,"5811")){
+			System.out.println("=================");
+		}
+		else{
+			System.out.println("-----------------");
+		}
+
+	}
+
+	@Test
+	public void bigDecimalTest(){
+		BigDecimal bigDecimal = new BigDecimal(0.6);
+		BigDecimal bigDecimal1 = BigDecimal.valueOf(0.6);
+		System.out.println(bigDecimal + "============" + bigDecimal1);
 	}
 
 }

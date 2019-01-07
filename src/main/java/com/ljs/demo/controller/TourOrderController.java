@@ -33,14 +33,15 @@ public class TourOrderController {
     TourService tourService;
 
     @RequestMapping(value = "/selectById")
-    public ResponseMessage selectById(){
+    public ResponseMessage selectById() {
         Tourorder tourorder = tourOrderService.selectByPrimaryKey(1);
         log.info("|对外接口|返回参数[{}]", tourorder);
-        return ResponseMessage.ok("",tourorder);
+        return ResponseMessage.ok("", tourorder);
     }
 
     /**
      * 导游后台查询订单接口
+     *
      * @param request
      * @return
      * @throws Exception
@@ -49,37 +50,38 @@ public class TourOrderController {
     public ResponseMessage queryOrderByTourUid(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute(StaticClass.LOGIN_CODE);
-        if(email == null){
+        if (email == null) {
             return ResponseMessage.error("用户未登录");
         }
-        Visitor vi = (Visitor) redisClient.get(email+ StaticClass.LOGIN_CODE);
-        if(vi == null){
+        Visitor vi = (Visitor) redisClient.get(email + StaticClass.LOGIN_CODE);
+        if (vi == null) {
             return ResponseMessage.error("未登陆！！！！！");
         }
         Tour tour = tourService.queryByVisitorUid(vi.getUuid());
 
         List<Tourorder> tourorderList = tourOrderService.queryOrderByTourUid(tour.getUuid());
 
-        log.info("导游后台查询订单接口返回数据|[{}]|",tourorderList);
+        log.info("导游后台查询订单接口返回数据|[{}]|", tourorderList);
 
-        return ResponseMessage.list("订单列表",tourorderList.size(),tourorderList);
+        return ResponseMessage.list("订单列表", tourorderList.size(), tourorderList);
     }
 
     /**
      * 后台管理员审批订单通过
+     *
      * @param tourorderid
      * @return
      */
     @RequestMapping(value = "/passOrder")
-    public ResponseMessage passOrder(@RequestParam("tourorderid") Integer tourorderid){
-        log.info("审批接口入参|[{}]|",tourorderid);
+    public ResponseMessage passOrder(@RequestParam("tourorderid") Integer tourorderid) {
+        log.info("审批接口入参|[{}]|", tourorderid);
         tourOrderService.passOrder(tourorderid);
         return ResponseMessage.ok("审批通过已完成");
     }
 
     @RequestMapping(value = "/failOrder")
-    public ResponseMessage failOrder(@RequestParam("tourorderid") Integer tourorderid){
-        log.info("审批接口入参|[{}]|",tourorderid);
+    public ResponseMessage failOrder(@RequestParam("tourorderid") Integer tourorderid) {
+        log.info("审批接口入参|[{}]|", tourorderid);
         tourOrderService.deleteByPrimaryKey(tourorderid);
         return ResponseMessage.ok("审批不通过");
     }

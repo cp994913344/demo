@@ -27,45 +27,49 @@ public class ScenicController {
 
     /**
      * 根据景点ID查询景点
+     *
      * @return
      */
     @RequestMapping(value = "/selectById")
-    public ResponseMessage selectById(){
+    public ResponseMessage selectById() {
         Scenic scenic = scenicService.selectByPrimaryKey(1);
         log.info("|对外接口|返回参数[{}]", scenic);
-        return ResponseMessage.ok("",scenic);
+        return ResponseMessage.ok("", scenic);
     }
 
     @RequestMapping(value = "/queryHotScenic")
-    public ResponseMessage queryHotScenic(){
+    public ResponseMessage queryHotScenic() {
         List<Scenic> list = scenicService.queryHotScenic();
         log.info("|对外接口|返回参数[{}]", list);
-        return ResponseMessage.list("热门景点列表",list.size(),list);
+        return ResponseMessage.list("热门景点列表", list.size(), list);
     }
 
     /**
      * 后台管理查询所有景点
+     *
      * @param pageNum
      * @return
      */
     @RequestMapping(value = "/queryScenic")
-    public ResponseMessage queryScenic(@RequestParam("pageNum") Integer pageNum){
+    public ResponseMessage queryScenic(@RequestParam("pageNum") Integer pageNum) {
         PageHelper.startPage(pageNum, StaticClass.pageSize);
         List<Scenic> scenicList = scenicService.queryScenic();
-        log.info("查询景点链表|[{}]|",scenicList);
+        log.info("查询景点链表|[{}]|", scenicList);
         PageInfo pageInfo = new PageInfo(scenicList);
-        Page page = (Page)scenicList;
-        log.info("查询景点接口出参|[{}]|",scenicList);
-        return ResponseMessage.pageList("景点分页链表",page,pageInfo);
+        Page page = (Page) scenicList;
+        log.info("查询景点接口出参|[{}]|", scenicList);
+        return ResponseMessage.pageList("景点分页链表", page, pageInfo);
     }
+
     /**
      * 删除城市
+     *
      * @param scenicid
      * @return
      */
     @GetMapping(value = "/deleteScenic")
-    public ResponseMessage deleteCity(@RequestParam("scenicid") Integer scenicid){
-        log.info("接口传入数据cityinfoid|[{}]|",scenicid);
+    public ResponseMessage deleteCity(@RequestParam("scenicid") Integer scenicid) {
+        log.info("接口传入数据cityinfoid|[{}]|", scenicid);
         scenicService.deleteScenic(scenicid);
         return ResponseMessage.ok("删除成功!");
     }
