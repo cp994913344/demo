@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     SERVICEID, UUID, SERVICENAME, SERVICEPRICE, SERVICEINFO
   </sql>
+  <select id="queryAllService" resultMap="BaseResultMap">
+    SELECT * from SERVICEINFO
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -90,4 +93,20 @@
       SERVICEINFO = #{serviceinfo,jdbcType=VARCHAR}
     where SERVICEID = #{serviceid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByTourUid" parameterType="String" resultType="String">
+    SELECT SERVICENAME FROM sys.SERVICEINFO
+    WHERE
+    UUID = ANY(SELECT SERVICEID FROM sys.MAPPING
+    WHERE
+    TOURID = #{tourUid});
+  </select>
+
+  <select id="queryByTourUID" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM sys.SERVICEINFO
+    WHERE
+    UUID = ANY(SELECT SERVICEID FROM sys.MAPPING
+    WHERE
+    TOURID = #{tourUid});
+  </select>
 </mapper>

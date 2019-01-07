@@ -3,6 +3,9 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.Tourorder;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface TourorderMapper {
@@ -53,4 +56,8 @@ public interface TourorderMapper {
      * @mbggenerated Fri May 25 01:51:54 CST 2018
      */
     int updateByPrimaryKey(Tourorder record);
+
+    List<Tourorder> queryOrderByTourUid(@Param("uuid") String uuid);
+
+    int passOrder(@Param("id") Integer id);
 }

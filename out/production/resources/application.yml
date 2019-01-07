@@ -35,8 +35,12 @@ spring:
     default-encoding : UTF-8
   mvc:
      view:
-          prefix: /views/
-          suffix: .html
+       prefix: /views/
+       suffix: .html
+  http:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 10Mb
 
 mail:
   fromMail:

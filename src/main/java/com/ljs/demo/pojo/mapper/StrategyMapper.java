@@ -3,6 +3,9 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.Strategy;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface StrategyMapper {
@@ -53,4 +56,26 @@ public interface StrategyMapper {
      * @mbggenerated Fri May 25 01:32:15 CST 2018
      */
     int updateByPrimaryKey(Strategy record);
+
+    /**
+     * 根据城市UID查询攻略
+     * @param cityUid
+     * @return
+     */
+    List<Strategy> queryByCityUid(@Param("cityUid") String cityUid);
+
+    /**
+     * 根据景点UID查询攻略
+     * @param SceUId
+     * @return
+     */
+    List<Strategy> queryBySceUid(@Param("SceUid") String SceUId);
+
+    /**
+     * 查询热门攻略
+     * @return
+     */
+    List<Strategy> queryHotStrategy();
+
+    List<Strategy> queryStrategy();
 }

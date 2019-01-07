@@ -38,9 +38,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.apache.shiro:shiro-spring:1.4.0')
 	compile('com.google.code.gson:gson:2.8.2')
-	compile 'com.google.code.kaptcha:kaptcha:'
+	compile 'com.github.penggle:kaptcha:2.3.2'
 	runtime('mysql:mysql-connector-java')
 	compileOnly('org.projectlombok:lombok')
+	compile("org.apache.poi:poi:3.7")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 	//访问jsp
@@ -51,6 +52,27 @@ dependencies {
 	//访问静态资源
 	compile 'javax.servlet:javax.servlet-api:4.0.1'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf:2.0.2.RELEASE'
+
+	//apache常用工具jar包
+	compile 'org.apache.commons:commons-lang3:3.7'
+
+	//springboot分页工具
+	compile 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.2'
+
+	//javax
+	compile 'javax.persistence:javax.persistence-api:2.2'
+
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	//随行付常用工具包
+	compile 'com.suixingpay.common:common-util:3.5'
+
+	//jackson
+	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+
+
+
+
 
 
 }

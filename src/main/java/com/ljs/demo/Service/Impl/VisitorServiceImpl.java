@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class VisitorServiceImpl implements VisitorServcie {
@@ -21,8 +23,8 @@ public class VisitorServiceImpl implements VisitorServcie {
     }
 
     @Override
-    public Visitor login(String phone, String password) {
-        return visitorMapper.login(phone,password);
+    public Visitor login(String email, String password) {
+        return visitorMapper.login(email,password);
     }
 
     @Override
@@ -31,7 +33,38 @@ public class VisitorServiceImpl implements VisitorServcie {
     }
 
     @Override
-    public int updateInfo(Visitor visitor,Integer visitorid) {
-        return visitorMapper.updateByPrimaryKey(visitor,visitorid);
+    public int updateInfo(Visitor visitor) {
+        return visitorMapper.updateByPrimaryKeySelective(visitor);
     }
+
+    @Override
+    public Visitor selectByUid(String visitorUid) {
+        return visitorMapper.selectByUid(visitorUid);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Visitor visitor) {
+        return visitorMapper.updateByPrimaryKeySelective(visitor);
+    }
+
+    @Override
+    public int resetPass(String newPass, String email) {
+        return visitorMapper.resetPass(newPass,email);
+    }
+
+    @Override
+    public List<Visitor> queryVisitor() {
+        return visitorMapper.queryVisitor();
+    }
+
+    @Override
+    public int deleteVisitor(Integer id) {
+        return visitorMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int toBeTour(String uuid) {
+        return visitorMapper.toBeTour(uuid);
+    }
+
 }

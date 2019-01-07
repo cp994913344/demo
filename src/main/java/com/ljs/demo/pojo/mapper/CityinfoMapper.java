@@ -3,6 +3,9 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.Cityinfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface CityinfoMapper {
@@ -53,4 +56,17 @@ public interface CityinfoMapper {
      * @mbggenerated Fri May 25 00:11:02 CST 2018
      */
     int updateByPrimaryKey(Cityinfo record);
+
+    Cityinfo queryByName(@Param("likeName") String cityname);
+
+    List<Cityinfo> queryHotCity();
+
+    List<Cityinfo> queryCity();
+
+    String queryProvince(@Param("cityname")String cityname);
+
+    String queryArea(@Param("province") String province);
+
+    int deleteCity(@Param("id") Integer id);
+
 }

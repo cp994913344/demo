@@ -16,16 +16,23 @@
     <result column="WALLet" property="wallet" jdbcType="DOUBLE" />
     <result column="STATUS" property="status" jdbcType="VARCHAR" />
     <result column="SCULPTURE" property="sculpture" jdbcType="CHAR" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     VISITORID, UUID, TOGETHERVISITORID, ORDERID, PHONE, EMAIL, PASSWORD, AGE, NAME, SEX, 
-    CITY, WALLet, STATUS, SCULPTURE
+    CITY, WALLet, STATUS, SCULPTURE, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from VISITOR
     where VISITORID = #{visitorid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="String" >
+    select
+    <include refid="Base_Column_List" />
+    from VISITOR
+    where UUID = #{uuid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from VISITOR
@@ -36,12 +43,12 @@
       ORDERID, PHONE, EMAIL, 
       PASSWORD, AGE, NAME, 
       SEX, CITY, WALLet, STATUS, 
-      SCULPTURE)
+      SCULPTURE, STATE)
     values (#{visitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{togethervisitorid,jdbcType=INTEGER}, 
       #{orderid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{wallet,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, 
-      #{sculpture,jdbcType=CHAR})
+      #{sculpture,jdbcType=CHAR}, #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Visitor" >
     insert into VISITOR
@@ -88,6 +95,9 @@
       <if test="sculpture != null" >
         SCULPTURE,
       </if>
+      <if test="state != null" >
+        STATUS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="visitorid != null" >
@@ -131,6 +141,9 @@
       </if>
       <if test="sculpture != null" >
         #{sculpture,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -176,6 +189,9 @@
       <if test="sculpture != null" >
         SCULPTURE = #{sculpture,jdbcType=CHAR},
       </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
     </set>
     where VISITORID = #{visitorid,jdbcType=INTEGER}
   </update>
@@ -193,13 +209,24 @@
       CITY = #{record.city,jdbcType=VARCHAR},
       WALLet = #{record.wallet,jdbcType=DOUBLE},
       STATUS = #{record.status,jdbcType=VARCHAR},
-      SCULPTURE = #{record.sculpture,jdbcType=CHAR}
+      SCULPTURE = #{record.sculpture,jdbcType=CHAR},
+      STATE = #{state,jdbcType=INTEGER}
     where VISITORID = #{visitorid,jdbcType=INTEGER}
   </update>
   <select id="login" resultMap="BaseResultMap" parameterType="String">
     select
     <include refid="Base_Column_List" />
     from VISITOR
-    WHERE PHONE = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
+    WHERE EMAIL = #{name,jdbcType=VARCHAR} AND PASSWORD = #{pass,jdbcType=VARCHAR}
   </select>
+  <update id="resetPass">
+    UPDATE VISITOR SET PASSWORD = #{pass,jdbcType=VARCHAR} WHERE EMAIL = #{email,jdbcType=VARCHAR}
+  </update>
+  <select id="queryVisitor" resultMap="BaseResultMap">
+    SELECT * FROM VISITOR
+  </select>
+
+  <update id="toBeTour" parameterType="java.lang.String">
+    update VISITOR SET STATE = 1 WHERE UUID = #{uuid,jdbcType = VARCHAR}
+  </update>
 </mapper>

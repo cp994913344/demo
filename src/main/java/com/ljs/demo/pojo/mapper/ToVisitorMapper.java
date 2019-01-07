@@ -2,7 +2,11 @@ package com.ljs.demo.pojo.mapper;
 
 
 import com.ljs.demo.pojo.domain.ToVisitor;
+import com.ljs.demo.pojo.domain.Visitor;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ToVisitorMapper {
@@ -53,4 +57,12 @@ public interface ToVisitorMapper {
      * @mbggenerated Thu May 24 20:18:00 CST 2018
      */
     int updateByPrimaryKey(ToVisitor record);
+
+    List<ToVisitor> selectList();
+
+    ToVisitor queryByVisitorId(String visitorid);
+
+    List<ToVisitor> queryBySelective(ToVisitor toVisitor);
+
+    List<ToVisitor> queryHotToVisitor();
 }

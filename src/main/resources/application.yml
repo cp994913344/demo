@@ -37,6 +37,10 @@ spring:
      view:
        prefix: /views/
        suffix: .html
+  http:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 10Mb
 
 mail:
   fromMail:

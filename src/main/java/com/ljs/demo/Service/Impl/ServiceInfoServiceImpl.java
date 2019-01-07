@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ServiceInfoServiceImpl implements ServiceInfoService {
@@ -17,5 +19,20 @@ public class ServiceInfoServiceImpl implements ServiceInfoService {
     @Override
     public ServiceInfo selectByPrimaryKey(Integer id) {
         return serviceInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<ServiceInfo> queryAllService() {
+        return serviceInfoMapper.queryAllService();
+    }
+
+    @Override
+    public List<String> queryByTourUid(String tourUid) {
+        return serviceInfoMapper.queryByTourUid(tourUid);
+    }
+
+    @Override
+    public List<ServiceInfo> queryByTourUID(String tourUid) {
+        return serviceInfoMapper.queryByTourUID(tourUid);
     }
 }

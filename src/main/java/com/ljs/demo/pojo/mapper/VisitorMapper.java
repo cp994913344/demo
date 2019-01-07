@@ -4,6 +4,8 @@ import com.ljs.demo.pojo.domain.Visitor;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface VisitorMapper {
     /**
@@ -55,7 +57,15 @@ public interface VisitorMapper {
     int updateByPrimaryKey(@Param("record") Visitor record,@Param("visitorid") Integer visitorid);
 
 
-    Visitor login(@Param("name") String phone , @Param("pass") String password);
+    Visitor login(@Param("name") String email , @Param("pass") String password);
+
+    Visitor selectByUid(@Param("uuid") String visitorUid);
+
+    int resetPass(@Param("pass") String newPass,@Param("email") String email);
+
+    List<Visitor> queryVisitor();
+
+    int toBeTour(@Param("uuid") String uuid );
 
 
 }

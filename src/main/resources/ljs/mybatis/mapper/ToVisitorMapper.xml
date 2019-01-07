@@ -12,14 +12,19 @@
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
     <result column="DETAILS" property="details" jdbcType="VARCHAR" />
     <result column="STATUS" property="status" jdbcType="VARCHAR" />
-    <result column="PART" property="part" jdbcType="CHAR" />
-    <result column="VISITORID" property="visitorid" jdbcType="INTEGER" />
-    <result column="PRESENTPART" property="presentpart" jdbcType="VARCHAR" />
+    <result column="PART" property="part" jdbcType="INTEGER" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR" />
+    <result column="PRESENTPART" property="presentpart" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     TOVISITORID, UUID, PHONE, DEPARTURE, DESTINATION, DATE, TIMENUM, TITLE, DETAILS, 
-    STATUS, PART, VISITORID, PRESENTPART
+    STATUS, PART, VISITORID, PRESENTPART, STATE, PICTURE
   </sql>
+  <select id="selectList" resultMap="BaseResultMap">
+    SELECT * FROM TOVISITOR
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -31,16 +36,16 @@
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.ToVisitor" >
-    insert into TOVISITOR (TOVISITORID, UUID, PHONE, 
-      DEPARTURE, DESTINATION, DATE, 
-      TIMENUM, TITLE, DETAILS, 
-      STATUS, PART, VISITORID, 
-      PRESENTPART)
+    insert into TOVISITOR (TOVISITORID, UUID, PHONE,
+      DEPARTURE, DESTINATION, DATE,
+      TIMENUM, TITLE, DETAILS,
+      STATUS, PART, VISITORID,
+      PRESENTPART,STATE,PICTURE)
     values (#{tovisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{departure,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
       #{timenum,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{part,jdbcType=CHAR}, #{visitorid,jdbcType=INTEGER}, 
-      #{presentpart,jdbcType=VARCHAR})
+      #{status,jdbcType=VARCHAR}, #{part,jdbcType=INTEGER}, #{visitorid,jdbcType=VARCHAR},
+      #{presentpart,jdbcType=INTEGER},#{state,jdbcType=INTEGER},#{picture,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.ToVisitor" >
     insert into TOVISITOR
@@ -84,6 +89,12 @@
       <if test="presentpart != null" >
         PRESENTPART,
       </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tovisitorid != null" >
@@ -117,13 +128,19 @@
         #{status,jdbcType=VARCHAR},
       </if>
       <if test="part != null" >
-        #{part,jdbcType=CHAR},
+        #{part,jdbcType=INTEGER},
       </if>
       <if test="visitorid != null" >
-        #{visitorid,jdbcType=INTEGER},
+        #{visitorid,jdbcType=VARCHAR},
       </if>
       <if test="presentpart != null" >
-        #{presentpart,jdbcType=VARCHAR},
+        #{presentpart,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{sate,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=PICTURE},
       </if>
     </trim>
   </insert>
@@ -158,13 +175,19 @@
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
       <if test="part != null" >
-        PART = #{part,jdbcType=CHAR},
+        PART = #{part,jdbcType=INTEGER},
       </if>
       <if test="visitorid != null" >
-        VISITORID = #{visitorid,jdbcType=INTEGER},
+        VISITORID = #{visitorid,jdbcType=VARCHAR},
       </if>
       <if test="presentpart != null" >
-        PRESENTPART = #{presentpart,jdbcType=VARCHAR},
+        PRESENTPART = #{presentpart,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        PRESENTPART = #{sate,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        PICTURE = #{picture,jdbcType=VARCHAR},
       </if>
     </set>
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
@@ -180,9 +203,67 @@
       TITLE = #{title,jdbcType=VARCHAR},
       DETAILS = #{details,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
-      PART = #{part,jdbcType=CHAR},
-      VISITORID = #{visitorid,jdbcType=INTEGER},
-      PRESENTPART = #{presentpart,jdbcType=VARCHAR}
+      PART = #{part,jdbcType=INTEGER},
+      VISITORID = #{visitorid,jdbcType=VARCHAR},
+      PRESENTPART = #{presentpart,jdbcType=INTEGER}
+      STATE = #{state,jdbcType=INTEGER}
+      PICTURE = #{picture,jdbcType=VARCHAR}
     where TOVISITORID = #{tovisitorid,jdbcType=INTEGER}
   </update>
+  <select id="queryByVisitorId" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TOVISITOR
+    where VISITORID = #{visitorid,jdbcType=VARCHAR}
+  </select>
+  <select id="queryBySelective" parameterType="com.ljs.demo.pojo.domain.ToVisitor" resultMap="BaseResultMap">
+    select * from TOVISITOR
+    <where>
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        and PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        and DEPARTURE LIKE CONCAT(CONCAT('%',#{departure,jdbcType=VARCHAR},'%'))
+      </if>
+      <if test="destination != null" >
+        and DESTINATION LIKE CONCAT(CONCAT('%',#{destination,jdbcType=VARCHAR},'%'))
+      </if>
+      <if test="date != null" >
+        and DATE = #{date,jdbcType=DATE},
+      </if>
+      <if test="timenum != null" >
+        and TIMENUM = #{timenum,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        and TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        and DETAILS = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        and STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="part != null" >
+        and PART = #{part,jdbcType=INTEGER},
+      </if>
+      <if test="visitorid != null" >
+        and VISITORID = #{visitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="presentpart != null" >
+        and PRESENTPART = #{presentpart,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        and STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        and PICTURE = #{picture,jdbcType=PICTURE},
+      </if>
+    </where>
+  </select>
+  <select id="queryHotToVisitor" resultMap="BaseResultMap">
+    SELECT  * FROM TOVISITOR WHERE STATE = 1
+  </select>
 </mapper>

@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ScenicServiceImpl implements ScenicService {
@@ -17,5 +19,28 @@ public class ScenicServiceImpl implements ScenicService {
     @Override
     public Scenic selectByPrimaryKey(Integer id) {
         return scenicMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     *查询热门景点
+     */
+    @Override
+    public List<Scenic> queryHotScenic() {
+        return scenicMapper.queryHotScenic();
+    }
+
+    @Override
+    public List<Scenic> queryScenic() {
+        return scenicMapper.queryScenic();
+    }
+
+    @Override
+    public int deleteScenic(Integer id) {
+        return scenicMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Scenic> queryByCityUid(String id) {
+        return scenicMapper.queryByCityUid(id);
     }
 }

@@ -9,9 +9,13 @@
     <result column="WITHSEX" property="withsex" jdbcType="VARCHAR" />
     <result column="WITHCITY" property="withcity" jdbcType="VARCHAR" />
     <result column="WITHPHOTO" property="withphoto" jdbcType="VARCHAR" />
+    <result column="VISITORID" property="visitorid" jdbcType="VARCHAR"/>
+    <result column="TOVISITORID" property="tovisitorid" jdbcType="VARCHAR"/>
+    <result column="STATUS" property="status" jdbcType="INTEGER"/>
+    <result column="WITHINFO" property="withinfo" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO
+    MYVISITORID, UUID, WITHNAME, WITHPHONE, WITHSEX, WITHCITY, WITHPHOTO,TOVISITORID,STATUS,WITHINFO
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +30,10 @@
   <insert id="insert" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR (MYVISITORID, UUID, WITHNAME, 
       WITHPHONE, WITHSEX, WITHCITY, 
-      WITHPHOTO)
+      WITHPHOTO,VISITORID,TOVISITORID,STATUS,WITHINFO)
     values (#{myvisitorid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{withname,jdbcType=VARCHAR}, 
       #{withphone,jdbcType=VARCHAR}, #{withsex,jdbcType=VARCHAR}, #{withcity,jdbcType=VARCHAR}, 
-      #{withphoto,jdbcType=VARCHAR})
+      #{withphoto,jdbcType=VARCHAR},#{visitorid,jdbcType=VARCHAR},#{tovisitorid,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{withinfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.MyVisitor" >
     insert into MYVISITOR
@@ -55,6 +59,18 @@
       <if test="withphoto != null" >
         WITHPHOTO,
       </if>
+      <if test="visitorid != null" >
+        VIDITORID,
+      </if>
+      <if test="toviditorid != null" >
+        TOVISITORID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="withinfo !=NULL">
+        WITHINFO,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="myvisitorid != null" >
@@ -77,6 +93,18 @@
       </if>
       <if test="withphoto != null" >
         #{withphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorid != null" >
+        #{visitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="tovisitorid != null" >
+        #{tovisitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="withinfo != null" >
+        #{withinfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +129,18 @@
       <if test="withphoto != null" >
         WITHPHOTO = #{withphoto,jdbcType=VARCHAR},
       </if>
+      <if test="visotorid != null" >
+        VISITORID = #{visitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="tovisitorid != null" >
+        TOVISITORID = #{tovisitorid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="withinfo != null" >
+        WITHINFO = #{withinfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
   </update>
@@ -111,7 +151,16 @@
       WITHPHONE = #{withphone,jdbcType=VARCHAR},
       WITHSEX = #{withsex,jdbcType=VARCHAR},
       WITHCITY = #{withcity,jdbcType=VARCHAR},
-      WITHPHOTO = #{withphoto,jdbcType=VARCHAR}
+      WITHPHOTO = #{withphoto,jdbcType=VARCHAR},
+      VISITORID = #{visitorid,jdbcType=VARCHAR},
+      TOVISITORID = #{tovisitorid,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER}
+      WITHINFO = #{withinfo,jdbcType=VARCHAR}
     where MYVISITORID = #{myvisitorid,jdbcType=INTEGER}
   </update>
+
+
+  <select id="queryByToUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * from MYVISITOR WHERE TOVISITORID = #{toUid,jdbcType=VARCHAR}
+  </select>
 </mapper>

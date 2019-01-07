@@ -2,6 +2,9 @@ package com.ljs.demo.pojo.mapper;
 
 import com.ljs.demo.pojo.domain.Scenic;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ScenicMapper {
@@ -52,4 +55,10 @@ public interface ScenicMapper {
      * @mbggenerated Fri May 25 01:15:44 CST 2018
      */
     int updateByPrimaryKey(Scenic record);
+
+    List<Scenic> queryHotScenic();
+
+    List<Scenic> queryScenic();
+
+    List<Scenic> queryByCityUid(@Param("id") String id);
 }
