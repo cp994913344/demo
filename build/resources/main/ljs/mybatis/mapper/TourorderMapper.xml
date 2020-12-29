@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljs.demo.pojo.mapper.TourorderMapper" >
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.Tourorder" >
+    <id column="TOURORDERID" property="tourorderid" jdbcType="INTEGER" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="TOURID" property="tourid" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="DATE" />
+    <result column="ENDTIME" property="endtime" jdbcType="DATE" />
+    <result column="MANCOUNT" property="mancount" jdbcType="VARCHAR" />
+    <result column="CHILDCOUNT" property="childcount" jdbcType="VARCHAR" />
+    <result column="JOURNEYNEED" property="journeyneed" jdbcType="VARCHAR" />
+    <result column="OUDERINFO" property="ouderinfo" jdbcType="VARCHAR" />
+    <result column="TOTALPRICE" property="totalprice" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TOURORDERID, UUID, TOURID, STARTTIME, ENDTIME, MANCOUNT, CHILDCOUNT, JOURNEYNEED, 
+    OUDERINFO, TOTALPRICE, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TOURORDER
+    where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TOURORDER
+    where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
+    insert into TOURORDER (TOURORDERID, UUID, TOURID, 
+      STARTTIME, ENDTIME, MANCOUNT, 
+      CHILDCOUNT, JOURNEYNEED, OUDERINFO, TOTALPRICE, STATE
+      )
+    values (#{tourorderid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{tourid,jdbcType=VARCHAR},
+      #{starttime,jdbcType=DATE}, #{endtime,jdbcType=DATE}, #{mancount,jdbcType=VARCHAR}, 
+      #{childcount,jdbcType=VARCHAR}, #{journeyneed,jdbcType=VARCHAR}, #{ouderinfo,jdbcType=VARCHAR}
+      #{totalprice,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
+    insert into TOURORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tourorderid != null" >
+        TOURORDERID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="tourid != null" >
+        TOURID,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="mancount != null" >
+        MANCOUNT,
+      </if>
+      <if test="childcount != null" >
+        CHILDCOUNT,
+      </if>
+      <if test="journeyneed != null" >
+        JOURNEYNEED,
+      </if>
+      <if test="ouderinfo != null" >
+        OUDERINFO,
+      </if>
+      <if test="totalprice != null" >
+        TOTALPRICE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tourorderid != null" >
+        #{tourorderid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tourid != null" >
+        #{tourid,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="mancount != null" >
+        #{mancount,jdbcType=VARCHAR},
+      </if>
+      <if test="childcount != null" >
+        #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyneed != null" >
+        #{journeyneed,jdbcType=VARCHAR},
+      </if>
+      <if test="ouderinfo != null" >
+        #{ouderinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
+    update TOURORDER
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tourid != null" >
+        TOURID = #{tourid,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="mancount != null" >
+        MANCOUNT = #{mancount,jdbcType=VARCHAR},
+      </if>
+      <if test="childcount != null" >
+        CHILDCOUNT = #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="journeyneed != null" >
+        JOURNEYNEED = #{journeyneed,jdbcType=VARCHAR},
+      </if>
+      <if test="ouderinfo != null" >
+        OUDERINFO = #{ouderinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null" >
+        TOTALPRICE = #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.Tourorder" >
+    update TOURORDER
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      TOURID = #{tourid,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=DATE},
+      ENDTIME = #{endtime,jdbcType=DATE},
+      MANCOUNT = #{mancount,jdbcType=VARCHAR},
+      CHILDCOUNT = #{childcount,jdbcType=VARCHAR},
+      JOURNEYNEED = #{journeyneed,jdbcType=VARCHAR},
+      OUDERINFO = #{ouderinfo,jdbcType=VARCHAR},
+      TOTALPRICE = #{totalprice,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
+    where TOURORDERID = #{tourorderid,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryOrderByTourUid" parameterType="String" resultMap="BaseResultMap">
+    SELECT * from TOURORDER WHERE TOURID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <update id="passOrder" parameterType="java.lang.Integer">
+    UPDATE TOURORDER SET STATE = 1 WHERE TOURORDERID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

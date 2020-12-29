@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>同游 - 求结伴</title> 
+  <meta name="renderer" content="webkit" /> 
+  <meta http-equiv="mobile-agent" content="format=html5; url=http://m.liantu.cn/tongyou/113.html" /> 
+  <meta name="keywords" content="#3月28日 成都到拉萨，青藏，川藏，可可西里16日游 求结伴#,成都到拉萨，青藏，川藏，可可西里旅游" /> 
+  <meta name="description" content="3.28号我们出发，走318国道川藏进，时间够的还可以青藏出，一起是16天。目前8名队友报名，再约5-7名队友，我们计划2-3台车走，路上有个照应。索要详细行程计划安排qq/微信474016180.去远方.在路上！" /> 
+  <meta http-equiv="Cache-Control" content="no-transform" /> 
+  <link rel="shortcut icon" href="../../images/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/detail.css" />
+  <script type="text/javascript">
+var TU={
+wwwUrl:'http://www.liantu.cn',
+myUrl:'http://my.liantu.cn',
+imageUrl:'http://static.liantu.cn/image/',
+domain:'liantu.cn',
+today:'2016-03-08',
+mobile_agent:'http://m.liantu.cn/tongyou/113.html'
+};
+var isMobi = (function(){
+var u = navigator.userAgent.toLowerCase();
+return  u.indexOf("mobi") > 0 || u.indexOf("nexus 7") > 0 || u.indexOf("480") > 0;
+})();
+if(isMobi&&TU.mobile_agent!=''){
+location.href = TU.mobile_agent;
+}
+</script> 
+  <script type="text/javascript" id="js-prelogin" src="../../js/cas.js"></script>
+  <script type="text/javascript" src="../../js/jquery.seajs.js" id="seajsnode"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <style>
+   .mod-in {
+    position: absolute;
+    top: 0px;
+    left: s0%;
+    margin-left: -200px;
+    width: 400px;
+    height: 701px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #bdbdbd;
+    background: #fff;
+    overflow: hidden;
+    zoom: 1;
+    z-index: 99;
+    display: block;
+   }
+
+  </style>
+ </head>
+ <body>
+ <div class="wrapper">
+      <div class="mod-in">
+       <div class="hd">
+        <h1>报名参与</h1> 
+        <a href=""> <img id="imgSrc"  src="../../images/man_160x160.jpg" /> </a>
+       </div> 
+       <div class="bd"> 
+        <div class="info"> 
+         <ul> 
+          <li class="infoli index9"> <label>现居住地</label>
+              <input type="text" class="input-text text pcc" name="palce"  value="" placeholder="例：北京" />
+          </li>
+          <li class="infoli index8 pd23">
+              <label>手&nbsp;机&nbsp;号&nbsp;</label>
+              <input type="text" name="contactnumber" placeholder="例：18005151538" class="input-text text pcc" maxlength="11"/>
+          </li>
+          <li class="infoli">
+              <label>&nbsp;备&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;</label>
+              <textarea name="message" class="input-text area-text message"></textarea>
+              <span class="text-count"> <span class="word">0</span> / <span class="max">60</span> </span>
+          </li>
+          <li class="infoli index7 mg-t84"> 
+           <div class="btn"> 
+            <a onclick="saveData()" class="send submit">提交申请</a>
+           </div> </li> 
+         </ul> 
+        </div> 
+       </div> 
+       <div class="ft"></div> 
+      </div>
+   </div>
+<script src="/js/jquery-3.3.1.js"></script>
+  <script src="/js/jquery.cookie.js"></script>
+  <script src="/js/layer/layer.js"></script>
+  <script src="/js/page/jquery.pagination.js"></script>
+  <script type="text/javascript">
+      var mainId = Cookies.get('mainId');
+      function saveData(){
+          if(!userName){
+              layer.msg("请点击登录");
+              return;
+          }
+          var phoneText = /^1[3|5|8]\d{9}$/;
+          var area = $("input[name='palce']").val();
+          var phone = $("input[name='contactnumber']").val();
+          var message = $("textarea[name='message']").val();
+          if(!area){
+              layer.msg("请输入居住地");
+              return;
+          }
+          if(!phone||!phoneText.test(phone)){
+              layer.msg("请输入正确的手机号");
+              return;
+          }
+          $.ajax({
+              url:'/myvisitor/insertMyvisitor',
+              data:{
+                  'tovisitorid':mainId,
+                  'withcity':area,
+                  'withphone':phone,
+                  'withinfo':message
+              },
+              type: 'post',
+              success:function(res){
+                  if (res.code===200) {
+                      alert(res.message);
+                      layer.msg(res.message);
+                      var index = parent.layer.getFrameIndex(window.name);
+                      setTimeout(function(){parent.layer.close(index)}, 1000);
+                      parent.location.href = '/toMemberInfo';
+                  } else if (res.code===500) {
+                      layer.msg(res.message);
+                  }
+              }
+          });
+      }
+
+
+
+      document.onkeydown = function(e){
+          var ev = document.all ? window.event : e;
+          if(ev.keyCode==13) {
+              var cityname = $("#search_text").val();
+              if(cityname){
+                  searchCity(cityname);
+              }else{
+                  layer.msg("请输入要搜索的城市信息");
+              }
+          }
+      }
+      var userName ;
+      var loginFun = function(){
+          $.ajax({
+              url: '/returnLogin',
+              type: 'post',
+              success: function (_res) {
+                  userName =_res.message;
+                  if (_res.code===200) {
+                      if(mainId){
+                          $.ajax({
+                              type:"post",
+                              url:"/visitor/getVisitor",
+                              success:function(_res){
+                                  $('#imgSrc').attr('src',_res.data.sculpture);
+                              }
+                          });
+                          Cookies.remove("mainId");
+                      }
+                  } else if (_res.code===500) {
+                      $("#loginDiv_detail").removeClass("displayNone");
+                      if(!userName){
+                          layer.msg("请点击登录");
+                          return;
+                      }
+                  }
+              }
+          });
+      };
+      //控制头像登录 滑入滑出
+      $("#pl-login-info_detail").hover(function(){
+          $("#loginInfo_detail").toggle();
+      });
+
+      function loginOut(){
+          $.ajax({
+              url: '/visitor/loginOut',
+              type: 'post',
+              success: function (_res) {
+                  if (_res.code===200) {
+                      if(!$("#pl-login-info_detail").hasClass("displayNone")){
+                          $("#pl-login-info_detail").addClass("displayNone");
+                      }
+                      if($("#loginDiv_detail").hasClass("displayNone")){
+                          $("#loginDiv_detail").removeClass("displayNone");
+                      }
+                  } else if (_res.code===500) {
+                      layer.msg("退出失败");
+                  }
+              }
+          });
+      }
+      loginFun();
+
+      function fmtDate(obj){
+          var date =  new Date(obj);
+          var y = 1900+date.getYear();
+          var m = "0"+(date.getMonth()+1);
+          var d = "0"+date.getDate();
+          return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+      }
+  </script>
+ </body>
+</html>

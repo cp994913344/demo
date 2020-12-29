@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="天阙" uuid="f4dca097-c665-45f2-ad1a-c5bebf68d271">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@172.16.136.252:1521:otestdb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="天阙资金" uuid="dd3f7ec4-d4e6-4489-a796-8252b5f1b9cc">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@172.16.136.252:1521:otestdb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="天阙测试管理员" uuid="24f7a1ea-5788-459d-a3cc-be252ef603bc">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@172.16.136.252:1521:otestdb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="天阙测试query" uuid="2b209c81-9b6c-4509-9701-7e60d7cabd88">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@172.16.136.252:1521:otestdb</jdbc-url>
+    </data-source>
+  </component>
+</project>

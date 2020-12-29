@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljs.demo.pojo.mapper.ServiceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ljs.demo.pojo.domain.ServiceInfo">
+    <id column="SERVICEID" jdbcType="INTEGER" property="serviceid" />
+    <result column="UUID" jdbcType="VARCHAR" property="uuid" />
+    <result column="SERVICENAME" jdbcType="VARCHAR" property="servicename" />
+    <result column="SERVICEPRICE" jdbcType="VARCHAR" property="serviceprice" />
+    <result column="SERVICEINFO" jdbcType="VARCHAR" property="serviceinfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SERVICEID, UUID, SERVICENAME, SERVICEPRICE, SERVICEINFO
+  </sql>
+  <select id="queryAllService" resultMap="BaseResultMap">
+    SELECT * from SERVICEINFO
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICEINFO
+    where SERVICEID = #{serviceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SERVICEINFO
+    where SERVICEID = #{serviceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ljs.demo.pojo.domain.ServiceInfo">
+    insert into SERVICEINFO (SERVICEID, UUID, SERVICENAME, 
+      SERVICEPRICE, SERVICEINFO)
+    values (#{serviceid,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{servicename,jdbcType=VARCHAR}, 
+      #{serviceprice,jdbcType=VARCHAR}, #{serviceinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ljs.demo.pojo.domain.ServiceInfo">
+    insert into SERVICEINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceid != null">
+        SERVICEID,
+      </if>
+      <if test="uuid != null">
+        UUID,
+      </if>
+      <if test="servicename != null">
+        SERVICENAME,
+      </if>
+      <if test="serviceprice != null">
+        SERVICEPRICE,
+      </if>
+      <if test="serviceinfo != null">
+        SERVICEINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceid != null">
+        #{serviceid,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="servicename != null">
+        #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceprice != null">
+        #{serviceprice,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceinfo != null">
+        #{serviceinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ljs.demo.pojo.domain.ServiceInfo">
+    update SERVICEINFO
+    <set>
+      <if test="uuid != null">
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="servicename != null">
+        SERVICENAME = #{servicename,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceprice != null">
+        SERVICEPRICE = #{serviceprice,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceinfo != null">
+        SERVICEINFO = #{serviceinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERVICEID = #{serviceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ljs.demo.pojo.domain.ServiceInfo">
+    update SERVICEINFO
+    set UUID = #{uuid,jdbcType=VARCHAR},
+      SERVICENAME = #{servicename,jdbcType=VARCHAR},
+      SERVICEPRICE = #{serviceprice,jdbcType=VARCHAR},
+      SERVICEINFO = #{serviceinfo,jdbcType=VARCHAR}
+    where SERVICEID = #{serviceid,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryByTourUid" parameterType="String" resultType="String">
+    SELECT SERVICENAME FROM sys.SERVICEINFO
+    WHERE
+    UUID = ANY(SELECT SERVICEID FROM sys.MAPPING
+    WHERE
+    TOURID = #{tourUid});
+  </select>
+
+  <select id="queryByTourUID" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM sys.SERVICEINFO
+    WHERE
+    UUID = ANY(SELECT SERVICEID FROM sys.MAPPING
+    WHERE
+    TOURID = #{tourUid});
+  </select>
+</mapper>
